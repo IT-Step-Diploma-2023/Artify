@@ -14,11 +14,11 @@ namespace Artify.Controllers
         [HttpGet]
         public IActionResult PrivateInformation()
         {
-            UserModel? model = UsersService.GetCurrentUser(this.HttpContext);
+            User? model = UsersService.GetCurrentUser(this.HttpContext);
             if (model == null)
                 return Forbid();
 
-            return Ok($"Hello {model.UserName}, you gained access to the private information!");
+            return Ok($"Hello {model.Username}, you gained access to the private information!");
         }
     }
 }

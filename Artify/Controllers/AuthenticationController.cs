@@ -31,15 +31,16 @@ namespace Artify.Controllers
             }
             return NotFound("User not found");
         }
-        private UserModel? Authenticate(UserLogin userLogin)
+        private User? Authenticate(UserLogin userLogin)
         {
-            var currentUser = UserConstants.Users.FirstOrDefault(
-                o=>o.UserName.ToLower() == userLogin.UserName.ToLower() 
-                && o.Password == userLogin.Password);
+            //var currentUser = UserConstants.Users.FirstOrDefault(
+            //    o=>o.UserName.ToLower() == userLogin.UserName.ToLower() 
+            //    && o.Password == userLogin.Password);
 
-            return currentUser;
+            //return currentUser;
+            return null;
         }
-        private string Generate(UserModel user)
+        private string Generate(User user)
         {
             string? jwt_key = _configuration["Jwt:Key"];
             string? jwt_issuer = _configuration["Jwt:Issuer"];
@@ -51,9 +52,9 @@ namespace Artify.Controllers
 
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, user.UserName),
+                new Claim(ClaimTypes.NameIdentifier, user.Username),
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Role, user.Role)
+                //new Claim(ClaimTypes.Role, user.Role)
             };
             var token = new JwtSecurityToken(jwt_issuer,
                 jwt_audience,
