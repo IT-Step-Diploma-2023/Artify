@@ -1,4 +1,6 @@
+using Artify.DAL;
 using Artify.Data;
+using Artify.Models.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -34,6 +36,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//Adding repositories
+builder.Services.AddTransient<IRepository<User>, UsersRepository>();
+builder.Services.AddTransient<IRepository<UserRole>, UserRolesRepository>();
 
 var app = builder.Build();
 
