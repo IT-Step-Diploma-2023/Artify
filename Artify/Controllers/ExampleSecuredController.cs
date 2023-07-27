@@ -14,7 +14,7 @@ namespace Artify.Controllers
         [HttpGet]
         public IActionResult PrivateInformation()
         {
-            User? model = UsersService.GetCurrentUser(this.HttpContext);
+            JwtUser? model = UsersService.GetCurrentUser(this.HttpContext);
             if (model == null)
                 return Forbid();
 

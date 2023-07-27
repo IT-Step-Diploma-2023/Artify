@@ -5,17 +5,18 @@ namespace Artify.Services
 {
     public static class UsersService
     {
-        public static User? GetCurrentUser(HttpContext context)
+        public static JwtUser? GetCurrentUser(HttpContext context)
         {
             var identity = context.User.Identity as ClaimsIdentity;
             if(identity != null)
             {
                 var userClaims = identity.Claims;
-                return new User
+                return new JwtUser
                 {
+                    Id = int.Parse(userClaims.FirstOrDefault(u => u.Type == "Id")?.Value ?? "-1"),
                     Username = userClaims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier)?.Value ?? "",
                     Email = userClaims.FirstOrDefault(u => u.Type == ClaimTypes.Email)?.Value ?? "",
-                    //Role = userClaims.FirstOrDefault(u => u.Type == ClaimTypes.Role)?.Value ?? ""
+                    RoleId = int.Parse(userClaims.FirstOrDefault(u => u.Type == ClaimTypes.Role)?.Value ?? "-1")
                 };
             }
             return null;

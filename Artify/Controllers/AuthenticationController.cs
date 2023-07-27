@@ -1,10 +1,13 @@
-﻿using Artify.Models.Users;
+﻿using Artify.DAL;
+using Artify.Models.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace Artify.Controllers
@@ -14,9 +17,11 @@ namespace Artify.Controllers
     public class AuthenticationController : ControllerBase
     {
         private IConfiguration _configuration;
-        public AuthenticationController(IConfiguration configuration)
+        private UsersRepository _usersRepository;
+        public AuthenticationController(IConfiguration configuration, IRepository<User> usersRepository)
         {
             _configuration = configuration;
+            this._usersRepository = (UsersRepository)usersRepository;
         }
 
         [AllowAnonymous]
@@ -33,12 +38,12 @@ namespace Artify.Controllers
         }
         private User? Authenticate(UserLogin userLogin)
         {
-            //var currentUser = UserConstants.Users.FirstOrDefault(
-            //    o=>o.UserName.ToLower() == userLogin.UserName.ToLower() 
-            //    && o.Password == userLogin.Password);
-
-            //return currentUser;
-            return null;
+            string hashedPassword = hashSHA256(userLogin.Password);
+            return _usersRepository.Query(user => 
+                user.Username == userLogin.Username && 
+                user.Password == hashedPassword)
+                .Include(user => user.Role)
+                .FirstOrDefault();
         }
         private string Generate(User user)
         {
@@ -52,9 +57,10 @@ namespace Artify.Controllers
 
             var claims = new[]
             {
+                new Claim("Id", user.Id.ToString()),
                 new Claim(ClaimTypes.NameIdentifier, user.Username),
                 new Claim(ClaimTypes.Email, user.Email),
-                //new Claim(ClaimTypes.Role, user.Role)
+                new Claim(ClaimTypes.Role, user.Role.Id.ToString())
             };
             var token = new JwtSecurityToken(jwt_issuer,
                 jwt_audience,
@@ -63,6 +69,20 @@ namespace Artify.Controllers
                 signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        private string hashSHA256(string data)
+        {
+            using (SHA256 hash = SHA256.Create())
+            {
+                byte[] bytes = hash.ComputeHash(Encoding.UTF8.GetBytes(data));
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }  
         }
     }
 }
