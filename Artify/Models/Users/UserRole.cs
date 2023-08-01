@@ -11,6 +11,7 @@ namespace Artify.Models.Users
         public string RoleName { get; set; } = string.Empty;
 
         // NAVIGATION PROPERTIES
-        public virtual List<User>? Users { get; set; }
+        public virtual List<User> Users { get; } = new();
+        public virtual List<Permission> Permissions { get; } = new();
     }
 }
