@@ -6,6 +6,7 @@ namespace Artify.Models.Users
     {
         [Key]
         public int Id { get; set; } = -1;
+
         [Required]
         public string RoleName { get; set; } = string.Empty;
 

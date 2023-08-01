@@ -9,10 +9,10 @@ namespace Artify.Models.Users
         public int Id { get; set; }
 
         [Required]
-        public int DesignerId { get; set; }
+        public int UserId { get; set; }
 
         // NAVIGATION PROPERTIES
-        [ForeignKey(nameof(DesignerId))]
-        public virtual Designer Designer { get; } = null!;
+        [ForeignKey(nameof(UserId))]
+        public virtual User User { get; } = null!;
     }
 }

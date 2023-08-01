@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Artify.Models.Users.Attributes
+namespace Artify.Models.Users
 {
     public class Follower
     {
@@ -10,11 +10,11 @@ namespace Artify.Models.Users.Attributes
         public int Id { get; set; }
 
         [Required]
-        public int DesignerId { get; set; }
+        public int UserId { get; set; }
 
         // NAVIGATION PROPERTIES
-        [ForeignKey(nameof(DesignerId))]
-        public virtual Designer Designer { get; set; } = null!;
+        [ForeignKey(nameof(UserId))]
+        public virtual User User { get; set; } = null!;
 
     }
 }

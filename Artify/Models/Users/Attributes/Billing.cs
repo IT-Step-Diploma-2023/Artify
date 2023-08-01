@@ -21,6 +21,6 @@ namespace Artify.Models.Users.Attributes
         public string CardCVV { get; set; } = string.Empty;
 
         // NAVIGATION PROPERTIES
-        public virtual List<Designer> Designers { get; } = null!;
+        public virtual List<User> Users { get; } = null!;
     }
 }

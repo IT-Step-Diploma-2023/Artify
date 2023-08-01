@@ -14,11 +14,11 @@ namespace Artify.Models.Artworks
         public string Title { get; set; } = string.Empty;
 
         [Required]
-        public int DesignerId { get; set; }
+        public int UserId { get; set; }
 
         // NAVIGATION PROPERTIES
-        [ForeignKey(nameof(DesignerId))]
-        public virtual Designer Designer { get; set; } = null!;
+        [ForeignKey(nameof(UserId))]
+        public virtual User User { get; set; } = null!;
         public virtual List<Shot> Shots { get; } = new();
     }
 }

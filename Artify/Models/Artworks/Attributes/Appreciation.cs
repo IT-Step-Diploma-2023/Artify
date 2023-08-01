@@ -11,7 +11,7 @@ namespace Artify.Models.Artworks.Attributes
         public int Id { get; set; }
 
         [Required]
-        public int DesignerId { get; set; }
+        public int UserId { get; set; }
 
         [Required]
         public int ShotId { get; set; }
@@ -20,7 +20,7 @@ namespace Artify.Models.Artworks.Attributes
         [ForeignKey(nameof(ShotId))]
         public virtual Shot Shot { get; set; } = null!;
 
-        [ForeignKey(nameof(DesignerId))]
-        public virtual Designer Designer { get; set; } = null!;
+        [ForeignKey(nameof(UserId))]
+        public virtual User User { get; set; } = null!;
     }
 }

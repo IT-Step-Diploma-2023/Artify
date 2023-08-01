@@ -12,6 +12,6 @@ namespace Artify.Models.Users.Attributes
         public string Name { get; set; } = string.Empty;
 
         // NAVIGATION PROPERTIES
-        public virtual List<DesignerSocialProfile> DesignerSocialProfiles { get; } = new ();
+        public virtual List<UserSocialProfile> UserSocialProfiles { get; } = new ();
     }
 }

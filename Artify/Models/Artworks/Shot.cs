@@ -17,11 +17,11 @@ namespace Artify.Models.Artworks
         public DateTime CreatedDateTime { get; set; }
 
         [Required]
-        public int DesignerId { get; set; } // Designer is author
+        public int UserId { get; set; } // User is author
 
         // NAVIGATION PROPERTIES
-        [ForeignKey(nameof(DesignerId))]
-        public virtual Designer Designer { get; set; } = null!;
+        [ForeignKey(nameof(UserId))]
+        public virtual User User { get; set; } = null!;
         public virtual List<Image> Images { get; } = new();
         public virtual List<Comment> Comments { get; } = new();
         public virtual List<Tag> Tags { get; } = new();

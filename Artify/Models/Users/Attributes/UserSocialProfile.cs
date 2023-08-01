@@ -4,13 +4,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Artify.Models.Users.Attributes
 {
-    public class DesignerSocialProfile
+    public class UserSocialProfile
     {
         [Key]
         public int Id { get; set; }
 
         [Required]
-        public int DesignerId { get; set; }
+        public int UserId { get; set; }
 
         [Required]
         public int SocialProfileId { get; set; }
@@ -20,8 +20,8 @@ namespace Artify.Models.Users.Attributes
 
         // NAVIGATION PROPERTIES
 
-        [ForeignKey(nameof(DesignerId))]
-        public virtual Designer Designer { get; set; } = null!;
+        [ForeignKey(nameof(UserId))]
+        public virtual User User { get; set; } = null!;
 
         [ForeignKey(nameof(SocialProfileId))]
         public virtual SocialProfile SocialProfile { get; set; } = null!;

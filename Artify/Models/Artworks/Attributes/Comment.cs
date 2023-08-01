@@ -11,7 +11,7 @@ namespace Artify.Models.Artworks.Attributes
         public int Id { get; set; }
 
         [Required]
-        public int DesignerId { get; set; } // Designer is author
+        public int UserId { get; set; } // User is author
 
         [Required]
         public int ShotId { get; set; } // Shot is subject
@@ -20,8 +20,8 @@ namespace Artify.Models.Artworks.Attributes
         public string Text { get; set; } = string.Empty;
 
         // NAVIGATION PROPERTIES
-        [ForeignKey(nameof(DesignerId))]
-        public virtual Designer Designer { get; set; } = null!;
+        [ForeignKey(nameof(UserId))]
+        public virtual User User { get; set; } = null!;
 
         [ForeignKey(nameof(ShotId))]
         public virtual Shot Shot { get; set; } = null!;
