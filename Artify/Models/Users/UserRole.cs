@@ -6,6 +6,10 @@ namespace Artify.Models.Users
     {
         [Key]
         public int Id { get; set; } = -1;
+        [Required]
         public string RoleName { get; set; } = string.Empty;
+
+        // NAVIGATION PROPERTIES
+        public virtual List<User>? Users { get; set; }
     }
 }
