@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.Design;
 using System.Xml.Linq;
+using Artify.Models.Users;
 
 namespace Artify.Models.WorkPreferenceModels
 {
@@ -23,11 +24,11 @@ namespace Artify.Models.WorkPreferenceModels
         public string Skills { get; set; }
 
         [Required]
-        [Display(Name = "Дизайнер")]
-        public int DesingerId { get; set; }
+        [Display(Name = "Користувач")]
+        public int UserId { get; set; }
 
-        [ForeignKey("DesignerId")]
-        public virtual Designer Designer { get; set; }
+        [ForeignKey("UserId")]
+        public virtual User User { get; set; }
 
         [Required]
         [Display(Name = "Повна зайнятість")]

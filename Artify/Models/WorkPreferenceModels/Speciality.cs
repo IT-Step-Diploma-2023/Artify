@@ -15,5 +15,6 @@ namespace Artify.Models.WorkPreferenceModels
         public string Name { get; set; }
 
         public virtual List<WorkPreference> WorkPreferences { get; set; }
+        public virtual List<Vacancy> Vacancy { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.Design;
+using Artify.Models.Users;
 
 
 namespace Artify.Models.WorkPreferenceModels
@@ -19,8 +20,8 @@ namespace Artify.Models.WorkPreferenceModels
         public int RemoteAvailable { get; set; }
 
         [Required]
-        [Display(Name = "Дизайнер")]
-        public int DesignerId { get; set; }
+        [Display(Name = "Користувач")]
+        public int UserId { get; set; }
 
         [Required]
         [Display(Name = "Заробітна плата")]
@@ -29,8 +30,8 @@ namespace Artify.Models.WorkPreferenceModels
         [ForeignKey("SalaryId")]
         public virtual Salary Salary { get; set; }
 
-        [ForeignKey("DesignerId")]
-        public virtual Designer Designer { get; set; }
+        [ForeignKey("UserId")]
+        public virtual User User { get; set; }
 
         public virtual List<WorkPreference> WorkPreferences { get; set; }
 

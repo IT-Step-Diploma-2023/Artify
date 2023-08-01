@@ -1,6 +1,7 @@
 ﻿using Artify.Models.Artworks;
 using Artify.Models.Artworks.Attributes;
 using Artify.Models.Users.Attributes;
+using Artify.Models.WorkPreferenceModels;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -36,8 +37,11 @@ namespace Artify.Models.Users
         public virtual List<UserSocialProfile> UserSocialProfiles { get; } = new();
         public virtual List<UserFollower> UserFollowers { get; } = new();
         public virtual List<Billing> Billings { get; } = null!;
+        public virtual List<Vacancy> Vacancy { get; set; } ///додала ось це
 
         [ForeignKey(nameof(EmployerId))]
         public virtual Employer Employer { get; } = null!;
+
+
     }
 }
