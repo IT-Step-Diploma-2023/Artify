@@ -12,12 +12,13 @@ namespace Artify.Models.Artworks
 
         [Required]
         [Column(TypeName = "money")]
-        public decimal? Price { get; set; }
+        public decimal Price { get; set; }
 
         [Required]
         public int ShotId { get; set; }
 
         [Required]
+        [DataType(DataType.DateTime)]
         public DateTime CreatedDateTime { get; set; }
 
         // NAVIGATION PROPERTIES

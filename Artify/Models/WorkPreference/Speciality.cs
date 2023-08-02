@@ -13,6 +13,7 @@ namespace Artify.Models.WorkPreference
         [MaxLength(256)]
         public string Name { get; set; } = string.Empty;
 
+        // NAVIGATION PROPERTIES
         public virtual List<WorkPreference> WorkPreferences { get; set; } = new();
         public virtual List<Vacancy> Vacancy { get; set; } = new();
     }

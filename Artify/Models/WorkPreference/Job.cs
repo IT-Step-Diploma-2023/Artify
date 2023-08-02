@@ -10,24 +10,20 @@ namespace Artify.Models.WorkPreference
 
         [Required]
         [MaxLength(256)]
-        [Display(Name = "Посада")]
-        public string Position { get; set; }
+        public string Position { get; set; } = string.Empty;
 
         [Required]
         [MaxLength(100)]
-        [Display(Name = "Назва компанії")]
-        public string Company { get; set; }
+        public string Company { get; set; } = string.Empty;
 
         [Required]
         [DataType(DataType.Date)]
-        [Display(Name = "Працював(ла) з")]
         public DateTime StartYear { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
-        [Display(Name = "Працював(ла) по")]
         public DateTime FinishYear { get; set; }
 
-        public virtual List<WorkPreference> WorkPreferences { get; set; }
+        public virtual List<WorkPreference> WorkPreferences { get; set; } = new();
     }
 }

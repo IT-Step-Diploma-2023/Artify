@@ -14,6 +14,7 @@ namespace Artify.Models.Artworks
         public string Title { get; set; } = string.Empty;
 
         [Required]
+        [DataType(DataType.DateTime)]
         public DateTime CreatedDateTime { get; set; }
 
         [Required]

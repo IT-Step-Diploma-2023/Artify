@@ -12,24 +12,19 @@ namespace Artify.Models.WorkPreference
         public int Id { get; set; }
 
         [Required]
-        [Display(Name = "Фіксована ціна")]
-        public decimal FixedPrice { get; set; }
-
-        [Required]
-        [Display(Name = "Мінімальна погодинна ставка")]
-        public decimal MinHourlyRate { get; set; }
-
-        [Required]
-        [Display(Name = "Мінімальна кількість годин")]
-        public int MinContractHours { get; set; }
-
-        [Required]
-        [Display(Name = "Користувач")]
         public int UserId { get; set; }
 
-        [ForeignKey("UserId")]
-        public virtual User User { get; set; }
+        [Column(TypeName = "money")]
+        public decimal FixedPrice { get; set; }
 
-        public virtual List<WorkPreference> WorkPreferences { get; set; }
+        [Column(TypeName = "money")]
+        public decimal MinHourlyRate { get; set; }
+
+        public int MinContractHours { get; set; }
+
+        // NAVIGATION PROPERTIES
+        [ForeignKey(nameof(UserId))]
+        public virtual User User { get; set; } = null!;
+        public virtual List<WorkPreference> WorkPreferences { get; set; } = new();
     }
 }

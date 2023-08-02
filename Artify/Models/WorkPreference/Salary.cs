@@ -10,12 +10,15 @@ namespace Artify.Models.WorkPreference
         [Key]
         public int Id { get; set; }
 
-        [Display(Name = "Мінімальна заробітна плата")]
+        [Required]
+        [Column(TypeName = "money")]
         public decimal MinSalary { get; set; }
 
-        [Display(Name = "Максимальна заробітна плата")]
+        [Required]
+        [Column(TypeName = "money")]
         public decimal MaxSalary { get; set; }
 
-        public virtual List<FullTimeAvailability> FullTimeAvailabilities { get; set; }
+        // NAVIGATION PROPERTIES
+        public virtual List<FullTimeAvailability> FullTimeAvailabilities { get; set; } = new();
     }
 }

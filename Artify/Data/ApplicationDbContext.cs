@@ -13,10 +13,12 @@ namespace Artify.Data
         public ApplicationDbContext(DbContextOptions options)
             : base(options)
         { }
+
+        #region DbSets
+
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<User> Users { get; set; }
         //
-
         public DbSet<Appreciation> Appreciations { get; set; }
         public DbSet<ShotComment> ShotComments { get; set; }
         public DbSet<Genre> Genres { get; set; }
@@ -45,10 +47,19 @@ namespace Artify.Data
         public DbSet<Vacancy> Vacancies { get; set; }
         public DbSet<WorkPreference> WorkPreferences { get; set; }
 
+        #endregion
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Image>().Property(si => si.Price).HasPrecision(18, 2);
+
+            modelBuilder.Entity<Salary>().Property(s => s.MinSalary).HasPrecision(18, 2);
+            modelBuilder.Entity<Salary>().Property(s => s.MaxSalary).HasPrecision(18, 2);
+
+            modelBuilder.Entity<FreelanceAvailability>().Property(fa => fa.FixedPrice).HasPrecision(18, 2);
+            modelBuilder.Entity<FreelanceAvailability>().Property(fa => fa.MinHourlyRate).HasPrecision(18, 2);
+
             base.OnModelCreating(modelBuilder);
         }
     }

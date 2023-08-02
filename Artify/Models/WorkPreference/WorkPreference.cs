@@ -21,25 +21,23 @@ namespace Artify.Models.WorkPreference
         [Required]
         public int UserId { get; set; }
 
-        [ForeignKey(nameof(UserId))]
-        public virtual User User { get; set; } = new();
-
         [Required]
         public int FullTimeAvailabilityId { get; set; }
-
-        [ForeignKey(nameof(FullTimeAvailabilityId))]
-        public virtual FullTimeAvailability FullTimeAvailability { get; set; } = new();
 
         [Required]
         public int FreelanceAvailabilityId { get; set; }
 
+        // NAVIGATION PROPERTIES
+        [ForeignKey(nameof(UserId))]
+        public virtual User User { get; set; } = new();
+
+        [ForeignKey(nameof(FullTimeAvailabilityId))]
+        public virtual FullTimeAvailability FullTimeAvailability { get; set; } = new();
+
         [ForeignKey(nameof(FreelanceAvailabilityId))]
         public virtual FreelanceAvailability FreelanceAvailability { get; set; } = new();
-
         public virtual List<Education> Educations { get; set; } = new();
-
         public virtual List<Job> Jobs { get; set; } = new();
-
         public virtual List<Speciality> Specialities { get; set; } = new();
     }
 }

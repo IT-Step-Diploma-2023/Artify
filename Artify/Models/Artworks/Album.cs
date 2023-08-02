@@ -11,10 +11,13 @@ namespace Artify.Models.Artworks
         public int Id { get; set; }
 
         [Required]
+        public int UserId { get; set; } // User created album
+        [Required]
         public string Title { get; set; } = string.Empty;
 
         [Required]
-        public int UserId { get; set; }
+        [DataType(DataType.DateTime)]
+        public DateTime CreatedDateTime { get; set; }
 
         // NAVIGATION PROPERTIES
         [ForeignKey(nameof(UserId))]
