@@ -4,7 +4,7 @@ using System.ComponentModel.Design;
 using System.Xml.Linq;
 using Artify.Models.Users;
 
-namespace Artify.Models.WorkPreferenceModels
+namespace Artify.Models.WorkPreference
 {
     public class Vacancy
     {
@@ -22,17 +22,16 @@ namespace Artify.Models.WorkPreferenceModels
         public string Location { get; set; } = string.Empty;
 
         [Required]
-
         public int RemoteAvailable { get; set; }
 
         [Required]
         public string Salary { get; set; } = string.Empty;
 
         [Required]
-        public string empType { get; set; } = string.Empty; //full or freelance
+        public string empType { get; set; } = string.Empty;
 
         [Required]
-        public DateTime CreatedDateTime { get; set; } /////int??????????????
+        public DateTime CreatedDateTime { get; set; }
 
         public bool InBest { get; set; }
 

@@ -1,7 +1,7 @@
 ﻿using Artify.Models.Artworks;
 using Artify.Models.Artworks.Attributes;
 using Artify.Models.Users.Attributes;
-using Artify.Models.WorkPreferenceModels;
+using Artify.Models.WorkPreference;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;

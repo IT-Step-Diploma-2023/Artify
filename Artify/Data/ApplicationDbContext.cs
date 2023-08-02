@@ -4,7 +4,7 @@ using System.Security.Claims;
 using Artify.Models.Artworks;
 using Artify.Models.Artworks.Attributes;
 using Artify.Models.Users.Attributes;
-using Artify.Models.WorkPreferenceModels;
+using Artify.Models.WorkPreference;
 
 namespace Artify.Data
 {

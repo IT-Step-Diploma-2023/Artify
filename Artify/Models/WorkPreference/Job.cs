@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Artify.Models.WorkPreferenceModels
+namespace Artify.Models.WorkPreference
 {
     public class Job
     {

@@ -4,7 +4,7 @@ using System.ComponentModel.Design;
 using Artify.Models.Users;
 
 
-namespace Artify.Models.WorkPreferenceModels
+namespace Artify.Models.WorkPreference
 {
     public class FullTimeAvailability
     {

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace Artify.Models.WorkPreferenceModels
+namespace Artify.Models.WorkPreference
 {
     public class Salary
     {

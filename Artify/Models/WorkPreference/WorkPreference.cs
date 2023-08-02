@@ -1,10 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.Design;
-using System.Xml.Linq;
 using Artify.Models.Users;
 
-namespace Artify.Models.WorkPreferenceModels
+namespace Artify.Models.WorkPreference
 {
     public class WorkPreference
     {
