@@ -11,16 +11,17 @@ namespace Artify.Models.Artworks.Attributes
         public int Id { get; set; }
 
         [Required]
-        public int UserId { get; set; }
+        public int UserId { get; set; } // User is author 
 
         [Required]
-        public int ShotId { get; set; }
+        public int ShotId { get; set; } // Shot is subject
 
         // NAVIGATION PROPERTIES
+        [ForeignKey(nameof(UserId))]
+        public virtual User Author { get; set; } = null!;
+
         [ForeignKey(nameof(ShotId))]
         public virtual Shot Shot { get; set; } = null!;
 
-        [ForeignKey(nameof(UserId))]
-        public virtual User User { get; set; } = null!;
     }
 }

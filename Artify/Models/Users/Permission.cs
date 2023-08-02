@@ -6,6 +6,6 @@
         public string Tag { get; set; } = string.Empty;
 
         // NAVIGATION PROPERTIES
-        public virtual List<UserRole> Roles { get; } = new();
+        public virtual List<UserRole> Roles { get; set; } = new();
     }
 }
