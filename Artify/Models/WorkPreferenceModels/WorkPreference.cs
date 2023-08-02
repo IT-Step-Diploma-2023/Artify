@@ -12,42 +12,36 @@ namespace Artify.Models.WorkPreferenceModels
         public int Id { get; set; }
 
         [Required]
-        [Display(Name = "Повна зайнятість")]
         public bool FullTimeAvailable { get; set; }
 
         [Required]
-        [Display(Name = "Фріланс")]
         public bool FreelanceAvailable { get; set; }
 
         [Required]
-        [Display(Name = "Навички")]
-        public string Skills { get; set; }
+        public string Skills { get; set; } = string.Empty;
 
         [Required]
-        [Display(Name = "Користувач")]
         public int UserId { get; set; }
 
-        [ForeignKey("UserId")]
-        public virtual User User { get; set; }
+        [ForeignKey(nameof(UserId))]
+        public virtual User User { get; set; } = new();
 
         [Required]
-        [Display(Name = "Повна зайнятість")]
         public int FullTimeAvailabilityId { get; set; }
 
-        [ForeignKey("FullTimeAvailabilityId")]
-        public virtual FullTimeAvailability FullTimeAvailability { get; set; }
+        [ForeignKey(nameof(FullTimeAvailabilityId))]
+        public virtual FullTimeAvailability FullTimeAvailability { get; set; } = new();
 
         [Required]
-        [Display(Name = "Фріланс")]
         public int FreelanceAvailabilityId { get; set; }
 
-        [ForeignKey("FreelanceAvailabilityId")]
-        public virtual FreelanceAvailability FreelanceAvailability { get; set; }
+        [ForeignKey(nameof(FreelanceAvailabilityId))]
+        public virtual FreelanceAvailability FreelanceAvailability { get; set; } = new();
 
-        public virtual List<Education> Educations { get; set; }
+        public virtual List<Education> Educations { get; set; } = new();
 
-        public virtual List<Job> Jobs { get; set; }
+        public virtual List<Job> Jobs { get; set; } = new();
 
-        public virtual List<Speciality> Specialities { get; set; }
+        public virtual List<Speciality> Specialities { get; set; } = new();
     }
 }
