@@ -1,6 +1,7 @@
 ﻿using Artify.Models.Artworks;
 using Artify.Models.Artworks.Attributes;
 using Artify.Models.Users.Attributes;
+using Artify.Models.WorkPreferenceModels;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,7 +15,7 @@ namespace Artify.Models.Users
         public string Username { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
-        public int RoleId { get; set; } 
+        public int RoleId { get; set; }
 
         //
         public string Location { get; set; } = string.Empty;
@@ -36,5 +37,13 @@ namespace Artify.Models.Users
         public virtual List<UserFollower> Followers { get; } = new();
         public virtual List<EmployerComment> Comments { get; } = new();
         public virtual List<Billing> Billings { get; } = null!;
+
+        //
+        public virtual List<FreelanceAvailability> FreelanceAvailabilities { get; set; } = new();
+        public virtual List<FullTimeAvailability> FullTimeAvailabilities { get; set; } = new();
+        public virtual List<WorkPreference> WorkPreferences { get; set; } = new();
+        public virtual List<Vacancy> Vacancy { get; set; } = new();
+
     }
+
 }
