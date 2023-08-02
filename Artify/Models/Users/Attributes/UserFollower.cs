@@ -10,7 +10,7 @@ namespace Artify.Models.Users.Attributes
         public int Id { get; set; }
 
         [Required]
-        public int UserId { get; set; }
+        public int UserId { get; set; } // Tracked user
 
         [Required]
         public int FollowerId { get; set; }
@@ -20,7 +20,7 @@ namespace Artify.Models.Users.Attributes
         public virtual User User { get; set; } = null!;
 
         [ForeignKey(nameof(FollowerId))]
-        public virtual Follower Follower { get; set; } = null!;
+        public virtual User Follower { get; set; } = null!;
 
     }
 }
