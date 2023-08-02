@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Artify.Models.WorkPreferenceModels;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Artify.Models.Users
@@ -14,5 +15,7 @@ namespace Artify.Models.Users
         // NAVIGATION PROPERTIES
         [ForeignKey(nameof(UserId))]
         public virtual User User { get; } = null!;
+
+        public virtual List<Vacancy> Vacancy { get; set; } //додала
     }
 }

@@ -10,11 +10,9 @@ namespace Artify.Models.WorkPreferenceModels
         [Key]
         public int Id { get; set; }
 
-        [Required]
         [Display(Name = "Мінімальна заробітна плата")]
         public decimal MinSalary { get; set; }
 
-        [Required]
         [Display(Name = "Максимальна заробітна плата")]
         public decimal MaxSalary { get; set; }
 

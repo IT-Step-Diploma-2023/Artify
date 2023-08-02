@@ -40,13 +40,12 @@ namespace Artify.Models.WorkPreferenceModels
         [Display(Name = "TimeStamp")]
         public int TimeStamp { get; set; } /////int??????????????
 
-        [Required]
         [Display(Name = "В улюблених")]
         public bool InBest { get; set; }
 
         [Required]
-        [Display(Name = "Користувач")]
-        public int UserId { get; set; }
+        [Display(Name = "Роботодавець")]
+        public int EmployerId { get; set; }
 
         [Required]
         [Display(Name = "Спеціальність")]
@@ -55,8 +54,8 @@ namespace Artify.Models.WorkPreferenceModels
         [ForeignKey("Speciality")]
         public virtual Speciality Speciality { get; set; }
 
-        [ForeignKey("UserId")]
-        public virtual User User { get; set; }
+        [ForeignKey("EmployerId")]
+        public virtual Employer Employer { get; set; }
 
 
     }

@@ -9,7 +9,6 @@ namespace Artify.Models.WorkPreferenceModels
         [Key]
         public int Id { get; set; }
 
-        [Required]
         [MaxLength(100)]
         [Display(Name = "Ступінь")]
         public string Degree { get; set; }
