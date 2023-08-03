@@ -20,9 +20,11 @@ namespace Artify.Models.Users.Attributes
 
         // NAVIGATION PROPERTIES
         [ForeignKey(nameof(UserId))]
+        [NotMapped]
         public virtual User Author { get; set; } = null!;
 
         [ForeignKey(nameof(EmployerId))]
+        [NotMapped]
         public virtual User Employer { get; set; } = null!;
     }
 }

@@ -29,12 +29,15 @@ namespace Artify.Models.WorkPreference
 
         // NAVIGATION PROPERTIES
         [ForeignKey(nameof(UserId))]
+        [NotMapped]
         public virtual User User { get; set; } = new();
 
         [ForeignKey(nameof(FullTimeAvailabilityId))]
+        [NotMapped]
         public virtual FullTimeAvailability FullTimeAvailability { get; set; } = new();
 
         [ForeignKey(nameof(FreelanceAvailabilityId))]
+        [NotMapped]
         public virtual FreelanceAvailability FreelanceAvailability { get; set; } = new();
         public virtual List<Education> Educations { get; set; } = new();
         public virtual List<Job> Jobs { get; set; } = new();

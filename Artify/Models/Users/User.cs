@@ -28,14 +28,23 @@ namespace Artify.Models.Users
         // NAVIGATION PROPERTIES
 
         [ForeignKey(nameof(RoleId))]
+        [NotMapped]
         public UserRole Role { get; set; } = new();
+        [NotMapped]
         public virtual List<Album> Collections { get; } = new();
+        [NotMapped]
         public virtual List<Project> Projects { get; } = new();
+        [NotMapped]
         public virtual List<Shot> Shots { get; } = new();
+        [NotMapped]
         public virtual List<Appreciation> Appreciations { get; } = new();
+        [NotMapped]
         public virtual List<UserSocialProfile> SocialProfiles { get; } = new();
+        [NotMapped]
         public virtual List<UserFollower> Followers { get; } = new();
+        [NotMapped]
         public virtual List<EmployerComment> Comments { get; } = new();
+        [NotMapped]
         public virtual List<Billing> Billings { get; } = null!;
 
         //

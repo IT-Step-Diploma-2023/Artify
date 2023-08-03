@@ -17,9 +17,11 @@ namespace Artify.Models.Users.Attributes
 
         // NAVIGATION PROPERTIES
         [ForeignKey(nameof(UserId))]
+        [NotMapped]
         public virtual User User { get; set; } = null!;
 
         [ForeignKey(nameof(FollowerId))]
+        [NotMapped]
         public virtual User Follower { get; set; } = null!;
 
     }

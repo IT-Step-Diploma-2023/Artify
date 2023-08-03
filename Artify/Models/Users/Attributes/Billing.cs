@@ -1,5 +1,6 @@
 ﻿using Artify.Models.Artworks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Artify.Models.Users.Attributes
 {
@@ -21,6 +22,7 @@ namespace Artify.Models.Users.Attributes
         public string CardCVV { get; set; } = string.Empty;
 
         // NAVIGATION PROPERTIES
+        [NotMapped]
         public virtual List<User> Users { get; } = null!;
     }
 }
