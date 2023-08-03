@@ -41,7 +41,7 @@ namespace Artify.Models.Users
         //
         public virtual List<FreelanceAvailability> FreelanceAvailabilities { get; set; } = new();
         public virtual List<FullTimeAvailability> FullTimeAvailabilities { get; set; } = new();
-        public virtual List<WorkPreference> WorkPreferences { get; set; } = new();
+        public virtual List<WorkPreference.WorkPreference> WorkPreferences { get; set; } = new();
         public virtual List<Vacancy> Vacancy { get; set; } = new();
 
     }
