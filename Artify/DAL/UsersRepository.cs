@@ -1,6 +1,6 @@
 ﻿using Artify.Data;
 using Artify.Models;
-using Artify.Models.Users;
+using Artify.Models.DbModels.Users;
 using System.Linq.Expressions;
 
 namespace Artify.DAL

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using Artify.Services;
-using Artify.Models.Users;
+using Artify.Models.HelperModels;
 
 namespace Artify.Controllers
 {

@@ -1,5 +1,6 @@
 ﻿using Artify.DAL;
-using Artify.Models.Users;
+using Artify.Models.DbModels.Users;
+using Artify.Models.HelperModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

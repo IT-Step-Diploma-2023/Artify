@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Artify.Models.Users;
 using System.Security.Claims;
-using Artify.Models.Artworks;
-using Artify.Models.Artworks.Attributes;
-using Artify.Models.Users.Attributes;
-using Artify.Models.WorkPreferences;
+using Artify.Models.DbModels.WorkPreferences;
+using Artify.Models.DbModels.DbModels.Artworks;
+using Artify.Models.DbModels.Users;
+using Artify.Models.DbModels.DbModels.Artworks.Attributes;
+using Artify.Models.DbModels.Users.Attributes;
+using Microsoft.Extensions.Hosting;
 
 namespace Artify.Data
 {
@@ -18,7 +19,7 @@ namespace Artify.Data
 
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<User> Users { get; set; }
-        //
+        public DbSet<Team> Teams { get; set; }
         public DbSet<Appreciation> Appreciations { get; set; }
         public DbSet<ShotComment> ShotComments { get; set; }
         public DbSet<Genre> Genres { get; set; }
@@ -28,16 +29,13 @@ namespace Artify.Data
         public DbSet<Image> Images { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Shot> Shots { get; set; }
-
         public DbSet<Billing> Billings { get; set; }
-        public DbSet<EmployerComment> EmployerComments { get; set; }
+        public DbSet<Employer> Employers { get; set; }
+        public DbSet<UserEmployerComment> UserEmployerComments { get; set; }
         public DbSet<SocialProfile> SocialProfiles { get; set; }
-        public DbSet<UserFollower> UserFollowers { get; set; }
+        public DbSet<Follower> Followers { get; set; }
         public DbSet<UserSocialProfile> UserSocialProfiles { get; set; }
-        public DbSet<JwtUser> JwtUsers { get; set; } //????
         public DbSet<Permission> Permissions { get; set; }
-        public DbSet<UserLogin> UserLogins { get; set; }
-
         public DbSet<Education> Educations { get; set; }
         public DbSet<FreelanceAvailability> FreelanceAvailabilities { get; set; }
         public DbSet<FullTimeAvailability> FullTimeAvailabilities { get; set; }
