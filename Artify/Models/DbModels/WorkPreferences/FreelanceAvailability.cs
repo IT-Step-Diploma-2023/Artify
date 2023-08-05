@@ -12,7 +12,7 @@ namespace Artify.Models.DbModels.WorkPreferences
         public int Id { get; set; }
 
         [Required]
-        public int UserId { get; set; }
+        public int WorkPreferenceId { get; set; }
 
         [Column(TypeName = "money")]
         public decimal FixedPrice { get; set; }
@@ -23,8 +23,7 @@ namespace Artify.Models.DbModels.WorkPreferences
         public int MinContractHours { get; set; }
 
         // NAVIGATION PROPERTIES
-        [ForeignKey(nameof(UserId))]
-        public virtual User User { get; set; } = null!;
-        public virtual List<WorkPreference> WorkPreferences { get; set; } = new();
+        [ForeignKey(nameof(WorkPreferenceId))]
+        public virtual WorkPreference WorkPreference { get; set; } = null!;
     }
 }

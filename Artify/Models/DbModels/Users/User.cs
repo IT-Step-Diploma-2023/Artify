@@ -34,8 +34,6 @@ namespace Artify.Models.DbModels.Users
         public virtual List<Follower> Followers { get; set; } = new();
         public virtual List<UserEmployerComment> UserEmployerComments { get; set; } = new();
         public virtual List<Billing> Billings { get; set; } = null!;
-        public virtual List<FreelanceAvailability> FreelanceAvailabilities { get; set; } = new();
-        public virtual List<FullTimeAvailability> FullTimeAvailabilities { get; set; } = new();
         public virtual List<WorkPreference> WorkPreferences { get; set; } = new();
         public virtual List<Team> Teams { get; set; } = new();
     }

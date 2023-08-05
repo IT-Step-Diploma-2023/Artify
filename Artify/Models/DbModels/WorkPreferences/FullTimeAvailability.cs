@@ -18,18 +18,15 @@ namespace Artify.Models.DbModels.WorkPreferences
         public int RemoteAvailable { get; set; }
 
         [Required]
-        public int UserId { get; set; }
-
+        public int WorkPreferenceId { get; set; }
 
         public int? SalaryId { get; set; }
 
         [ForeignKey(nameof(SalaryId))]
         public virtual Salary Salary { get; set; } = null!;
 
-        [ForeignKey(nameof(UserId))]
-        public virtual User User { get; set; } = null!;
-
-        public virtual List<WorkPreference> WorkPreferences { get; set; } = new();
+        [ForeignKey(nameof(WorkPreferenceId))]
+        public virtual WorkPreference WorkPreference { get; set; } = null!;
 
     }
 }

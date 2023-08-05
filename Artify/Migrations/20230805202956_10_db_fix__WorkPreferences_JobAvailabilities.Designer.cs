@@ -4,6 +4,7 @@ using Artify.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Artify.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230805202956_10_db_fix__WorkPreferences_JobAvailabilities")]
+    partial class _10_db_fix__WorkPreferences_JobAvailabilities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -573,10 +576,15 @@ namespace Artify.Migrations
                         .HasPrecision(18, 2)
                         .HasColumnType("money");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.Property<int>("WorkPreferenceId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.HasIndex("WorkPreferenceId");
 
@@ -602,12 +610,17 @@ namespace Artify.Migrations
                         .IsRequired()
                         .HasColumnType("int");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.Property<int>("WorkPreferenceId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("SalaryId");
+
+                    b.HasIndex("UserId");
 
                     b.HasIndex("WorkPreferenceId");
 
@@ -1040,6 +1053,10 @@ namespace Artify.Migrations
 
             modelBuilder.Entity("Artify.Models.DbModels.WorkPreferences.FreelanceAvailability", b =>
                 {
+                    b.HasOne("Artify.Models.DbModels.Users.User", null)
+                        .WithMany("FreelanceAvailabilities")
+                        .HasForeignKey("UserId");
+
                     b.HasOne("Artify.Models.DbModels.WorkPreferences.WorkPreference", "WorkPreference")
                         .WithMany("FreelanceAvailabilities")
                         .HasForeignKey("WorkPreferenceId")
@@ -1056,6 +1073,10 @@ namespace Artify.Migrations
                         .HasForeignKey("SalaryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Artify.Models.DbModels.Users.User", null)
+                        .WithMany("FullTimeAvailabilities")
+                        .HasForeignKey("UserId");
 
                     b.HasOne("Artify.Models.DbModels.WorkPreferences.WorkPreference", "WorkPreference")
                         .WithMany("FullTimeAvailabilities")
@@ -1251,6 +1272,10 @@ namespace Artify.Migrations
                     b.Navigation("Albums");
 
                     b.Navigation("Appreciations");
+
+                    b.Navigation("FreelanceAvailabilities");
+
+                    b.Navigation("FullTimeAvailabilities");
 
                     b.Navigation("Projects");
 
