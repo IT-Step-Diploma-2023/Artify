@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Artify.Models.Users;
 
-namespace Artify.Models.WorkPreference
+namespace Artify.Models.WorkPreferences
 {
     public class WorkPreference
     {

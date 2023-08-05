@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Linq;
 
-namespace Artify.Models.WorkPreference
+namespace Artify.Models.WorkPreferences
 {
     public class Speciality
     {

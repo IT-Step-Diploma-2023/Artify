@@ -1,30 +1,35 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.Design;
-using System.Xml.Linq;
 using Artify.Models.Users;
 
-namespace Artify.Models.WorkPreference
+
+namespace Artify.Models.WorkPreferences
 {
-    public class FreelanceAvailability
+    public class FullTimeAvailability
     {
         [Key]
         public int Id { get; set; }
 
         [Required]
+        public string Location { get; set; } = string.Empty;
+
+        [Required]
+        public int RemoteAvailable { get; set; }
+
+        [Required]
         public int UserId { get; set; }
 
-        [Column(TypeName = "money")]
-        public decimal FixedPrice { get; set; }
+        [Required]
+        public int SalaryId { get; set; }
 
-        [Column(TypeName = "money")]
-        public decimal MinHourlyRate { get; set; }
+        [ForeignKey(nameof(SalaryId))]
+        public virtual Salary Salary { get; set; } = null!;
 
-        public int MinContractHours { get; set; }
-
-        // NAVIGATION PROPERTIES
         [ForeignKey(nameof(UserId))]
         public virtual User User { get; set; } = null!;
+
         public virtual List<WorkPreference> WorkPreferences { get; set; } = new();
+
     }
 }

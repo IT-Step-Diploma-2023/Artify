@@ -42,7 +42,7 @@ namespace Artify.Controllers
             return _usersRepository.Query(user => 
                 user.Username == userLogin.Username && 
                 user.Password == hashedPassword)
-                .Include(user => user.Role)
+                .Include(user => user.UserRole)
                 .FirstOrDefault();
         }
         private string Generate(User user)
@@ -60,7 +60,7 @@ namespace Artify.Controllers
                 new Claim("Id", user.Id.ToString()),
                 new Claim(ClaimTypes.NameIdentifier, user.Username),
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Role, user.Role.Id.ToString())
+                new Claim(ClaimTypes.Role, user.UserRole.Id.ToString())
             };
             var token = new JwtSecurityToken(jwt_issuer,
                 jwt_audience,

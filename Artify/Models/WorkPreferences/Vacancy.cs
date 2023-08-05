@@ -4,7 +4,7 @@ using System.ComponentModel.Design;
 using System.Xml.Linq;
 using Artify.Models.Users;
 
-namespace Artify.Models.WorkPreference
+namespace Artify.Models.WorkPreferences
 {
     public class Vacancy
     {

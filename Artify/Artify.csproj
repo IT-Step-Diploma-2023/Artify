@@ -28,7 +28,8 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\" />
-    <Folder Include="Models\WorkPreference\" />
+    <Folder Include="Migrations\" />
+    <Folder Include="Models\WorkPreferences\" />
   </ItemGroup>
 
 </Project>

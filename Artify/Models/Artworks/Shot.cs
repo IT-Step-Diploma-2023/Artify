@@ -24,7 +24,7 @@ namespace Artify.Models.Artworks
         [ForeignKey(nameof(UserId))]
         public virtual User User { get; set; } = null!;
         public virtual List<Image> Images { get; } = new();
-        public virtual List<ShotComment> Comments { get; } = new();
+        public virtual List<ShotComment> ShotComments { get; } = new();
         public virtual List<Tag> Tags { get; } = new();
         public virtual List<Genre> Genres { get; } = new();
         public virtual List<Tool> Tools { get; } = new();

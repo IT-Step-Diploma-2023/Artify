@@ -1,7 +1,7 @@
 ﻿using Artify.Models.Artworks;
 using Artify.Models.Artworks.Attributes;
 using Artify.Models.Users.Attributes;
-using Artify.Models.WorkPreference;
+using Artify.Models.WorkPreferences;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -29,9 +29,9 @@ namespace Artify.Models.Users
 
         [ForeignKey(nameof(RoleId))]
         [NotMapped]
-        public UserRole Role { get; set; } = new();
+        public UserRole UserRole { get; set; } = new();
         [NotMapped]
-        public virtual List<Album> Collections { get; } = new();
+        public virtual List<Album> Albums { get; } = new();
         [NotMapped]
         public virtual List<Project> Projects { get; } = new();
         [NotMapped]
@@ -39,19 +39,20 @@ namespace Artify.Models.Users
         [NotMapped]
         public virtual List<Appreciation> Appreciations { get; } = new();
         [NotMapped]
-        public virtual List<UserSocialProfile> SocialProfiles { get; } = new();
+        public virtual List<UserSocialProfile> UserSocialProfiles { get; } = new();
         [NotMapped]
-        public virtual List<UserFollower> Followers { get; } = new();
+        public virtual List<UserFollower> UserFollowers { get; } = new();
         [NotMapped]
-        public virtual List<EmployerComment> Comments { get; } = new();
+        public virtual List<EmployerComment> EmployerComments { get; } = new();
         [NotMapped]
         public virtual List<Billing> Billings { get; } = null!;
 
         //
         public virtual List<FreelanceAvailability> FreelanceAvailabilities { get; set; } = new();
         public virtual List<FullTimeAvailability> FullTimeAvailabilities { get; set; } = new();
-        public virtual List<WorkPreference.WorkPreference> WorkPreferences { get; set; } = new();
-        public virtual List<Vacancy> Vacancy { get; set; } = new();
+
+        public virtual List<WorkPreference> WorkPreferences { get; set; } = new();
+        public virtual List<Vacancy> Vacancies { get; set; } = new();
 
     }
 
