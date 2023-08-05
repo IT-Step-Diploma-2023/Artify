@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Artify.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230805211449_12_db_fix")]
-    partial class _12_db_fix
+    [Migration("20230805214644_new_init_db")]
+    partial class new_init_db
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -329,12 +329,12 @@ namespace Artify.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("MemberUserid")
+                    b.Property<int>("MemberUserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MemberUserid");
+                    b.HasIndex("MemberUserId");
 
                     b.ToTable("TeamMembers");
                 });
@@ -987,7 +987,7 @@ namespace Artify.Migrations
                 {
                     b.HasOne("Artify.Models.DbModels.Users.User", "MemberUser")
                         .WithMany()
-                        .HasForeignKey("MemberUserid")
+                        .HasForeignKey("MemberUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

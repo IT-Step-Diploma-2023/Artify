@@ -6,25 +6,37 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Artify.Migrations
 {
     /// <inheritdoc />
-    public partial class new_init_01 : Migration
+    public partial class new_init_db : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Educations",
+                name: "Billings",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Degree = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Institution = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    StartYear = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    FinishYear = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    CardNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CardHolderName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CardExp = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CardCVV = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Educations", x => x.Id);
+                    table.PrimaryKey("PK_Billings", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Followers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Followers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -38,22 +50,6 @@ namespace Artify.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Genres", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Jobs",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Position = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    Company = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    StartYear = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    FinishYear = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Jobs", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -141,7 +137,8 @@ namespace Artify.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    RoleName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    InheritedRoleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -153,11 +150,11 @@ namespace Artify.Migrations
                 columns: table => new
                 {
                     PermissionsId = table.Column<int>(type: "int", nullable: false),
-                    RolesId = table.Column<int>(type: "int", nullable: false)
+                    UserRolesId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PermissionUserRole", x => new { x.PermissionsId, x.RolesId });
+                    table.PrimaryKey("PK_PermissionUserRole", x => new { x.PermissionsId, x.UserRolesId });
                     table.ForeignKey(
                         name: "FK_PermissionUserRole_Permissions_PermissionsId",
                         column: x => x.PermissionsId,
@@ -165,8 +162,8 @@ namespace Artify.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PermissionUserRole_UserRoles_RolesId",
-                        column: x => x.RolesId,
+                        name: "FK_PermissionUserRole_UserRoles_UserRolesId",
+                        column: x => x.UserRolesId,
                         principalTable: "UserRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -221,25 +218,27 @@ namespace Artify.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Billings",
+                name: "BillingUser",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CardNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CardHolderName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CardExp = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CardCVV = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: true)
+                    BillingsId = table.Column<int>(type: "int", nullable: false),
+                    UsersId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Billings", x => x.Id);
+                    table.PrimaryKey("PK_BillingUser", x => new { x.BillingsId, x.UsersId });
                     table.ForeignKey(
-                        name: "FK_Billings_Users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_BillingUser_Billings_BillingsId",
+                        column: x => x.BillingsId,
+                        principalTable: "Billings",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BillingUser_Users_UsersId",
+                        column: x => x.UsersId,
                         principalTable: "Users",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -262,69 +261,24 @@ namespace Artify.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Followers",
+                name: "FollowerUser",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    FollowersId = table.Column<int>(type: "int", nullable: false),
+                    UsersId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Followers", x => x.Id);
+                    table.PrimaryKey("PK_FollowerUser", x => new { x.FollowersId, x.UsersId });
                     table.ForeignKey(
-                        name: "FK_Followers_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "FreelanceAvailabilities",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    FixedPrice = table.Column<decimal>(type: "money", precision: 18, scale: 2, nullable: false),
-                    MinHourlyRate = table.Column<decimal>(type: "money", precision: 18, scale: 2, nullable: false),
-                    MinContractHours = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_FreelanceAvailabilities", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_FreelanceAvailabilities_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "FullTimeAvailabilities",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RemoteAvailable = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    SalaryId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_FullTimeAvailabilities", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_FullTimeAvailabilities_Salaries_SalaryId",
-                        column: x => x.SalaryId,
-                        principalTable: "Salaries",
+                        name: "FK_FollowerUser_Followers_FollowersId",
+                        column: x => x.FollowersId,
+                        principalTable: "Followers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_FullTimeAvailabilities_Users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_FollowerUser_Users_UsersId",
+                        column: x => x.UsersId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -374,6 +328,44 @@ namespace Artify.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TeamMembers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MemberUserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TeamMembers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TeamMembers_Users_MemberUserId",
+                        column: x => x.MemberUserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Teams",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Teams", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Teams_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserSocialProfiles",
                 columns: table => new
                 {
@@ -401,33 +393,19 @@ namespace Artify.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Vacancies",
+                name: "WorkPreferences",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RemoteAvailable = table.Column<int>(type: "int", nullable: false),
-                    Salary = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EmpType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    InBest = table.Column<bool>(type: "bit", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    SpecialityId = table.Column<int>(type: "int", nullable: false)
+                    Skills = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Vacancies", x => x.Id);
+                    table.PrimaryKey("PK_WorkPreferences", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Vacancies_Specialities_SpecialityId",
-                        column: x => x.SpecialityId,
-                        principalTable: "Specialities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Vacancies_Users_UserId",
+                        name: "FK_WorkPreferences_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -462,39 +440,37 @@ namespace Artify.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "WorkPreferences",
+                name: "Vacancies",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FullTimeAvailable = table.Column<bool>(type: "bit", nullable: false),
-                    FreelanceAvailable = table.Column<bool>(type: "bit", nullable: false),
-                    Skills = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    FullTimeAvailabilityId = table.Column<int>(type: "int", nullable: false),
-                    FreelanceAvailabilityId = table.Column<int>(type: "int", nullable: false)
+                    Title = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RemoteAvailable = table.Column<int>(type: "int", nullable: false),
+                    Salary = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EmpType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    InBest = table.Column<bool>(type: "bit", nullable: false),
+                    EmployerId = table.Column<int>(type: "int", nullable: false),
+                    SpecialityId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WorkPreferences", x => x.Id);
+                    table.PrimaryKey("PK_Vacancies", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_WorkPreferences_FreelanceAvailabilities_FreelanceAvailabilityId",
-                        column: x => x.FreelanceAvailabilityId,
-                        principalTable: "FreelanceAvailabilities",
+                        name: "FK_Vacancies_Employers_EmployerId",
+                        column: x => x.EmployerId,
+                        principalTable: "Employers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_WorkPreferences_FullTimeAvailabilities_FullTimeAvailabilityId",
-                        column: x => x.FullTimeAvailabilityId,
-                        principalTable: "FullTimeAvailabilities",
+                        name: "FK_Vacancies_Specialities_SpecialityId",
+                        column: x => x.SpecialityId,
+                        principalTable: "Specialities",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_WorkPreferences_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -692,48 +668,120 @@ namespace Artify.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EducationWorkPreference",
+                name: "TeamTeamMember",
                 columns: table => new
                 {
-                    EducationsId = table.Column<int>(type: "int", nullable: false),
-                    WorkPreferencesId = table.Column<int>(type: "int", nullable: false)
+                    TeamMembersId = table.Column<int>(type: "int", nullable: false),
+                    TeamsId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EducationWorkPreference", x => new { x.EducationsId, x.WorkPreferencesId });
+                    table.PrimaryKey("PK_TeamTeamMember", x => new { x.TeamMembersId, x.TeamsId });
                     table.ForeignKey(
-                        name: "FK_EducationWorkPreference_Educations_EducationsId",
-                        column: x => x.EducationsId,
-                        principalTable: "Educations",
+                        name: "FK_TeamTeamMember_TeamMembers_TeamMembersId",
+                        column: x => x.TeamMembersId,
+                        principalTable: "TeamMembers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EducationWorkPreference_WorkPreferences_WorkPreferencesId",
-                        column: x => x.WorkPreferencesId,
+                        name: "FK_TeamTeamMember_Teams_TeamsId",
+                        column: x => x.TeamsId,
+                        principalTable: "Teams",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Educations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Degree = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Institution = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    StartYear = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FinishYear = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    WorkPreferenceId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Educations", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Educations_WorkPreferences_WorkPreferenceId",
+                        column: x => x.WorkPreferenceId,
                         principalTable: "WorkPreferences",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "JobWorkPreference",
+                name: "FreelanceAvailabilities",
                 columns: table => new
                 {
-                    JobsId = table.Column<int>(type: "int", nullable: false),
-                    WorkPreferencesId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    WorkPreferenceId = table.Column<int>(type: "int", nullable: false),
+                    FixedPrice = table.Column<decimal>(type: "money", precision: 18, scale: 2, nullable: false),
+                    MinHourlyRate = table.Column<decimal>(type: "money", precision: 18, scale: 2, nullable: false),
+                    MinContractHours = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_JobWorkPreference", x => new { x.JobsId, x.WorkPreferencesId });
+                    table.PrimaryKey("PK_FreelanceAvailabilities", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_JobWorkPreference_Jobs_JobsId",
-                        column: x => x.JobsId,
-                        principalTable: "Jobs",
+                        name: "FK_FreelanceAvailabilities_WorkPreferences_WorkPreferenceId",
+                        column: x => x.WorkPreferenceId,
+                        principalTable: "WorkPreferences",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FullTimeAvailabilities",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RemoteAvailable = table.Column<int>(type: "int", nullable: false),
+                    WorkPreferenceId = table.Column<int>(type: "int", nullable: false),
+                    SalaryId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FullTimeAvailabilities", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_FullTimeAvailabilities_Salaries_SalaryId",
+                        column: x => x.SalaryId,
+                        principalTable: "Salaries",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_JobWorkPreference_WorkPreferences_WorkPreferencesId",
-                        column: x => x.WorkPreferencesId,
+                        name: "FK_FullTimeAvailabilities_WorkPreferences_WorkPreferenceId",
+                        column: x => x.WorkPreferenceId,
+                        principalTable: "WorkPreferences",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Jobs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Position = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    Company = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    StartYear = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FinishYear = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    WorkPreferenceId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Jobs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Jobs_WorkPreferences_WorkPreferenceId",
+                        column: x => x.WorkPreferenceId,
                         principalTable: "WorkPreferences",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -784,14 +832,14 @@ namespace Artify.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Billings_UserId",
-                table: "Billings",
-                column: "UserId");
+                name: "IX_BillingUser_UsersId",
+                table: "BillingUser",
+                column: "UsersId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EducationWorkPreference_WorkPreferencesId",
-                table: "EducationWorkPreference",
-                column: "WorkPreferencesId");
+                name: "IX_Educations_WorkPreferenceId",
+                table: "Educations",
+                column: "WorkPreferenceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Employers_UserId",
@@ -799,14 +847,14 @@ namespace Artify.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Followers_UserId",
-                table: "Followers",
-                column: "UserId");
+                name: "IX_FollowerUser_UsersId",
+                table: "FollowerUser",
+                column: "UsersId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FreelanceAvailabilities_UserId",
+                name: "IX_FreelanceAvailabilities_WorkPreferenceId",
                 table: "FreelanceAvailabilities",
-                column: "UserId");
+                column: "WorkPreferenceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_FullTimeAvailabilities_SalaryId",
@@ -814,9 +862,9 @@ namespace Artify.Migrations
                 column: "SalaryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FullTimeAvailabilities_UserId",
+                name: "IX_FullTimeAvailabilities_WorkPreferenceId",
                 table: "FullTimeAvailabilities",
-                column: "UserId");
+                column: "WorkPreferenceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_GenreShot_ShotsId",
@@ -829,14 +877,14 @@ namespace Artify.Migrations
                 column: "ShotId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_JobWorkPreference_WorkPreferencesId",
-                table: "JobWorkPreference",
-                column: "WorkPreferencesId");
+                name: "IX_Jobs_WorkPreferenceId",
+                table: "Jobs",
+                column: "WorkPreferenceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PermissionUserRole_RolesId",
+                name: "IX_PermissionUserRole_UserRolesId",
                 table: "PermissionUserRole",
-                column: "RolesId");
+                column: "UserRolesId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Projects_UserId",
@@ -879,6 +927,21 @@ namespace Artify.Migrations
                 column: "WorkPreferencesId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TeamMembers_MemberUserId",
+                table: "TeamMembers",
+                column: "MemberUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Teams_UserId",
+                table: "Teams",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TeamTeamMember_TeamsId",
+                table: "TeamTeamMember",
+                column: "TeamsId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserEmployerComments_EmployerId",
                 table: "UserEmployerComments",
                 column: "EmployerId");
@@ -904,24 +967,14 @@ namespace Artify.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Vacancies_EmployerId",
+                table: "Vacancies",
+                column: "EmployerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Vacancies_SpecialityId",
                 table: "Vacancies",
                 column: "SpecialityId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Vacancies_UserId",
-                table: "Vacancies",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_WorkPreferences_FreelanceAvailabilityId",
-                table: "WorkPreferences",
-                column: "FreelanceAvailabilityId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_WorkPreferences_FullTimeAvailabilityId",
-                table: "WorkPreferences",
-                column: "FullTimeAvailabilityId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_WorkPreferences_UserId",
@@ -939,13 +992,19 @@ namespace Artify.Migrations
                 name: "Appreciations");
 
             migrationBuilder.DropTable(
-                name: "Billings");
+                name: "BillingUser");
 
             migrationBuilder.DropTable(
-                name: "EducationWorkPreference");
+                name: "Educations");
 
             migrationBuilder.DropTable(
-                name: "Followers");
+                name: "FollowerUser");
+
+            migrationBuilder.DropTable(
+                name: "FreelanceAvailabilities");
+
+            migrationBuilder.DropTable(
+                name: "FullTimeAvailabilities");
 
             migrationBuilder.DropTable(
                 name: "GenreShot");
@@ -954,7 +1013,7 @@ namespace Artify.Migrations
                 name: "Images");
 
             migrationBuilder.DropTable(
-                name: "JobWorkPreference");
+                name: "Jobs");
 
             migrationBuilder.DropTable(
                 name: "PermissionUserRole");
@@ -975,6 +1034,9 @@ namespace Artify.Migrations
                 name: "SpecialityWorkPreference");
 
             migrationBuilder.DropTable(
+                name: "TeamTeamMember");
+
+            migrationBuilder.DropTable(
                 name: "UserEmployerComments");
 
             migrationBuilder.DropTable(
@@ -987,13 +1049,16 @@ namespace Artify.Migrations
                 name: "Albums");
 
             migrationBuilder.DropTable(
-                name: "Educations");
+                name: "Billings");
+
+            migrationBuilder.DropTable(
+                name: "Followers");
+
+            migrationBuilder.DropTable(
+                name: "Salaries");
 
             migrationBuilder.DropTable(
                 name: "Genres");
-
-            migrationBuilder.DropTable(
-                name: "Jobs");
 
             migrationBuilder.DropTable(
                 name: "Permissions");
@@ -1014,22 +1079,19 @@ namespace Artify.Migrations
                 name: "WorkPreferences");
 
             migrationBuilder.DropTable(
-                name: "Employers");
+                name: "TeamMembers");
+
+            migrationBuilder.DropTable(
+                name: "Teams");
 
             migrationBuilder.DropTable(
                 name: "SocialProfiles");
 
             migrationBuilder.DropTable(
+                name: "Employers");
+
+            migrationBuilder.DropTable(
                 name: "Specialities");
-
-            migrationBuilder.DropTable(
-                name: "FreelanceAvailabilities");
-
-            migrationBuilder.DropTable(
-                name: "FullTimeAvailabilities");
-
-            migrationBuilder.DropTable(
-                name: "Salaries");
 
             migrationBuilder.DropTable(
                 name: "Users");

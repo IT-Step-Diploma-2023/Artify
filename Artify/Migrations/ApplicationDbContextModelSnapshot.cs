@@ -326,12 +326,12 @@ namespace Artify.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("MemberUserid")
+                    b.Property<int>("MemberUserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MemberUserid");
+                    b.HasIndex("MemberUserId");
 
                     b.ToTable("TeamMembers");
                 });
@@ -984,7 +984,7 @@ namespace Artify.Migrations
                 {
                     b.HasOne("Artify.Models.DbModels.Users.User", "MemberUser")
                         .WithMany()
-                        .HasForeignKey("MemberUserid")
+                        .HasForeignKey("MemberUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
