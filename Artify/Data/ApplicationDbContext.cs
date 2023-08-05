@@ -20,6 +20,7 @@ namespace Artify.Data
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Team> Teams { get; set; }
+        public DbSet<TeamMember> TeamMembers { get; set; }
         public DbSet<Appreciation> Appreciations { get; set; }
         public DbSet<ShotComment> ShotComments { get; set; }
         public DbSet<Genre> Genres { get; set; }

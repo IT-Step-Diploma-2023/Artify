@@ -4,6 +4,7 @@ using Artify.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Artify.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230805210227_11_db_fix__add_TeamMember")]
+    partial class _11_db_fix__add_TeamMember
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -326,12 +329,7 @@ namespace Artify.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("MemberUserid")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("MemberUserid");
 
                     b.ToTable("TeamMembers");
                 });
@@ -978,17 +976,6 @@ namespace Artify.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Artify.Models.DbModels.Users.Attributes.TeamMember", b =>
-                {
-                    b.HasOne("Artify.Models.DbModels.Users.User", "MemberUser")
-                        .WithMany()
-                        .HasForeignKey("MemberUserid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("MemberUser");
                 });
 
             modelBuilder.Entity("Artify.Models.DbModels.Users.Attributes.UserEmployerComment", b =>
