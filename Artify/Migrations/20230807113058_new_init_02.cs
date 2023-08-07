@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Artify.Migrations
 {
     /// <inheritdoc />
-    public partial class new_init_db : Migration
+    public partial class new_init_02 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -854,7 +854,8 @@ namespace Artify.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_FreelanceAvailabilities_WorkPreferenceId",
                 table: "FreelanceAvailabilities",
-                column: "WorkPreferenceId");
+                column: "WorkPreferenceId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_FullTimeAvailabilities_SalaryId",
@@ -864,7 +865,8 @@ namespace Artify.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_FullTimeAvailabilities_WorkPreferenceId",
                 table: "FullTimeAvailabilities",
-                column: "WorkPreferenceId");
+                column: "WorkPreferenceId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_GenreShot_ShotsId",
@@ -979,7 +981,8 @@ namespace Artify.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_WorkPreferences_UserId",
                 table: "WorkPreferences",
-                column: "UserId");
+                column: "UserId",
+                unique: true);
         }
 
         /// <inheritdoc />

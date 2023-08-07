@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Artify.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230805214644_new_init_db")]
-    partial class new_init_db
+    [Migration("20230807113058_new_init_02")]
+    partial class new_init_02
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -609,7 +609,8 @@ namespace Artify.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("WorkPreferenceId");
+                    b.HasIndex("WorkPreferenceId")
+                        .IsUnique();
 
                     b.ToTable("FreelanceAvailabilities");
                 });
@@ -640,7 +641,8 @@ namespace Artify.Migrations
 
                     b.HasIndex("SalaryId");
 
-                    b.HasIndex("WorkPreferenceId");
+                    b.HasIndex("WorkPreferenceId")
+                        .IsUnique();
 
                     b.ToTable("FullTimeAvailabilities");
                 });
@@ -735,7 +737,8 @@ namespace Artify.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("WorkPreferences");
                 });
@@ -1087,8 +1090,8 @@ namespace Artify.Migrations
             modelBuilder.Entity("Artify.Models.DbModels.WorkPreferences.FreelanceAvailability", b =>
                 {
                     b.HasOne("Artify.Models.DbModels.WorkPreferences.WorkPreference", "WorkPreference")
-                        .WithMany("FreelanceAvailabilities")
-                        .HasForeignKey("WorkPreferenceId")
+                        .WithOne("FreelanceAvailability")
+                        .HasForeignKey("Artify.Models.DbModels.WorkPreferences.FreelanceAvailability", "WorkPreferenceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1104,8 +1107,8 @@ namespace Artify.Migrations
                         .IsRequired();
 
                     b.HasOne("Artify.Models.DbModels.WorkPreferences.WorkPreference", "WorkPreference")
-                        .WithMany("FullTimeAvailabilities")
-                        .HasForeignKey("WorkPreferenceId")
+                        .WithOne("FullTimeAvailability")
+                        .HasForeignKey("Artify.Models.DbModels.WorkPreferences.FullTimeAvailability", "WorkPreferenceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1128,8 +1131,8 @@ namespace Artify.Migrations
             modelBuilder.Entity("Artify.Models.DbModels.WorkPreferences.WorkPreference", b =>
                 {
                     b.HasOne("Artify.Models.DbModels.Users.User", "User")
-                        .WithMany("WorkPreferences")
-                        .HasForeignKey("UserId")
+                        .WithOne("WorkPreference")
+                        .HasForeignKey("Artify.Models.DbModels.WorkPreferences.WorkPreference", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1308,7 +1311,7 @@ namespace Artify.Migrations
 
                     b.Navigation("UserSocialProfiles");
 
-                    b.Navigation("WorkPreferences");
+                    b.Navigation("WorkPreference");
                 });
 
             modelBuilder.Entity("Artify.Models.DbModels.Users.UserRole", b =>
@@ -1330,9 +1333,9 @@ namespace Artify.Migrations
                 {
                     b.Navigation("Educations");
 
-                    b.Navigation("FreelanceAvailabilities");
+                    b.Navigation("FreelanceAvailability");
 
-                    b.Navigation("FullTimeAvailabilities");
+                    b.Navigation("FullTimeAvailability");
 
                     b.Navigation("Jobs");
                 });

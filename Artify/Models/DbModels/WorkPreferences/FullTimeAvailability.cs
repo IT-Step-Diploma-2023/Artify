@@ -22,6 +22,7 @@ namespace Artify.Models.DbModels.WorkPreferences
 
         public int? SalaryId { get; set; }
 
+        // NAVIGATION PROPERTIES
         [ForeignKey(nameof(SalaryId))]
         public virtual Salary Salary { get; set; } = null!;
 

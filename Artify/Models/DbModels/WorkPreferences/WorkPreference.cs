@@ -16,12 +16,12 @@ namespace Artify.Models.DbModels.WorkPreferences
 
         // NAVIGATION PROPERTIES
         [ForeignKey(nameof(UserId))]
-        public virtual User User { get; set; } = new();
-        public virtual List<Education> Educations { get; set; } = new();
-        public virtual List<Job> Jobs { get; set; } = new();
-        public virtual List<Speciality> Specialities { get; set; } = new();
-        public virtual List<FullTimeAvailability> FullTimeAvailabilities { get; set; } = new();
-        public virtual List<FreelanceAvailability> FreelanceAvailabilities { get; set; } = new();
+        public virtual User User { get; set; } = null!;
+        public virtual List<Education>? Educations { get; set; }
+        public virtual List<Job>? Jobs { get; set; }
+        public virtual List<Speciality>? Specialities { get; set; }
+        public virtual FullTimeAvailability? FullTimeAvailability { get; set; }
+        public virtual FreelanceAvailability? FreelanceAvailability { get; set; }
 
     }
 }

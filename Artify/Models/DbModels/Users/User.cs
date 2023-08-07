@@ -25,7 +25,7 @@ namespace Artify.Models.DbModels.Users
 
         // NAVIGATION PROPERTIES
         [ForeignKey(nameof(RoleId))]
-        public UserRole UserRole { get; set; } = new();
+        public virtual UserRole UserRole { get; set; } = null!;
         public virtual List<Album> Albums { get; set; } = new();
         public virtual List<Project> Projects { get; set; } = new();
         public virtual List<Shot> Shots { get; set; } = new();
@@ -34,7 +34,7 @@ namespace Artify.Models.DbModels.Users
         public virtual List<Follower> Followers { get; set; } = new();
         public virtual List<UserEmployerComment> UserEmployerComments { get; set; } = new();
         public virtual List<Billing> Billings { get; set; } = null!;
-        public virtual List<WorkPreference> WorkPreferences { get; set; } = new();
+        public virtual WorkPreference? WorkPreference { get; set; }
         public virtual List<Team> Teams { get; set; } = new();
     }
 
