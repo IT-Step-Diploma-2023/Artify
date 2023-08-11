@@ -1,4 +1,5 @@
 import ExampleFetch from "./assets/components/ExampleFetch";
+import { Suspense } from 'react';
 
 function App() {
   return (
@@ -8,4 +9,10 @@ function App() {
   )
 }
 
-export default App
+export default function WrappedApp() {
+  return (
+    <Suspense fallback="...is loading">
+      <App />
+    </Suspense>
+  );
+}
