@@ -1,7 +1,7 @@
 {
     "title": "English",
     "buttonFetch": "Fetch Data",
-    "header": {
+    "headerComponent": {
         "menue": {
             "search": "search",
             "hire": "hire",
@@ -9,7 +9,7 @@
             "buy": "purchase",
             "help": "help",
             "download": "download",
-            "share": "to share"
+            "share": "share"
         },
         "filter": "filter",
         "tags": {
@@ -23,8 +23,45 @@
             "animation": "animation"
         }
     },
-    "userProfile": {
-        "buttonEdit": "edit",
+    "userAccountCreate": {
+        "general":{
+            "terms": "by creating an account, you agree to our <a href='#'>terms of service</a>, <a href='#'>privacy policy</a> and <a href='#' >notification settings</a> by default.",
+            "haveAccount": "already have an account?",
+            "enter": "enter"
+        },
+        "registrationMethodPage": {
+            "title": "CREATE ACCOUNT",
+            "withGoogle": "sign up with google",
+            "withEmail": "continue with email"
+        },
+        "registrationPage": {
+            "title": "CREATION OF ACCOUNT",
+            "login": "login",
+            "loginError": "Incorrect login format",
+            "userName": "username",
+            "userNameError": "Incorrect username format",
+            "email": "e-mail",
+            "emailError": "Invalid email address",
+            "password": "password",
+            "passwordError": "Incorrect password format",
+            "create": "create an account"
+        }
+    },
+    "userLoginPage": {
+        "title": "SIGN IN TO ACCOUNT",
+        "withGoogle": "sign in with google",
+        "alternative": "or",
+        "login": "username or email address",
+        "loginError": "Enter email address",
+        "forgot": "forgot?",
+        "password": "password",
+        "passwordError": "Enter password",
+        "enter": "enter",
+        "noAccount": "no account?",
+        "register":"register"
+    },
+    "userProfilePage": {
+        "edit": "edit",
         "portfolio": "portfolio",
         "about": "about me",
         "albums": "albums",

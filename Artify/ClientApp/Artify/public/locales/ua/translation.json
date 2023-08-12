@@ -1,7 +1,7 @@
 {
     "title": "Українська",
     "buttonFetch": "Отримати дані",
-    "header": {
+    "headerComponent": {
         "menue": {
             "search": "пошук",
             "hire": "винайняти",
@@ -23,8 +23,45 @@
             "animation": "анімація"
         }
     },
-    "userProfile": {
-        "buttonEdit": "редагувати",
+    "userAccountCreate": {
+        "general":{
+            "terms": "створюючи обліковий запис, ви погоджуєтеся з нашими <a href='#'>умовами обслуговування</a>, <a href='#'>політикою конфіденційності</a> та <a href='#'>налаштуваннями сповіщень</a> за замовчуванням.",
+            "haveAccount": "вже є аккаунт?",
+            "enter": "увійти"
+        },
+        "registerationMetodPage": {
+            "title": "СТВОРИТИ АККАУНТ",
+            "withGoogle": "зареєструватися за допомогою google",
+            "withEmail": "продовжити з електронною поштою"
+        },
+        "registerationPage": {
+            "title": "СТВОРЕННЯ АККАУНТУ",
+            "login": "логін",
+            "loginError": "Некоректний формат логіну",
+            "userName": "ім'я користувача",
+            "userNameError": "Некоректний формат ім'я користувача",
+            "email": "електронна пошта",
+            "emailError": "Некоректна адреса електроннаої пошти",
+            "password": "пароль",
+            "passwordError": "Некоректний формат паролю",
+            "create": "сворити аккаунт"
+        }
+    },
+    "userLoginPage": {
+        "title": "УВІЙТИ ДО АККАУНТУ",
+        "withGoogle": "увійти за допомогою google",
+        "alternative": "або",
+        "login": "ім’я користувача або адреса електронної пошти",
+        "loginError": "Введіть адресу електронної пошти",
+        "forgot": "забули?",
+        "password": "пароль",
+        "passwordError": "Введіть пароль",
+        "enter": "увійти",
+        "noAccount": "немає аккаунту?",
+        "register":"зареєструватися"
+    },
+    "userProfilePage": {
+        "edit": "редагувати",
         "portfolio": "портфоліо",
         "about": "про мене",
         "albums": "альбоми",
