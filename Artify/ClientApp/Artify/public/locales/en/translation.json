@@ -1,4 +1,27 @@
 {
     "title": "English",
-    "buttonFetch": "Fetch data"
+    "buttonFetch": "Fetch Data",
+    "header": {
+        "menue": {
+            "search": "search",
+            "hire": "hire",
+            "job": "job",
+            "buy": "purchase",
+            "help": "help",
+            "download": "download",
+            "share": "to share"
+           
+        },
+        "filter": "",
+        "tags": {
+            "sites": "websites",
+            "images": "illustrations",
+            "photos": "photos",
+            "brand": "brand",
+            "typography": "typography",
+            "prints": "prints",
+            "mobile": "model",
+            "animation": "animation"
+        }
+    }
 }
