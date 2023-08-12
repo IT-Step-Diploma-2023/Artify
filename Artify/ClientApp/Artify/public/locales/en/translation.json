@@ -22,5 +22,13 @@
             "mobile": "model",
             "animation": "animation"
         }
+    },
+    "userProfile": {
+        "buttonEdit": "edit",
+        "portfolio": "portfolio",
+        "about": "about me",
+        "albums": "albums",
+        "appreciations": "likes",
+        "followings": "subscriptions"
     }
 }

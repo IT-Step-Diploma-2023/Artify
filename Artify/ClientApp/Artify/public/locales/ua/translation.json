@@ -22,5 +22,13 @@
             "mobile": "модільне",
             "animation": "анімація"
         }
+    },
+    "userProfile": {
+        "buttonEdit": "редагувати",
+        "portfolio": "портфоліо",
+        "about": "про мене",
+        "albums": "альбоми",
+        "appreciations": "вподобання",
+        "followings": "підписки"
     }
 }
