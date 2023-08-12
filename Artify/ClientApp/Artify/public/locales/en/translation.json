@@ -28,7 +28,7 @@
         "portfolio": "portfolio",
         "about": "about me",
         "albums": "albums",
-        "appreciations": "likes",
-        "followings": "subscriptions"
+        "appreciations": "appreciations",
+        "followings": "followings"
     }
 }
