@@ -10,9 +10,8 @@
             "help": "help",
             "download": "download",
             "share": "to share"
-           
         },
-        "filter": "",
+        "filter": "filter",
         "tags": {
             "sites": "websites",
             "images": "illustrations",
