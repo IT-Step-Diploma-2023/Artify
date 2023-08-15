@@ -1,0 +1,35 @@
+:root {
+    --light-grey: #ECEAEF;
+    --grey: #CACACA;
+    --red: #D65353;
+    --violet: #6A4BD9;
+    --dark-violet: #271846;
+}
+
+@font-face {
+    font-family: 'Soyuz Grotesk Bold';
+    font-style: normal;
+    src: local('Soyuz Grotesk Bold'), url('./src/assets/fonts/SoyuzGroteskBold.woff') format('woff');
+}
+
+body {
+    font-family: 'Nunito', sans-serif !important;
+    font-weight: 100;
+    font-style: normal;
+    color: #271846;
+    background-color: #ECEAEF;
+}
+
+.logo {
+    text-align: center;
+    width: 68px !important;
+}
+
+
+
+.menu-item {
+    font-family: 'Nunito', sans-serif !important;
+    font-weight: 100;
+    font-size: 20px;
+    font-style: normal;
+}

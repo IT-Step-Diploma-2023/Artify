@@ -1,10 +1,12 @@
-import ExampleFetch from "./assets/components/ExampleFetch";
 import { Suspense } from 'react';
+import ResponsiveAppBar from "./assets/components/ResponsiveAppBar";
+import './App.css';
 
 function App() {
   return (
     <>
-    <ExampleFetch/>
+      {/* <ExampleFetch /> */}
+      <ResponsiveAppBar />
     </>
   )
 }
