@@ -59,7 +59,7 @@ function ResponsiveAppBar() {
     <Container maxWidth="xl">
       <Toolbar disableGutters>
         <Logo />
-        {/* <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+        <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
           <IconButton
             size="large"
             aria-label="account of current user"
@@ -94,9 +94,9 @@ function ResponsiveAppBar() {
             ))}
           </Menu>
           <Logo />
-        </Box> */}
+        </Box>
 
-        {/* <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
           {pages.map((page) => (
             <MenuItem
               className="menu-item"
@@ -107,16 +107,16 @@ function ResponsiveAppBar() {
               {page}
             </MenuItem>
           ))}
-        </Box> */}
-        {/* <div>
+        </Box>
+        <div>
           {Object.keys(lngs).map((lng) => (
             <button key={lng} style={{ fontWeight: i18n.resolvedLanguage === lng ? 'bold' : 'normal' }} type="submit" onClick={() => void i18n.changeLanguage(lng)}>
               {lng === 'ua' ? lngs.ua : lngs.en}
             </button>
           ))}
-        </div> */}
+        </div>
 
-        {/* <Box sx={{ flexGrow: 0 }}>
+        <Box sx={{ flexGrow: 0 }}>
           <Tooltip title="Open settings">
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
               <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -144,7 +144,7 @@ function ResponsiveAppBar() {
               </MenuItem>
             ))}
           </Menu>
-        </Box> */}
+        </Box>
       </Toolbar>
     </Container>
     // <AppBar position="static" className='menu'>
