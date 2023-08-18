@@ -1,6 +1,22 @@
 {
     "title": "English",
     "buttonFetch": "Fetch Data",
+
+    "homePage":{
+        "text": "Home Page"
+    },
+
+    "errorPage":{
+        "undefinedError":{
+            "title": "An error occurred",
+            "message": "Something went wrong"
+        },
+        "notFoundError":{
+            "title": "File not found (404)",
+            "message": "Resource or page not found"
+        }
+    },
+
     "headerComponent": {
         "menue": {
             "search": "search",
@@ -23,6 +39,7 @@
             "animation": "animation"
         }
     },
+
     "userAccountCreate": {
         "general":{
             "terms": "by creating an account, you agree to our <a href='#'>terms of service</a>, <a href='#'>privacy policy</a> and <a href='#' >notification settings</a> by default.",
@@ -47,6 +64,7 @@
             "create": "create an account"
         }
     },
+
     "userLoginPage": {
         "title": "SIGN IN TO ACCOUNT",
         "withGoogle": "sign in with google",
@@ -60,6 +78,7 @@
         "noAccount": "no account?",
         "register":"register"
     },
+
     "userProfilePage": {
         "edit": "edit",
         "portfolio": "portfolio",
