@@ -1,4 +1,4 @@
-﻿namespace Artify.Models.Users
+﻿namespace Artify.Models.HelperModels
 {
     //User that stores in JwtToken
     public class JwtUser

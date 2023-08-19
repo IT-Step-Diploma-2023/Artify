@@ -1,42 +1,41 @@
 ﻿using Artify.Data;
-using Artify.Models;
 using Artify.Models.DbModels.Users;
 using System.Linq.Expressions;
 
 namespace Artify.DAL
 {
-    public class UsersRepository : IRepository<User>
+    public class TeamsRepository : IRepository<Team>
     {
         private ApplicationDbContext context;
-        public UsersRepository(ApplicationDbContext context)
+        public TeamsRepository(ApplicationDbContext context)
         {
             this.context = context;
         }
-        public void Add(User obj)
+        public void Add(Team obj)
         {
-            context.Users.Add(obj);
+            context.Teams.Add(obj);
         }
 
-        public IQueryable<User> GetAll()
+        public IQueryable<Team> GetAll()
         {
-            return context.Users;
+            return context.Teams;
         }
 
-        public User? GetById(int id)
+        public Team? GetById(int id)
         {
-            return context.Users.Find(id);
+            return context.Teams.Find(id);
         }
 
-        public IQueryable<User> Query(Expression<Func<User, bool>> filter)
+        public IQueryable<Team> Query(Expression<Func<Team, bool>> filter)
         {
-            return context.Users.Where(filter);
+            return context.Teams.Where(filter);
         }
 
         public void Remove(int id)
         {
-            User? user = context.Users.Find(id);
-            if (user != null)
-                context.Users.Remove(user);
+            Team? team = context.Teams.Find(id);
+            if (team != null)
+                context.Teams.Remove(team);
         }
 
         public void Save()
@@ -49,7 +48,7 @@ namespace Artify.DAL
             await context.SaveChangesAsync();
         }
 
-        public void Update(User obj)
+        public void Update(Team obj)
         {
             context.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
         }

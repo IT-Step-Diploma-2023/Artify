@@ -1,4 +1,6 @@
-﻿namespace Artify.Models.Users
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Artify.Models.HelperModels
 {
     public class UserLogin
     {

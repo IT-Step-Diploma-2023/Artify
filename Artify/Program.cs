@@ -1,6 +1,6 @@
 using Artify.DAL;
 using Artify.Data;
-using Artify.Models.Users;
+using Artify.Models.DbModels.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
