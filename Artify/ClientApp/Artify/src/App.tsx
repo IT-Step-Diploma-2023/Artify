@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import ResponsiveAppBar from "./assets/components/ResponsiveAppBar";
+import ResponsiveAppBar from "./components/ResponsiveAppBar";
 import './App.css';
 
 function App() {
