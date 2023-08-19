@@ -28,9 +28,10 @@ namespace Artify.Controllers
         [AllowAnonymous]
         [HttpPost]
         public IActionResult Login([FromBody] UserLogin userLogin)
+        //public IActionResult Login(string username, string password)
         {
             var user = Authenticate(userLogin);
-            
+
             if (user != null)
             {
                 var token = Generate(user);

@@ -3,6 +3,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import RootLayout from './pages/HelperPages/RootLayout';
 import ErrorPage from './pages/HelperPages/ErrorPage';
 import HomePage from './pages/HomePage';
+import LoginPage from './pages/AuthorizationPages/LoginPage';
 function App() {
   const router = createBrowserRouter([
     {
@@ -12,6 +13,7 @@ function App() {
       children: [
         { index: true, element: <HomePage /> },
         { path: 'fetchdata', element: <ExampleFetch /> },
+        { path: 'login', element: <LoginPage /> },
       ],
     },
   ]);
