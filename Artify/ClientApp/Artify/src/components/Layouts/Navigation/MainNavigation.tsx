@@ -1,39 +1,9 @@
 import { AppBar, Toolbar, CssBaseline, Typography } from '@mui/material';
 import { NavLink } from 'react-router-dom';
-import { makeStyles } from '@mui/styles';
 import { FunctionComponent } from 'react';
-const useStyles = makeStyles(() => ({
-  navlinks: {
-    marginLeft: '5px',
-    display: 'flex',
-  },
-  logo: {
-    flexGrow: '1',
-    cursor: 'pointer',
-  },
-  link: {
-    textDecoration: 'none',
-    color: 'white',
-    fontSize: '20px',
-    marginLeft: '20px',
-    borderBottom: '1px solid transparent',
-    '&:hover': {
-      color: 'yellow',
-      borderBottom: '1px solid white',
-    },
-  },
-  linkActive: {
-    textDecoration: 'none',
-    fontSize: '20px',
-    marginLeft: '20px',
-    color: 'yellow',
-    borderBottom: '1px solid white',
-  },
-}));
+import classes from './MainNavigation.module.css';
 
 const Navbar: FunctionComponent = () => {
-  const classes = useStyles();
-
   return (
     <AppBar position='static'>
       <CssBaseline />
@@ -41,7 +11,7 @@ const Navbar: FunctionComponent = () => {
         <Typography variant='h4' className={classes.logo}>
           Artify
         </Typography>
-        <div className={classes.navlinks}>
+        <div className={classes.navlink}>
           <NavLink
             to='/'
             className={({ isActive }) => (isActive ? classes.linkActive : classes.link)}
