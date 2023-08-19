@@ -17,11 +17,11 @@ namespace Artify.Models.DbModels.Users
         public string Email { get; set; } = string.Empty;
         public int RoleId { get; set; }
         //
-        public string Location { get; set; } = string.Empty;
-        public string Info { get; set; } = string.Empty;
-        public string WebSite { get; set; } = string.Empty;
-        public string Biography { get; set; } = string.Empty;
-        public string LogoImage { get; set; } = string.Empty;
+        public string? Location { get; set; } = string.Empty;
+        public string? Info { get; set; } = string.Empty;
+        public string? WebSite { get; set; } = string.Empty;
+        public string? Biography { get; set; } = string.Empty;
+        public string? LogoImage { get; set; } = string.Empty;
 
         // NAVIGATION PROPERTIES
         [ForeignKey(nameof(RoleId))]

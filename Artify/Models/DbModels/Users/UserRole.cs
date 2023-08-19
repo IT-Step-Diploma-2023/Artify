@@ -8,8 +8,7 @@ namespace Artify.Models.DbModels.Users
         public int Id { get; set; } = -1;
         [Required]
         public string RoleName { get; set; } = string.Empty;
-        [Required]
-        public int InheritedRoleId { get; set; }
+        public int? InheritedRoleId { get; set; }
 
         // NAVIGATION PROPERTIES
         public virtual List<User> Users { get; set; } = new();
