@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { authActions } from '../store/auth';
-export class AuthenticationManager {
+export class AuthenticationManager  {
   //Returns null or username if user is logged in
   isUserLogged() {
     const token = this.getAuthToken();

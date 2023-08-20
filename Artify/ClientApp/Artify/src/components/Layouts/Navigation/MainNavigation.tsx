@@ -3,10 +3,17 @@ import { NavLink } from 'react-router-dom';
 import { FunctionComponent } from 'react';
 import classes from './MainNavigation.module.css';
 import { AuthenticationManager } from '../../../utils/AuthenticationManager';
+import {useSelector} from "react-redux";
 const Navbar: FunctionComponent = () => {
   const authManager = new AuthenticationManager();
   //Cheking in local storage
-  const userName = authManager.isUserLogged();
+  let username = authManager.isUserLogged();
+  const authStore = useSelector(state => state.auth);
+  if(username === null && authStore.isAuthenticated === true){
+    username = authStore.username;
+  }
+  console.log("auth - ")
+  console.log(authStore);
   //Checking in state
   return (
     <AppBar position='static'>
@@ -34,7 +41,7 @@ const Navbar: FunctionComponent = () => {
           >
             Other page
           </NavLink>
-          {userName !== null && (
+          {username !== null && (
             <NavLink
               to='/logout'
               className={({ isActive }) => (isActive ? classes.linkActive : classes.link)}
@@ -46,7 +53,7 @@ const Navbar: FunctionComponent = () => {
             to='/login'
             className={({ isActive }) => (isActive ? classes.linkActive : classes.link)}
           >
-            {userName === null ? 'Login' : userName}
+            {username === null ? 'Login' : username}
           </NavLink>
         </div>
       </Toolbar>

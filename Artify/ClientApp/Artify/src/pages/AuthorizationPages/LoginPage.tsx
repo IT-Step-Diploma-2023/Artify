@@ -13,11 +13,13 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { AuthenticationManager } from '../../utils/AuthenticationManager';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { authActions } from '../../store/auth';
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   function Copyright(props: any) {
     return (
       <Typography variant='body2' color='text.secondary' align='center' {...props}>
@@ -48,6 +50,8 @@ const LoginPage = () => {
     if (loggedUserName !== '') {
       dispatch(authActions.login(loggedUserName));
     }
+    navigate("/actionresult");
+
   };
 
   return (
