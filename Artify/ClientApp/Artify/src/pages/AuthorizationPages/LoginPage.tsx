@@ -13,8 +13,11 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { AuthenticationManager } from '../../utils/AuthenticationManager';
+import { useSelector, useDispatch } from 'react-redux';
+import { authActions } from '../../store/auth';
 
 const LoginPage = () => {
+  const dispatch = useDispatch();
   function Copyright(props: any) {
     return (
       <Typography variant='body2' color='text.secondary' align='center' {...props}>
@@ -29,7 +32,7 @@ const LoginPage = () => {
   }
   const defaultTheme = createTheme();
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
@@ -40,7 +43,11 @@ const LoginPage = () => {
     const password = data.get('password')?.toString() ?? '';
     if (userName === '' && password === '') return;
     const authManager = new AuthenticationManager();
-    authManager.authenticateUser(userName, password);
+
+    const loggedUserName = await authManager.authenticateUser(userName, password);
+    if (loggedUserName !== '') {
+      dispatch(authActions.login(loggedUserName));
+    }
   };
 
   return (

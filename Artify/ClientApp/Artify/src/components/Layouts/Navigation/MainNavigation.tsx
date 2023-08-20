@@ -5,8 +5,9 @@ import classes from './MainNavigation.module.css';
 import { AuthenticationManager } from '../../../utils/AuthenticationManager';
 const Navbar: FunctionComponent = () => {
   const authManager = new AuthenticationManager();
+  //Cheking in local storage
   const userName = authManager.isUserLogged();
-  console.log(userName);
+  //Checking in state
   return (
     <AppBar position='static'>
       <CssBaseline />
@@ -33,6 +34,14 @@ const Navbar: FunctionComponent = () => {
           >
             Other page
           </NavLink>
+          {userName !== null && (
+            <NavLink
+              to='/logout'
+              className={({ isActive }) => (isActive ? classes.linkActive : classes.link)}
+            >
+              Log out
+            </NavLink>
+          )}
           <NavLink
             to='/login'
             className={({ isActive }) => (isActive ? classes.linkActive : classes.link)}

@@ -1,3 +1,5 @@
+import { useSelector, useDispatch } from 'react-redux';
+import { authActions } from '../store/auth';
 export class AuthenticationManager {
   //Returns null or username if user is logged in
   isUserLogged() {
@@ -21,12 +23,17 @@ export class AuthenticationManager {
       },
       body: JSON.stringify(authData),
     });
+    if (response.status !== 200) return;
+
     const token = await response.text();
 
     localStorage.setItem('token', token);
     const expiration = new Date();
     expiration.setHours(expiration.getHours() + 1);
     localStorage.setItem('expiration', expiration.toISOString());
+
+    const tokenData = this.#parseJwt(token);
+
     return this.isUserLogged();
   }
 
@@ -37,8 +44,11 @@ export class AuthenticationManager {
     if (tokenDuration < 0) {
       return 'EXPIRED';
     }
-
     return token;
+  }
+
+  logOut() {
+    localStorage.clear();
   }
 
   #getTokenDuration() {
