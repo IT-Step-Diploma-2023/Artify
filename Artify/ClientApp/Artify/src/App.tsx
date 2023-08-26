@@ -8,6 +8,9 @@ import LogoutPage from './pages/AuthorizationPages/LogoutPage';
 import store from './store/index';
 import { Provider } from 'react-redux';
 import ResultPage from "./pages/AuthorizationPages/ResultPage";
+import { ThemeProvider, createTheme } from '@mui/material';
+import { colors } from './assets/defaults/colors';
+
 function App() {
   const router = createBrowserRouter([
     {
@@ -24,10 +27,23 @@ function App() {
     },
   ]);
 
+  const theme = createTheme({
+    typography: {
+      fontFamily: 'Nunito'
+    },
+    palette: {
+      background: {
+        default: colors.lightGrey
+      }
+    }
+  });
+
   return (
-    <Provider store={store}>
-      <RouterProvider router={router} />
-    </Provider>
+    <ThemeProvider theme={theme}>
+       <Provider store={store}>
+          <RouterProvider router={router} />
+        </Provider>
+    </ThemeProvider>
   );
 }
 
