@@ -7,7 +7,6 @@ import LoginPage from './pages/AuthorizationPages/LoginPage';
 import LogoutPage from './pages/AuthorizationPages/LogoutPage';
 import store from './store/index';
 import { Provider } from 'react-redux';
-import ResultPage from "./pages/AuthorizationPages/ResultPage";
 import { ThemeProvider, createTheme } from '@mui/material';
 import { colors } from './assets/defaults/colors';
 
@@ -20,11 +19,10 @@ function App() {
       children: [
         { index: true, element: <HomePage /> },
         { path: 'fetchdata', element: <ExampleFetch /> },
-        { path: 'login', element: <LoginPage /> },
         { path: 'logout', element: <LogoutPage /> },
-        { path: 'actionresult', element: <ResultPage /> },
       ],
     },
+    { path: 'login', element: <LoginPage /> }
   ]);
 
   const theme = createTheme({

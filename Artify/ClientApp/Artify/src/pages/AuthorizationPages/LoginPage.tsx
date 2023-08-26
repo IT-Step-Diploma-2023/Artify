@@ -9,14 +9,14 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { AuthenticationManager } from '../../utils/AuthenticationManager';
 import { useDispatch } from 'react-redux';
 import { authActions } from '../../store/auth';
 import { NavLink, useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
-import { FormControl, Input } from '@mui/material';
+import {  Input } from '@mui/material';
+import {CircularProgress} from "@mui/material";
 import Separator from '../../components/UI/Separator';
 
 const images = [
@@ -26,42 +26,36 @@ const images = [
 ];
 
 const LoginPage = () => {
+    const [isLoginError, setIsLoginError] = useState<string>("");
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const Copyright = (props: any): JSX.Element => {
-    return (
-      <Typography variant='body2' color='text.secondary' align='center' {...props}>
-        {'Copyright © '}
-        <Link color='inherit' href=''>
-          Artify
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    );
-  };
+        const data = new FormData(event.currentTarget);
+        const userName = data.get('username')?.toString() ?? '';
+        const password = data.get('password')?.toString() ?? '';
+        if (userName === '' && password === '') {
+            setIsLoginError("Login or password is empty");
+            return;
+        }
+        setIsLoginError("");
+        setIsLoading(true);
+        const authManager = new AuthenticationManager();
 
-  const defaultTheme = createTheme();
+        const loggedUserName = await authManager.authenticateUser(userName, password);
+        setIsLoading(false);
+        if (loggedUserName) {
+            dispatch(authActions.login(loggedUserName));
+            navigate("/");
+        } else {
+            setIsLoginError("Login or password is incorrect");
+            setIsLoading(false);
+        }
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      userName: data.get('username'),
-      password: data.get('password'),
-    });
-    const userName = data.get('username')?.toString() ?? '';
-    const password = data.get('password')?.toString() ?? '';
-    if (userName === '' && password === '') return;
-    const authManager = new AuthenticationManager();
 
-    const loggedUserName = await authManager.authenticateUser(userName, password);
-    if (loggedUserName !== '') {
-      dispatch(authActions.login(loggedUserName));
-    }
-    navigate("/");
-  };
+    };
 
   const { t } = useTranslation();
 
@@ -130,12 +124,16 @@ const LoginPage = () => {
                 control={<Checkbox value='remember' color='primary' />}
                 label='Remember me'
               />
+                {isLoginError !== "" && <span style={{"color": "red"}}><br/>{isLoginError}</span>}
               <Button
                 type='submit'
                 className='button button-dark button-b'
-                style={{ width: '100%', display: 'block', marginTop: '48px' }}>
-                {t('userLoginPage.enter')}
+                style={{ width: '100%', display: 'block', marginTop: '48px' }}
+                disabled={isLoading}>
+                  {isLoading ? <CircularProgress disableShrink/> : <span>{t('userLoginPage.enter')}</span>}
+
               </Button>
+
               <Box className='form-link'
                 sx={{ textAlign: 'center' }}>
                 <Typography
