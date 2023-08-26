@@ -1,3 +1,6 @@
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import { useSelector, useDispatch } from 'react-redux';
 import { authActions } from '../store/auth';
 export class AuthenticationManager  {

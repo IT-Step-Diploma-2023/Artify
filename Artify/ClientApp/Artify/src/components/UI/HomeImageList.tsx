@@ -9,29 +9,29 @@ import { Card } from '@mui/material';
 export default function StandardImageList() {
 
   return (<>
-    <ImageList sx={{margin:'auto 170px' }} cols={4} rowHeight={164}>
+    <ImageList sx={{ margin: 'auto 170px' }} cols={4} rowHeight={164}>
       {itemData.map((item) => (
-            <Card style={{width: 240, height: 238,borderRadius:'10px', marginTop:'60px'}}>
-        <ImageListItem key={item.img} >
-          <img
-          style={{width: 240, height: 200,borderRadius:'10px'}}
-            src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-            srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-            alt={item.title}
-            loading="lazy"
-          />
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites" style={{marginTop:'482px',marginLeft:'170px'}}>
-          <FavoriteIcon />
-        </IconButton>
-      </CardActions>
-        </ImageListItem>
+        <Card style={{ width: 240, height: 238, borderRadius: '10px', marginTop: '60px' }}>
+          <ImageListItem key={item.img} >
+            <img
+              style={{ width: 240, height: 200, borderRadius: '10px' }}
+              src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
+              srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+              alt={item.title}
+              loading="lazy"
+            />
+            <CardActions disableSpacing>
+              <IconButton aria-label="add to favorites" style={{ marginTop: '482px', marginLeft: '170px' }}>
+                <FavoriteIcon />
+              </IconButton>
+            </CardActions>
+          </ImageListItem>
         </Card>
       ))}
     </ImageList>
-            <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
-          </IconButton></>
+    <IconButton aria-label="add to favorites">
+      <FavoriteIcon />
+    </IconButton></>
   );
 }
 

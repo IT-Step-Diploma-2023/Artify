@@ -13,17 +13,11 @@ export default function ScrollableTabsButtonVisible() {
   const { t } = useTranslation();
 
   return (
-  
-    <Box className='link1'
-      sx={{
-        flexGrow: 1,
-        maxWidth: { xs: 320, sm: 480 },
-      }}
-    >
+
+    <Box>
       <Tabs
         value={value}
         onChange={handleChange}
-        
         variant="scrollable"
         scrollButtons
         aria-label="visible arrows tabs example"
@@ -32,7 +26,7 @@ export default function ScrollableTabsButtonVisible() {
             '&.Mui-disabled': { opacity: 0.3 },
           },
         }}
-        style={{ width: '442px',height: '44px',marginLeft: '509px',marginTop: '90px',gap:'20px'}}>
+        style={{ width: '600px', height: '44px', gap: '20px' }}>
         <Tab className='link' label="веб сайти" color='#271846' />
         <Tab className='link' label="ілюстрації" />
         <Tab className='link' label="фото" />

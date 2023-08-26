@@ -6,9 +6,13 @@ import { Box } from '@mui/system';
 
 const HomePage: FunctionComponent = () => {
   return <>
-    <Box>
-      <HomeButtonFilter />
+    <Box display='flex' flexDirection='row' justifyContent='center' margin='48px 170px 0'>
+      <Box width='30%'>
+        <HomeButtonFilter />
+      </Box>
       <HomeTabs />
+      <Box width='30%'>
+      </Box>
     </Box>
     <HomeImageList />
   </>
