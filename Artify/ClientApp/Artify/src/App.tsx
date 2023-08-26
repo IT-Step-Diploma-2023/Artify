@@ -7,7 +7,6 @@ import LoginPage from './pages/AuthorizationPages/LoginPage';
 import LogoutPage from './pages/AuthorizationPages/LogoutPage';
 import store from './store/index';
 import { Provider } from 'react-redux';
-import ResultPage from "./pages/AuthorizationPages/ResultPage";
 function App() {
   const router = createBrowserRouter([
     {
@@ -19,7 +18,6 @@ function App() {
         { path: 'fetchdata', element: <ExampleFetch /> },
         { path: 'login', element: <LoginPage /> },
         { path: 'logout', element: <LogoutPage /> },
-        { path: 'actionresult', element: <ResultPage /> },
       ],
     },
   ]);
