@@ -11,7 +11,8 @@ import { useTranslation } from 'react-i18next';
 import Logo from '../../UI/Logo';
 import SearchIcon from '@mui/icons-material/Search';
 import { Button } from '@mui/base/Button';
-import {colors} from '../../../assets/defaults/colors';
+import { colors } from '../../../assets/defaults/colors';
+import { margin } from '@mui/system';
 
 
 //#region localization languages
@@ -80,6 +81,7 @@ const Navbar: FunctionComponent = () => {
     position: 'relative',
     borderRadius: '21px',
     border: `1px solid ${colors.darkViolet}`,
+    backgroundColor: 'white !important',
     // backgroundColor: alpha(theme.palette.common.white, 0.15),
     '&:hover': {
       // backgroundColor: alpha(theme.palette.common.white, 0.25),
@@ -144,7 +146,7 @@ const Navbar: FunctionComponent = () => {
           style={{
             cursor: 'pointer',
             display: 'inline-block',
-            marginRight: '5px',
+            marginLeft: '5px',
             fontWeight: i18n.resolvedLanguage === lng ? 'bold' : 'normal',
           }}>
           {lng === 'ua' ? lngs.ua : lngs.en}
@@ -190,12 +192,12 @@ const Navbar: FunctionComponent = () => {
   }
 
   return (
-
     <AppBar
       position='static'
       sx={{ boxShadow: 'none', backgroundColor: 'transparent' }}>
       <CssBaseline />
-      <Toolbar>
+      <Toolbar sx={{ margin: "40px 50px 0" }}>
+        {/* for md size */}
         <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
           <NavLink to='/' className="logo">
             <Logo />
@@ -225,9 +227,9 @@ const Navbar: FunctionComponent = () => {
               {t('headerComponent.share')}
             </Button>
           )}
-          <LangSwitcher />
+
         </Box>
-        <Box sx={{ flexGrow: 0 }}>
+        <Box sx={{ flexGrow: 0, marginRight: '10px' }}>
           <Tooltip title={username !== null ? username : t('headerComponent.loggedOffMessage')}>
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
               <Avatar
@@ -237,7 +239,7 @@ const Navbar: FunctionComponent = () => {
             </IconButton>
           </Tooltip>
           <Menu
-            sx={{ mt: '45px', borderRadius: '20px', fontFamily: 'Nunito' }}
+            sx={{ mt: '45px', borderRadius: '20px' }}
             id="menu-appbar"
             anchorEl={anchorElUser}
             anchorOrigin={{
@@ -255,10 +257,9 @@ const Navbar: FunctionComponent = () => {
             <DropdownMenu />
           </Menu>
         </Box>
-
+        <LangSwitcher />
       </Toolbar>
     </AppBar>
-
   );
 };
 export default Navbar;

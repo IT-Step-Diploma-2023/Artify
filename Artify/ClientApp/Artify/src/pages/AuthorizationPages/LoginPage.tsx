@@ -1,26 +1,35 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
+import { Button } from '@mui/base/Button';
 import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { AuthenticationManager } from '../../utils/AuthenticationManager';
 import { useDispatch } from 'react-redux';
 import { authActions } from '../../store/auth';
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
+import { FormControl, Input } from '@mui/material';
+import Separator from '../../components/UI/Separator';
+
+const images = [
+  '/images/auth_bg_img_01.png',
+  '/images/auth_bg_img_02.png',
+  '/images/auth_bg_img_03.png'
+];
 
 const LoginPage = () => {
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  function Copyright(props: any) {
+  const Copyright = (props: any): JSX.Element => {
     return (
       <Typography variant='body2' color='text.secondary' align='center' {...props}>
         {'Copyright © '}
@@ -31,10 +40,11 @@ const LoginPage = () => {
         {'.'}
       </Typography>
     );
-  }
+  };
+
   const defaultTheme = createTheme();
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
@@ -50,73 +60,102 @@ const LoginPage = () => {
     if (loggedUserName !== '') {
       dispatch(authActions.login(loggedUserName));
     }
-    navigate("/actionresult");
-
+    navigate("/");
   };
 
-  return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container component='main' maxWidth='xs'>
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component='h1' variant='h5'>
-            Sign in
-          </Typography>
-          <Box component='form' onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            <TextField
-              margin='normal'
-              required
-              fullWidth
-              id='username'
-              label='Username'
-              name='username'
-              //   autoComplete='email'
-              autoFocus
-            />
-            <TextField
-              margin='normal'
-              required
-              fullWidth
-              name='password'
-              label='Password'
-              type='password'
-              id='password'
-              autoComplete='current-password'
-            />
-            <FormControlLabel
-              control={<Checkbox value='remember' color='primary' />}
-              label='Remember me'
-            />
-            <Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href='#' variant='body2'>
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href='#' variant='body2'>
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
-        </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
-      </Container>
-    </ThemeProvider>
+  const { t } = useTranslation();
+
+  const [index, setIndex] = useState(0);
+
+  setTimeout(() => {
+    setIndex((index + 1) % images.length);
+  }, 10000);
+
+  return (<>
+    <CssBaseline />
+    <Container >
+      {/* insert */}
+      <div className="form-container">
+        <div className='form-bg'
+          style={{ backgroundImage: `url(${images[index]})` }}>
+        </div>
+        <div className='form'>
+          <div className="form-fields">
+            <Box component='form' onSubmit={handleSubmit}
+              sx={{ width: '100%' }}>
+              <Typography className='form-title'
+                sx={{
+                  fontSize: '42px',
+                  fontWeight: '800',
+                }}>
+                {t('userLoginPage.title')}
+              </Typography>
+              <Button
+                className='button button-light button-b'
+                style={{ marginTop: '24px', width: '100%', display: 'block' }}>
+                {t('userLoginPage.withGoogle')}
+              </Button>
+              <Separator text={t('userLoginPage.alternative')} />
+              <Input className='input'
+                style={{ marginTop: '24px', width: '100%' }}
+                required
+                title={t('userLoginPage.login')}
+                id='username'
+                name='username'
+                placeholder={t('userLoginPage.login')}
+                autoFocus
+                aria-label='input-username'
+              />
+              <Box className='form-link'
+                sx={{ textAlign: 'right' }}>
+                <NavLink
+                  key='fogot'
+                  to='#'
+                >
+                  {t('userLoginPage.forgot')}
+                </NavLink>
+              </Box>
+              <Input className='input'
+                type='password'
+                style={{ marginTop: '24px', width: '100%' }}
+                required
+                title={t('userLoginPage.password')}
+                id='password'
+                name='password'
+                placeholder={t('userLoginPage.password')}
+                aria-label='input-password'
+                autoComplete='current-password'
+              />
+              <FormControlLabel
+                control={<Checkbox value='remember' color='primary' />}
+                label='Remember me'
+              />
+              <Button
+                type='submit'
+                className='button button-dark button-b'
+                style={{ width: '100%', display: 'block', marginTop: '48px' }}>
+                {t('userLoginPage.enter')}
+              </Button>
+              <Box className='form-link'
+                sx={{ textAlign: 'center' }}>
+                <Typography
+                >
+                  {`${t('userLoginPage.noAccount')} `}
+                  <NavLink
+                    key='noAccount'
+                    to='#'
+                  >
+                    {t('userLoginPage.register')}
+                  </NavLink>
+                </Typography>
+              </Box>
+            </Box>
+          </div>
+        </div>
+      </div>
+      {/* end insert */}
+    </Container>
+  </>
   );
 };
 export default LoginPage;

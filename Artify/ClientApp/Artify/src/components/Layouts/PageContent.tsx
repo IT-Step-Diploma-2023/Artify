@@ -6,7 +6,7 @@ interface PageContentProps {
 
 const PageContent: FunctionComponent<PageContentProps> = ({ title, children }) => {
   return (
-    <div>
+    <div >
       <h1>{title}</h1>
       {children}
     </div>

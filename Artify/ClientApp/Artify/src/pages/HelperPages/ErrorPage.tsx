@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { useRouteError } from 'react-router-dom';
 import PageContent from '../../components/Layouts/PageContent';
 import MainNavigation from '../../components/Layouts/Navigation/MainNavigation';
@@ -18,7 +20,6 @@ const ErrorPage: FunctionComponent = () => {
   return (
     <>
       <MainNavigation />
-
       <PageContent title={title}>
         <p>{message}</p>
       </PageContent>
