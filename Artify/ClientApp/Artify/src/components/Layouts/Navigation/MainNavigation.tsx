@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-import { useContext, useState } from 'react';
-import { AppBar, Toolbar, CssBaseline, Typography, styled, InputBase, Box, MenuItem, Avatar, IconButton, Menu, Tooltip } from '@mui/material';
+import { useState } from 'react';
+import { AppBar, Toolbar, CssBaseline, Typography, styled, InputBase, Box, MenuItem, Avatar, IconButton, Menu, Tooltip, Divider } from '@mui/material';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { FunctionComponent } from 'react';
 import { AuthenticationManager } from '../../../utils/AuthenticationManager';
@@ -10,9 +10,9 @@ import { useSelector } from "react-redux";
 import { useTranslation } from 'react-i18next';
 import Logo from '../../UI/Logo';
 import SearchIcon from '@mui/icons-material/Search';
+import MenuIcon from '@mui/icons-material/Menu';
 import { Button } from '@mui/base/Button';
 import { colors } from '../../../assets/defaults/colors';
-import { margin } from '@mui/system';
 
 
 //#region localization languages
@@ -58,13 +58,13 @@ const Navbar: FunctionComponent = () => {
     '/help',
   ]
 
-
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -76,6 +76,11 @@ const Navbar: FunctionComponent = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const handleClickMenuItem = (path: string) => {
+    handleCloseNavMenu();
+    navigate(path);
+  }
 
   const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -122,7 +127,7 @@ const Navbar: FunctionComponent = () => {
     },
   }));
 
-  const MenuItems = (): JSX.Element => {
+  const NavMenuItems = (): JSX.Element => {
     return <>
       {pages.map((page) => (
         <NavLink
@@ -132,6 +137,20 @@ const Navbar: FunctionComponent = () => {
         >
           {page}
         </NavLink>
+      ))}
+    </>
+  }
+
+  const NavDropdownMenuItems = (): JSX.Element => {
+    return <>
+      {pages.map((page) => (<>
+        <MenuItem
+          key={page}
+          onClick={() => { handleClickMenuItem(pathes[pages.indexOf(page)]) }}>
+          <Typography textAlign="center">{page}</Typography>
+        </MenuItem>
+        {pages.indexOf(page) === pages.length - 1 && <Divider />}
+      </>
       ))}
     </>
   }
@@ -146,16 +165,17 @@ const Navbar: FunctionComponent = () => {
           style={{
             cursor: 'pointer',
             display: 'inline-block',
-            marginLeft: '5px',
+            margin: '0 3px',
             fontWeight: i18n.resolvedLanguage === lng ? 'bold' : 'normal',
           }}>
           {lng === 'ua' ? lngs.ua : lngs.en}
         </Typography>
+
       ))}
     </>
   }
 
-  const DropdownMenu = (): JSX.Element => {
+  const UserDropdownMenuItems = (): JSX.Element => {
     if (username !== null)
       return <>
         <Typography
@@ -173,19 +193,19 @@ const Navbar: FunctionComponent = () => {
         </MenuItem>
         <MenuItem
           key={'logout'}
-          onClick={() => { navigate('/logout') }}>
+          onClick={() => { handleClickMenuItem('/logout') }}>
           {t('headerComponent.dropdownMenu.logоut')}
         </MenuItem>
       </>
     return <>
       <MenuItem divider
         key={'login'}
-        onClick={() => { navigate('/login') }}>
+        onClick={() => { handleClickMenuItem('/login') }}>
         {t('headerComponent.dropdownMenu.login')}
       </MenuItem>
       <MenuItem
         key={'register'}
-        onClick={() => { navigate('/register') }}>
+        onClick={() => { handleClickMenuItem('/register') }}>
         {t('headerComponent.dropdownMenu.register')}
       </MenuItem>
     </>
@@ -196,7 +216,48 @@ const Navbar: FunctionComponent = () => {
       position='static'
       sx={{ boxShadow: 'none', backgroundColor: 'transparent' }}>
       <CssBaseline />
-      <Toolbar sx={{ margin: "40px 50px 0" }}>
+      <Toolbar sx={{ marginTop: { xs: '12px', md: '40px' }, width: 'auto', padding: { xs: '0 20px', md: '0 50px' } }}>
+        {/* for sm size */}
+        <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <IconButton
+            size="large"
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleOpenNavMenu}
+            sx={{ color: `${colors.darkViolet}` }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorElNav}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'left',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'left',
+            }}
+            open={Boolean(anchorElNav)}
+            onClose={handleCloseNavMenu}
+            sx={{
+              display: { xs: 'block', md: 'none' },
+            }}
+          >
+            <NavDropdownMenuItems />
+            <MenuItem key='lng'>
+              <LangSwitcher />
+            </MenuItem>
+          </Menu>
+          <Box sx={{ width: '100%', textAlign: 'center' }}>
+            <NavLink to='/' className="logo">
+              <Logo />
+            </NavLink>
+          </Box>
+        </Box>
         {/* for md size */}
         <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
           <NavLink to='/' className="logo">
@@ -213,7 +274,7 @@ const Navbar: FunctionComponent = () => {
           </Search>
         </Box>
         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, height: '25px' }}>
-          <MenuItems />
+          <NavMenuItems />
         </Box>
         {/* for all sizes */}
         <Box sx={{
@@ -254,10 +315,12 @@ const Navbar: FunctionComponent = () => {
             open={Boolean(anchorElUser)}
             onClose={handleCloseUserMenu}
           >
-            <DropdownMenu />
+            <UserDropdownMenuItems />
           </Menu>
         </Box>
-        <LangSwitcher />
+        <Box sx={{ flexgrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <LangSwitcher />
+        </Box>
       </Toolbar>
     </AppBar>
   );

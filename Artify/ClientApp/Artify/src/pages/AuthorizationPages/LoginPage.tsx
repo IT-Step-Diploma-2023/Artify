@@ -15,7 +15,7 @@ import { authActions } from '../../store/auth';
 import { NavLink, useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
-import {  Input } from '@mui/material';
+import { Input } from '@mui/material';
 import {CircularProgress} from "@mui/material";
 import Separator from '../../components/UI/Separator';
 

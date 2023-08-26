@@ -5,6 +5,7 @@ import ErrorPage from './pages/HelperPages/ErrorPage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/AuthorizationPages/LoginPage';
 import LogoutPage from './pages/AuthorizationPages/LogoutPage';
+import RegisterPage from './pages/RegistrationPages/RegistrationPage';
 import store from './store/index';
 import { Provider } from 'react-redux';
 import { ThemeProvider, createTheme } from '@mui/material';
@@ -22,7 +23,8 @@ function App() {
         { path: 'logout', element: <LogoutPage /> },
       ],
     },
-    { path: 'login', element: <LoginPage /> }
+    { path: 'login', element: <LoginPage /> },
+    { path: 'register', element: <RegisterPage /> }
   ]);
 
   const theme = createTheme({
