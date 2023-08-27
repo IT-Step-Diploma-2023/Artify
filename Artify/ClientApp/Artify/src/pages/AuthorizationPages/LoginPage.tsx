@@ -4,8 +4,6 @@ import { Button } from '@mui/base/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
@@ -40,6 +38,7 @@ const LoginPage = () => {
             setIsLoginError("Login or password is empty");
             return;
         }
+
         setIsLoginError("");
         setIsLoading(true);
         const authManager = new AuthenticationManager();
@@ -53,8 +52,6 @@ const LoginPage = () => {
             setIsLoginError("Login or password is incorrect");
             setIsLoading(false);
         }
-
-
     };
 
   const { t } = useTranslation();
@@ -131,9 +128,7 @@ const LoginPage = () => {
                 style={{ width: '100%', display: 'block', marginTop: '48px' }}
                 disabled={isLoading}>
                   {isLoading ? <CircularProgress disableShrink/> : <span>{t('userLoginPage.enter')}</span>}
-
               </Button>
-
               <Box className='form-link'
                 sx={{ textAlign: 'center' }}>
                 <Typography
@@ -141,7 +136,7 @@ const LoginPage = () => {
                   {`${t('userLoginPage.noAccount')} `}
                   <NavLink
                     key='noAccount'
-                    to='#'
+                    to='/register'
                   >
                     {t('userLoginPage.register')}
                   </NavLink>
