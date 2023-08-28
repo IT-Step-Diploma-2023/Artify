@@ -4,6 +4,7 @@ interface PageContentProps {
   children: ReactNode;
 }
 
+
 const PageContent: FunctionComponent<PageContentProps> = ({ title, children }) => {
   return (
     <div >
