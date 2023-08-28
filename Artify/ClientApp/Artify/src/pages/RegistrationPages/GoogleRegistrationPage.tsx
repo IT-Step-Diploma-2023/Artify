@@ -15,7 +15,7 @@ const images = [
     '/images/auth_bg_img_03.png'
 ];
 
-const RegisterPage: FunctionComponent = () => {
+const GoogleRegisterPage: FunctionComponent = () => {
 
     const { t } = useTranslation();
 
@@ -30,19 +30,11 @@ const RegisterPage: FunctionComponent = () => {
     return <>
         <FormPanel sx={{ backgroundColor: colors.lightGrey }}>
             <Container sx={{ margin: 'auto' }}>
-                <Paper sx={{ width: '460px' , margin: 'auto'}}>
+                <Paper sx={{ width: '460px', margin: 'auto', backgroundColor: 'transparent', boxShadow: 'none' }}>
                     <FormTitle sx={{ color: colors.violet }}>
                         {t('userAccountCreate.title')}
                     </FormTitle>
-                    <CommonButton color='primary' height='bg'
-                        sx={{ width: '100%' , marginTop: '2.5rem'}}>
-                        {t('userAccountCreate.registerationMetodPage.withGoogle')}
-                    </CommonButton>
-                    <Separator text={t('userLoginPage.alternative')}/>
-                    <CommonButton color='primary' height='bg'
-                        sx={{ width: '100%' , marginTop: '2.5rem'}}>
-                        {t('userAccountCreate.registerationMetodPage.withEmail')}
-                    </CommonButton>
+                    registartion by Google Account
                 </Paper>
             </Container>
         </FormPanel >
@@ -50,4 +42,4 @@ const RegisterPage: FunctionComponent = () => {
     </>
 }
 
-export default RegisterPage
+export default GoogleRegisterPage

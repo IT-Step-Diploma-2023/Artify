@@ -1,15 +1,18 @@
 import ExampleFetch from './components/ExampleFetch';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import store from './store/index';
+import { Provider } from 'react-redux';
+import { ThemeProvider } from '@mui/material';
+import theme from './assets/defaults/theme';
+// pages
 import RootLayout from './pages/HelperPages/RootLayout';
 import ErrorPage from './pages/HelperPages/ErrorPage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/AuthorizationPages/LoginPage';
 import LogoutPage from './pages/AuthorizationPages/LogoutPage';
-import RegisterPage from './pages/RegistrationPages/RegistrationPage';
-import store from './store/index';
-import { Provider } from 'react-redux';
-import { ThemeProvider, createTheme } from '@mui/material';
-import theme from './assets/defaults/theme';
+import EmailRegisterPage from './pages/RegistrationPages/EmailRegistrationPage';
+import SelectRegisterPage from './pages/RegistrationPages/SelectRegistrationPage';
+import GoogleRegisterPage from './pages/RegistrationPages/GoogleRegistrationPage';
 
 function App() {
   const router = createBrowserRouter([
@@ -24,7 +27,9 @@ function App() {
       ],
     },
     { path: 'login', element: <LoginPage /> },
-    { path: 'register', element: <RegisterPage /> }
+    { path: 'select-register', element: <SelectRegisterPage /> },
+    { path: 'google-register', element: <GoogleRegisterPage /> },
+    { path: 'email-register', element: <EmailRegisterPage /> }
   ]);
 
 

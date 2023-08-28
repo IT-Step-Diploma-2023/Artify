@@ -136,7 +136,7 @@ const LoginPage = () => {
                   {`${t('userLoginPage.noAccount')} `}
                   <NavLink
                     key='noAccount'
-                    to='/register'
+                    to='/select-register'
                   >
                     {t('userLoginPage.register')}
                   </NavLink>

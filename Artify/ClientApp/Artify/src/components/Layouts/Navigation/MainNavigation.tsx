@@ -203,7 +203,7 @@ const Navbar: FunctionComponent = () => {
       </MenuItem>
       <MenuItem
         key={'register'}
-        onClick={() => { handleClickMenuItem('/register') }}>
+        onClick={() => { handleClickMenuItem('/select-register') }}>
         {t('headerComponent.dropdownMenu.register')}
       </MenuItem>
     </>
