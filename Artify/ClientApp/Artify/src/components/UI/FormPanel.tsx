@@ -16,7 +16,10 @@ const FormPanel = styled('div')(({ theme }) => ({
     [theme.breakpoints.down('sm')]: {
         width: '100vw'
     },
-    transition: 'width 0.2s'
+    transition: 'width 0.2s',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center'
 }));
 
 export default FormPanel;

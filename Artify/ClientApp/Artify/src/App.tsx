@@ -9,7 +9,7 @@ import RegisterPage from './pages/RegistrationPages/RegistrationPage';
 import store from './store/index';
 import { Provider } from 'react-redux';
 import { ThemeProvider, createTheme } from '@mui/material';
-import { colors } from './assets/defaults/colors';
+import theme from './assets/defaults/theme';
 
 function App() {
   const router = createBrowserRouter([
@@ -27,16 +27,7 @@ function App() {
     { path: 'register', element: <RegisterPage /> }
   ]);
 
-  const theme = createTheme({
-    typography: {
-      fontFamily: 'Nunito'
-    },
-    palette: {
-      background: {
-        default: colors.lightGrey
-      }
-    }
-  });
+
 
   return (
     <ThemeProvider theme={theme}>

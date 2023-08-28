@@ -87,9 +87,7 @@ const Navbar: FunctionComponent = () => {
     borderRadius: '21px',
     border: `1px solid ${colors.darkViolet}`,
     backgroundColor: 'white !important',
-    // backgroundColor: alpha(theme.palette.common.white, 0.15),
     '&:hover': {
-      // backgroundColor: alpha(theme.palette.common.white, 0.25),
     },
     marginLeft: 0,
     width: '100%',

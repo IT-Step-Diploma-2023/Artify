@@ -1,7 +1,7 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import Card from "./UI/Card";
 import CardContainer from "./UI/CardContainer";
-import Button from "./UI/Button";
+import Button from "./UI/CommonButton";
 import { useTranslation } from 'react-i18next';
 
 

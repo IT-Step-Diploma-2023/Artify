@@ -246,9 +246,7 @@ body {
 .button {
     font-weight: 400;
     cursor: pointer;
-    font-family: 'Nunito', sans-serif !important;
     font-size: 18px;
-    border-radius: 22px;
     display: inline-block;
     margin-right: 10px;
     border: 0;
@@ -362,7 +360,7 @@ body {
 
 .separator-text {
     margin: 0 24px;
-    height: 16px;
+    height: 1rem;
     color: #6A4BD9;
     text-align: center;
 }
