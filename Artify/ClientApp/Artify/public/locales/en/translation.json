@@ -81,7 +81,9 @@
         "passwordError": "Enter password",
         "enter": "enter",
         "noAccount": "no account?",
-        "register": "register"
+        "register": "register",
+        "credentialsEmpty": "Password or login not entered", 
+        "credentialsIncorrect": "Password or login is incorrect"
     },
     "userProfilePage": {
         "edit": "edit",

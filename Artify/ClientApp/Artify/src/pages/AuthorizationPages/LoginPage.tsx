@@ -35,7 +35,7 @@ const LoginPage = () => {
         const userName = data.get('username')?.toString() ?? '';
         const password = data.get('password')?.toString() ?? '';
         if (userName === '' && password === '') {
-            setIsLoginError("Login or password is empty");
+            setIsLoginError(t('userLoginPage.credentialsEmpty'));
             return;
         }
 
@@ -49,7 +49,7 @@ const LoginPage = () => {
             dispatch(authActions.login(loggedUserName));
             navigate("/");
         } else {
-            setIsLoginError("Login or password is incorrect");
+            setIsLoginError(t('userLoginPage.credentialsIncorrect'));
             setIsLoading(false);
         }
     };

@@ -83,7 +83,10 @@
         "passwordError": "Введіть пароль",
         "enter": "увійти",
         "noAccount": "немає акаунту?",
-        "register":"зареєструватися"
+        "register":"зареєструватися",
+        "credentialsEmpty": "Пароль або логін не введені",
+        "credentialsIncorrect": "Пароль або логін помилкові"
+
     },
 
     "userProfilePage": {
