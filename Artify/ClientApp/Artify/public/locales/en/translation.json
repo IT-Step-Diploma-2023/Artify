@@ -60,13 +60,15 @@
         },
         "registrationPage": {
             "login": "login",
-            "loginError": "Incorrect login format",
+            "loginError": "incorrect login format",
             "userName": "username",
-            "userNameError": "Incorrect username format",
+            "userNameError": "incorrect username format",
             "email": "e-mail",
-            "emailError": "Invalid email address",
+            "emailError": "invalid email address",
             "password": "password",
-            "passwordError": "Incorrect password format",
+            "passwordError": "incorrect password format",
+            "passwordRepeat": "Password repeat", 
+            "passwordRepeatError": "incorrect password repeat",
             "create": "create an account"
         }
     },

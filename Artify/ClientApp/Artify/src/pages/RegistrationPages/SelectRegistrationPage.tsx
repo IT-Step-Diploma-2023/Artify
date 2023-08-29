@@ -26,7 +26,7 @@ const SelectRegisterPage: FunctionComponent = () => {
                 {t('userAccountCreate.registerationMetodPage.withGoogle')}
             </CommonButton>
             <Separator text={t('userLoginPage.alternative')} />
-            <CommonButton color='primary' height='bg' type='button'
+            <CommonButton color='secondary' height='bg' type='button'
                 sx={{ width: '100%', marginTop: '2.5rem' }}
                 onClick={(() => { navigate('/email-register') })}>
                 {t('userAccountCreate.registerationMetodPage.withEmail')}

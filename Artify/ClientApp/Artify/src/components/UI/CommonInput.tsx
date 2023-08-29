@@ -3,24 +3,24 @@ import { sizes } from "../../assets/defaults/sizes";
 import { colors } from "../../assets/defaults/colors";
 
 
-const CommonButton = styled('button')(({ color, height }: {
+const CommonInput = styled('input')(({ color, height }: {
     color?: 'primary' | 'secondary',
     height?: 'bg' | 'md'
 }) => (
     {
         fontFamily: 'Nunito',
+        outline: 'none',
         fontWeight: '400',
-        cursor: 'pointer',
-        fontSize: '1.125rem',
+        fontSize: '1rem',
         display: 'inline-block',
-        color: (color === 'primary' ? colors.lightGrey : colors.darkViolet),
-        border: (color === 'primary' ? 0 : `1px solid ${colors.darkViolet}`),
-        backgroundColor: (color === 'primary' ? colors.darkViolet : 'none'),
+        boxSizing: 'border-box',
+        color: colors.darkViolet,
+        border: '1px solid',
+        borderColor: (color === 'primary' ? colors.grey : colors.darkViolet),
+        backgroundColor: (color === 'primary' ? 'white' : colors.lightGrey),
+        padding: '0 24px',
         transition: 'all 0.15s ease-out',
         '&:hover': {
-            color: colors.lightGrey,
-            backgroundColor: colors.violet,
-            border: '0',
             boxShadow: '0px 4px 8px 0px rgba(39, 24, 70, 0.40)'
         },
         '&:active': {
@@ -30,4 +30,4 @@ const CommonButton = styled('button')(({ color, height }: {
         borderRadius: (height === 'bg' ? sizes.radiusBg : sizes.radiusMd)
     }));
 
-export default CommonButton;
+export default CommonInput;

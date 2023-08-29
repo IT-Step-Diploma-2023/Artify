@@ -1,7 +1,8 @@
 import { Outlet } from 'react-router-dom';
 import MainNavigation from '../../components/Layouts/Navigation/MainNavigation';
 import { FunctionComponent } from 'react';
-import { Paper } from '@mui/material';
+
+
 const RootLayout: FunctionComponent = () => {
   // const navigation = useNavigation();
   return (
