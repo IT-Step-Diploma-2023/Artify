@@ -9,7 +9,7 @@ import { Card } from '@mui/material';
 export default function StandardImageList() {
 
   return (<>
-    <ImageList sx={{ margin: 'auto 170px' }} cols={4} rowHeight={164}>
+    <ImageList cols={4} rowHeight={164}>
       {itemData.map((item) => (
         <Card style={{ width: 240, height: 238, borderRadius: '10px', marginTop: '60px' }}>
           <ImageListItem key={item.img} >
