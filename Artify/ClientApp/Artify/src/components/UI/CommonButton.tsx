@@ -15,7 +15,7 @@ const CommonButton = styled('button')(({ color, height }: {
         display: 'inline-block',
         color: (color === 'primary' ? colors.lightGrey : colors.darkViolet),
         border: (color === 'primary' ? 0 : `1px solid ${colors.darkViolet}`),
-        backgroundColor: (color === 'primary' ? colors.darkViolet : 'none'),
+        backgroundColor: (color === 'primary' ? colors.darkViolet : 'white'),
         transition: 'all 0.15s ease-out',
         '&:hover': {
             color: colors.lightGrey,

@@ -1,23 +1,22 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import * as React from 'react';
 import { Button } from '@mui/base/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import { AuthenticationManager } from '../../utils/AuthenticationManager';
 import { useDispatch } from 'react-redux';
 import { authActions } from '../../store/auth';
 import { NavLink, useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
-import { Input } from '@mui/material';
 import { CircularProgress } from "@mui/material";
 import Separator from '../../components/UI/Separator';
 import RegLogPageContent from '../../components/Layouts/RegLogPageContent';
 import CommonButton from '../../components/UI/CommonButton';
+import CommonInput from '../../components/UI/CommonInput';
+import { colors } from '../../assets/defaults/colors';
 
 
 const LoginPage = () => {
@@ -57,14 +56,14 @@ const LoginPage = () => {
     <RegLogPageContent title={t('userLoginPage.title')}>
       <Box component='form' onSubmit={handleSubmit}
         sx={{ width: '100%' }}>
-        <CommonButton color='primary' height='bg' type='button'
-          sx={{ width: '100%', marginTop: '2.5rem' }}
+        <CommonButton height='bg' type='button'
+          sx={{ width: '100%', marginTop: '2.5rem', borderColor: colors.grey}}
           onClick={(() => { navigate('/google-register') })}>
           {t('userLoginPage.withGoogle')}
         </CommonButton>
         <Separator text={t('userLoginPage.alternative')} />
-        <Input className='input'
-          style={{ marginTop: '24px', width: '100%' }}
+        <CommonInput color='primary' height='bg'
+          sx={{ marginTop: '24px', width: '100%' }}
           required
           title={t('userLoginPage.login')}
           id='username'
@@ -75,16 +74,13 @@ const LoginPage = () => {
         />
         <Box className='form-link'
           sx={{ textAlign: 'right' }}>
-          <NavLink
-            key='fogot'
-            to='#'
-          >
+          <NavLink key='fogot' to='#'>
             {t('userLoginPage.forgot')}
           </NavLink>
         </Box>
-        <Input className='input'
+        <CommonInput color='primary' height='bg'
           type='password'
-          style={{ marginTop: '24px', width: '100%' }}
+          sx={{ marginTop: '24px', width: '100%' }}
           required
           title={t('userLoginPage.password')}
           id='password'
@@ -95,7 +91,7 @@ const LoginPage = () => {
         />
         <FormControlLabel
           control={<Checkbox value='remember' color='primary' />}
-          label='Remember me'
+          label={t('userLoginPage.rememberMe')}
         />
         {isLoginError !== "" && <span style={{ "color": "red" }}><br />{isLoginError}</span>}
         <Button
@@ -107,8 +103,7 @@ const LoginPage = () => {
         </Button>
         <Box className='form-link'
           sx={{ textAlign: 'center' }}>
-          <Typography
-          >
+          <Typography>
             {`${t('userLoginPage.noAccount')} `}
             <NavLink
               key='noAccount'

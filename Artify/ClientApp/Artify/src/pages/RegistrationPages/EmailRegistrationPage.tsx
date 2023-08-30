@@ -1,15 +1,11 @@
 import { useTranslation } from 'react-i18next';
 import { FunctionComponent, useState } from 'react';
 import Box from '@mui/material/Box';
-import { Checkbox, Container, FormControlLabel, Grid, Paper, Typography } from '@mui/material';
-import { colors } from '../../assets/defaults/colors';
-import FormPanelBackground from '../../components/UI/FormPanelBackground';
-import FormTitle from '../../components/UI/FormTitle';
-import FormPanel from '../../components/UI/FormPanel';
+import { Checkbox, FormControlLabel, Grid, Paper, Typography } from '@mui/material';
 import CommonButton from '../../components/UI/CommonButton';
-import Separator from '../../components/UI/Separator';
 import RegLogPageContent from '../../components/Layouts/RegLogPageContent';
 import CommonInput from '../../components/UI/CommonInput';
+import { NavLink } from 'react-router-dom';
 
 
 
@@ -94,23 +90,36 @@ const EmailRegisterPage: FunctionComponent = () => {
                             aria-label='input-password-repeat'
                         />
                     </Grid>
-                    <Grid item xs={12} display={'flex'}>
+                    <Grid item xs={12} display='flex'>
                         <Box>
                             <FormControlLabel
                                 control={
                                     <Checkbox
-                                        sx={{ paddingTop: '0px' }}
+                                        sx={{ paddingTop: '0px', paddingRight: '0px' }}
                                         value='remember'
                                         color='primary'
-                                        aria-label='remember' />
+                                        aria-label='remember'
+                                        disableRipple />
                                 }
                                 label={null}
-
                             />
                         </Box>
-                        <Box textAlign={'justify'}>
-                            {t('userAccountCreate.registerationPage.agreement')}
+                        <Box textAlign='justify' fontSize='0,875rem'>
+                            Я погоджуюся з <a href='#'>умовами обслуговування</a>, <a href='#'>політикою конфіденційності</a> та <a href='#'>налаштуваннями сповіщень</a> за замовчуванням
                         </Box>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <CommonButton color='primary' height='bg' type='submit' sx={{ width: '100%' }}>
+                            {t('userAccountCreate.general.enter')}
+                        </CommonButton>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Typography textAlign='center'>
+                            {`${t('userAccountCreate.general.haveAccount')} `}
+                            <NavLink key='haveAccount' to='/login'>
+                                {t('userAccountCreate.general.enter')}
+                            </NavLink>
+                        </Typography>
                     </Grid>
                 </Grid>
             </Box>

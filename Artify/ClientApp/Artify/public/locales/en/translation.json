@@ -69,6 +69,7 @@
             "passwordError": "incorrect password format",
             "passwordRepeat": "Password repeat", 
             "passwordRepeatError": "incorrect password repeat",
+            "agreement": "I agree to <1>terms of service</1>, <2>privacy policy</2> and <5>default notification settings</5>",
             "create": "create an account"
         }
     },
@@ -84,6 +85,7 @@
         "enter": "enter",
         "noAccount": "no account?",
         "register": "register",
+        "rememberMe": "remember me",
         "credentialsEmpty": "Password or login not entered", 
         "credentialsIncorrect": "Password or login is incorrect"
     },

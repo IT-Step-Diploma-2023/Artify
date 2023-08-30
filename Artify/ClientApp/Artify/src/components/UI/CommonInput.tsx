@@ -10,6 +10,7 @@ const CommonInput = styled('input')(({ color, height }: {
     {
         fontFamily: 'Nunito',
         outline: 'none',
+        caretColor: colors.darkViolet,
         fontWeight: '400',
         fontSize: '1rem',
         display: 'inline-block',

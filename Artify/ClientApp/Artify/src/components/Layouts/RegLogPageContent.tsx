@@ -32,7 +32,8 @@ const RegLogPageContent: FunctionComponent<PageContentProps> = ({ title, childre
   return (
     <>
       <FormPanel sx={{ backgroundColor: colors.lightGrey }}>
-        <Container sx={{ margin: 'auto' }}>
+        <Container sx={{ margin: 'auto'
+         }}>
           <Box sx={{ 
             width: '460px', 
             margin: 'auto', 
