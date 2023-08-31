@@ -11,6 +11,6 @@ namespace Artify.DAL
         void Update(T obj);
         IQueryable<T> Query(Expression<Func<T, bool>> filter);
         void Save();
-        void SaveAsync();
+        Task<int> SaveAsync();
     }
 }

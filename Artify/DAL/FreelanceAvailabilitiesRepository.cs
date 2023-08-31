@@ -43,11 +43,10 @@ namespace Artify.DAL
             context.SaveChanges();
         }
 
-        public async void SaveAsync()
+        public async Task<int> SaveAsync()
         {
-            await context.SaveChangesAsync();
+            return await context.SaveChangesAsync();
         }
-
         public void Update(FreelanceAvailability obj)
         {
             context.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
