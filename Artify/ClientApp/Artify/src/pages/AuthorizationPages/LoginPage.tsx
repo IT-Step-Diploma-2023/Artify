@@ -5,7 +5,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { AuthenticationManager } from '../../utils/AuthenticationManager';
+// import { AuthenticationManager } from '../../utils/AuthenticationManager';
 import { useDispatch } from 'react-redux';
 import { authActions } from '../../store/auth';
 import { NavLink, useNavigate } from "react-router-dom";
@@ -17,13 +17,14 @@ import RegLogPageContent from '../../components/Layouts/RegLogPageContent';
 import CommonButton from '../../components/UI/CommonButton';
 import CommonInput from '../../components/UI/CommonInput';
 import { colors } from '../../assets/defaults/colors';
+import useAuthorization from "../../hooks/useAuthorization";
 
 
 const LoginPage = () => {
   const [isLoginError, setIsLoginError] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const {authenticateUser} = useAuthorization();
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -37,12 +38,12 @@ const LoginPage = () => {
 
     setIsLoginError("");
     setIsLoading(true);
-    const authManager = new AuthenticationManager();
+   // const authManager = new AuthenticationManager();
 
-    const loggedUserName = await authManager.authenticateUser(userName, password);
+    const loggedUserName = await authenticateUser(userName, password);
     setIsLoading(false);
     if (loggedUserName) {
-      dispatch(authActions.login(loggedUserName));
+     // dispatch(authActions.login(loggedUserName));
       navigate("/");
     } else {
       setIsLoginError(t('userLoginPage.credentialsIncorrect'));

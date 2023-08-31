@@ -1,19 +1,9 @@
-import { AuthenticationManager } from '../../utils/AuthenticationManager';
-import {useDispatch} from "react-redux";
-import {authActions} from "../../store/auth";
-import { useNavigate } from 'react-router-dom';
-
+// import { AuthenticationManager } from '../../utils/AuthenticationManager';
+import useAuthorization from "../../hooks/useAuthorization";
 
 const LogoutPage = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const authManager : AuthenticationManager = new AuthenticationManager();
-  authManager.logOut();
-  dispatch(authActions.logout());
-
-  //navigate('/');
-
+  const {logOut} = useAuthorization();
+  logOut();
   return (
     <>
       <h1>Log out successful!</h1>

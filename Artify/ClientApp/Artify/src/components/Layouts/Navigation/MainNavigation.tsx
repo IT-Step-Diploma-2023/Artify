@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { AppBar, Toolbar, CssBaseline, Typography, styled, InputBase, Box, MenuItem, Avatar, IconButton, Menu, Tooltip, Divider } from '@mui/material';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { FunctionComponent } from 'react';
-import { AuthenticationManager } from '../../../utils/AuthenticationManager';
+import {isUserLogged} from "../../../hooks/useAuthorization";
 import { useSelector } from "react-redux";
 //
 import { useTranslation } from 'react-i18next';
@@ -13,6 +13,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Button } from '@mui/base/Button';
 import { colors } from '../../../assets/defaults/colors';
+import useAuthorization from "../../../hooks/useAuthorization";
 
 
 //#region localization languages
@@ -28,10 +29,8 @@ const lngs: Lngs = {
 //#endregion
 
 const Navbar: FunctionComponent = () => {
-
-  const authManager = new AuthenticationManager();
   //Cheking in local storage
-  let username = authManager.isUserLogged();
+  let username = isUserLogged();
   const authStore = useSelector(state => state.auth);
   if (username === null && authStore.isAuthenticated === true) {
     username = authStore.username;
