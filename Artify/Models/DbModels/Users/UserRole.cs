@@ -5,7 +5,7 @@ namespace Artify.Models.DbModels.Users
     public class UserRole
     {
         [Key]
-        public int Id { get; set; } = -1;
+        public int Id { get; set; }
         [Required]
         public string RoleName { get; set; } = string.Empty;
         public int? InheritedRoleId { get; set; }

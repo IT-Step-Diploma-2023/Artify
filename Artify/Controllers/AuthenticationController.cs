@@ -10,22 +10,37 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Artify.Controllers
 {
-    [Route("api/[controller]")]
+    
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
         private IConfiguration _configuration;
         private UsersRepository _usersRepository;
-        public AuthenticationController(IConfiguration configuration, IRepository<User> usersRepository)
+        private UserRolesRepository _usersRoleRepository;
+        readonly int userRoleId;
+        public AuthenticationController(IConfiguration configuration, IRepository<User> usersRepository, IRepository<UserRole> usersRolesRepository)
         {
             _configuration = configuration;
             this._usersRepository = (UsersRepository)usersRepository;
-        }
+            this._usersRoleRepository = (UserRolesRepository)usersRolesRepository;
 
+            var role = _usersRoleRepository.Query(role => role.RoleName == "user").FirstOrDefault();
+            if (role == null) {
+                UserRole userRole = new UserRole();
+                userRole.RoleName = "user";
+                _usersRoleRepository.Add(userRole);
+                _usersRoleRepository.Save();
+                userRoleId = userRole.Id;
+            }else
+                userRoleId=role.Id;
+        }
+        
         [AllowAnonymous]
+        [Route("api/[controller]/Authentication")]
         [HttpPost]
         public IActionResult Login([FromBody] UserLogin userLogin)
         //public IActionResult Login(string username, string password)
@@ -35,9 +50,29 @@ namespace Artify.Controllers
             if (user != null)
             {
                 var token = Generate(user);
-                return Ok(token);
+                return Ok(new { token = token });
             }
             return NotFound("User not found");
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("api/[controller]/Registration")]
+        public async Task<IActionResult> Registration([FromBody] UserRegistration registrationData)
+        {
+            if (_usersRepository.Query(user => user.Username == registrationData.Username).Count() > 0 ||
+               _usersRepository.Query(user => user.Email == registrationData.Email).Count() > 0)
+            {
+                return BadRequest("User is already registered");
+            }
+            User newUser = new User();
+            newUser.Username = registrationData.Username;
+            newUser.Email = registrationData.Email;
+            newUser.Password = hashSHA256(registrationData.Password);
+            newUser.RoleId = userRoleId;
+            _usersRepository.Add(newUser);
+            await _usersRepository.SaveAsync();
+            return Ok(new { token = Generate(newUser) });
         }
         private User? Authenticate(UserLogin userLogin)
         {
