@@ -401,3 +401,63 @@ body {
 }
 
 /* END LOGIN AUTHORIZE */
+
+/* HOME PAGE */
+
+.link1 {
+    text-align: center;
+    text-decoration:none;
+    font-size: 16px;
+    margin-right: 20px;
+    color: var(--dark-violet);
+    display: inline-block;
+    font-weight: 400;
+    line-height: 21.82px;
+    width:'55px'
+}
+
+.link1:hover {
+    color: #6A4BD9;
+    font:bold;
+    font-weight: 700;
+    width:'57px'
+}
+
+.link1-active {
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin-left: 20px;
+    display: inline-block;
+    font-weight: 700;
+    font:bold;
+}
+
+.link2 {
+    color: var(--violet);
+    border: 2px dashed;
+    border-color: var(--violet);
+}
+
+.link2:hover {
+    color: var(--violet);
+    border: 2px dashed;
+    border-color: var(--violet);
+}
+
+.link2-active {
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    margin-left: 20px;
+    display: inline-block;
+    border-bottom: 2px dashed;
+}
+
+.separator-line1 {
+    background-color: #CACACA;
+    height: 2px;
+    width: 178px
+}
+
+/* END HOME PAGE */

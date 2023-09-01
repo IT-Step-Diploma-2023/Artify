@@ -1,100 +1,117 @@
     {
-    "title": "English",
-    "buttonFetch": "Fetch Data",
-
-    "homePage": {
-        "text": "Home Page"
-    },
-
-    "errorPage": {
-        "undefinedError": {
-            "title": "An error occurred",
-            "message": "Something went wrong"
+        "title": "English",
+        "buttonFetch": "Fetch Data",
+        "homePage": {
+            "text": "Home Page"
         },
-        "notFoundError": {
-            "title": "File not found (404)",
-            "message": "Resource or page not found"
-        }
-    },
-
-    "headerComponent": {
-        "search": "search",
-        "menue": {
-            "hire": "hire",
-            "job": "job",
-            "buy": "purchase",
-            "help": "help",
-            "download": "download"
+        "errorPage": {
+            "undefinedError": {
+                "title": "An error occurred",
+                "message": "Something went wrong"
+            },
+            "notFoundError": {
+                "title": "File not found (404)",
+                "message": "Resource or page not found"
+            }
         },
-        "share": "share",
-        "filter": "filter",
-        "tags": {
-            "sites": "websites",
-            "images": "illustrations",
-            "photos": "photos",
-            "brand": "brand",
-            "typography": "typography",
-            "prints": "prints",
-            "mobile": "model",
-            "animation": "animation"
+        "headerComponent": {
+            "search": "search",
+            "menue": {
+                "hire": "hire",
+                "job": "job",
+                "buy": "purchase",
+                "help": "help",
+                "download": "download"
+            },
+            "share": "share",
+            "filter": "filter",
+            "tags": {
+                "sites": "websites",
+                "images": "illustrations",
+                "photos": "photos",
+                "brand": "brand",
+                "typography": "typography",
+                "prints": "prints",
+                "mobile": "model",
+                "animation": "animation"
+            },
+            "dropdownMenu": {
+                "workPrefs": "my job history",
+                "settings": "settings",
+                "login": "login",
+                "logout": "logout",
+                "register": "sign up"
+            },
+            "loggedOffMessage": "login or register"
         },
-        "dropdownMenu": {
-            "workPrefs": "my job history",
-            "settings": "settings",
-            "login": "login",
-            "logout": "logout",
-            "register": "sign up"
+        "userAccountCreate": {
+            "title": "CREATE ACCOUNT",
+            "general": {
+                "terms": "by creating an account, you agree to our <a href='#'>terms of service</a>, <a href='#'>privacy policy</a> and <a href='#' >notification settings</a> by default.",
+                "haveAccount": "already have an account?",
+                "enter": "enter"
+            },
+            "registrationMethodPage": {
+                "withGoogle": "sign up with google",
+                "withEmail": "continue with email"
+            },
+            "registrationPage": {
+                "login": "login",
+                "loginError": "incorrect login format",
+                "userName": "username",
+                "userNameError": "incorrect username format",
+                "email": "e-mail",
+                "emailError": "invalid email address",
+                "password": "password",
+                "passwordError": "incorrect password format",
+                "passwordRepeat": "Password repeat",
+                "passwordRepeatError": "incorrect password repeat",
+                "agreement": "I agree to <1>terms of service</1>, <2>privacy policy</2> and <5>default notification settings</5>",
+                "create": "create an account"
+            }
         },
-        "loggedOffMessage": "login or register"
-    },
-    "userAccountCreate": {
-        "title": "CREATE ACCOUNT",
-        "general": {
-            "terms": "by creating an account, you agree to our <a href='#'>terms of service</a>, <a href='#'>privacy policy</a> and <a href='#' >notification settings</a> by default.",
-            "haveAccount": "already have an account?",
-            "enter": "enter"
-        },
-        "registrationMethodPage": {
-            "withGoogle": "sign up with google",
-            "withEmail": "continue with email"
-        },
-        "registrationPage": {
-            "login": "login",
-            "loginError": "incorrect login format",
-            "userName": "username",
-            "userNameError": "incorrect username format",
-            "email": "e-mail",
-            "emailError": "invalid email address",
+        "userLoginPage": {
+            "title": "SIGN IN TO ACCOUNT",
+            "withGoogle": "sign in with google",
+            "alternative": "or",
+            "login": "username or email address",
+            "loginError": "Enter email address",
+            "forgot": "forgot?",
             "password": "password",
-            "passwordError": "incorrect password format",
-            "passwordRepeat": "Password repeat", 
-            "passwordRepeatError": "incorrect password repeat",
-            "agreement": "I agree to <1>terms of service</1>, <2>privacy policy</2> and <5>default notification settings</5>",
-            "create": "create an account"
+            "passwordError": "Enter password",
+            "enter": "enter",
+            "noAccount": "no account?",
+            "register": "register",
+            "rememberMe": "remember me",
+            "credentialsEmpty": "Password or login not entered",
+            "credentialsIncorrect": "Password or login is incorrect"
+        },
+        "userProfilePage": {
+            "basicInfo": "basic information",
+            "profInfo": "professional information",
+            "socialNetworks": "social networks",
+            "name": "name",
+            "userName": "username",
+            "country": "country",
+            "city": "city",
+            "about": "about me",
+            "download": "download",
+
+            "save": "save changes",
+            "edit": "edit",
+            "deleteAccount": "delete account",
+
+            "albums": "albums",
+            "appreciations": "likes",
+            "followings": "subscriptions"
+        },
+        "accountPage2": {
+            "portfolio": "portfolio",
+            "about": "about",
+            "saved": "saved",
+            "likedIt": "liked it",
+            "subscriptions": "subscriptions",
+            "editAccount": "edit",
+            "downloadWork": "download the work"
         }
-    },
-    "userLoginPage": {
-        "title": "SIGN IN TO ACCOUNT",
-        "withGoogle": "sign in with google",
-        "alternative": "or",
-        "login": "username or email address",
-        "loginError": "Enter email address",
-        "forgot": "forgot?",
-        "password": "password",
-        "passwordError": "Enter password",
-        "enter": "enter",
-        "noAccount": "no account?",
-        "register": "register",
-        "rememberMe": "remember me",
-        "credentialsEmpty": "Password or login not entered", 
-        "credentialsIncorrect": "Password or login is incorrect"
-    },
-    "userProfilePage": {
-        "edit": "edit",
-        "portfolio": "portfolio",
-        "about": "about me",
-        "albums": "albums",
-        "appreciations": "appreciations",
-        "followings": "followings"
     }
-}

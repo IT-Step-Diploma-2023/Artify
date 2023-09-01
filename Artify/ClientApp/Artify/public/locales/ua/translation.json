@@ -1,22 +1,19 @@
 {
     "title": "Українська",
     "buttonFetch": "Отримати дані",
-
-    "homePage":{
+    "homePage": {
         "text": "Домашня Сторінка"
     },
-
-    "errorPage":{
-        "undefinedError":{
+    "errorPage": {
+        "undefinedError": {
             "title": "Сталася помилка",
             "message": "Щось пішло не так"
         },
-        "notFoundError":{
+        "notFoundError": {
             "title": "Файл не знайдено (404)",
             "message": "Ресурс або сторінка не знайдені"
         }
     },
-    
     "headerComponent": {
         "search": "пошук",
         "menue": {
@@ -47,15 +44,14 @@
         },
         "loggedOffMessage": "увійдіть або зареєструйтеся"
     },
-
     "userAccountCreate": {
         "title": "СТВОРИТИ АКАУНТ",
-        "general":{
+        "general": {
             "terms": "створюючи обліковий запис, ви погоджуєтеся з нашими <a href='#'>умовами обслуговування</a>, <a href='#'>політикою конфіденційності</a> та <a href='#'>налаштуваннями сповіщень</a> за замовчуванням.",
             "haveAccount": "вже є акаунт?",
             "enter": "увійти"
         },
-        "registerationMetodPage": { 
+        "registerationMetodPage": {
             "withGoogle": "зареєструватися за допомогою google",
             "withEmail": "продовжити з електронною поштою"
         },
@@ -74,7 +70,6 @@
             "create": "сворити акаунт"
         }
     },
-
     "userLoginPage": {
         "title": "УВІЙДІТЬ У АКАУНТ",
         "withGoogle": "увійти за допомогою google",
@@ -86,18 +81,40 @@
         "passwordError": "Введіть пароль",
         "enter": "увійти",
         "noAccount": "немає акаунту?",
-        "register":"зареєструватися",
+        "register": "зареєструватися",
         "rememberMe": "запам'ятати мене",
         "credentialsEmpty": "пароль або логін не введені",
         "credentialsIncorrect": "пароль або логін помилкові"
     },
 
-    "userProfilePage": {
-        "edit": "редагувати",
-        "portfolio": "портфоліо",
+    "accountPage": {
+        "basicInfo": "основна інформація",
+        "profInfo": "професійна інформація",
+        "socialNetworks": "соціальні мережі",
+        "name": "ім'я",
+        "userName": "ім'я користувача",
+        "country": "країна",
+        "city": "місто",
         "about": "про мене",
+        "download": "завантажити",
+        
+        "deleteAccount": "видалити аккаунт",
+        "save": "зберегти зміни",
+        "edit": "редагувати",
+        
         "albums": "альбоми",
         "appreciations": "вподобання",
         "followings": "підписки"
+    },
+
+    "accountPage2": {
+        "portfolio": "портфоліо",
+        "about": "про",
+        "saved": "збережено",
+        "likedIt": "сподобалось",
+        "subscriptions": "підписки",
+        "editAccount": "редагувати",
+        "downloadWork": "завантажте роботу"
     }
+
 }

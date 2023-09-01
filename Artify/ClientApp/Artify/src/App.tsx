@@ -13,6 +13,7 @@ import LogoutPage from './pages/AuthorizationPages/LogoutPage';
 import EmailRegisterPage from './pages/RegistrationPages/EmailRegistrationPage';
 import SelectRegisterPage from './pages/RegistrationPages/SelectRegistrationPage';
 import GoogleRegisterPage from './pages/RegistrationPages/GoogleRegistrationPage';
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
   const router = createBrowserRouter([
@@ -24,6 +25,7 @@ function App() {
         { index: true, element: <HomePage /> },
         { path: 'fetchdata', element: <ExampleFetch /> },
         { path: 'logout', element: <LogoutPage /> },
+        { path: 'profile', element: <ProfilePage /> }
       ],
     },
     { path: 'login', element: <LoginPage /> },
@@ -31,8 +33,6 @@ function App() {
     { path: 'google-register', element: <GoogleRegisterPage /> },
     { path: 'email-register', element: <EmailRegisterPage /> }
   ]);
-
-
 
   return (
     <ThemeProvider theme={theme}>

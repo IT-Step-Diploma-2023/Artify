@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { AppBar, Toolbar, CssBaseline, Typography, styled, InputBase, Box, MenuItem, Avatar, IconButton, Menu, Tooltip, Divider } from '@mui/material';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { FunctionComponent } from 'react';
-import {isUserLogged} from "../../../hooks/useAuthorization";
+import { isUserLogged } from "../../../hooks/useAuthorization";
 import { useSelector } from "react-redux";
 //
 import { useTranslation } from 'react-i18next';
@@ -167,7 +167,6 @@ const Navbar: FunctionComponent = () => {
           }}>
           {lng === 'ua' ? lngs.ua : lngs.en}
         </Typography>
-
       ))}
     </>
   }
@@ -180,7 +179,7 @@ const Navbar: FunctionComponent = () => {
           style={{ margin: '10px auto', fontWeight: '600', caret: 'transparent', cursor: 'default' }}>{username}</Typography >
         <MenuItem
           key={'workPrefs'}
-          onClick={handleCloseUserMenu}>
+          onClick={() => { handleClickMenuItem('/profile') }}>
           {t('headerComponent.dropdownMenu.workPrefs')}
         </MenuItem>
         <MenuItem divider
