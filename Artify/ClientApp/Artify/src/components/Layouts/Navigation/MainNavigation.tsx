@@ -179,18 +179,23 @@ const Navbar: FunctionComponent = () => {
           style={{ margin: '10px auto', fontWeight: '600', caret: 'transparent', cursor: 'default' }}>{username}</Typography >
         <MenuItem
           key={'workPrefs'}
-          onClick={() => { handleClickMenuItem('/profile') }}>
+          onClick={() => { handleClickMenuItem('/portfolio') }}>
           {t('headerComponent.dropdownMenu.workPrefs')}
         </MenuItem>
         <MenuItem divider
           key={'settings'}
-          onClick={handleCloseUserMenu}>
+          onClick={() => { handleClickMenuItem('/profile-edit') }}>
           {t('headerComponent.dropdownMenu.settings')}
         </MenuItem>
         <MenuItem
           key={'logout'}
           onClick={() => { handleClickMenuItem('/logout') }}>
           {t('headerComponent.dropdownMenu.logоut')}
+        </MenuItem>
+        <MenuItem
+          key={'show-borders'}
+          onClick={() => { handleClickMenuItem('/show-borders') }}>
+          Show Borders
         </MenuItem>
       </>
     return <>

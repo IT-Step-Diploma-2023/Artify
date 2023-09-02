@@ -1,4 +1,5 @@
 import { FunctionComponent, ReactNode } from 'react';
+
 interface PageContentProps {
   title: string;
   children: ReactNode;

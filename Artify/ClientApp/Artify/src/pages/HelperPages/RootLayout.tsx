@@ -2,8 +2,7 @@ import { Outlet } from 'react-router-dom';
 import MainNavigation from '../../components/Layouts/Navigation/MainNavigation';
 import { FunctionComponent } from 'react';
 import Footer from '../../components/Layouts/FooterComponent/Footer';
-import { Container } from '@mui/material';
-
+import { Box } from '@mui/material';
 
 const RootLayout: FunctionComponent = () => {
   // const navigation = useNavigation();
@@ -11,16 +10,18 @@ const RootLayout: FunctionComponent = () => {
     <>
       <MainNavigation />
       <main>
-        <Container sx={{
-          margin: '0 auto',
-          paddingLeft: { sx: '1rem', sm: '50px', md: '100px' },
-          paddingRight: { sx: '1rem', sm: '50px', md: '100px' }
+        <Box sx={{
+          margin: 'auto',
+          maxWidth: '1120px',
+          boxSizing: 'border-box',
+          paddingLeft: {xs: '1rem', sm: '50px', lg: '0'},
+          paddingRight: {xs: '1rem', sm: '50px', lg: '0'}
         }}>
           {/* {navigation.state === 'loading' && <p>Loading...</p>} */}
           <Outlet />
-        </Container>
+        </Box>
       </main>
-      <Footer />
+      <Footer pos='docked' />
     </>
   );
 };

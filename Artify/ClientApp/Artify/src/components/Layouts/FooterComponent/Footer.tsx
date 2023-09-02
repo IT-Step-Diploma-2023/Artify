@@ -11,8 +11,12 @@ const buttonIcons = [
     { target: "#", image: "/images/footer/mail_icon.svg", }
 ];
 
+interface Position {
+    pos?: 'docked' | 'default';
+}
 
-const Footer: FunctionComponent = () => {
+
+const Footer: FunctionComponent<Position> = ({ pos }) => {
     return <>
         <Box
             sx={{
@@ -22,7 +26,9 @@ const Footer: FunctionComponent = () => {
                 boxShadow: '0px -2px 16px 0px rgba(106, 75, 217, 0.20), 1px -22px 40px 0px rgba(106, 75, 217, 0.20) inset',
                 borderTopLeftRadius: '1.5rem',
                 borderTopRightRadius: '1.5rem',
-                paddingTop: { xs: '2rem', md: '4rem' }
+                paddingTop: { xs: '2rem', md: '4rem' },
+                // position: pos === 'docked' ? 'fixed' : 'static',
+                // bottom: pos === 'docked' ? '0' : ''
             }}>
             <Grid
                 container

@@ -13,7 +13,9 @@ import LogoutPage from './pages/AuthorizationPages/LogoutPage';
 import EmailRegisterPage from './pages/RegistrationPages/EmailRegistrationPage';
 import SelectRegisterPage from './pages/RegistrationPages/SelectRegistrationPage';
 import GoogleRegisterPage from './pages/RegistrationPages/GoogleRegistrationPage';
-import ProfilePage from './pages/ProfilePage';
+import PortfolioPage from './pages/UserProfilePages/PortfolioPage';
+import EditProfilePage from './pages/UserProfilePages/EditProfilePage';
+import ShowBorders from './pages/ShowBordersPage';
 
 function App() {
   const router = createBrowserRouter([
@@ -25,7 +27,9 @@ function App() {
         { index: true, element: <HomePage /> },
         { path: 'fetchdata', element: <ExampleFetch /> },
         { path: 'logout', element: <LogoutPage /> },
-        { path: 'profile', element: <ProfilePage /> }
+        { path: 'portfolio', element: <PortfolioPage /> },
+        { path: 'profile-edit', element: <EditProfilePage /> },
+        { path: 'show-borders', element: <ShowBorders /> }
       ],
     },
     { path: 'login', element: <LoginPage /> },
