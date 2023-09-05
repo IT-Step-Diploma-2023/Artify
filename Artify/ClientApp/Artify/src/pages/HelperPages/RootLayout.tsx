@@ -14,6 +14,7 @@ const RootLayout: FunctionComponent = () => {
           margin: 'auto',
           maxWidth: '1120px',
           boxSizing: 'border-box',
+          paddingTop: {xs: '1rem', sm: '2rem', md: '90px'},
           paddingLeft: {xs: '1rem', sm: '50px', lg: '0'},
           paddingRight: {xs: '1rem', sm: '50px', lg: '0'}
         }}>

@@ -16,6 +16,9 @@ import GoogleRegisterPage from './pages/RegistrationPages/GoogleRegistrationPage
 import PortfolioPage from './pages/UserProfilePages/PortfolioPage';
 import EditProfilePage from './pages/UserProfilePages/EditProfilePage';
 import ShowBorders from './pages/ShowBordersPage';
+import ProfInfoPage from './pages/UserProfilePages/ProfInfoPage';
+import NetworksPage from './pages/UserProfilePages/NetworksPage';
+import DelAccountPage from './pages/UserProfilePages/DelAccountPage';
 
 function App() {
   const router = createBrowserRouter([
@@ -28,8 +31,11 @@ function App() {
         { path: 'fetchdata', element: <ExampleFetch /> },
         { path: 'logout', element: <LogoutPage /> },
         { path: 'portfolio', element: <PortfolioPage /> },
-        { path: 'profile-edit', element: <EditProfilePage /> },
-        { path: 'show-borders', element: <ShowBorders /> }
+        { path: 'profile-basicinfo', element: <EditProfilePage /> },
+        { path: 'profile-profinfo', element: <ProfInfoPage /> },
+        { path: 'profile-networks', element: <NetworksPage /> },
+        { path: 'delete-account', element: <DelAccountPage /> },
+        { path: 'show-borders', element: <ShowBorders /> } // temporary 
       ],
     },
     { path: 'login', element: <LoginPage /> },

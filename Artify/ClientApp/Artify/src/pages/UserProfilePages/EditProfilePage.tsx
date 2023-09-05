@@ -9,12 +9,13 @@ import Typography from '@mui/material/Typography';
 
 import { NavLink } from "react-router-dom";
 
-import { Grid, IconButton, Input, Select, Tab, TextField } from '@mui/material';
+import { Grid, IconButton, Input, List, ListItem, ListItemButton, ListItemText, Select, Tab, TextField } from '@mui/material';
 import { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AddAPhoto } from '@mui/icons-material';
 import { display } from '@mui/system';
 import Separator from '../../components/UI/Separator';
+import ProfileMenu from '../../components/UI/ProfileMenu';
 
 
 interface Lngs {
@@ -57,10 +58,11 @@ const EditProfilePage: FunctionComponent = () => {
   const save = t('accountPage.save');
 
   const pathes = [
-    '/basicInfo',
-    '/profInfo',
-    '/socialNetworks',
+    '/profile-basicinfo',
+    '/profile-profinfo',
+    '/profile-networks'
   ]
+
 
   //basicInfo
   //professional information
@@ -74,26 +76,11 @@ const EditProfilePage: FunctionComponent = () => {
 
 
   return <>
-    <Grid container spacing={2} marginTop={3} display={'flex'}>
-      <Grid xs={4}>
-        {pages.map((page) => (
-          <NavLink className={'link1'}
-            key={page}
-            to={pathes[pages.indexOf(page)]}
-            style={{ marginTop: '54px', display: 'block', textAlign: 'left' }}>
-            {page}
-          </NavLink>
-        ))}
-
-        <div className="separator-line1" style={{ marginTop: '108px', color: '#CACACA' }}></div>
-
-        <NavLink className={'link1'}
-          to='/deleteAccount'
-          style={{ marginTop: '27px', display: 'block', textAlign: 'left', color: '#D65353' }}>
-          {delAccount}
-        </NavLink>
+    <Grid container spacing={2} display={'flex'}>
+      <Grid item xs={4}>
+        <ProfileMenu translation={t}></ProfileMenu>
       </Grid>
-      <Grid xs={2}>
+      <Grid item xs={2}>
         <IconButton aria-label="addaphoto" className={'link2'} style={{ marginTop: '24px', display: 'block' }}
           sx={{ border: '2px dashed #271846', color: '#271846', padding: '50px' }}>
           <AddAPhoto />

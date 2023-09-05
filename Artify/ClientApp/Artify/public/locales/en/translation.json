@@ -86,7 +86,7 @@
             "credentialsEmpty": "Password or login not entered",
             "credentialsIncorrect": "Password or login is incorrect"
         },
-        "userProfilePage": {
+        "accountPage": {
             "basicInfo": "basic information",
             "profInfo": "professional information",
             "socialNetworks": "social networks",
