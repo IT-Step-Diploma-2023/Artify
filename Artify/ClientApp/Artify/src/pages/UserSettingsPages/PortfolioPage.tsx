@@ -51,7 +51,7 @@ const PortfolioPage: FunctionComponent = () => {
     '/portfolio',
     '/about',
     '/saved',
-    '/likedIt',
+    '/liked',
     '/subscriptions',
   ]
 

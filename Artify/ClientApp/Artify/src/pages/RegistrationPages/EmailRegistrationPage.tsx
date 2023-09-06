@@ -98,7 +98,6 @@ const EmailRegisterPage: FunctionComponent = () => {
                             name='password'
                             required
                             placeholder={t('userAccountCreate.registerationPage.password')}
-                            autoFocus
                             aria-label='input-password'
                             value={formData.password}
                             onChange={(e: ChangeEvent<HTMLInputElement>) => {
@@ -122,7 +121,6 @@ const EmailRegisterPage: FunctionComponent = () => {
                             name='password-repeat'
                             required
                             placeholder={t('userAccountCreate.registerationPage.passwordRepeat')}
-                            autoFocus
                             aria-label='input-password-repeat'
                             value={formData.passwordRepeat}
                             onChange={(e: ChangeEvent<HTMLInputElement>) => {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import {useDispatch} from "react-redux";
 import {authActions} from "../store/auth";
 
@@ -72,6 +73,7 @@ export const isUserLogged = () : any => {
     const token = getAuthToken();
     if (token === null || token === 'EXPIRED') return null;
     const tokenData = parseJwt(token);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     return tokenData['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
 }
 

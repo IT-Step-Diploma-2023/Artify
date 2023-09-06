@@ -15,7 +15,7 @@ import { useTranslation } from 'react-i18next';
 import { AddAPhoto } from '@mui/icons-material';
 import { display } from '@mui/system';
 import Separator from '../../components/UI/Separator';
-import ProfileMenu from '../../components/UI/UserProfilePages/ProfileMenu';
+import SettingsMenu from '../../components/UI/UserSettingsComponents/SettingsMenu';
 
 
 interface Lngs {
@@ -28,7 +28,7 @@ const lngs: Lngs = {
   en: 'EN'
 }
 
-const EditProfilePage: FunctionComponent = () => {
+const BasicInfoPage: FunctionComponent = () => {
 
   const { t, i18n } = useTranslation();
 
@@ -58,9 +58,9 @@ const EditProfilePage: FunctionComponent = () => {
   const save = t('accountPage.save');
 
   const pathes = [
-    '/profile-basicinfo',
-    '/profile-profinfo',
-    '/profile-networks'
+    '/settings-basicinfo',
+    '/settings-profinfo',
+    '/settings-networks'
   ]
 
 
@@ -78,7 +78,7 @@ const EditProfilePage: FunctionComponent = () => {
   return <>
     <Grid container spacing={2} display={'flex'}>
       <Grid item xs={4}>
-        <ProfileMenu translation={t}></ProfileMenu>
+        <SettingsMenu translation={t}></SettingsMenu>
       </Grid>
       <Grid item xs={2}>
         <IconButton aria-label="addaphoto" className={'link2'} style={{ marginTop: '24px', display: 'block' }}
@@ -149,4 +149,4 @@ const EditProfilePage: FunctionComponent = () => {
 
   </>
 };
-export default EditProfilePage;
+export default BasicInfoPage;

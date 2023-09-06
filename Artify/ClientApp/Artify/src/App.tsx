@@ -13,12 +13,15 @@ import LogoutPage from './pages/AuthorizationPages/LogoutPage';
 import EmailRegisterPage from './pages/RegistrationPages/EmailRegistrationPage';
 import SelectRegisterPage from './pages/RegistrationPages/SelectRegistrationPage';
 import GoogleRegisterPage from './pages/RegistrationPages/GoogleRegistrationPage';
-import PortfolioPage from './pages/UserProfilePages/PortfolioPage';
-import EditProfilePage from './pages/UserProfilePages/EditProfilePage';
+import PortfolioPage from './pages/UserSettingsPages/PortfolioPage';
+import BasicInfoPage from './pages/UserSettingsPages/BasicInfoPage';
 import ShowBorders from './pages/ShowBordersPage';
-import ProfInfoPage from './pages/UserProfilePages/ProfInfoPage';
-import NetworksPage from './pages/UserProfilePages/NetworksPage';
-import DelAccountPage from './pages/UserProfilePages/DelAccountPage';
+import ProfInfoPage from './pages/UserSettingsPages/ProfInfoPage';
+import NetworksPage from './pages/UserSettingsPages/NetworksPage';
+import DelAccountPage from './pages/UserSettingsPages/DelAccountPage';
+import AboutMePage from './pages/AboutMePage';
+import LikedPage from './pages/LikedPage';
+import SharePage from './pages/SharePage';
 
 function App() {
   const router = createBrowserRouter([
@@ -31,10 +34,14 @@ function App() {
         { path: 'fetchdata', element: <ExampleFetch /> },
         { path: 'logout', element: <LogoutPage /> },
         { path: 'portfolio', element: <PortfolioPage /> },
-        { path: 'profile-basicinfo', element: <EditProfilePage /> },
-        { path: 'profile-profinfo', element: <ProfInfoPage /> },
-        { path: 'profile-networks', element: <NetworksPage /> },
+        { path: 'settings-basicinfo', element: <BasicInfoPage /> },
+        { path: 'settings-profinfo', element: <ProfInfoPage /> },
+        { path: 'settings-networks', element: <NetworksPage /> },
+        { path: 'about', element: <AboutMePage /> },
+        { path: 'liked', element: <LikedPage /> },
+        { path: 'share', element: <SharePage /> },
         { path: 'delete-account', element: <DelAccountPage /> },
+        //
         { path: 'show-borders', element: <ShowBorders /> } // temporary 
       ],
     },

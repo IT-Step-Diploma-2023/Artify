@@ -3,11 +3,11 @@ import Box from '@mui/material/Box';
 import { Divider } from '@mui/material';
 import { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
-import ProfileMenu from '../../components/UI/UserProfilePages/ProfileMenu';
+import SettingsMenu from '../../components/UI/UserSettingsComponents/SettingsMenu';
 import { colors } from '../../assets/defaults/colors';
 import CommonButton from '../../components/UI/CommonButton';
-import CommonLabel from '../../components/UI/UserProfilePages/CommonLabel';
-import InputSub from '../../components/UI/UserProfilePages/InputSub';
+import CommonLabel from '../../components/UI/UserSettingsComponents/CommonLabel';
+import InputSub from '../../components/UI/UserSettingsComponents/InputSub';
 import CommonInput from '../../components/UI/CommonInput';
 
 
@@ -33,7 +33,7 @@ const NetworksPage: FunctionComponent = () => {
     return <>
         <Box sx={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
             <Box sx={{ position: 'absolute', left: '0', margin: '0' }}>
-                <ProfileMenu translation={t}></ProfileMenu>
+                <SettingsMenu translation={t}></SettingsMenu>
             </Box>
             <Box
                 component='form'

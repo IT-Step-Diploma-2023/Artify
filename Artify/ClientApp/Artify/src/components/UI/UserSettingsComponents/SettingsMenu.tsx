@@ -1,9 +1,9 @@
 import { Box, Divider, } from "@mui/material";
 import { TFunction } from "i18next";
 import { NavLink } from "react-router-dom";
-import classes from './ProfileMenu.module.css'
+import classes from './SettingsMenu.module.css'
 
-const ProfileMenu = ({ translation }: { translation: TFunction<"translation", undefined> }) => {
+const SettingsMenu = ({ translation }: { translation: TFunction<"translation", undefined> }) => {
 
     const pages = [
         translation('accountPage.basicInfo'),
@@ -13,9 +13,9 @@ const ProfileMenu = ({ translation }: { translation: TFunction<"translation", un
 
 
     const pathes = [
-        '/profile-basicinfo',
-        '/profile-profinfo',
-        '/profile-networks'
+        '/settings-basicinfo',
+        '/settings-profinfo',
+        '/settings-networks'
     ]
 
     return <>
@@ -41,4 +41,4 @@ const ProfileMenu = ({ translation }: { translation: TFunction<"translation", un
     </>
 }
 
-export default ProfileMenu
+export default SettingsMenu

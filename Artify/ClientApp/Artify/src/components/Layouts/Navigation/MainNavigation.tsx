@@ -184,7 +184,7 @@ const Navbar: FunctionComponent = () => {
         </MenuItem>
         <MenuItem divider
           key={'settings'}
-          onClick={() => { handleClickMenuItem('/profile-basicinfo') }}>
+          onClick={() => { handleClickMenuItem('/settings-basicinfo') }}>
           {t('headerComponent.dropdownMenu.settings')}
         </MenuItem>
         <MenuItem
