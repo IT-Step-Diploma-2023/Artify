@@ -135,5 +135,29 @@
             "sitePlaceholder": "add a link to your own website ",
             "siteSub": "add a link to your personal website or portfolio with samples of your work"
         },
-        "accountPage4": {}
+        "accountPage4": {},
+
+        "aboutMe": {
+            "aboutMe": "about me",
+            "inWeb": "in web",
+            "tags": "tags"
+        },
+
+        "share": {
+            "addToGetStarted":"add to get started",
+            "text":"text",
+            "image":"image",
+            "video":"video",
+            "projectName":"project name",
+            "addProjectName":"add a project name",
+            "tags":"tags",
+            "addTags":"add tags",
+            "until":"until",
+            "suggested":"suggested",
+            "visibilityOfTheProject":"visibility of the project",
+            "intervalsBetweenBlocks":"intervals between blocks",
+            "saveAsDraft":"save as draft",
+            "myContinue":"continue",
+            "addBlock":"add block"
+        }    
     }

@@ -1,4 +1,3 @@
-import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 
 import { Avatar, Grid, Paper, Typography } from '@mui/material';
@@ -17,41 +16,38 @@ export default function StandardImageList() {
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
   return (<>
-    <ImageList  cols={4} rowHeight={164}>
+    <Grid container spacing={{ xs: 2, md: 3 }} style={{ margin: 'auto 70px' }}>      
       {itemData.map((item) => (
-        <Paper elevation={0} style={{ width: 240, height: 238,borderRadius: '10px', marginTop: '60px',background:'#ECEAEF'}}>
-          <ImageListItem key={item.img} >
-            <img
-              style={{ width: 240, height: 200, borderRadius: '10px',boxShadow: '0px 4px 8px 0px #27184666' }}
-              src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-              srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-              alt={item.title}
-              loading="lazy"
-            />
-            <div>
-            <div style={{ verticalAlign:'center',marginRight: 'auto'}}>
-              <Avatar style={{float:'left',marginTop: '7px'}}
-                alt="Remy Sharp"
-                src="images/default_profile.png"
-                sx={{ width: 20, height: 20}}
-              />
-              </div>
-              <Typography style={{verticalAlign:'center',float:'left',fontFamily: 'Nunito',fontSize: '14px',fontWeight: 700,lineHeight: '19.1px',color:'#271846',marginTop: '7px',marginLeft:'7px'}}>fvfsvsvvs dgbdgbb</Typography>
-              <Typography style={{ width: '17px', height: '19px',marginLeft: 'auto',float:'right',fontFamily: 'Nunito',fontSize: '14px',fontWeight: 400,lineHeight: '19px',letterSpacing: '0em',textAlign: 'left',color:'#9E9AA2',marginTop: '7px'}}>12</Typography>
-              <div style={{marginLeft: 'auto'}}>
-                <Checkbox {...label} icon={<FavoriteBorder style={{color:'#9E9AA2'}} />} checkedIcon={<Favorite style={{color:'#D65353'}} />} 
-                style={{ width:'13.093928337097168px',height:'11.617537498474121px',float:'right',marginTop: '7px',marginLeft:'2.453125px',marginRight:'5px'}}/> 
-              </div>
-              
-              </div>
-             
-          </ImageListItem>
-          
-
-        </Paper>
-      ))}
-
-    </ImageList>
+        <Grid xs={12} sm={6} md={3}>
+              <Paper elevation={0} style={{ width: 240, height: 238,borderRadius: '10px', marginTop: '60px',background:'#ECEAEF'}}>
+                <ImageListItem key={item.img} >
+                  <img
+                    style={{ width: 240, height: 200, borderRadius: '10px',boxShadow: '0px 4px 8px 0px #27184666' }}
+                    src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
+                    srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                    alt={item.title}
+                    loading="lazy"
+                  />
+                  <div>
+                    <div style={{ verticalAlign:'center',marginRight: 'auto'}}>
+                      <Avatar style={{float:'left',marginTop: '7px'}}
+                        alt="Remy Sharp"
+                        src="images/default_profile.png"
+                        sx={{ width: 20, height: 20}}
+                      />
+                      </div>
+                      <Typography style={{verticalAlign:'center',float:'left',fontFamily: 'Nunito',fontSize: '14px',fontWeight: 700,lineHeight: '19.1px',color:'#271846',marginTop: '7px',marginLeft:'7px'}}>fvfsvsvvs dgbdgbb</Typography>
+                      <Typography style={{ width: '17px', height: '19px',marginLeft: 'auto',float:'right',fontFamily: 'Nunito',fontSize: '14px',fontWeight: 400,lineHeight: '19px',letterSpacing: '0em',textAlign: 'left',color:'#9E9AA2',marginTop: '7px'}}>12</Typography>
+                      <div style={{marginLeft: 'auto'}}>
+                        <Checkbox {...label} icon={<FavoriteBorder style={{color:'#9E9AA2'}} />} checkedIcon={<Favorite style={{color:'#D65353'}} />} 
+                        style={{ width:'13.093928337097168px',height:'11.617537498474121px',float:'right',marginTop: '7px',marginLeft:'2.453125px',marginRight:'5px'}}/> 
+                      </div>              
+                    </div>              
+                </ImageListItem>
+              </Paper>
+        </Grid>
+            ))}
+      </Grid>
 </>
   );
   

@@ -135,5 +135,30 @@
         "sitePlaceholder": "додайте посилання на власний веб-сайт ",
         "siteSub": "додайте посилання на свій особистий веб-сайт або портфоліо зі зразками ваших робіт"
     },
-    "accountPage4": {}
+    "accountPage4": {},
+    "aboutMe": {
+        "aboutMe": "про мене",
+        "inWeb": "в інтернеті",
+        "tags": "теги"
+    },
+
+    "share": {
+        "addToGetStarted":"додайте щоб розпочати",
+        "text":"текст",
+        "image":"зображення",
+        "video":"відео",
+        "projectName":"назва проекту",
+        "addProjectName":"додайте назву проекту",
+        "tags":"теги",
+        "addTags":"додайте теги",
+        "until":"до",
+        "suggested":"запропоновано",
+        "visibilityOfTheProject":"видимість проекту",
+        "intervalsBetweenBlocks":"інтервали між блоками",
+        "saveAsDraft":"зберегти як чернетку",
+        "myContinue":"продовжити",
+        "addBlock":"додати блок"        
+    }  
+
+
 }
