@@ -128,7 +128,7 @@ const Navbar: FunctionComponent = () => {
     return <>
       {pages.map((page) => (
         <NavLink
-          key={page}
+          key={pages.indexOf(page)}
           to={pathes[pages.indexOf(page)]}
           className={({ isActive }) => (isActive ? 'link-active' : 'link')}
         >
@@ -142,7 +142,7 @@ const Navbar: FunctionComponent = () => {
     return <>
       {pages.map((page) => (<>
         <MenuItem
-          key={page}
+          key={pages.indexOf(page)}
           onClick={() => { handleClickMenuItem(pathes[pages.indexOf(page)]) }}>
           <Typography textAlign="center">{page}</Typography>
         </MenuItem>

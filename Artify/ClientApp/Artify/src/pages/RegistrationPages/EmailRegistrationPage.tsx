@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import {useTranslation} from 'react-i18next';
 import {ChangeEvent, FunctionComponent, useState} from 'react';
 import Box from '@mui/material/Box';
@@ -41,20 +42,6 @@ const EmailRegisterPage: FunctionComponent = () => {
                 navigate('/');
             }}>
                 <Grid container columnSpacing={2} rowSpacing={3} marginTop={3}>
-                    {/*<Grid item xs={12} md={6}>*/}
-                    {/*    <CommonInput*/}
-                    {/*        sx={{ width: '100%' }}*/}
-                    {/*        color='primary'*/}
-                    {/*        height='bg'*/}
-                    {/*        title='name'*/}
-                    {/*        id='name'*/}
-                    {/*        name='name'*/}
-                    {/*        required*/}
-                    {/*        placeholder='Your name'*/}
-                    {/*        autoFocus*/}
-                    {/*        aria-label='input-login'*/}
-                    {/*    />*/}
-                    {/*</Grid>*/}
                     <Grid item xs={12} md={12}>
                         <CommonInput
                             sx={{width: '100%'}}

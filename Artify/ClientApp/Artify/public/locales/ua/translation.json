@@ -4,6 +4,10 @@
     "homePage": {
         "text": "Домашня Сторінка"
     },
+    "common": {
+        "saveLong": "зберегти зміни",
+        "save": "зберегти"
+    },
     "errorPage": {
         "undefinedError": {
             "title": "Сталася помилка",
@@ -86,7 +90,6 @@
         "credentialsEmpty": "пароль або логін не введені",
         "credentialsIncorrect": "пароль або логін помилкові"
     },
-
     "accountPage": {
         "basicInfo": "основна інформація",
         "profInfo": "професійна інформація",
@@ -97,16 +100,13 @@
         "city": "місто",
         "about": "про мене",
         "download": "завантажити",
-        
         "deleteAccount": "видалити аккаунт",
         "save": "зберегти зміни",
         "edit": "редагувати",
-        
         "albums": "альбоми",
         "appreciations": "вподобання",
         "followings": "підписки"
     },
-
     "accountPage2": {
         "portfolio": "портфоліо",
         "about": "про",
@@ -115,6 +115,25 @@
         "subscriptions": "підписки",
         "editAccount": "редагувати",
         "downloadWork": "завантажте роботу"
-    }
-
+    },
+    "accountPage3": {
+        "profession": "професія",
+        "professionPlaceholder": "вкажіть професію, якою володієте",
+        "skills": "навички",
+        "skillsPlaceholder": "навички, пов’язані з послугами, які ви пропонуєте",
+        "skillsSub": "перелічить через кому ваші навички",
+        "education": "освіта",
+        "grades": {
+            "add": "додати ще",
+            "country": "країна коледжу / університету",
+            "facility": "назва коледжу / університету",
+            "grade": "ступінь",
+            "start": "розпочав",
+            "finish": "закінчив"
+        },
+        "site": "персональний сайт",
+        "sitePlaceholder": "додайте посилання на власний веб-сайт ",
+        "siteSub": "додайте посилання на свій особистий веб-сайт або портфоліо зі зразками ваших робіт"
+    },
+    "accountPage4": {}
 }

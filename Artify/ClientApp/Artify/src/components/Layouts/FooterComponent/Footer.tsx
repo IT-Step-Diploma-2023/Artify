@@ -48,7 +48,7 @@ const Footer: FunctionComponent<Position> = ({ pos }) => {
                     <Grid container columnSpacing={3}
                     >
                         {buttonIcons.map((buttonIcon) => (
-                            <Grid item>
+                            <Grid item key={buttonIcon.image}>
                                 <a href={buttonIcon.target}>
                                     <Box
                                         width='20px' height='20px'

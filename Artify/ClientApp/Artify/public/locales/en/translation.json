@@ -4,6 +4,10 @@
         "homePage": {
             "text": "Home Page"
         },
+        "common": {
+            "saveLong": "save changes",
+            "save": "save"
+        },
         "errorPage": {
             "undefinedError": {
                 "title": "An error occurred",
@@ -96,11 +100,9 @@
             "city": "city",
             "about": "about me",
             "download": "download",
-
             "save": "save changes",
             "edit": "edit",
             "deleteAccount": "delete account",
-
             "albums": "albums",
             "appreciations": "likes",
             "followings": "subscriptions"
@@ -113,5 +115,25 @@
             "subscriptions": "subscriptions",
             "editAccount": "edit",
             "downloadWork": "download the work"
-        }
+        },
+        "accountPage3": {
+            "profession": "profession",
+            "professionPlaceholder": "enter your profession",
+            "skills": "skills",
+            "skillsPlaceholder": "enter skills related to the services you offer",
+            "skillsSub": "enter skills via sub",
+            "education": "education",
+            "grades": {
+                "add": "add more",
+                "country": "college / university country",
+                "facility": "college / university name",
+                "grade": "grade",
+                "start": "started",
+                "finish": "finished"
+            },
+            "site": "personal site",
+            "sitePlaceholder": "add a link to your own website ",
+            "siteSub": "add a link to your personal website or portfolio with samples of your work"
+        },
+        "accountPage4": {}
     }
