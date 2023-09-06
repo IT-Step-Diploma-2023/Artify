@@ -33,16 +33,18 @@ function App() {
         { index: true, element: <HomePage /> },
         { path: 'fetchdata', element: <ExampleFetch /> },
         { path: 'logout', element: <LogoutPage /> },
-        { path: 'portfolio', element: <PortfolioPage /> },
+        // SETTINGS
         { path: 'settings-basicinfo', element: <BasicInfoPage /> },
         { path: 'settings-profinfo', element: <ProfInfoPage /> },
         { path: 'settings-networks', element: <NetworksPage /> },
+        // PROFILE
+        { path: 'portfolio', element: <PortfolioPage /> },
         { path: 'about', element: <AboutMePage /> },
         { path: 'liked', element: <LikedPage /> },
         { path: 'share', element: <SharePage /> },
         { path: 'delete-account', element: <DelAccountPage /> },
-        //
-        { path: 'show-borders', element: <ShowBorders /> } // temporary 
+        // TEMPORARY HELPER PAGE
+        { path: 'show-borders', element: <ShowBorders /> } 
       ],
     },
     { path: 'login', element: <LoginPage /> },
