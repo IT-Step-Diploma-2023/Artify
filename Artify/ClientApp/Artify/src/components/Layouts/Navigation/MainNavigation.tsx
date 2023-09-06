@@ -285,7 +285,9 @@ const Navbar: FunctionComponent = () => {
           {username !== null && (
             <Button
               className='button button-dark button-m'
-              style={{ width: '200px' }}>
+              style={{ width: '200px' }}
+              onClick={()=>{navigate('/share')}}
+              >
               {t('headerComponent.share')}
             </Button>
           )}
