@@ -12,6 +12,7 @@ import LocationOn from '@mui/icons-material/LocationOn';
 
 import AddCircleOutline from '@mui/icons-material/AddCircleOutline';
 import { FavoriteBorder, Favorite } from '@mui/icons-material';
+import ProfileMenu from '../components/UI/UserProfileComponents/ProfileMenu';
 
 interface Lngs {
   ua: string
@@ -97,23 +98,7 @@ const lngs: Lngs = {
         
       </Grid>
       <Grid item xs={5} md={5}>
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        centered
-        sx={{ }}
-        style={{ width: '645px', height: '44px', gap: '20px'}}>
-          {pages.map((page) => (
-              <NavLink 
-              
-              key={page}
-              to={pathes[pages.indexOf(page)]}
-              className={({ isActive }) => (isActive ? 'link1-active' : 'link1')}
-            >{page}         
-            </NavLink>
-          ))}
-    
-      </Tabs> 
+        <ProfileMenu translation={t}></ProfileMenu>
       </Grid>
       <Grid item xs={4} md={4}>
 

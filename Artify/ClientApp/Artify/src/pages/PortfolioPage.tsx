@@ -12,8 +12,9 @@ import LocationOn from '@mui/icons-material/LocationOn';
 
 import AddCircleOutline from '@mui/icons-material/AddCircleOutline';
 import { FavoriteBorder, Favorite } from '@mui/icons-material';
-import CommonButton from '../../components/UI/CommonButton';
-import { colors } from '../../assets/defaults/colors'
+import CommonButton from '../components/UI/CommonButton';
+import { colors } from '../assets/defaults/colors'
+import ProfileMenu from '../components/UI/UserProfileComponents/ProfileMenu';
 
 interface Lngs {
   ua: string
@@ -59,7 +60,7 @@ const PortfolioPage: FunctionComponent = () => {
 
   return <>
     <Grid container spacing={2}>
-      <Grid item xs={4} md={4}/>
+      <Grid item xs={4} md={4} />
       <Grid item xs={4} md={4}>
         <div>
           <Avatar alt="Remy Sharp" src="/images/sample_christian_kouly_profile.jpg" sx={{ marginTop: '90px', display: 'inline-block', width: '147px', height: '147px' }} />
@@ -73,11 +74,12 @@ const PortfolioPage: FunctionComponent = () => {
                 {t('Ukraine')}
               </Typography>
             </div>
-            <CommonButton color='secondary' sx={{ 
-              backgroundColor: colors.lightGrey, 
-              width: '130px', 
-              margin: 'auto', 
-              display: 'block', marginBottom: '70px'}}>
+            <CommonButton color='secondary' sx={{
+              backgroundColor: colors.lightGrey,
+              width: '130px',
+              margin: 'auto',
+              display: 'block', marginBottom: '70px'
+            }}>
               <Typography > {editAccount} </Typography>
             </CommonButton>
           </div>
@@ -92,23 +94,7 @@ const PortfolioPage: FunctionComponent = () => {
 
       </Grid>
       <Grid item xs={5} md={5}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          centered
-          sx={{}}
-          style={{ width: '645px', height: '44px', gap: '20px' }}>
-          {pages.map((page) => (
-            <NavLink
-
-              key={page}
-              to={pathes[pages.indexOf(page)]}
-              className={({ isActive }) => (isActive ? 'link1-active' : 'link1')}
-            >{page}
-            </NavLink>
-          ))}
-
-        </Tabs>
+        <ProfileMenu translation={t}></ProfileMenu>
       </Grid>
       <Grid item xs={4} md={4}>
 

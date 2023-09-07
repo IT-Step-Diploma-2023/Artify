@@ -76,10 +76,67 @@ Status: 200 OK
     "id": ,
     "userName": ,
     "fullName": ,
-    "socialProfiles": [
-        "socialProfile" :{
+    "userSocialProfiles": [
+        "userSocialProfile": {
+                    "socialProfile" :{
             "id": ,
             "name": 
+        },
+        "address": 
         }
     ]
 }
+
+************
+
+004
+POST /settings-networks/add
+
+Description
+-----------
+Add user social network
+
+Payload 
+-----------
+{
+    "userSocialProfiles": [
+        "userSocialProfile": {
+                    "socialProfile" :{
+            "id": 
+        },
+        "address": 
+        }
+    ]
+}
+
+Response
+-----------
+Status: 200 OK
+redirect to /settings-networks
+
+***********
+
+005
+POST /settings-networks/add
+
+Description
+-----------
+Add user social network
+
+Payload 
+-----------
+{
+    "userSocialProfiles": [
+        "userSocialProfile": {
+                    "socialProfile" :{
+            "id": 
+        },
+        "address": 
+        }
+    ]
+}
+
+Response
+-----------
+Status: 200 OK
+redirect to /settings-networks

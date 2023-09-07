@@ -13,7 +13,7 @@ import LogoutPage from './pages/AuthorizationPages/LogoutPage';
 import EmailRegisterPage from './pages/RegistrationPages/EmailRegistrationPage';
 import SelectRegisterPage from './pages/RegistrationPages/SelectRegistrationPage';
 import GoogleRegisterPage from './pages/RegistrationPages/GoogleRegistrationPage';
-import PortfolioPage from './pages/UserSettingsPages/PortfolioPage';
+import PortfolioPage from './pages/PortfolioPage';
 import BasicInfoPage from './pages/UserSettingsPages/BasicInfoPage';
 import ShowBorders from './pages/ShowBordersPage';
 import ProfInfoPage from './pages/UserSettingsPages/ProfInfoPage';
