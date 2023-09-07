@@ -117,7 +117,7 @@ redirect to /settings-networks
 ***********
 
 005
-POST /settings-networks/add
+PUT /settings-networks/update
 
 Description
 -----------
