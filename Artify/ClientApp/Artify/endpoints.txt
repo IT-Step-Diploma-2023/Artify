@@ -1,0 +1,85 @@
+001
+GET /settings-basicinfo
+
+Description
+-----------
+Get a basic user information
+
+Response
+-----------
+Status: 200 OK
+{
+    "id": ,
+    "userName": , // means login
+    "fullName": , // should be added to model
+    "location": ,
+    "info": ,
+    "logoImage":
+}
+
+************
+
+002
+GET /settings-profinfo
+
+Description
+-----------
+Get information about profession, skills and education
+
+Response
+-----------
+Status: 200 OK
+{
+    "id": ,
+    "userName": ,
+    "fullName": ,
+    "workPreference": {
+        "skills": ,
+        "educations": [
+            education: {
+                "id": ,
+                "degree": ,
+                "institution": ,
+                "startYear": ,
+                "finisYear": ,
+            }
+        ],
+        "specialties": [
+            specialty: {
+                "id": ,
+                "name": 
+            }
+        ],
+        "jobs": [
+            "id": ,
+            "position": ,
+            "company": ,
+            "startYear": ,
+            "finisYear": 
+        ]
+    }
+}
+
+************
+
+003
+GET /settings-networks
+
+Description
+-----------
+Get information user social networks
+
+Response
+-----------
+Status: 200 OK
+{
+    "id": ,
+    "userName": ,
+    "fullName": ,
+    "socialProfiles": [
+        "socialProfile" :{
+            "id": ,
+            "name": 
+        }
+    ]
+}
