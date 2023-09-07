@@ -4,6 +4,7 @@ using Artify.Models.HelperModels;
 using Artify.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json.Serialization;
 
 namespace Artify.Controllers.users
 {
@@ -34,7 +35,7 @@ namespace Artify.Controllers.users
                 User? user = _usersRepository.Query(user => user.Id == model.Id).FirstOrDefault();
                 if (user == null)
                     return NotFound(new { errorMessage = "User was not found in the database" });
-                return Ok(new EndPointUserModel(user));
+                return new JsonResult(new EndPointUserModel(user));
             }catch(Exception)
             {
                 return BadRequest(new { errorMessage = "Something went wrong" });
@@ -45,15 +46,21 @@ namespace Artify.Controllers.users
         private class EndPointUserModel
         { 
             public int Id { get; set; }
-            public string Username { get; set; } = string.Empty;
-            public string FullName { get; set; } = string.Empty;
-            public string Email { get; set; } = string.Empty;
+            public string? Username { get; set; } 
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+            public string? FullName { get; set; } 
+            public string? Email { get; set; }
             public int RoleId { get; set; }
-            public string? Location { get; set; } = string.Empty;
-            public string? Info { get; set; } = string.Empty;
-            public string? WebSite { get; set; } = string.Empty;
-            public string? Biography { get; set; } = string.Empty;
-            public string? LogoImage { get; set; } = string.Empty;
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+            public string? Location { get; set; } 
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+            public string? Info { get; set; } 
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+            public string? WebSite { get; set; } 
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+            public string? Biography { get; set; }
+            [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+            public string? LogoImage { get; set; } 
             
             public EndPointUserModel(User user)
             {
@@ -64,14 +71,26 @@ namespace Artify.Controllers.users
             {
                 this.Id = user.Id;
                 this.Username = user.Username;
-                this.FullName = user.FullName;
-                this.Email = user.Email;    
+                this.Email = user.Email;
                 this.RoleId = user.RoleId;
-                this.Location = user.Location;
-                this.Info = user.Info;
-                this.WebSite = user.WebSite;
+
+
+                if (IsNotEmpty(user.FullName))
+                    this.FullName = user.FullName;
+                if (IsNotEmpty(user.Location))
+                    this.Location = user.Location;
+                if (IsNotEmpty(user.Info))
+                    this.Info = user.Info;
+                if (IsNotEmpty(user.Biography))
+                    this.WebSite = user.Biography;
                 this.Biography = user.Biography;
-                this.LogoImage = user.LogoImage;
+                if (IsNotEmpty(user.LogoImage))
+                    this.LogoImage = user.LogoImage;
+            }
+
+            private bool IsNotEmpty(string? value)
+            {
+                return !string.IsNullOrEmpty(value);
             }
         }
     }
