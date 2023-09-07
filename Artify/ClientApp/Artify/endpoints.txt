@@ -3,7 +3,7 @@ GET /settings-basicinfo
 
 Description
 -----------
-Get a basic user information
+Get a basic user information -> Done
 
 Response
 -----------
