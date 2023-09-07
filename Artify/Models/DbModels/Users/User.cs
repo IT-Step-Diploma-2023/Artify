@@ -8,6 +8,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Artify.Models.DbModels.Users
 {
+    ///<Summary>
+    /// Database user model
+    ///</Summary>
     public class User
     {
         [Key]
