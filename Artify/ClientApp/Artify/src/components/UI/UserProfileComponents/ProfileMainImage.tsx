@@ -10,7 +10,14 @@ const ProfileMainImage = ({ translation }: { translation: TFunction<"translation
     return <>
         <Box sx={{ margin: '0 auto 40px', width: '500px', height: '150px', display: 'flex', justifyContent: 'left' }}>
             <Box sx={{ paddingLeft: '40px' }}>
-                <Avatar alt="Remy Sharp" src="/images/sample_christian_kouly_profile.jpg" sx={{ display: 'inline-block', width: '147px', height: '147px' }} />
+                <Avatar
+                    alt="Remy Sharp" src="/images/sample_christian_kouly_profile.jpg"
+                    sx={{
+                        display: 'inline-block',
+                        width: '147px',
+                        height: '147px',
+                        boxShadow: '0px 4px 8px 0px #2718464D'
+                    }} />
             </Box>
             <Box sx={{ paddingLeft: '40px' }}>
                 <Typography component='div' sx={{ display: 'block', fontSize: '2rem', fontWeight: '700' }}>
