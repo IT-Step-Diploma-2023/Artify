@@ -44,9 +44,9 @@ const Navbar: FunctionComponent = () => {
   const { t, i18n } = useTranslation();
 
   const pages = [
-    t('headerComponent.menue.hire'),
-    t('headerComponent.menue.job'),
+    t('headerComponent.menue.inspiration'),
     t('headerComponent.menue.buy'),
+    t('headerComponent.menue.hire'),
     t('headerComponent.menue.help'),
   ];
 

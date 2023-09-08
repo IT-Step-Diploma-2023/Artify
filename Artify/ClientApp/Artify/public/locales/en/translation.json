@@ -21,9 +21,9 @@
         "headerComponent": {
             "search": "search",
             "menue": {
-                "hire": "hire",
-                "job": "job",
+                "inspiration": "inspiration",
                 "buy": "purchase",
+                "hire": "hire",
                 "help": "help",
                 "download": "download"
             },
@@ -40,10 +40,10 @@
                 "animation": "animation"
             },
             "dropdownMenu": {
-                "workPrefs": "my job history",
+                "workPrefs": "my profie",
                 "settings": "settings",
                 "login": "login",
-                "logout": "logout",
+                "logоut": "logout",
                 "register": "sign up"
             },
             "loggedOffMessage": "login or register"

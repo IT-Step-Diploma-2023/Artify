@@ -21,9 +21,9 @@
     "headerComponent": {
         "search": "пошук",
         "menue": {
-            "hire": "винайняти",
-            "job": "робота",
+            "inspiration": "надхнення",
             "buy": "купівля",
+            "hire": "найняти",
             "help": "допомога",
             "download": "завантажити"
         },
@@ -40,7 +40,7 @@
             "animation": "анімація"
         },
         "dropdownMenu": {
-            "workPrefs": "моє резюме",
+            "workPrefs": "мій профіль",
             "settings": "налаштування",
             "login": "увійти",
             "logоut": "вийти",
