@@ -16,7 +16,8 @@ const RootLayout: FunctionComponent = () => {
           boxSizing: 'border-box',
           paddingTop: {xs: '1rem', sm: '2rem', md: '90px'},
           paddingLeft: {xs: '1rem', sm: '50px', lg: '0'},
-          paddingRight: {xs: '1rem', sm: '50px', lg: '0'}
+          paddingRight: {xs: '1rem', sm: '50px', lg: '0'},
+          paddingBottom: {xs: '1rem', sm: '2rem', md: '90px'}
         }}>
           {/* {navigation.state === 'loading' && <p>Loading...</p>} */}
           <Outlet />

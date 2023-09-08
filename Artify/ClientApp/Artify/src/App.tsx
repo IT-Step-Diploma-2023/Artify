@@ -22,6 +22,9 @@ import DelAccountPage from './pages/UserSettingsPages/DelAccountPage';
 import AboutMePage from './pages/AboutMePage';
 import LikedPage from './pages/LikedPage';
 import SharePage from './pages/SharePage';
+import CollectionItemPage from './pages/CollectionItemPage';
+import SavedPage from './pages/SavedPage';
+import SubscriptionsPage from './pages/SubscriptionsPage';
 
 function App() {
   const router = createBrowserRouter([
@@ -43,6 +46,9 @@ function App() {
         { path: 'liked', element: <LikedPage /> },
         { path: 'share', element: <SharePage /> },
         { path: 'delete-account', element: <DelAccountPage /> },
+        { path: 'saved', element: <SavedPage /> },
+        { path: 'collectionItems', element: <CollectionItemPage /> },
+        { path: 'subscriptions', element: <SubscriptionsPage /> },
         // TEMPORARY HELPER PAGE
         { path: 'show-borders', element: <ShowBorders /> } 
       ],

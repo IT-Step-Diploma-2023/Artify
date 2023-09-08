@@ -94,7 +94,4 @@ namespace Artify.Controllers.users
             }
         }
     }
-
-
-    
 }

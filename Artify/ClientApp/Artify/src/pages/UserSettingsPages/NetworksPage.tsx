@@ -25,24 +25,29 @@ const NetworksPage: FunctionComponent = () => {
 
     const [editFormData, setEditFormData] = useState({ ...networks });
 
-    const handleFieldChange = (event: any) => {
+    const handleFieldChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();
         const fieldName = event.target.getAttribute("name");
         const fieldValue = event.target.value;
         const newFormData = { ...editFormData };
-        Object.keys(newFormData).forEach(element => {
-            if (newFormData[parseInt(element)].name === fieldName)
-                newFormData[parseInt(element)].address = fieldValue;
-        });
+
+        for (let i = 0; i < Object.keys(editFormData).length; i++) {
+            if (newFormData[i].name === fieldName)
+                newFormData[i].address = fieldValue;
+        }
         setEditFormData(newFormData);
     };
+    
+    // ^(http(s):\/\/.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+
         const userSocialProfiles: SocialProfile[] = [];
-        Object.keys(editFormData).forEach(element => {
-            userSocialProfiles.push(editFormData[parseInt(element)]);
-        });
+
+        for (let i = 0; i < Object.keys(editFormData).length; i++) {
+            userSocialProfiles.push(editFormData[i]);
+        }
         ////
         // here will be fetch with PUT request
         ////
