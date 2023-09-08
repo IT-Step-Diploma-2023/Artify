@@ -1,5 +1,6 @@
 ﻿using Artify.DAL;
 using Artify.Models.DbModels.Users;
+using Artify.Models.DbModels.Users.Attributes;
 using Artify.Models.HelperModels;
 using Artify.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -12,8 +13,10 @@ namespace Artify.Controllers.users
     public class UsersApiController : ControllerBase
     {
         private UsersRepository _usersRepository;
+        //private SocialProfilesRepository _socialProfilesRepository;
         public UsersApiController(IRepository<User> usersRepository) {
             this._usersRepository = (UsersRepository)usersRepository;
+            //this._socialProfilesRepository = (SocialProfilesRepository)socialProfilesRepository;
         }
 
         /// <summary>
@@ -35,15 +38,50 @@ namespace Artify.Controllers.users
                 User? user = _usersRepository.Query(user => user.Id == model.Id).FirstOrDefault();
                 if (user == null)
                     return NotFound(new { errorMessage = "User was not found in the database" });
-                return new JsonResult(new EndPointUserModel(user));
+                return new JsonResult(new BaseEndPointUserModel(user));
             }catch(Exception)
             {
                 return BadRequest(new { errorMessage = "Something went wrong" });
             }
         }
+        [Route("api/[controller]/[action]")]
+        [HttpGet]
+        [Authorize]
+        public IActionResult GetUserSocialProfiles()
+        {
 
+            try
+            {
+                JwtUser? model = UsersService.GetCurrentUser(this.HttpContext);
+                if (model == null)
+                    return Forbid();
+                User? user = _usersRepository.Query(user => user.Id == model.Id).FirstOrDefault();
+                user.UserSocialProfiles.ForEach(profile =>
+                {
+                    Console.WriteLine(profile);
+                });
+                int count = user.UserSocialProfiles.Count();
+                Console.WriteLine(count);
+                // _socialProfilesRepository.Query(profile => profile.UserSocialProfiles.Contains())
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest(new { errorMessage = "Something went wrong" });
+            }
+        }
+        private class SocialProfilesUserModel : BaseEndPointUserModel
+        {
+            public SocialProfilesUserModel(User user) : base(user)
+            {
 
-        private class EndPointUserModel
+            }
+            public SocialProfilesUserModel() : base()
+            {
+
+            }
+        }
+        private class BaseEndPointUserModel
         { 
             public int Id { get; set; }
             public string? Username { get; set; } 
@@ -62,11 +100,11 @@ namespace Artify.Controllers.users
             [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
             public string? LogoImage { get; set; } 
             
-            public EndPointUserModel(User user)
+            public BaseEndPointUserModel(User user)
             {
                 fillFields(user);
             }
-            public EndPointUserModel() { }
+            public BaseEndPointUserModel() { }
             public void fillFields(User user)
             {
                 this.Id = user.Id;
@@ -81,9 +119,10 @@ namespace Artify.Controllers.users
                     this.Location = user.Location;
                 if (IsNotEmpty(user.Info))
                     this.Info = user.Info;
+                if (IsNotEmpty(user.WebSite))
+                    this.WebSite = user.WebSite;
                 if (IsNotEmpty(user.Biography))
-                    this.WebSite = user.Biography;
-                this.Biography = user.Biography;
+                    this.Biography = user.Biography;
                 if (IsNotEmpty(user.LogoImage))
                     this.LogoImage = user.LogoImage;
             }

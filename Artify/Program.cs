@@ -17,6 +17,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     var config = builder.Configuration;
     var connectionString = config.GetConnectionString("DefaultConnection");
     options.UseSqlServer(connectionString);
+    options.UseLazyLoadingProxies();
 });
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
