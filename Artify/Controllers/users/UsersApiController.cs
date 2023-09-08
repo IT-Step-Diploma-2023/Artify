@@ -133,7 +133,4 @@ namespace Artify.Controllers.users
             }
         }
     }
-
-
-    
 }

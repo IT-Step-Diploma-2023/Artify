@@ -68,6 +68,8 @@ GET /settings-networks
 Description
 -----------
 Get information user social networks
+The list of social networks is constant 
+Each address can be set to exact value or be empty
 
 Response
 -----------
@@ -76,10 +78,40 @@ Status: 200 OK
     "id": ,
     "userName": ,
     "fullName": ,
-    "socialProfiles": [
-        "socialProfile" :{
+    "userSocialProfiles": [
+        "socialProfile": {
             "id": ,
-            "name": 
+            "name": ,
+            "address": 
         }
     ]
 }
+
+************
+
+004
+POST /settings-networks/update
+
+Description
+-----------
+Update user social network
+The list of social networks is constant 
+Each address can be set to exact value or be empty
+
+Payload 
+-----------
+{
+    "userSocialProfiles": [
+        "socialProfile": {
+            "id": ,
+            "name": ,
+            "address": 
+        }
+    ]
+}
+
+Response
+-----------
+Status: 200 OK
+redirect to /settings-networks
+

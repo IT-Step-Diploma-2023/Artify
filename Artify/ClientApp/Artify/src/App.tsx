@@ -13,7 +13,7 @@ import LogoutPage from './pages/AuthorizationPages/LogoutPage';
 import EmailRegisterPage from './pages/RegistrationPages/EmailRegistrationPage';
 import SelectRegisterPage from './pages/RegistrationPages/SelectRegistrationPage';
 import GoogleRegisterPage from './pages/RegistrationPages/GoogleRegistrationPage';
-import PortfolioPage from './pages/UserSettingsPages/PortfolioPage';
+import PortfolioPage from './pages/PortfolioPage';
 import BasicInfoPage from './pages/UserSettingsPages/BasicInfoPage';
 import ShowBorders from './pages/ShowBordersPage';
 import ProfInfoPage from './pages/UserSettingsPages/ProfInfoPage';
@@ -22,6 +22,9 @@ import DelAccountPage from './pages/UserSettingsPages/DelAccountPage';
 import AboutMePage from './pages/AboutMePage';
 import LikedPage from './pages/LikedPage';
 import SharePage from './pages/SharePage';
+import CollectionItemPage from './pages/CollectionItemPage';
+import SavedPage from './pages/SavedPage';
+import SubscriptionsPage from './pages/SubscriptionsPage';
 
 function App() {
   const router = createBrowserRouter([
@@ -43,6 +46,9 @@ function App() {
         { path: 'liked', element: <LikedPage /> },
         { path: 'share', element: <SharePage /> },
         { path: 'delete-account', element: <DelAccountPage /> },
+        { path: 'saved', element: <SavedPage /> },
+        { path: 'collectionItems', element: <CollectionItemPage /> },
+        { path: 'subscriptions', element: <SubscriptionsPage /> },
         // TEMPORARY HELPER PAGE
         { path: 'show-borders', element: <ShowBorders /> } 
       ],

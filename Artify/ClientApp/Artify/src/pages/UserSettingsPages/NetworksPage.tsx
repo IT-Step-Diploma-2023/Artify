@@ -1,27 +1,58 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import Box from '@mui/material/Box';
-import { Divider } from '@mui/material';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import SettingsMenu from '../../components/UI/UserSettingsComponents/SettingsMenu';
 import { colors } from '../../assets/defaults/colors';
 import CommonButton from '../../components/UI/CommonButton';
 import CommonLabel from '../../components/UI/UserSettingsComponents/CommonLabel';
-import InputSub from '../../components/UI/UserSettingsComponents/InputSub';
 import CommonInput from '../../components/UI/CommonInput';
+import networksData from '../../assets/data/networksData.json'
 
 
+interface SocialProfile {
+    id: number
+    name: string
+    address: string
+}
 
 const NetworksPage: FunctionComponent = () => {
 
     const { t } = useTranslation();
 
-    const networks = [
-        'instagram',
-        'behance',
-        'facebook',
-        'pinterest'
-    ];
+    const networks = networksData;
+
+    const [editFormData, setEditFormData] = useState({ ...networks });
+
+    const handleFieldChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        event.preventDefault();
+        const fieldName = event.target.getAttribute("name");
+        const fieldValue = event.target.value;
+        const newFormData = { ...editFormData };
+
+        for (let i = 0; i < Object.keys(editFormData).length; i++) {
+            if (newFormData[i].name === fieldName)
+                newFormData[i].address = fieldValue;
+        }
+        setEditFormData(newFormData);
+    };
+    
+    // ^(http(s):\/\/.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$
+
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+        const userSocialProfiles: SocialProfile[] = [];
+
+        for (let i = 0; i < Object.keys(editFormData).length; i++) {
+            userSocialProfiles.push(editFormData[i]);
+        }
+        ////
+        // here will be fetch with PUT request
+        ////
+        console.log(userSocialProfiles);
+    };
 
     const placeholders = [
         'instagram',
@@ -37,25 +68,24 @@ const NetworksPage: FunctionComponent = () => {
             </Box>
             <Box
                 component='form'
-                onSubmit={() => { console.log('submit') }}
+                onSubmit={handleSubmit}
                 sx={{ width: '100%', padding: '0 275px', marginBottom: '130px' }}>
                 {networks.map((network) => (
                     <Box key={networks.indexOf(network)}>
-                        <CommonLabel htmlFor={network}
+                        <CommonLabel htmlFor={network.name}
                             sx={{ marginTop: networks.indexOf(network) !== 0 ? '1.5rem' : '0' }}>
-                            {network}
+                            {network.name}
                         </CommonLabel>
                         <CommonInput
                             sx={{ width: '100%' }}
                             color='primary'
                             height='bg'
-                            title={network}
-                            id={network}
-                            name={network}
-                            placeholder={placeholders[networks.indexOf(network)]}
-                            autoFocus
-                            aria-label={'input ' + network}
-                            onChange={() => { console.log(`${network} input changed`) }}
+                            title={network.name}
+                            id={network.name}
+                            name={network.name}
+                            placeholder={network.address !== "" ? network.address : placeholders[networks.indexOf(network)]}
+                            aria-label={network.name}
+                            onChange={handleFieldChange}
                         />
                     </Box>
                 ))}
@@ -71,8 +101,6 @@ const NetworksPage: FunctionComponent = () => {
                 >
                     {t('common.saveLong')}
                 </CommonButton>
-
-
             </Box>
         </Box>
     </>
