@@ -8,20 +8,10 @@ import { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import {  AutorenewRounded, DeleteForeverRounded, North, South } from '@mui/icons-material';
 
-
-interface Lngs {
-  ua: string
-  en: string
-}
-
-const lngs: Lngs = {
-  ua: 'UA',
-  en: 'EN'
-}
-  
+ 
   const SharePage: FunctionComponent = () => {   
 
-    const { t, i18n } = useTranslation();  
+    const { t } = useTranslation();  
 
     const addToGetStarted=t('share.addToGetStarted');
     const text=t('share.text');

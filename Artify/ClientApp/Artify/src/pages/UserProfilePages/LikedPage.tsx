@@ -1,29 +1,20 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import { Avatar, Checkbox, Grid, ImageListItem, Paper } from '@mui/material';
 import { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FavoriteBorder, Favorite } from '@mui/icons-material';
-import ProfileMenu from '../components/UI/UserProfileComponents/ProfileMenu';
-import ProfileMainImage from '../components/UI/UserProfileComponents/ProfileMainImage';
+import ProfileTopComponent from '../../components/UI/UserProfileComponents/ProfileTopComponent';
+import ProfileMenu from '../../components/UI/UserProfileComponents/ProfileMenu';
 
 
 const LikedPage: FunctionComponent = () => {
 
   const { t } = useTranslation();
 
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
-
   return <>
-
-    <ProfileMainImage translation={t}></ProfileMainImage>
+    <ProfileTopComponent />
     <ProfileMenu translation={t}></ProfileMenu>
-
     <Grid container spacing={{ xs: 2, md: 3 }} style={{ margin: 'auto 70px' }}>
       {itemData.map((item) => (
         <Grid xs={12} sm={6} md={3}>

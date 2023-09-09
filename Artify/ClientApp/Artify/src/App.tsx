@@ -8,23 +8,26 @@ import theme from './assets/defaults/theme';
 import RootLayout from './pages/HelperPages/RootLayout';
 import ErrorPage from './pages/HelperPages/ErrorPage';
 import HomePage from './pages/HomePage';
+// auth and reg pages
 import LoginPage from './pages/AuthorizationPages/LoginPage';
 import LogoutPage from './pages/AuthorizationPages/LogoutPage';
 import EmailRegisterPage from './pages/RegistrationPages/EmailRegistrationPage';
 import SelectRegisterPage from './pages/RegistrationPages/SelectRegistrationPage';
 import GoogleRegisterPage from './pages/RegistrationPages/GoogleRegistrationPage';
-import PortfolioPage from './pages/PortfolioPage';
-import BasicInfoPage from './pages/UserSettingsPages/BasicInfoPage';
-import ShowBorders from './pages/ShowBordersPage';
+// user settings pages
 import ProfInfoPage from './pages/UserSettingsPages/ProfInfoPage';
 import NetworksPage from './pages/UserSettingsPages/NetworksPage';
 import DelAccountPage from './pages/UserSettingsPages/DelAccountPage';
-import AboutMePage from './pages/AboutMePage';
-import LikedPage from './pages/LikedPage';
-import SharePage from './pages/SharePage';
-import CollectionItemPage from './pages/CollectionItemPage';
-import SavedPage from './pages/SavedPage';
-import SubscriptionsPage from './pages/SubscriptionsPage';
+// user profile pages
+import PortfolioPage from './pages/UserProfilePages/PortfolioPage';
+import BasicInfoPage from './pages/UserSettingsPages/BasicInfoPage';
+import ShowBorders from './pages/ShowBordersPage';
+import AboutMePage from './pages/UserProfilePages/AboutMePage';
+import LikedPage from './pages/UserProfilePages/LikedPage';
+import SharePage from './pages/UserProfilePages/SharePage';
+import CollectionItemPage from './pages/UserProfilePages/CollectionItemPage';
+import SavedPage from './pages/UserProfilePages/SavedPage';
+import SubscriptionsPage from './pages/UserProfilePages/SubscriptionsPage';
 
 function App() {
   const router = createBrowserRouter([
