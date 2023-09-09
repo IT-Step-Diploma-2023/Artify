@@ -1,152 +1,235 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import * as React from 'react';
-import { Button } from '@mui/base/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-
-
-
-import { NavLink } from "react-router-dom";
-
-import { Grid, IconButton, Input, List, ListItem, ListItemButton, ListItemText, Select, Tab, TextField } from '@mui/material';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { AddAPhoto } from '@mui/icons-material';
-import { display } from '@mui/system';
-import Separator from '../../components/UI/Separator';
 import SettingsMenu from '../../components/UI/UserSettingsComponents/SettingsMenu';
-
-
-interface Lngs {
-  ua: string
-  en: string
-}
-
-const lngs: Lngs = {
-  ua: 'UA',
-  en: 'EN'
-}
+import { colors } from '../../assets/defaults/colors';
+import CommonButton from '../../components/UI/CommonButton';
+import CommonLabel from '../../components/UI/UserSettingsComponents/CommonLabel';
+import CommonInput from '../../components/UI/CommonInput';
+import networksData from '../../assets/data/networksData.json'
+import React from 'react';
+import { AddAPhoto } from '@mui/icons-material';
+import { IconButton, Typography, Input, Grid } from '@mui/material';
+import CommonTextArea from '../../components/UI/CommonTextArea';
+import { margin } from '@mui/system';
 
 const BasicInfoPage: FunctionComponent = () => {
 
-  const { t, i18n } = useTranslation();
+    const networks = networksData;
 
-  const [value, setValue] = React.useState(0);
-
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
+    const [editFormData, setEditFormData] = useState({ ...networks });
+    const [selectedImage, setSelectedImage] = useState(new Blob);
+    console.log(selectedImage);
 
 
-  const pages = [
-    t('accountPage.basicInfo'),
-    t('accountPage.profInfo'),
-    t('accountPage.socialNetworks'),
+    const loadButtonClickHandler = () => {
+        const inputElement = window.document.getElementById('loadFileInput')!
+        inputElement.click();
+    }
 
-  ];
+    const loadInputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const loadedFile = event.target.files!
+        console.log(loadedFile[0]);
+        setSelectedImage(loadedFile[0]);
+    }
 
-  const delAccount = t('accountPage.deleteAccount');
+    const { t } = useTranslation();
 
-  const name = t('accountPage.name');
-  const userName = t('accountPage.userName');
-  const country = t('accountPage.country');
-  const city = t('accountPage.city');
-  const about = t('accountPage.about');
-  const download = t('accountPage.download');
-  const save = t('accountPage.save');
+    const placeholders = [
+        'instagram',
+        'behance',
+        'facebook',
+        'pinterest'
+    ];
 
-  const pathes = [
-    '/settings-basicinfo',
-    '/settings-profinfo',
-    '/settings-networks'
-  ]
-
-
-  //basicInfo
-  //professional information
-  //social networks
-
-
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-  };
+    const login = t('accountPage.userName');
+    const fullName = t('accountPage.fullName');
+    const country = t('accountPage.country');
+    const city = t('accountPage.city');
+    const location = country + ', ' + city;
+    const about = t('accountPage.about');
+    const download = t('accountPage.download');
+    const save = t('accountPage.save');
 
 
-  return <>
-    <Grid container spacing={2} display={'flex'}>
-      <Grid item xs={4}>
-        <SettingsMenu translation={t}></SettingsMenu>
-      </Grid>
-      <Grid item xs={2}>
-        <IconButton aria-label="addaphoto" className={'link2'} style={{ marginTop: '24px', display: 'block' }}
-          sx={{ border: '2px dashed #271846', color: '#271846', padding: '50px' }}>
-          <AddAPhoto />
-        </IconButton>
-        <Typography style={{ display: 'block', marginTop: '16px', marginLeft: '14px', fontWeight: 'bold' }} >{download}</Typography>
-      </Grid>
-      <Grid item xs={4}>
-        <Box component='form' onSubmit={handleSubmit}
-          sx={{ width: '100%' }}>
-          <Grid container columnSpacing={2} rowSpacing={3} marginTop={3} display={'flex'} flexGrow={1}>
-            <Grid item xs={12} md={6} display={'flex'} flexGrow={1}>
-              <div >
-                <Typography style={{ display: 'block', marginBottom: '10px', marginLeft: '7px' }} >{name}</Typography>
-                <Input className='input'
-                  style={{ width: '100%', display: 'block' }}
-                  required
-                />
-              </div>
-            </Grid>
-            <Grid item xs={12} md={6} display={'flex'}>
-              <div >
-                <Typography style={{ display: 'block', marginBottom: '10px', marginLeft: '7px' }} >{userName}</Typography>
-                <Input className='input'
-                  style={{ width: '100%', display: 'block' }}
-                  required
-                />
-              </div>
-            </Grid>
-          </Grid>
-
-          <Grid container columnSpacing={2} rowSpacing={3} marginTop={3}>
-            <Grid item xs={12} md={6} display={'flex'}>
-              <div>
-                <Typography style={{ display: 'block', marginTop: '1px', marginLeft: '7px' }} >{country}</Typography>
-                <Select className='select'
-                  style={{ marginTop: '10px', width: '250px', display: 'block' }}
-                  sx={{ backgroundColor: 'white', border: '1px solid #CACACA', borderRadius: '30px', height: '44px' }}
-                  required
-                />
-              </div>
-            </Grid>
-            <Grid item xs={12} md={6} display={'flex'}>
-              <div>
-                <Typography style={{ display: 'block', marginBottom: '10px', marginLeft: '7px' }} >{city}</Typography>
-                <Input className='input'
-                  style={{ marginTop: '10px', width: '100%', display: 'block' }}
-                  required
-                />
-              </div>
-            </Grid>
-          </Grid>
-          <Typography style={{ display: 'block', marginTop: '36px', marginLeft: '7px' }} >{about}</Typography>
-          <Grid container columnSpacing={2} rowSpacing={3}>
-            <Grid item xs={12} md={12} display={'flex'}>
-              <Input
-                multiline
-                rows={6}
-                sx={{ padding: '10px, 30px, 10px, 30px', width: '100%', marginTop: '7px', borderRadius: '30px', border: '1px solid #CACACA', backgroundColor: '#FFFFFF' }}
-              />
-            </Grid>
-          </Grid>
-          <Button className='button' style={{ width: '164px', height: '54px', padding: '18px, 72px, 18px, 72px', marginTop: '54px', color: '#FFFFFF', marginLeft: '169px', backgroundColor: '#CACACA', borderRadius: '50px' }}>{save}</Button>
+    return <>
+        <Box sx={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
+            <Box sx={{ position: 'absolute', left: '0', margin: '0' }}>
+                <SettingsMenu translation={t} />
+            </Box>
         </Box>
-      </Grid>
-    </Grid>
+        <Box sx={{ position: 'relative' }}>
+            <Box sx={{
+                position: 'absolute',
+                left: '0',
+                margin: '0',
+                display: {
+                    xs: 'none', sm: 'block'
+                },
+                marginBottom: '130px'
+            }}>
+                <SettingsMenu translation={t}></SettingsMenu>
+            </Box>
+            <Box
+                sx={{
+                    width: '100%',
+                    padding: '0 0 0 275px',
+                    display: 'flex'
+                }}>
+                <Box sx={{
+                    width: '151px',
+                    marginRight: '4.5rem',
+                    display: {
+                        xs: 'none',
+                        md: 'block'
 
-  </>
-};
+                    }
+                }}>
+                    {(selectedImage.size === 0) &&
+                        <Box
+                            aria-label="addaphoto"
+                            sx={{
+                                border: '2px dashed #271846',
+                                color: '#271846',
+                                display: 'block',
+                                padding: '50px',
+                                width: '147px',
+                                height: '147px',
+                                borderRadius: '50%'
+                            }}>
+                            <AddAPhoto sx={{
+                                height: '2.25rem',
+                                width: '2.25rem',
+                                margin: '3px 0 0 3px'
+                            }} />
+                        </Box>}
+                    {(selectedImage.size !== 0) &&
+                        <img
+                            alt="not found"
+                            width={'147px'}
+                            style={{
+                                border: '1px solid',
+                                color: '#271846',
+                                display: 'block',
+                                borderRadius: '50%'
+                            }}
+                            src={URL.createObjectURL(selectedImage)}
+                        // src='/public/images/sample_luna_profile.png'
+                        />
+                    }
+                    <CommonButton color='secondary'
+                        sx={{ width: '100%', marginTop: '1.5rem', backgroundColor: colors.lightGrey }}
+                        onClick={() => selectedImage.size === 0 ? loadButtonClickHandler() : setSelectedImage(new Blob)}
+                    >
+                        {download}
+                        <input
+                            id='loadFileInput'
+                            style={{ display: 'none' }}
+                            type="file"
+                            name="profileImage"
+                            onChange={loadInputChangeHandler}
+                        />
+                    </CommonButton>
+                </Box>
+                <Grid
+                    component='form'
+                    container
+                    columnSpacing={{ sm: 2 }}
+                    rowSpacing={{ sm: 3 }}
+                    sx={{ width: '100%' }}
+                >
+                    <Grid item xs={12} sm={12} md={6}>
+                        <Box sx={{ width: '100%' }}>
+                            <CommonLabel htmlFor={login}>
+                                {login}
+                            </CommonLabel>
+                            <CommonInput
+                                sx={{ width: '100%' }}
+                                color='primary'
+                                height='bg'
+                                title={login}
+                                id={login}
+                                name={login}
+                                placeholder={login}
+                                aria-label={login}
+                            />
+                        </Box>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={6}>
+                        <Box sx={{ width: '100%' }}>
+                            <CommonLabel htmlFor={fullName}>
+                                {fullName}
+                            </CommonLabel>
+                            <CommonInput
+                                sx={{ width: '100%' }}
+                                color='primary'
+                                height='bg'
+                                title={fullName}
+                                id={fullName}
+                                name={fullName}
+                                placeholder={fullName}
+                                aria-label={fullName}
+                            />
+                        </Box>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Box sx={{ width: '100%' }}>
+                            <CommonLabel htmlFor={location}>
+                                {location}
+                            </CommonLabel>
+                            <CommonInput
+                                sx={{ width: '100%' }}
+                                color='primary'
+                                height='bg'
+                                title={location}
+                                id={location}
+                                name={location}
+                                placeholder={location}
+                                aria-label={location}
+                            />
+                        </Box>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Box sx={{ width: '100%' }}>
+                            <CommonLabel htmlFor={about}>
+                                {about}
+                            </CommonLabel>
+                            <CommonTextArea
+                                sx={{ width: '100%' }}
+                                color='primary'
+                                borderRaius='bg'
+                                rows={6}
+                                title={about}
+                                id={about}
+                                name={about}
+                                placeholder={about}
+                                aria-label={about}
+                            />
+                        </Box>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <CommonButton
+                            color='primary'
+                            height='bg'
+                            sx={{
+                                display: 'block',
+                                width: '12.5rem',
+                                margin: {
+                                    xs: '0.5rem auto 0',
+                                    sm: '1.25rem auto 0',
+                                    md: '4.625rem auto 0'
+                                }
+                            }}>
+                            {save}
+                        </CommonButton>
+                    </Grid>
+                </Grid>
+            </Box>
+        </Box>
+    </>
+
+}
+
 export default BasicInfoPage;

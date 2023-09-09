@@ -8,8 +8,8 @@ import { Grid, ImageListItem, Paper } from '@mui/material';
 import { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import ProfileMenu from '../../components/UI/UserProfileComponents/ProfileTopComponent';
-import ProfileTopComponent from '../../components/UI/UserProfileComponents/ProfileTopComponent';
+import ProfileMenu from '../../components/UI/UserProfileComponents/ProfileMenu';
+import ProfileMainImage from '../../components/UI/UserProfileComponents/ProfileMainImage';
 
 
 const SavedPage: FunctionComponent = () => {
@@ -17,8 +17,8 @@ const SavedPage: FunctionComponent = () => {
   const { t } = useTranslation();
 
   return <>
-    <ProfileTopComponent />
-    <ProfileMenu ></ProfileMenu>
+    <ProfileMainImage />
+    <ProfileMenu translation={t}/>
     <Grid container spacing={{ xs: 2, md: 3 }} style={{ margin: 'auto 50px' }}>
       {itemData.map((item) => (
         <Grid xs={12} sm={6} md={3}>

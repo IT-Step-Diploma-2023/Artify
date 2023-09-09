@@ -12,7 +12,7 @@ const RootLayout: FunctionComponent = () => {
       <main>
         <Box sx={{
           margin: 'auto',
-          maxWidth: '1120px',
+          maxWidth: '1240px',
           boxSizing: 'border-box',
           paddingTop: {xs: '1rem', sm: '2rem', md: '90px'},
           paddingLeft: {xs: '1rem', sm: '50px', lg: '0'},
