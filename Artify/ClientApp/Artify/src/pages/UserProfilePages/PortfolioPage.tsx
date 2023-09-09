@@ -22,8 +22,8 @@ const PortfolioPage: FunctionComponent = () => {
   const downloadWork = t('accountPage2.downloadWork');
 
   return <>
-    <ProfileMainImage /> ДЛЯ ПОРІВНЯННЯ
-    <ProfileMenu translation={t}></ProfileMenu>
+    <ProfileMainImage />
+    <ProfileMenu translation={t}/>
     <Grid container spacing={{ xs: 2, md: 3 }} style={{ marginLeft: '50px' }}>
       {itemData.map((item) => (
         <Grid xs={12} sm={6} md={3}>
