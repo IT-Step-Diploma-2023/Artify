@@ -25,7 +25,8 @@
                 "buy": "purchase",
                 "hire": "hire",
                 "help": "help",
-                "download": "download"
+                "download": "download",
+                "aboutUs": "about us"
             },
             "share": "share",
             "filter": "filter",

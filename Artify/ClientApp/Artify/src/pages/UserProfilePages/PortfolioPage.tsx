@@ -6,7 +6,7 @@ import { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import AddCircleOutline from '@mui/icons-material/AddCircleOutline';
 import ProfileMenu from '../../components/UI/UserProfileComponents/ProfileMenu';
-import ProfileMainImage from '../../components/UI/UserProfileComponents/ProfileMainImage';
+import ProfileTopComponent from '../../components/UI/UserProfileComponents/ProfileTopComponent';
 
 
 const PortfolioPage: FunctionComponent = () => {
@@ -22,7 +22,7 @@ const PortfolioPage: FunctionComponent = () => {
   const downloadWork = t('accountPage2.downloadWork');
 
   return <>
-    <ProfileMainImage />
+    <ProfileTopComponent />
     <ProfileMenu translation={t}/>
     <Grid container spacing={{ xs: 2, md: 3 }} style={{ marginLeft: '50px' }}>
       {itemData.map((item) => (

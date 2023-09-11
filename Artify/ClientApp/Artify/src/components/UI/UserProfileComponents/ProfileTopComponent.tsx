@@ -1,43 +1,45 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
-import { Button } from '@mui/base/Button';
-import Typography from '@mui/material/Typography';
-import { Avatar } from '@mui/material';
-import { FunctionComponent } from 'react';
-import { useTranslation } from 'react-i18next';
-import LocationOn from '@mui/icons-material/LocationOn';
-import { useNavigate } from 'react-router';
+import { LocationOn } from "@mui/icons-material";
+import { Avatar, Typography } from "@mui/material";
+import { Box } from "@mui/system";
+import CommonButton from "../CommonButton";
+import { colors } from "../../../assets/defaults/colors";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from 'react-router-dom';
 
+const ProfileMainImage = () => {
 
-const ProfileTopComponent: FunctionComponent = () => {
+    const { t } = useTranslation();
+    const navigate = useNavigate();
 
-  const { t } = useTranslation();
-  const navigate = useNavigate();
-
-  return <>
-    <div style={{ margin: '0 auto', width: '500px' }}>
-      <Avatar alt="Remy Sharp" src="/images/sample_christian_kouly_profile.jpg"
-        sx={{ marginTop: '90px', display: 'inline-block', width: '147px', height: '147px' }} />
-      <div style={{ display: 'inline-block' }}>
-        <div style={{ display: 'block', marginBottom: '45px' }}>
-          <Typography component='div' sx={{ display: 'block', marginLeft: '40px', fontSize: '30px' }}>
-            {t('jocelyn calzoni')}
-          </Typography>
-          <LocationOn sx={{ fintSize: 'small', display: 'inline-block', marginLeft: '38px' }} />
-          <Typography component='div' sx={{ display: 'inline-block' }}>
-            {t('Ukraine')}
-          </Typography>
-        </div>
-        <Button className='button button-border-dark button-m'
-          style={{ display: 'block', marginBottom: '70px', marginLeft: '40px', width: '130px', height: '42px', left: '100px', border: '1px solid #271846', borderRadius: '30px', gap: '10px', padding: '10px, 22px, 10px, 22px' }}
-          onClick={()=>{navigate('/settings-basicinfo')}}>
-          <Typography component='div' sx={{ float: 'center', padding: '1px 6px' }}>
-            {t('accountPage2.editAccount')}
-          </Typography>
-        </Button>
-      </div>
-    </div>
-  </>
+    return <>
+        <Box sx={{ margin: '0 auto 40px', width: '500px', height: '150px', display: 'flex', justifyContent: 'left' }}>
+            <Box sx={{ paddingLeft: '40px' }}>
+                <Avatar
+                    alt="Remy Sharp" src="/images/sample_christian_kouly_profile.jpg"
+                    sx={{
+                        display: 'inline-block',
+                        width: '147px',
+                        height: '147px',
+                        boxShadow: '0px 4px 8px 0px #2718464D'
+                    }} />
+            </Box>
+            <Box sx={{ paddingLeft: '40px' }}>
+                <Typography component='div' sx={{ display: 'block', fontSize: '2rem', fontWeight: '700' }}>
+                    {t('jocelyn calzoni')}
+                </Typography>
+                <LocationOn sx={{ fontSize: '1.25rem', display: 'inline-block', color: 'grey', margin: '0 4px -2px 0' }} />
+                <Typography component='div' sx={{ display: 'inline-block', color: 'grey', fontSize: '1.25rem' }}>
+                    {t('Ukraine')}
+                </Typography>
+                <CommonButton color='secondary' height='md'
+                    sx={{ width: '130px', marginTop: '20px', display: 'block', background: colors.lightGrey }}
+                    onClick={()=>{navigate('/settings-basicinfo')}}>
+                    {t('accountPage2.editAccount')}
+                </CommonButton>
+            </Box>
+        </Box>;
+    </>
 };
 
-export default ProfileTopComponent;
+export default ProfileMainImage;
 

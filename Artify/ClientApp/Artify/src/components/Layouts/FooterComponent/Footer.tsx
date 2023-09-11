@@ -1,8 +1,11 @@
-import { Box, Grid } from "@mui/material";
+import { Box, Divider, Grid, Paper } from "@mui/material";
 import { FunctionComponent } from "react";
 import { colors } from "../../../assets/defaults/colors";
 import Logo from "../../UI/Logo";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import NavMenu from "../../UI/NavMenu";
+import { margin, padding } from "@mui/system";
 
 const buttonIcons = [
     { target: "#", image: "/images/footer/phone_icon.svg" },
@@ -17,38 +20,76 @@ interface Position {
 
 
 const Footer: FunctionComponent<Position> = ({ pos }) => {
+
+    const navigate = useNavigate();
+
+    const { t } = useTranslation();
+
+    const pages = [
+        t('headerComponent.menue.inspiration'),
+        t('headerComponent.menue.buy'),
+        t('headerComponent.menue.hire'),
+        t('headerComponent.menue.help'),
+        t('headerComponent.menue.aboutUs'),
+    ];
+
+    const pathes = [
+        '/hire',
+        '/job',
+        '/buy',
+        '/help',
+        '/about-us'
+    ]
+
     return <>
-        <Box
-            sx={{
-                width: '100%',
-                height: { xs: '10rem', md: '24rem' },
-                backgroundColor: colors.lightGrey,
-                boxShadow: '0px -2px 16px 0px rgba(106, 75, 217, 0.20), 1px -22px 40px 0px rgba(106, 75, 217, 0.20) inset',
-                borderTopLeftRadius: '1.5rem',
-                borderTopRightRadius: '1.5rem',
-                paddingTop: { xs: '2rem', md: '4rem' },
-                // position: pos === 'docked' ? 'fixed' : 'static',
-                // bottom: pos === 'docked' ? '0' : ''
+        <Box component='footer' sx={{
+            position: 'fixed',
+            bottom: '0',
+            paddingTop: '1rem',
+            backgroundColor: colors.lightGrey
+        }}>
+            <Divider />
+            <Grid container sx={{
+                width: '100vw',
+                padding: '1rem 100px',
+                alignItems: 'center',
+                justifyContent: 'space-between'
             }}>
-            <Grid
-                container
-                margin='0 auto'
-                width='200px'
-                direction='column'
-                justifyContent='top'
-                alignItems='center'
-            >
-                <Grid item >
-                    <NavLink className="logo" to='/' >
-                        <Logo />
-                    </NavLink>
+                <Grid item xs={12} lg='auto'>
+                    <Box sx={{
+                        textAlign: {
+                            xs: 'center',
+                            sm: 'center',
+                            md: 'center',
+                            lg: 'left'
+                        }
+                    }}>
+                        <NavLink to='/' className="logo" >
+                            <Logo />
+                        </NavLink>
+                    </Box>
                 </Grid>
-                <Grid item
-                    sx={{ marginTop: { xs: '0.75rem', md: '2.625rem' } }}>
-                    <Grid container columnSpacing={3}
-                    >
+                <Grid item xs={12} lg={8}>
+                    <Box sx={{
+                        height: '41px',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}>
+                        <NavMenu pages={pages} pathes={pathes} />
+                    </Box>
+                </Grid>
+                <Grid item xs={12} lg='auto'>
+                    <Box sx={{
+                        height: '41px',
+                        width: '152px',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        margin: '0 auto'
+                    }}>
                         {buttonIcons.map((buttonIcon) => (
-                            <Grid item key={buttonIcon.image}>
+                            <Box key={buttonIcon.image} id={buttonIcon.image} >
                                 <a href={buttonIcon.target}>
                                     <Box
                                         width='20px' height='20px'
@@ -64,12 +105,13 @@ const Footer: FunctionComponent<Position> = ({ pos }) => {
                                         }}>
                                     </Box>
                                 </a>
-                            </Grid>
+                            </Box>
                         ))}
-                    </Grid>
+                    </Box>
                 </Grid>
             </Grid>
-        </Box >
+        </Box>
+
     </>
 }
 
