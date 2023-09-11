@@ -56,12 +56,13 @@ namespace Artify.Controllers.users
                 if (model == null)
                     return Forbid();
                 User? user = _usersRepository.Query(user => user.Id == model.Id).FirstOrDefault();
+                SocialProfilesUserModel returnModel = new SocialProfilesUserModel(user);
                 user.UserSocialProfiles.ForEach(profile =>
                 {
-                    Console.WriteLine(profile);
+                    
                 });
                 int count = user.UserSocialProfiles.Count();
-                Console.WriteLine(count);
+               
                 // _socialProfilesRepository.Query(profile => profile.UserSocialProfiles.Contains())
                 return Ok();
             }
@@ -72,6 +73,7 @@ namespace Artify.Controllers.users
         }
         private class SocialProfilesUserModel : BaseEndPointUserModel
         {
+            public List<string> data { get; set; } = new List<string>();
             public SocialProfilesUserModel(User user) : base(user)
             {
 
