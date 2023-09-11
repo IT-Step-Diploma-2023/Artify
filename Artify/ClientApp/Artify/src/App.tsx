@@ -28,6 +28,11 @@ import SharePage from './pages/UserProfilePages/SharePage';
 import CollectionItemPage from './pages/UserProfilePages/CollectionItemPage';
 import SavedPage from './pages/UserProfilePages/SavedPage';
 import SubscriptionsPage from './pages/UserProfilePages/SubscriptionsPage';
+// main menu / footer menu pages
+import HirePage from './pages/MenuPages/HirePage';
+//
+import MessagePage from './pages/MessagePage';
+import ProfilePage2 from './pages/ProfilePage2';
 
 function App() {
   const router = createBrowserRouter([
@@ -52,8 +57,13 @@ function App() {
         { path: 'saved', element: <SavedPage /> },
         { path: 'collectionItems', element: <CollectionItemPage /> },
         { path: 'subscriptions', element: <SubscriptionsPage /> },
+        // MAIN MENU / FOOTER MENU
+        { path: 'hire', element: <HirePage /> },
+        // 
+        { path: 'messagesPage', element: <MessagePage /> },
+        { path: 'accountPage2', element: <ProfilePage2 /> },
         // TEMPORARY HELPER PAGE
-        { path: 'show-borders', element: <ShowBorders /> } 
+        { path: 'show-borders', element: <ShowBorders /> }
       ],
     },
     { path: 'login', element: <LoginPage /> },
@@ -61,17 +71,13 @@ function App() {
     { path: 'google-register', element: <GoogleRegisterPage /> },
     { path: 'email-register', element: <EmailRegisterPage /> },
 
-
-    { path: 'hire', element: <HirePage /> },
-    { path: 'messagesPage', element: <MessagePage /> },
-    { path: 'accountPage2', element: <ProfilePage2 /> },
   ]);
 
   return (
     <ThemeProvider theme={theme}>
-       <Provider store={store}>
-          <RouterProvider router={router} />
-        </Provider>
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
     </ThemeProvider>
   );
 }

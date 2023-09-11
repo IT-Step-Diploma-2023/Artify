@@ -9,8 +9,8 @@ import { Avatar,  Grid, ImageListItem,  Paper } from '@mui/material';
 import { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import LocationOn from '@mui/icons-material/LocationOn';
+import ProfileMenu from '../components/UI/UserProfileComponents/ProfileMenu';
 
-import ProfileMenu from './UserProfileComponents/ProfileMenu';
 
 interface Lngs {
   ua: string
