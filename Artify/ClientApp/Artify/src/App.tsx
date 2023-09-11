@@ -59,7 +59,12 @@ function App() {
     { path: 'login', element: <LoginPage /> },
     { path: 'select-register', element: <SelectRegisterPage /> },
     { path: 'google-register', element: <GoogleRegisterPage /> },
-    { path: 'email-register', element: <EmailRegisterPage /> }
+    { path: 'email-register', element: <EmailRegisterPage /> },
+
+
+    { path: 'hire', element: <HirePage /> },
+    { path: 'messagesPage', element: <MessagePage /> },
+    { path: 'accountPage2', element: <ProfilePage2 /> },
   ]);
 
   return (
