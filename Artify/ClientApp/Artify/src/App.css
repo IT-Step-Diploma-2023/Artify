@@ -609,3 +609,27 @@ background-color: #ECEAEF;
 .input3:hover {
     box-shadow: 0px 4px 8px 0px rgba(39, 24, 70, 0.40);
 }
+
+
+
+
+.button4 {
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif !important;
+    font-size: 18px;
+    height: var(--btn-height);
+    border-radius: 22px;
+    display: inline-block;
+    margin-right: 10px;
+    border: 0;
+    transition: all 0.15s ease-out;
+    color: var(--dark-violet);
+}
+
+.button4:hover {
+    border: none;
+    color: var(--light-grey);
+    font-weight: bold;
+    background-color: var(--dark-violet);
+    box-shadow: 0px 4px 8px 0px rgba(39, 24, 70, 0.40);
+}

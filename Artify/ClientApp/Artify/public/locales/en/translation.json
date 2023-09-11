@@ -160,5 +160,24 @@
             "saveAsDraft":"save as draft",
             "myContinue":"continue",
             "addBlock":"add block"
-        }    
+        },
+    
+    
+
+
+
+
+        "hire": {
+            "tags":"tags",
+            "profession":"profession",
+            "location":"location",
+            "salary":"salary range",
+            "hr":"hr",
+            "write":"write",
+            "message":"your message",
+            "interested":"I am interested in hiring",
+            "budget":"your budget",
+            "send":"send a message",
+            "subscribe":"subscribe"
+        }
     }
