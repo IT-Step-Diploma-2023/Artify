@@ -115,3 +115,43 @@ Response
 Status: 200 OK
 redirect to /settings-networks
 
+************
+
+005
+POST /AddProject
+
+Description
+-----------
+Creating a new 'Shot' that contains uploaded 'Images'
+Incapsulating 'Shot' inside 'Project' with adding text description
+
+Payload
+-----------
+"userId":,
+"project": {
+    "title": ,
+    "createDateTime": , 
+    "description": ,
+    "shot": [
+        "title": ,
+        "createDateTime": ,
+        "genres": [
+            "name": ,
+        ],
+        "images": [
+            "imagePath": , // should be added to 'Image' model 
+        ],
+        "tags":[
+            "name": 
+        ]
+    ]
+}
+
+Response
+-----------
+Status: 200 OK
+redirect to /portfolio
+
+
+
+
