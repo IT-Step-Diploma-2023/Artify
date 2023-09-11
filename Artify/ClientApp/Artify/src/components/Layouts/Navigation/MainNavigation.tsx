@@ -14,6 +14,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Button } from '@mui/base/Button';
 import { colors } from '../../../assets/defaults/colors';
 import useAuthorization from "../../../hooks/useAuthorization";
+import NavMenu from '../../UI/NavMenu';
 
 
 //#region localization languages
@@ -124,20 +125,6 @@ const Navbar: FunctionComponent = () => {
     },
   }));
 
-  const NavMenuItems = (): JSX.Element => {
-    return <>
-      {pages.map((page) => (
-        <NavLink
-          key={pages.indexOf(page)}
-          to={pathes[pages.indexOf(page)]}
-          className={({ isActive }) => (isActive ? 'link-active' : 'link')}
-        >
-          {page}
-        </NavLink>
-      ))}
-    </>
-  }
-
   const NavDropdownMenuItems = (): JSX.Element => {
     return <>
       {pages.map((page) => (<>
@@ -214,10 +201,14 @@ const Navbar: FunctionComponent = () => {
 
   return (
     <AppBar
-      position='static'
-      sx={{ boxShadow: 'none', backgroundColor: 'transparent' }}>
+
+      sx={{ position: 'fixed', boxShadow: 'none', backgroundColor: colors.lightGrey }}>
       <CssBaseline />
-      <Toolbar sx={{ marginTop: { xs: '12px', md: '40px' }, width: 'auto', padding: { xs: '0 20px', md: '0 50px' } }}>
+      <Toolbar sx={{ 
+        marginTop: { xs: '12px', md: '30px' }, 
+        marginBottom: { xs: '12px', md: '30px' }, 
+        width: 'auto', 
+        padding: { xs: '0 20px', md: '0 100px' } }}>
         {/* for sm size */}
         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
           <IconButton
@@ -259,7 +250,7 @@ const Navbar: FunctionComponent = () => {
             </NavLink>
           </Box>
         </Box>
-        {/* for md size */}
+        {/*for md size */}
         <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
           <NavLink to='/' className="logo">
             <Logo />
@@ -275,7 +266,7 @@ const Navbar: FunctionComponent = () => {
           </Search>
         </Box>
         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, height: '25px' }}>
-          <NavMenuItems />
+          <NavMenu pages={pages} pathes={pathes} />
         </Box>
         {/* for all sizes */}
         <Box sx={{
@@ -286,8 +277,8 @@ const Navbar: FunctionComponent = () => {
             <Button
               className='button button-dark button-m'
               style={{ width: '200px' }}
-              onClick={()=>{navigate('/share')}}
-              >
+              onClick={() => { navigate('/share') }}
+            >
               {t('headerComponent.share')}
             </Button>
           )}
