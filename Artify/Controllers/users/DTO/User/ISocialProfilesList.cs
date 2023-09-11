@@ -1,4 +1,4 @@
-﻿namespace Artify.Controllers.users.DTO
+﻿namespace Artify.Controllers.users.DTO.User
 {
     public interface ISocialProfilesList
     {

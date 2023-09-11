@@ -1,4 +1,4 @@
-﻿using Artify.Controllers.users.DTO;
+﻿using Artify.Controllers.users.DTO.User;
 using Artify.DAL;
 using Artify.Models.DbModels.Users;
 using Artify.Models.DbModels.Users.Attributes;

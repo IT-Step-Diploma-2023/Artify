@@ -1,7 +1,7 @@
 ﻿using Artify.Models.DbModels.Users;
 using System.Text.Json.Serialization;
 
-namespace Artify.Controllers.users.DTO
+namespace Artify.Controllers.users.DTO.User
 {
     public class BaseDTOUser
     {
@@ -29,24 +29,24 @@ namespace Artify.Controllers.users.DTO
         public BaseDTOUser() { }
         public void fillFields(User user)
         {
-            this.Id = user.Id;
-            this.Username = user.Username;
-            this.Email = user.Email;
-            this.RoleId = user.RoleId;
+            Id = user.Id;
+            Username = user.Username;
+            Email = user.Email;
+            RoleId = user.RoleId;
 
 
             if (IsNotEmpty(user.FullName))
-                this.FullName = user.FullName;
+                FullName = user.FullName;
             if (IsNotEmpty(user.Location))
-                this.Location = user.Location;
+                Location = user.Location;
             if (IsNotEmpty(user.Info))
-                this.Info = user.Info;
+                Info = user.Info;
             if (IsNotEmpty(user.WebSite))
-                this.WebSite = user.WebSite;
+                WebSite = user.WebSite;
             if (IsNotEmpty(user.Biography))
-                this.Biography = user.Biography;
+                Biography = user.Biography;
             if (IsNotEmpty(user.LogoImage))
-                this.LogoImage = user.LogoImage;
+                LogoImage = user.LogoImage;
         }
 
         private bool IsNotEmpty(string? value)
