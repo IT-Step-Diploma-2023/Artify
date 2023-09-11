@@ -52,9 +52,9 @@ const Navbar: FunctionComponent = () => {
   ];
 
   const pathes = [
-    '/hire',
-    '/job',
+    '/inspire',
     '/buy',
+    '/hire',
     '/help',
   ]
 

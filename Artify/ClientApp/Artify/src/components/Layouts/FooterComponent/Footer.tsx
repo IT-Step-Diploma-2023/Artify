@@ -34,9 +34,9 @@ const Footer: FunctionComponent<Position> = ({ pos }) => {
     ];
 
     const pathes = [
-        '/hire',
-        '/job',
+        '/inspire',
         '/buy',
+        '/hire',
         '/help',
         '/about-us'
     ]
