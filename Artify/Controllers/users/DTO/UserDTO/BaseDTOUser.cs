@@ -1,7 +1,7 @@
 ﻿using Artify.Models.DbModels.Users;
 using System.Text.Json.Serialization;
 
-namespace Artify.Controllers.users.DTO.User
+namespace Artify.Controllers.users.DTO.UserDTO
 {
     public class BaseDTOUser
     {

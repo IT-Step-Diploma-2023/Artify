@@ -9,7 +9,7 @@ namespace Artify.Models.DbModels.Users.Attributes
         public int Id { get; set; }
 
         [Required]
-        public int UserId { get; set; } // User who is Employer
+        public int UserId { get; set; } // UserDTO who is Employer
 
         // NAVIGATION PROPERTIES
         [ForeignKey(nameof(UserId))]

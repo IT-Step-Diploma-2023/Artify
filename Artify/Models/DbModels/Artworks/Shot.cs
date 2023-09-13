@@ -18,7 +18,7 @@ namespace Artify.Models.DbModels.DbModels.Artworks
         public DateTime CreatedDateTime { get; set; }
 
         [Required]
-        public int UserId { get; set; } // User is author
+        public int UserId { get; set; } // UserDTO is author
 
         // NAVIGATION PROPERTIES
         [ForeignKey(nameof(UserId))]

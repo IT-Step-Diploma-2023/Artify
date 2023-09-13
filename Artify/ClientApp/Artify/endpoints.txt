@@ -127,8 +127,6 @@ Incapsulating 'Shot' inside 'Project' with adding text description
 
 Payload
 -----------
-"userId":,
-"project": {
     "title": ,
     "createDateTime": , 
     "description": ,
@@ -139,13 +137,13 @@ Payload
             "name": ,
         ],
         "images": [
-            "imagePath": , // should be added to 'Image' model 
+           
         ],
         "tags":[
             "name": 
         ]
     ]
-}
+
 
 Response
 -----------

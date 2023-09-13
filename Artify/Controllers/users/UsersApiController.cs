@@ -1,4 +1,4 @@
-﻿using Artify.Controllers.users.DTO.User;
+﻿using Artify.Controllers.users.DTO.UserDTO;
 using Artify.DAL;
 using Artify.Models.DbModels.Users;
 using Artify.Models.DbModels.Users.Attributes;
@@ -14,17 +14,15 @@ namespace Artify.Controllers.users
     public class UsersApiController : ControllerBase
     {
         private UsersRepository _usersRepository;
-        //private SocialProfilesRepository _socialProfilesRepository;
         public UsersApiController(IRepository<User> usersRepository) {
             this._usersRepository = (UsersRepository)usersRepository;
-            //this._socialProfilesRepository = (SocialProfilesRepository)socialProfilesRepository;
         }
 
         /// <summary>
         /// Returns user data
         /// </summary>
         /// /// <response code="200">Returns user in json format</response>
-        /// <response code="404">User was not found in the database</response>
+        /// <response code="404">UserDTO was not found in the database</response>
         /// <response code="500">Can't fetch user right now</response>
         [Route("api/[controller]/[action]")]
         [HttpGet]
@@ -38,7 +36,7 @@ namespace Artify.Controllers.users
                     return Forbid();
                 User? user = _usersRepository.Query(user => user.Id == model.Id).FirstOrDefault();
                 if (user == null)
-                    return NotFound(new { errorMessage = "User was not found in the database" });
+                    return NotFound(new { errorMessage = "UserDTO was not found in the database" });
                 return new JsonResult(new BaseDTOUser(user));
             }catch(Exception)
             {
@@ -54,7 +52,7 @@ namespace Artify.Controllers.users
         /// Returns user data
         /// </summary>
         /// /// <response code="200">Returns user with the social profiles in json format</response>
-        /// <response code="404">User was not found in the database</response>
+        /// <response code="404">UserDTO was not found in the database</response>
         /// <response code="500">Can't fetch user right now</response>
         [Route("api/[controller]/[action]")]
         [HttpGet]
@@ -67,7 +65,7 @@ namespace Artify.Controllers.users
                 if (model == null)
                     return Forbid();
                 User? user = _usersRepository.Query(user => user.Id == model.Id).FirstOrDefault();
-                if (user == null) return NotFound(new { errorMessage = "User was not found in the database" });
+                if (user == null) return NotFound(new { errorMessage = "UserDTO was not found in the database" });
                 UserSocialProfileDTO returnModel = new UserSocialProfileDTO(user);
                 user.UserSocialProfiles.ForEach(profile =>
                 {

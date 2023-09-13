@@ -13,7 +13,8 @@ namespace Artify.DAL
         }
         public void Add(Shot obj)
         {
-            context.Shots.Add(obj);
+            var res = context.Shots.Add(obj);
+            Console.WriteLine(  );
         }
 
         public IQueryable<Shot> GetAll()
@@ -40,7 +41,8 @@ namespace Artify.DAL
 
         public void Save()
         {
-            context.SaveChanges();
+            int res = context.SaveChanges();
+            Console.WriteLine(  );
         }
 
         public async Task<int> SaveAsync()
