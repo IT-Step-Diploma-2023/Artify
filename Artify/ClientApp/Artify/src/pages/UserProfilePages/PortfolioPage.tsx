@@ -26,7 +26,7 @@ const PortfolioPage: FunctionComponent = () => {
     <ProfileMenu translation={t}/>
     <Grid container spacing={{ xs: 2, md: 3 }} style={{ marginLeft: '50px' }}>
       {itemData.map((item) => (
-        <Grid xs={12} sm={6} md={3}>
+        <Grid item xs={12} sm={6} md={3} key={item.title}>
           <Paper elevation={0} style={{ width: 240, height: 238, borderRadius: '10px', marginTop: '60px', background: '#ECEAEF' }}>
             <ImageListItem key={item.img} >
               <img

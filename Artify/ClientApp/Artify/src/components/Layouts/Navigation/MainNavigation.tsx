@@ -15,6 +15,7 @@ import { Button } from '@mui/base/Button';
 import { colors } from '../../../assets/defaults/colors';
 import useAuthorization from "../../../hooks/useAuthorization";
 import NavMenu from '../../UI/NavMenu';
+import CommonButton from '../../UI/CommonButton';
 
 
 //#region localization languages
@@ -86,7 +87,7 @@ const Navbar: FunctionComponent = () => {
     position: 'relative',
     borderRadius: '21px',
     border: `1px solid ${colors.darkViolet}`,
-    backgroundColor: 'white !important',
+    // backgroundColor: 'white !important',
     '&:hover': {
     },
     marginLeft: 0,
@@ -127,14 +128,12 @@ const Navbar: FunctionComponent = () => {
 
   const NavDropdownMenuItems = (): JSX.Element => {
     return <>
-      {pages.map((page) => (<>
+      {pages.map((page) => (
         <MenuItem
           key={pages.indexOf(page)}
           onClick={() => { handleClickMenuItem(pathes[pages.indexOf(page)]) }}>
-          <Typography textAlign="center">{page}</Typography>
+          <Typography textAlign="center">{page}-</Typography>
         </MenuItem>
-        {pages.indexOf(page) === pages.length - 1 && <Divider />}
-      </>
       ))}
     </>
   }
@@ -204,17 +203,18 @@ const Navbar: FunctionComponent = () => {
 
       sx={{ position: 'fixed', boxShadow: 'none', backgroundColor: colors.lightGrey }}>
       <CssBaseline />
-      <Toolbar sx={{ 
-        marginTop: { xs: '12px', md: '30px' }, 
-        marginBottom: { xs: '12px', md: '30px' }, 
-        width: 'auto', 
-        padding: { xs: '0 20px', md: '0 100px' } }}>
+      <Toolbar sx={{
+        marginTop: { xs: '12px', md: '30px' },
+        marginBottom: { xs: '12px', md: '30px' },
+        width: 'auto',
+        padding: { xs: '0 20px', md: '0 100px' }
+      }}>
         {/* for sm size */}
         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
           <IconButton
             size="large"
             aria-label="account of current user"
-            aria-controls="menu-appbar"
+            aria-controls="menu-appbar-xs"
             aria-haspopup="true"
             onClick={handleOpenNavMenu}
             sx={{ color: `${colors.darkViolet}` }}
@@ -222,7 +222,7 @@ const Navbar: FunctionComponent = () => {
             <MenuIcon />
           </IconButton>
           <Menu
-            id="menu-appbar"
+            id="menu-appbar-xs"
             anchorEl={anchorElNav}
             anchorOrigin={{
               vertical: 'bottom',
@@ -240,6 +240,7 @@ const Navbar: FunctionComponent = () => {
             }}
           >
             <NavDropdownMenuItems />
+            <Divider />
             <MenuItem key='lng'>
               <LangSwitcher />
             </MenuItem>
@@ -265,24 +266,23 @@ const Navbar: FunctionComponent = () => {
             />
           </Search>
         </Box>
-        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, height: '25px' }}>
+        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, height: '25px', justifyContent: 'center' }}>
           <NavMenu pages={pages} pathes={pathes} />
         </Box>
         {/* for all sizes */}
         <Box sx={{
           flexGrow: 0,
-          marginRight: '10px'
+          margin: '0 10px 0 20px'
         }}>
           {username !== null && (
-            <Button
-              className='button button-dark button-m'
-              style={{ width: '200px' }}
-              onClick={() => { navigate('/share') }}
-            >
+            <CommonButton
+              color='primary'
+              height='bg'
+              sx={{ width: { lg: '200px', md: '150px' } }}
+              onClick={() => navigate('/share')}>
               {t('headerComponent.share')}
-            </Button>
+            </CommonButton>
           )}
-
         </Box>
         <Box sx={{ flexGrow: 0, marginRight: '10px' }}>
           <Tooltip title={username !== null ? username : t('headerComponent.loggedOffMessage')}>
@@ -295,7 +295,7 @@ const Navbar: FunctionComponent = () => {
           </Tooltip>
           <Menu
             sx={{ mt: '45px', borderRadius: '20px' }}
-            id="menu-appbar"
+            id="menu-appbar-md"
             anchorEl={anchorElUser}
             anchorOrigin={{
               vertical: 'top',

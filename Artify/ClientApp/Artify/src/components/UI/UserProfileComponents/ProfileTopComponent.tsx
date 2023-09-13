@@ -25,11 +25,11 @@ const ProfileMainImage = () => {
             </Box>
             <Box sx={{ paddingLeft: '40px' }}>
                 <Typography component='div' sx={{ display: 'block', fontSize: '2rem', fontWeight: '700' }}>
-                    {t('jocelyn calzoni')}
+                    jocelyn calzoni
                 </Typography>
                 <LocationOn sx={{ fontSize: '1.25rem', display: 'inline-block', color: 'grey', margin: '0 4px -2px 0' }} />
                 <Typography component='div' sx={{ display: 'inline-block', color: 'grey', fontSize: '1.25rem' }}>
-                    {t('Ukraine')}
+                    Ukraine
                 </Typography>
                 <CommonButton color='secondary' height='md'
                     sx={{ width: '130px', marginTop: '20px', display: 'block', background: colors.lightGrey }}
@@ -37,7 +37,7 @@ const ProfileMainImage = () => {
                     {t('accountPage2.editAccount')}
                 </CommonButton>
             </Box>
-        </Box>;
+        </Box>
     </>
 };
 
