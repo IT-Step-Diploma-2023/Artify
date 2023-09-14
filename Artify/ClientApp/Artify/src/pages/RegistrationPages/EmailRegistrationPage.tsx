@@ -22,8 +22,6 @@ interface InputForm {
     check: RegExp
 }
 
-
-
 const EmailRegisterPage: FunctionComponent = () => {
 
     const { t } = useTranslation();

@@ -130,7 +130,7 @@ Payload
     "title": ,
     "createDateTime": , 
     "description": ,
-    "shot": [
+    "shot": {
         "title": ,
         "createDateTime": ,
         "genres": [
@@ -138,17 +138,53 @@ Payload
         ],
         "images": [
            
-        ],
+        ], 
         "tags":[
             "name": 
         ]
-    ]
+    }
 
 
 Response
 -----------
 Status: 200 OK
 redirect to /portfolio
+
+************
+
+006
+GET /ShotsApi/GetShots
+
+Description
+-----------
+Authorization: NO
+For use on HomePage
+Get array of 10 Shots // number will be begger after increasing records quantity
+// Next we`ll have add filters by genre, tags, author, appreciations quantity
+
+Response
+-----------
+Status: 200 OK
+{
+    [
+        "shot": {
+            "id": ,
+            "user": {
+                // user filds
+            },
+            "title": ,
+            "createDateTime": ,
+            "genres": [],
+            "images": [], 
+            "tags":[],
+            "appreciations":[],
+            "comments":[],
+            "albums":[],
+            "projects": []
+        }
+    ]
+}
+
 
 
 
