@@ -1,4 +1,4 @@
-﻿namespace Artify.Controllers.users.DTO.User
+﻿namespace Artify.Controllers.users.DTO.UserDTO
 {
     public class SocialProfileDTO
     {

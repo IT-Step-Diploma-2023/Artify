@@ -1,6 +1,6 @@
 ﻿namespace Artify.Models.HelperModels
 {
-    //User that stores in JwtToken
+    //UserDTO that stores in JwtToken
     public class JwtUser
     {
         public int Id { get; set; }

@@ -1,5 +1,7 @@
 using Artify.DAL;
 using Artify.Data;
+using Artify.Models.DbModels.DbModels.Artworks;
+using Artify.Models.DbModels.DbModels.Artworks.Attributes;
 using Artify.Models.DbModels.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -50,6 +52,9 @@ builder.Services.AddSwaggerGen(swagger =>
 //Adding repositories
 builder.Services.AddTransient<IRepository<User>, UsersRepository>();
 builder.Services.AddTransient<IRepository<UserRole>, UserRolesRepository>();
+builder.Services.AddTransient<IRepository<Shot>, ShotsRepository>();
+builder.Services.AddTransient<IRepository<Genre>, GenresRepository>();
+builder.Services.AddTransient<IRepository<Tag>, TagsRepository>();
 
 var app = builder.Build();
 
