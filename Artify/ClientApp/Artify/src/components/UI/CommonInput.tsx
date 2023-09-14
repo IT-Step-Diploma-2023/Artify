@@ -3,9 +3,10 @@ import { sizes } from "../../assets/defaults/sizes";
 import { colors } from "../../assets/defaults/colors";
 
 
-const CommonInput = styled('input')(({ color, height }: {
+const CommonInput = styled('input')(({ color, height, isValid }: {
     color?: 'primary' | 'secondary',
-    height?: 'bg' | 'md'
+    height?: 'bg' | 'md',
+    isValid?: boolean
 }) => (
     {
         fontFamily: 'Nunito',
@@ -17,12 +18,12 @@ const CommonInput = styled('input')(({ color, height }: {
         boxSizing: 'border-box',
         color: colors.darkViolet,
         border: '1px solid',
-        borderColor: (color === 'primary' ? colors.grey : colors.darkViolet),
+        borderColor: (isValid?(color === 'primary' ? colors.grey : colors.darkViolet):colors.red),
         backgroundColor: (color === 'primary' ? 'white' : colors.lightGrey),
         padding: '0 24px',
         transition: 'all 0.15s ease-out',
         '&:hover': {
-            boxShadow: '0px 4px 8px 0px rgba(39, 24, 70, 0.40)'
+            boxShadow: '0px 4px 8px 0px rgba(39, 24, 70, 0.60)',
         },
         '&:active': {
             boxShadow: '0px 3px 6px 0px rgba(39, 24, 70, 0.60)'

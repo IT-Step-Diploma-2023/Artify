@@ -24,7 +24,7 @@ const LoginPage = () => {
   const [isLoginError, setIsLoginError] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
-  const {authenticateUser} = useAuthorization();
+  const { authenticateUser } = useAuthorization();
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -38,12 +38,12 @@ const LoginPage = () => {
 
     setIsLoginError("");
     setIsLoading(true);
-   // const authManager = new AuthenticationManager();
+    // const authManager = new AuthenticationManager();
 
     const loggedUserName = await authenticateUser(userName, password);
     setIsLoading(false);
     if (loggedUserName) {
-     // dispatch(authActions.login(loggedUserName));
+      // dispatch(authActions.login(loggedUserName));
       navigate("/");
     } else {
       setIsLoginError(t('userLoginPage.credentialsIncorrect'));
@@ -58,12 +58,15 @@ const LoginPage = () => {
       <Box component='form' onSubmit={handleSubmit}
         sx={{ width: '100%' }}>
         <CommonButton height='bg' type='button'
-          sx={{ width: '100%', marginTop: '2.5rem', borderColor: colors.grey}}
+          sx={{ width: '100%', marginTop: '2.5rem', borderColor: colors.grey }}
           onClick={(() => { navigate('/google-register') })}>
           {t('userLoginPage.withGoogle')}
         </CommonButton>
         <Separator text={t('userLoginPage.alternative')} />
-        <CommonInput color='primary' height='bg'
+        <CommonInput
+          isValid={true}
+          color='primary'
+          height='bg'
           sx={{ marginTop: '24px', width: '100%' }}
           required
           title={t('userLoginPage.login')}
@@ -79,7 +82,10 @@ const LoginPage = () => {
             {t('userLoginPage.forgot')}
           </NavLink>
         </Box>
-        <CommonInput color='primary' height='bg'
+        <CommonInput
+          isValid={true}
+          color='primary'
+          height='bg'
           type='password'
           sx={{ marginTop: '24px', width: '100%' }}
           required
