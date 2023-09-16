@@ -291,7 +291,6 @@ const EmailRegisterPage: FunctionComponent = () => {
             {(input.active && input.error) &&
                 messageFragment(input.error)}
         </Grid>;
-
     }
 
     function messageFragment(message: string) {

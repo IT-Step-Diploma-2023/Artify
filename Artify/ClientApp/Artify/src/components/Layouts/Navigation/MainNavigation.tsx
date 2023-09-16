@@ -294,7 +294,7 @@ const Navbar: FunctionComponent = () => {
             </IconButton>
           </Tooltip>
           <Menu
-            sx={{ mt: '45px', borderRadius: '20px' }}
+            sx={{ mt: '45px' }}
             id="menu-appbar-md"
             anchorEl={anchorElUser}
             anchorOrigin={{

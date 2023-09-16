@@ -4,7 +4,7 @@ import {authActions} from "../store/auth";
 
 function useAuthorization() {
     const dispatch = useDispatch();
-//Returns user login if success, or null if failed
+    //Returns user login if success, or null if failed
     const authenticateUser = async (userName: string, userPassword: string) : Promise<any> => {
         const authData = {
             username: userName,

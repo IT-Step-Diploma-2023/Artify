@@ -1,5 +1,6 @@
 001
-GET /settings-basicinfo
+GET     /UsersApi/GetCurrentUserData
+PAGE    /settings-basicinfo
 
 Description
 -----------
@@ -12,6 +13,7 @@ Status: 200 OK
     "id": ,
     "userName": , // means login
     "fullName": , // should be added to model
+    "email":,
     "location": ,
     "info": ,
     "logoImage":
@@ -30,9 +32,6 @@ Response
 -----------
 Status: 200 OK
 {
-    "id": ,
-    "userName": ,
-    "fullName": ,
     "workPreference": {
         "skills": ,
         "educations": [
@@ -75,12 +74,8 @@ Response
 -----------
 Status: 200 OK
 {
-    "id": ,
-    "userName": ,
-    "fullName": ,
     "userSocialProfiles": [
         "socialProfile": {
-            "id": ,
             "name": ,
             "address": 
         }
@@ -185,7 +180,142 @@ Status: 200 OK
     ]
 }
 
+************
 
+007
+POST /UsersApi/UpdateUserSocialProfiles
 
+Description
+-----------
+Create (or update) UserSocialProfiles
+use the name of social profile to get it Id in SocialProfiles table
+create new or update existing UserSocialProfile using Id and address
+return created or updated UserSocialProfile
 
+Payload
+-----------
+{
+    "userSocialProfiles": [
+        "socialProfile": {
+            "name":,
+            "address"
+        }
+    ]
+}
+
+Response
+-----------
+Status: 200 OK
+{
+    "userSocialProfiles": [
+        "socialProfile": {
+            "name":,
+            "address"
+        }
+    ]
+}
+
+************
+
+008
+POST /UsersApi/UpdateWorkPreferences
+
+Description
+-----------
+Create (or update) user`s  WorkPreference and WebSite
+return updated or created user`s  WorkPreference and WebSite
+
+Payload
+-----------
+{
+    "workPreference": {
+        "skills": ,
+        "educations": [
+            education: {
+                "id": ,
+                "degree": ,
+                "institution": ,
+                "startYear": ,
+                "finisYear": ,
+            }
+        ],
+        "specialties": [
+            specialty: {
+                "id": ,
+                "name": 
+            }
+        ],
+        "jobs": [
+            "id": ,
+            "position": ,
+            "company": ,
+            "startYear": ,
+            "finisYear": 
+        ]
+    }
+    "webSite":
+}
+
+Response
+-----------
+Status: 200 OK
+{
+    "workPreference": {
+        "skills": ,
+        "educations": [
+            education: {
+                "id": ,
+                "degree": ,
+                "institution": ,
+                "startYear": ,
+                "finisYear": ,
+            }
+        ],
+        "specialties": [
+            specialty: {
+                "id": ,
+                "name": 
+            }
+        ],
+        "jobs": [
+            "id": ,
+            "position": ,
+            "company": ,
+            "startYear": ,
+            "finisYear": 
+        ]
+    }
+    "webSite":
+}
+
+************
+
+008
+PUT /UsersApi/UpdateCurrentUser
+
+Description
+-----------
+Update user`s basic info
+return updated user`s basic info
+
+{
+    "userName": , // means login
+    "fullName": ,
+    "email":,
+    "location": ,
+    "info": ,
+    "logoImage":
+}
+
+Response
+-----------
+Status: 200 OK
+{
+    "userName": , // means login
+    "fullName": ,
+    "email":,
+    "location": ,
+    "info": ,
+    "logoImage":
+}
 

@@ -1,6 +1,7 @@
 import { styled } from "@mui/material/styles";
 import { sizes } from "../../assets/defaults/sizes";
 import { colors } from "../../assets/defaults/colors";
+import { Select } from "@mui/material";
 
 const positionHover = '0px 4px 8px 0px ';
 const positionActive = '0px 3px 8px 0px ';
@@ -8,7 +9,7 @@ const positionActive = '0px 3px 8px 0px ';
 const colorValid = 'rgba(39, 24, 70, 0.60)';
 const colorInvalid = 'rgba(214, 83, 83, 0.4)';
 
-const CommonInput = styled('input')(({ color, height, isValid }: {
+const CommonSelect = styled('select')(({ color, height, isValid }: {
     color?: 'primary' | 'secondary',
     height?: 'bg' | 'md',
     isValid?: boolean
@@ -37,4 +38,4 @@ const CommonInput = styled('input')(({ color, height, isValid }: {
         borderRadius: (height === 'bg' ? sizes.radiusBg : sizes.radiusMd)
     }));
 
-export default CommonInput;
+export default CommonSelect;

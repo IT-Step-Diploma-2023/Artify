@@ -1,25 +1,55 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import Box from '@mui/material/Box';
-import { FunctionComponent, useState } from 'react';
+import { ChangeEvent, FunctionComponent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import SettingsMenu from '../../components/UI/UserSettingsComponents/SettingsMenu';
 import { colors } from '../../assets/defaults/colors';
 import CommonButton from '../../components/UI/CommonButton';
 import CommonLabel from '../../components/UI/UserSettingsComponents/CommonLabel';
 import CommonInput from '../../components/UI/CommonInput';
-import networksData from '../../assets/data/networksData.json'
 import React from 'react';
 import { AddAPhoto } from '@mui/icons-material';
-import { IconButton, Typography, Input, Grid } from '@mui/material';
+import { Grid, MenuItem } from '@mui/material';
 import CommonTextArea from '../../components/UI/CommonTextArea';
-import { margin } from '@mui/system';
+import { getAuthToken } from '../../hooks/useAuthorization';
+import { countriesNames } from '../../utils/GetCountries'
+import CommonSelect from '../../components/UI/CommonSelect';
+
+const token = getAuthToken() ?? '';
+
+//*
+const userData = await fetch(`api/UsersApi/GetCurrentUserData`, {
+    headers: {
+        "Authorization": "Bearer " + token,
+    },
+})
+    .then((response) => {
+        if (response.status === 200)
+            return response.json();
+    })
+    .catch((error) => {
+        console.error("Error: ", error);
+    });
+
+//->
 
 const BasicInfoPage: FunctionComponent = () => {
 
-    const networks = networksData;
+    const countries = countriesNames;
 
-    const [editFormData, setEditFormData] = useState({ ...networks });
+    const [formData, setFormData] = useState({
+        username: userData.username,
+        fullName: userData.fullName ?? '',
+        location: userData.location ?? '',
+        info: userData.info ?? '',
+        logoImage: userData.logoImage ?? ''
+    });
+
+    // console.log(formData);
+
+
     const [selectedImage, setSelectedImage] = useState(new Blob);
     console.log(selectedImage);
 
@@ -37,19 +67,12 @@ const BasicInfoPage: FunctionComponent = () => {
 
     const { t } = useTranslation();
 
-    const placeholders = [
-        'instagram',
-        'behance',
-        'facebook',
-        'pinterest'
-    ];
-
     const login = t('accountPage.userName');
     const fullName = t('accountPage.fullName');
     const country = t('accountPage.country');
     const city = t('accountPage.city');
-    const location = country + ', ' + city;
-    const about = t('accountPage.about');
+    const location = city;
+    const info = t('accountPage.about');
     const download = t('accountPage.download');
     const save = t('accountPage.save');
 
@@ -84,7 +107,6 @@ const BasicInfoPage: FunctionComponent = () => {
                     display: {
                         xs: 'none',
                         md: 'block'
-
                     }
                 }}>
                     {(selectedImage.size === 0) &&
@@ -140,13 +162,21 @@ const BasicInfoPage: FunctionComponent = () => {
                     rowSpacing={{ sm: 3 }}
                     sx={{ width: '100%' }}
                 >
-                    <Grid item xs={12} sm={12} md={6}>
+                    <Grid item xs={12} sm={12} md={4}>
                         <Box sx={{ width: '100%' }}>
                             <CommonLabel htmlFor={login}>
                                 {login}
                             </CommonLabel>
                             <CommonInput
-                                sx={{ width: '100%' }}
+                                sx={{
+                                    width: '100%',
+                                    backgroundColor: colors.lightGrey,
+                                    caretColor: 'transparent',
+                                    '&:hover':
+                                        { boxShadow: 'unset' },
+                                    '&:active':
+                                        { boxShadow: 'unset' }
+                                }}
                                 color='primary'
                                 height='bg'
                                 title={login}
@@ -154,10 +184,12 @@ const BasicInfoPage: FunctionComponent = () => {
                                 name={login}
                                 placeholder={login}
                                 aria-label={login}
+                                defaultValue={formData.username}
+                                readOnly
                             />
                         </Box>
                     </Grid>
-                    <Grid item xs={12} sm={12} md={6}>
+                    <Grid item xs={12} sm={12} md={8}>
                         <Box sx={{ width: '100%' }}>
                             <CommonLabel htmlFor={fullName}>
                                 {fullName}
@@ -171,10 +203,42 @@ const BasicInfoPage: FunctionComponent = () => {
                                 name={fullName}
                                 placeholder={fullName}
                                 aria-label={fullName}
+                                value={formData.fullName}
+                                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                                    setFormData((pervData) => {
+                                        const updatedData = { ...pervData, fullName: e.target.value };
+                                        console.log(pervData)
+                                        return updatedData;
+                                    });
+                                }}
+
                             />
                         </Box>
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} sm={12} md={4}>
+                        <Box sx={{ width: '100%' }}>
+                            <CommonLabel htmlFor='country'>
+                                {country}
+                            </CommonLabel>
+                            <CommonSelect
+                                height='bg'
+                                color='primary'
+                                name='country'
+                                value='Singapore'
+                                sx={{ width: '100%' }}
+                                onChange={(e) => console.log(e.target.value)}>
+                                <option value="">
+                                    None
+                                </option>
+                                {countries.map((country) =>
+                                (
+                                    <option key={country} value={country}>{country}</option>
+                                ))}
+
+                            </CommonSelect>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={8}>
                         <Box sx={{ width: '100%' }}>
                             <CommonLabel htmlFor={location}>
                                 {location}
@@ -188,24 +252,41 @@ const BasicInfoPage: FunctionComponent = () => {
                                 name={location}
                                 placeholder={location}
                                 aria-label={location}
+                                value={formData.location}
+                                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                                    setFormData((pervData) => {
+                                        const updatedData = { ...pervData, location: e.target.value };
+                                        console.log(pervData)
+                                        return updatedData;
+                                    });
+                                }}
                             />
                         </Box>
                     </Grid>
                     <Grid item xs={12}>
                         <Box sx={{ width: '100%' }}>
-                            <CommonLabel htmlFor={about}>
-                                {about}
+                            <CommonLabel htmlFor={info}>
+                                {info}
                             </CommonLabel>
                             <CommonTextArea
                                 sx={{ width: '100%' }}
                                 color='primary'
                                 borderRaius='bg'
                                 rows={6}
-                                title={about}
-                                id={about}
-                                name={about}
-                                placeholder={about}
-                                aria-label={about}
+                                title={info}
+                                id={info}
+                                name={info}
+                                placeholder={info}
+                                aria-label={info}
+                                value={formData.info}
+                                onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
+                                    setFormData((pervData) => {
+                                        const updatedData = { ...pervData, info: e.target.value };
+                                        console.log(pervData)
+                                        return updatedData;
+                                    });
+                                }
+                                }
                             />
                         </Box>
                     </Grid>
