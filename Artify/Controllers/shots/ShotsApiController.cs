@@ -185,7 +185,7 @@ namespace Artify.Controllers.shots
 
             List<GetShotDTO> returnableShots = new List<GetShotDTO>();
 
-            await _shotsRepository.GetAll().Skip(page * pageSize).Take(pageSize).ForEachAsync(shot =>
+            await _shotsRepository.GetAll().OrderByDescending(shot=>shot.Id).Skip(page * pageSize).Take(pageSize).ForEachAsync(shot =>
             {
                 GetShotDTO getShotDTO = new GetShotDTO(shot);
                 shot.Images.ForEach(image =>

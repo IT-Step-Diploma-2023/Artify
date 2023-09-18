@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
 
 namespace Artify.Controllers.uploads
 {
@@ -14,11 +15,28 @@ namespace Artify.Controllers.uploads
         //public static readonly string compressedImagesFolderRelativePath = Path.Combine("uploads", "thumbnails");
 
         [HttpGet]
-        [Route("api/[controller]/[action]/{fileDirectory}/{fileName}")]
-        public IActionResult GetImage(string fileDirectory, string fileName)
+        [Route("api/[controller]/{*parameters}")]
+        public IActionResult GetImage(string parameters)
         {
-            return Ok("OK");
-            //return base.File()
+            try
+            {
+                string[] paramArray = parameters.Split('/');
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
+                foreach (string param in paramArray)
+                {
+                    if (!Regex.IsMatch(param, "^[a-zA-Z0-9_.() -]+$"))
+                        return BadRequest("Wrong path");
+                    path = Path.Combine(path, param);
+                }
+
+                if(!System.IO.File.Exists(path))
+                    return NotFound();
+
+                return base.PhysicalFile(path, "image/jpeg");
+            }catch(Exception)
+            {
+                return NotFound();
+            }
         }
         
         /// <summary>
@@ -29,9 +47,8 @@ namespace Artify.Controllers.uploads
         [NonAction]
         public static string PrepareImagePath(string relativePath)
         {
-            Path.GetFileName(relativePath);
-            Path.GetDirectoryName(relativePath);
-            return "http://"+relativePath;
+            
+            return "api/"+relativePath.Replace("\\", "/");
         }
     }
 }
