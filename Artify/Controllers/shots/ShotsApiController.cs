@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using static Artify.Helpers.Uploaders.ImageUploader;
+using Image = Artify.Models.DbModels.DbModels.Artworks.Image;
 
 namespace Artify.Controllers.shots
 {
@@ -89,7 +90,7 @@ namespace Artify.Controllers.shots
                     foreach (IFormFile img in images)
                     {
                         ImageUploaderResult uploadResult = await ImageUploader.UploadImage(img);
-                        if (uploadResult.ResultCode == ImageUploaderResultCode.UploadingError || uploadResult.FileName == null)
+                        if (uploadResult.ResultCode == ImageUploaderResultCode.Error || uploadResult.FileName == null)
                             throw new FileLoadException("Uploading image failed");
                         if (uploadResult.ResultCode == ImageUploaderResultCode.ForbiddenExtension)
                             throw new BadImageFormatException("Unsupported file extension");
@@ -104,9 +105,11 @@ namespace Artify.Controllers.shots
                         {
                             if(inputImage.filename == path.OldFileName)
                             {
+                                ImageUploaderResult compressedImage = CompressImage(path.NewFilePath);
                                 Image newImage = new Image()
                                 {
                                     imagePath = path.NewFilePath,
+                                    thumbnailFullPath = compressedImage.FileName ?? path.NewFilePath,
                                     Price = (decimal)(inputImage.price ?? 0)
                                 };
                                 newShot.Images.Add(newImage);

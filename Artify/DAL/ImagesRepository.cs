@@ -1,5 +1,7 @@
 ﻿using Artify.Data;
 using Artify.Models.DbModels.DbModels.Artworks;
+using Image = Artify.Models.DbModels.DbModels.Artworks.Image;
+
 using System.Linq.Expressions;
 
 namespace Artify.DAL
