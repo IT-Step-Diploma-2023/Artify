@@ -1,4 +1,5 @@
 ﻿using Artify.Controllers.shots.DTO;
+using Artify.Controllers.uploads;
 using Artify.DAL;
 using Artify.Helpers.Uploaders;
 using Artify.Models.DbModels.DbModels.Artworks;
@@ -7,6 +8,7 @@ using Artify.Models.HelperModels;
 using Artify.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using static Artify.Helpers.Uploaders.ImageUploader;
 using Image = Artify.Models.DbModels.DbModels.Artworks.Image;
@@ -89,7 +91,7 @@ namespace Artify.Controllers.shots
                     //Uploading images
                     foreach (IFormFile img in images)
                     {
-                        ImageUploaderResult uploadResult = await ImageUploader.UploadImage(img);
+                        ImageUploaderResult uploadResult = await ImageUploader.UploadImage(img, "shots");
                         if (uploadResult.ResultCode == ImageUploaderResultCode.Error || uploadResult.FileName == null)
                             throw new FileLoadException("Uploading image failed");
                         if (uploadResult.ResultCode == ImageUploaderResultCode.ForbiddenExtension)
@@ -105,7 +107,7 @@ namespace Artify.Controllers.shots
                         {
                             if(inputImage.filename == path.OldFileName)
                             {
-                                ImageUploaderResult compressedImage = CompressImage(path.NewFilePath);
+                                ImageUploaderResult compressedImage = CompressImage(path.NewFilePath, "shots");
                                 Image newImage = new Image()
                                 {
                                     imagePath = path.NewFilePath,
@@ -166,6 +168,34 @@ namespace Artify.Controllers.shots
             public string NewFileName { get; set; } = string.Empty;
             public string NewFilePath { get; set; } = string.Empty;
 
+        }
+
+        [HttpGet]
+        [Route("api/[controller]/[action]")]
+        public async Task<IActionResult> GetShots(int page = 0,string filters="", int pageSize = 20)
+        {
+            if (filters != "") return BadRequest("Currently, filters are not supported");
+            if (pageSize > 50)
+                return BadRequest("Page size cannot be more than 50");
+            if (page < 0)
+                return BadRequest("Page cannot be negative");
+            int pages = _shotsRepository.Count() / pageSize;
+            if (page > pages)
+                return BadRequest("Wrong page");
+
+            List<GetShotDTO> returnableShots = new List<GetShotDTO>();
+
+            await _shotsRepository.GetAll().Skip(page * pageSize).Take(pageSize).ForEachAsync(shot =>
+            {
+                GetShotDTO getShotDTO = new GetShotDTO(shot);
+                shot.Images.ForEach(image =>
+                {
+                    getShotDTO.thumbnailsPaths.Add(UploadsController.PrepareImagePath(image.thumbnailFullPath));
+                });
+                returnableShots.Add(getShotDTO);
+            }
+            );
+            return Ok(returnableShots);
         }
     }
 }

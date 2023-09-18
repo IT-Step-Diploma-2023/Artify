@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Artify.Controllers.uploads;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Jpeg;
 
@@ -6,12 +7,9 @@ namespace Artify.Helpers.Uploaders
 {
     public static class ImageUploader
     {
-        private static readonly string originalImagesFolderFullPath = Path.Combine(Directory.GetCurrentDirectory(), "uploads", "fullImages");
-        private static readonly string originalImagesFolderRelativePath = Path.Combine("uploads", "fullImages");
-        private static readonly string compressedImagesFolderFullPath = Path.Combine(Directory.GetCurrentDirectory(), "uploads", "thumbnails");
-        private static readonly string compressedImagesFolderRelativePath = Path.Combine( "uploads", "thumbnails");
+
         private static string[] allowedExtension = { ".png",".jpg",".gif",".jpeg" };
-        public static async Task<ImageUploaderResult> UploadImage(IFormFile image)
+        public static async Task<ImageUploaderResult> UploadImage(IFormFile image, string imageSubLinks)
         {
             if (!allowedExtension.Contains(Path.GetExtension(image.FileName)))
                 return new ImageUploaderResult { ResultCode = ImageUploaderResultCode.ForbiddenExtension };
@@ -20,21 +18,29 @@ namespace Artify.Helpers.Uploaders
                 if (image.Length <= 0)
                     throw new ArgumentException("Wrong length");
 
+                //Ensuring that folder is created
+                if (!Directory.Exists(Path.Combine(UploadsController.imagesRootDirectoryFullPath, imageSubLinks, UploadsController.originalFolderName)))
+                    Directory.CreateDirectory(Path.Combine(UploadsController.imagesRootDirectoryFullPath, imageSubLinks, UploadsController.originalFolderName));
+
+
+
                 //Ensuring that image with this name does not exist
                 string fileName = string.Empty;
+                string fullPath = string.Empty;
                 for (int i=0; i < 20; i++)
                 {
                     fileName = $"{Guid.NewGuid()}{Path.GetExtension(image.FileName)}";
-                    if (!File.Exists(Path.Combine(originalImagesFolderFullPath, fileName)))
+                    fullPath = Path.Combine(UploadsController.imagesRootDirectoryFullPath, imageSubLinks, UploadsController.originalFolderName, fileName);
+
+                    if (!File.Exists(fullPath))
                         break;
                 }
                 if(fileName == string.Empty)
                     throw new Exception("Wrong filename");
 
-
-                var filePath = Path.Combine(originalImagesFolderFullPath, fileName);
-                var relativePath = Path.Combine(originalImagesFolderRelativePath, fileName);
-                using (var stream = new FileStream(filePath, FileMode.Create))
+                var relativePath = Path.Combine(UploadsController.imagesRootDirectory, imageSubLinks, UploadsController.originalFolderName, fileName);
+                
+                using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
                     await image.CopyToAsync(stream);
                 }
@@ -48,14 +54,14 @@ namespace Artify.Helpers.Uploaders
             
         }
         
-        public static ImageUploaderResult CompressImage(string RelativeImagePath)
+        public static ImageUploaderResult CompressImage(string RelativeImagePath, string imageCategory)
         {
             try
             {
                 ImageUploaderResult result;
                 using (var image = Image.Load(Path.Combine(Directory.GetCurrentDirectory(), RelativeImagePath)))
                 {
-                    result = CompressImage(image);
+                    result = CompressImage(image, imageCategory);
                 }
                 return result;
             }catch (Exception)
@@ -66,7 +72,7 @@ namespace Artify.Helpers.Uploaders
                 };
             }
         }
-        public static ImageUploaderResult CompressImage(Image image)
+        public static ImageUploaderResult CompressImage(Image image, string imageSubLinks)
         {
             try
             {
@@ -84,24 +90,30 @@ namespace Artify.Helpers.Uploaders
                 image.Mutate(x => x
                 .Resize(newWidth, newHeight));
 
+                //Ensuring that folder is created
+                if (!Directory.Exists(Path.Combine(UploadsController.imagesRootDirectoryFullPath, imageSubLinks, UploadsController.thumbnailsFolderName)))
+                    Directory.CreateDirectory(Path.Combine(UploadsController.imagesRootDirectoryFullPath, imageSubLinks, UploadsController.thumbnailsFolderName));
+
+
                 string fileName = string.Empty;
+                string outputPath = string.Empty;
                 for (int i = 0; i < 20; i++)
                 {
                     fileName = $"{Guid.NewGuid()}{".jpg"}";
-                    if (!File.Exists(Path.Combine(compressedImagesFolderFullPath, fileName)))
+                    outputPath = Path.Combine(UploadsController.imagesRootDirectoryFullPath, imageSubLinks, UploadsController.thumbnailsFolderName, fileName);
+                    if (!File.Exists(outputPath))
                         break;
                 }
-                if (fileName == string.Empty)
+                if (fileName == string.Empty || outputPath == string.Empty)
                     throw new Exception("Wrong length");
 
-                string outputPath = Path.Combine(compressedImagesFolderFullPath, fileName);
                 // Save the thumbnail
                 image.Save(outputPath, new JpegEncoder());
 
                 return new ImageUploaderResult()
                 {
                     ResultCode = ImageUploaderResultCode.Success,
-                    FileName = Path.Combine(compressedImagesFolderRelativePath, fileName)
+                    FileName = Path.Combine(UploadsController.imagesRootDirectory,imageSubLinks,UploadsController.thumbnailsFolderName, fileName)
                 };
             }catch(Exception) {
                 return new ImageUploaderResult()
