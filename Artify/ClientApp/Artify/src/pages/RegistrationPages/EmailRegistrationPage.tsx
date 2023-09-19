@@ -70,7 +70,9 @@ const EmailRegisterPage: FunctionComponent = () => {
             active: loginActive,
             focused: true,
             value: formData.username,
-            check: /^(?=.*[a-zїієа-я])(?=.*[A-ZЇІЄА-Я])[їЇіІєЄа-яА-Яa-zA-Z0-9_-]{6,36}$/,
+            check: /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9_]{6,24}$/,
+            // below regex should be used for fullName validation
+            // check: /^(?=.*[a-zїієа-я])(?=.*[A-ZЇІЄА-Я])[їЇіІєЄа-яА-Яa-zA-Z0-9_-]{6,36}$/,
         },
         {
             name: 'email',
@@ -123,7 +125,7 @@ const EmailRegisterPage: FunctionComponent = () => {
     }, [loginActive, emailActive, passwordActive, passwordRepeatActive, agreeConfirmed]);
 
 
-    const handlerBlure = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const blurHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();
         switch (event.target.name) {
             case "username":
@@ -290,7 +292,7 @@ const EmailRegisterPage: FunctionComponent = () => {
                     });
                     inputCheck(e);
                 }}
-                onBlurCapture={handlerBlure} />
+                onBlurCapture={blurHandler} />
             {(input.active && input.error) &&
                 <InputErrorMessage message={input.error} />
             }

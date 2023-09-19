@@ -18,6 +18,8 @@ export interface BasicUserFormData {
     logoImage: string
 }
 
+const split = "_"
+
 const token = getAuthToken() ?? '';
 
 export const userData: BasicUserData = await fetch(`api/UsersApi/GetCurrentUserData`, {
@@ -34,15 +36,15 @@ export const userData: BasicUserData = await fetch(`api/UsersApi/GetCurrentUserD
     });
 
 export const getCountry = (location: string): string => {
-    return location.split('::')[0];
+    return location.split(split)[0];
 }
 
 export const getAddress = (location: string): string => {
-    return location.split('::')[1];
+    return location.split(split)[1];
 }
 
 export const setLocation = (city: string, address: string): string => {
-    return city + '::' + address;
+    return city + split + address;
 }
 
 const decodeData = (data: BasicUserData): BasicUserFormData => {

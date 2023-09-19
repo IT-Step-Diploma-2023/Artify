@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box';
-import { ChangeEvent, FunctionComponent, useState } from 'react';
+import { ChangeEvent, FunctionComponent, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import SettingsMenu from '../../components/UI/UserSettingsComponents/SettingsMenu';
 import { colors } from '../../assets/defaults/colors';
@@ -12,12 +12,14 @@ import { Grid, MenuItem } from '@mui/material';
 import CommonTextArea from '../../components/UI/CommonTextArea';
 import { countriesNames } from '../../utils/getCountries';
 import CommonSelect from '../../components/UI/CommonSelect';
-import useUserSettings, { BasicUserFormData } from '../../hooks/useUserSettings';
-
-//->
-
+import useUserSettings from '../../hooks/useUserSettings';
+import InputErrorMessage from '../../components/UI/InputErrorMessage';
 
 const BasicInfoPage: FunctionComponent = () => {
+
+    const countries = countriesNames;
+
+    /* #region localization */
 
     const { t } = useTranslation();
 
@@ -29,13 +31,64 @@ const BasicInfoPage: FunctionComponent = () => {
     const download = t('accountPage.download');
     const save = t('accountPage.save');
 
-    const countries = countriesNames;
+    /* #endregion */
+
+    /* #region validation */
+
+    const [fullNameError, setFullNameError] = useState<string>('');
+    const [addressError, setAddressError] = useState<string>('');
+    const [infoError, setInfoError] = useState<string>('');
+
+    const [fullNameActive, setFullNameActive] = useState<boolean>(false);
+    const [addressActive, setAddressActive] = useState<boolean>(false);
+    const [infoActive, setInfoActive] = useState<boolean>(false);
+
+    const [formValid, setFormValid] = useState<boolean>(false);
+    const [formActive, setFormActive] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (fullNameError !== '' || addressError !== '' || infoError !== '')
+            setFormValid(false);
+        else
+            setFormValid(true);
+    }, [fullNameError, addressError, infoError]);
+
+    useEffect(() => {
+        if (!fullNameActive || !addressActive || !infoActive)
+            setFormActive(false);
+        else
+            setFormActive(true);
+    }, [fullNameActive, addressActive, infoActive]);
+
+    /* #endregion */
 
     const { getData, postData, loadData } = useUserSettings();
-    const d = getData();
+    const retriveData = getData();
 
-    const [formData, setFormData] = useState(loadData());
+    const [formData, setFormData] = useState(() => loadData());
 
+    const fullNameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
+        const re = /^([їЇіІєЄа-яА-Яa-zA-Z])[їЇіІєЄа-яА-Яa-zA-Z0-9" "-]{0,24}$/;
+        re.test(String(value)) || value === '' ? setFullNameError('') : setFullNameError('fullNameError');
+        value !== '' ? setFullNameActive(true) : setFullNameActive(false);
+    }
+
+    const addressChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
+        const re = /^([їЇіІєЄа-яА-Яa-zA-Z0-9#№])[їЇіІєЄа-яА-Яa-zA-Z0-9" "#№,;\\/-]{0,256}$/;
+        re.test(String(value)) || value === '' ? setAddressError('') : setAddressError('addressError');
+        value !== '' ? setAddressActive(true) : setAddressActive(false);
+    }
+
+    const infoChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+        const value = event.target.value;
+        const re = /^([їЇіІєЄа-яА-Яa-zA-Z0-9])[їЇіІєЄа-яА-Яa-zA-Z0-9" "$@!?#№,;\\/-]{0,2048}$/;
+        re.test(String(value)) || value === '' ? setInfoError('') : setInfoError('infoError');
+        value !== '' ? setInfoActive(true) : setInfoActive(false);
+    }
+
+    /* #region load profile icon image */
     const [selectedImage, setSelectedImage] = useState(new Blob);
 
     const loadButtonClickHandler = () => {
@@ -47,11 +100,19 @@ const BasicInfoPage: FunctionComponent = () => {
         const loadedFile = event.target.files!
         setSelectedImage(loadedFile[0]);
     }
+    /* #endregion */
 
     const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        console.log(formValid);
+        console.log("fullNameError - " + fullNameError)
+        console.log("addressError - " + addressError)
+        console.log("infoError - " + infoError)
+        if (!formValid) {
+            console.log('form error');
+            return;
+        }
         postData(formData, selectedImage);
-
     }
 
     return <>
@@ -173,12 +234,13 @@ const BasicInfoPage: FunctionComponent = () => {
                                 {fullName}
                             </CommonLabel>
                             <CommonInput
+                                isValid={fullNameError === '' || formData.fullName.length === 0}
                                 sx={{ width: '100%' }}
                                 color='primary'
                                 height='bg'
                                 title={fullName}
-                                id={fullName}
-                                name={fullName}
+                                id='fullName'
+                                name='fullName'
                                 placeholder={fullName}
                                 aria-label={fullName}
                                 value={formData.fullName}
@@ -187,8 +249,12 @@ const BasicInfoPage: FunctionComponent = () => {
                                         const updatedData = { ...pervData, fullName: e.target.value };
                                         return updatedData;
                                     });
+                                    fullNameChangeHandler(e);
                                 }}
                             />
+                            {(fullNameActive && fullNameError) &&
+                                <InputErrorMessage message={fullNameError} />
+                            }
                         </Box>
                     </Grid>
                     <Grid item xs={12} sm={12} md={4}>
@@ -226,12 +292,13 @@ const BasicInfoPage: FunctionComponent = () => {
                                 {address}
                             </CommonLabel>
                             <CommonInput
+                                isValid={addressError === '' || formData.address.length === 0}
                                 sx={{ width: '100%' }}
                                 color='primary'
                                 height='bg'
                                 title={address}
-                                id={address}
-                                name={address}
+                                id="address"
+                                name="address"
                                 placeholder={address}
                                 aria-label={address}
                                 value={formData.address}
@@ -240,8 +307,12 @@ const BasicInfoPage: FunctionComponent = () => {
                                         const updatedData = { ...pervData, address: e.target.value };
                                         return updatedData;
                                     });
+                                    addressChangeHandler(e);
                                 }}
                             />
+                            {(addressActive && addressError) &&
+                                <InputErrorMessage message={addressError} />
+                            }
                         </Box>
                     </Grid>
                     <Grid item xs={12}>
@@ -250,13 +321,14 @@ const BasicInfoPage: FunctionComponent = () => {
                                 {info}
                             </CommonLabel>
                             <CommonTextArea
+                                isValid={infoError === '' || formData.info.length === 0}
                                 sx={{ width: '100%' }}
                                 color='primary'
                                 borderRaius='bg'
                                 rows={6}
                                 title={info}
-                                id={info}
-                                name={info}
+                                id="info"
+                                name="info"
                                 placeholder={info}
                                 aria-label={info}
                                 value={formData.info}
@@ -265,9 +337,12 @@ const BasicInfoPage: FunctionComponent = () => {
                                         const updatedData = { ...pervData, info: e.target.value };
                                         return updatedData;
                                     });
-                                }
-                                }
+                                    infoChangeHandler(e);
+                                }}
                             />
+                            {(infoActive && infoError) &&
+                                <InputErrorMessage message={infoError} />
+                            }
                         </Box>
                     </Grid>
                     <Grid item xs={12}>
@@ -282,7 +357,8 @@ const BasicInfoPage: FunctionComponent = () => {
                                     xs: '0.5rem auto 0',
                                     sm: '1.25rem auto 0',
                                     md: '4.625rem auto 0'
-                                }
+                                },
+                                backgroundColor: ((formValid) ? colors.darkViolet : colors.grey)
                             }}>
                             {save}
                         </CommonButton>
