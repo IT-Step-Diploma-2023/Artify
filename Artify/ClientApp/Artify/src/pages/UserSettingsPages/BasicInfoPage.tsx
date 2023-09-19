@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import Box from '@mui/material/Box';
 import { ChangeEvent, FunctionComponent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -13,46 +10,33 @@ import React from 'react';
 import { AddAPhoto } from '@mui/icons-material';
 import { Grid, MenuItem } from '@mui/material';
 import CommonTextArea from '../../components/UI/CommonTextArea';
-import { getAuthToken } from '../../hooks/useAuthorization';
-import { countriesNames } from '../../utils/GetCountries'
+import { countriesNames } from '../../utils/getCountries';
 import CommonSelect from '../../components/UI/CommonSelect';
-
-const token = getAuthToken() ?? '';
-
-//*
-const userData = await fetch(`api/UsersApi/GetCurrentUserData`, {
-    headers: {
-        "Authorization": "Bearer " + token,
-    },
-})
-    .then((response) => {
-        if (response.status === 200)
-            return response.json();
-    })
-    .catch((error) => {
-        console.error("Error: ", error);
-    });
+import useUserSettings, { BasicUserFormData } from '../../hooks/useUserSettings';
 
 //->
 
+
 const BasicInfoPage: FunctionComponent = () => {
+
+    const { t } = useTranslation();
+
+    const login = t('accountPage.userName');
+    const fullName = t('accountPage.fullName');
+    const country = t('accountPage.country');
+    const address = t('accountPage.address');
+    const info = t('accountPage.about');
+    const download = t('accountPage.download');
+    const save = t('accountPage.save');
 
     const countries = countriesNames;
 
-    const [formData, setFormData] = useState({
-        username: userData.username,
-        fullName: userData.fullName ?? '',
-        location: userData.location ?? '',
-        info: userData.info ?? '',
-        logoImage: userData.logoImage ?? ''
-    });
+    const { getData, postData, loadData } = useUserSettings();
+    const d = getData();
 
-    // console.log(formData);
-
+    const [formData, setFormData] = useState(loadData());
 
     const [selectedImage, setSelectedImage] = useState(new Blob);
-    console.log(selectedImage);
-
 
     const loadButtonClickHandler = () => {
         const inputElement = window.document.getElementById('loadFileInput')!
@@ -61,21 +45,14 @@ const BasicInfoPage: FunctionComponent = () => {
 
     const loadInputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         const loadedFile = event.target.files!
-        console.log(loadedFile[0]);
         setSelectedImage(loadedFile[0]);
     }
 
-    const { t } = useTranslation();
+    const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        postData(formData, selectedImage);
 
-    const login = t('accountPage.userName');
-    const fullName = t('accountPage.fullName');
-    const country = t('accountPage.country');
-    const city = t('accountPage.city');
-    const location = city;
-    const info = t('accountPage.about');
-    const download = t('accountPage.download');
-    const save = t('accountPage.save');
-
+    }
 
     return <>
         <Box sx={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
@@ -161,6 +138,7 @@ const BasicInfoPage: FunctionComponent = () => {
                     columnSpacing={{ sm: 2 }}
                     rowSpacing={{ sm: 3 }}
                     sx={{ width: '100%' }}
+                    onSubmit={submitHandler}
                 >
                     <Grid item xs={12} sm={12} md={4}>
                         <Box sx={{ width: '100%' }}>
@@ -207,11 +185,9 @@ const BasicInfoPage: FunctionComponent = () => {
                                 onChange={(e: ChangeEvent<HTMLInputElement>) => {
                                     setFormData((pervData) => {
                                         const updatedData = { ...pervData, fullName: e.target.value };
-                                        console.log(pervData)
                                         return updatedData;
                                     });
                                 }}
-
                             />
                         </Box>
                     </Grid>
@@ -221,12 +197,18 @@ const BasicInfoPage: FunctionComponent = () => {
                                 {country}
                             </CommonLabel>
                             <CommonSelect
+                                sx={{ width: '100%' }}
                                 height='bg'
                                 color='primary'
+                                title='country'
                                 name='country'
-                                value='Singapore'
-                                sx={{ width: '100%' }}
-                                onChange={(e) => console.log(e.target.value)}>
+                                value={formData.country}
+                                onChange={(e) => {
+                                    setFormData((pervData) => {
+                                        const updatedData = { ...pervData, country: e.target.value };
+                                        return updatedData;
+                                    });
+                                }}>
                                 <option value="">
                                     None
                                 </option>
@@ -240,23 +222,22 @@ const BasicInfoPage: FunctionComponent = () => {
                     </Grid>
                     <Grid item xs={12} sm={12} md={8}>
                         <Box sx={{ width: '100%' }}>
-                            <CommonLabel htmlFor={location}>
-                                {location}
+                            <CommonLabel htmlFor={address}>
+                                {address}
                             </CommonLabel>
                             <CommonInput
                                 sx={{ width: '100%' }}
                                 color='primary'
                                 height='bg'
-                                title={location}
-                                id={location}
-                                name={location}
-                                placeholder={location}
-                                aria-label={location}
-                                value={formData.location}
+                                title={address}
+                                id={address}
+                                name={address}
+                                placeholder={address}
+                                aria-label={address}
+                                value={formData.address}
                                 onChange={(e: ChangeEvent<HTMLInputElement>) => {
                                     setFormData((pervData) => {
-                                        const updatedData = { ...pervData, location: e.target.value };
-                                        console.log(pervData)
+                                        const updatedData = { ...pervData, address: e.target.value };
                                         return updatedData;
                                     });
                                 }}
@@ -282,7 +263,6 @@ const BasicInfoPage: FunctionComponent = () => {
                                 onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
                                     setFormData((pervData) => {
                                         const updatedData = { ...pervData, info: e.target.value };
-                                        console.log(pervData)
                                         return updatedData;
                                     });
                                 }
@@ -294,6 +274,7 @@ const BasicInfoPage: FunctionComponent = () => {
                         <CommonButton
                             color='primary'
                             height='bg'
+                            type='submit'
                             sx={{
                                 display: 'block',
                                 width: '12.5rem',
@@ -310,7 +291,7 @@ const BasicInfoPage: FunctionComponent = () => {
             </Box>
         </Box>
     </>
-
 }
 
 export default BasicInfoPage;
+

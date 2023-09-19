@@ -100,7 +100,7 @@
             "userName": "login",
             "fullName": "user`s full name",
             "country": "country",
-            "city": "city",
+            "address": "city",
             "about": "about me",
             "download": "download",
             "save": "save changes",

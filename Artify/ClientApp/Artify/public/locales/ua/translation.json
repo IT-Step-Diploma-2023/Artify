@@ -100,7 +100,7 @@
         "userName": "логін",
         "fullName": "і`мя користувача",
         "country": "країна",
-        "city": "місто",
+        "address": "місто",
         "about": "про мене",
         "download": "завантажити",
         "deleteAccount": "видалити аккаунт",

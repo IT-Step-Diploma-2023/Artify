@@ -298,13 +298,15 @@ Description
 Update user`s basic info
 return updated user`s basic info
 
+Payload
+-----------
 {
     "userName": , // means login
     "fullName": ,
     "email":,
     "location": ,
     "info": ,
-    "logoImage":
+    "logoImage": // image as Blob
 }
 
 Response
@@ -316,6 +318,6 @@ Status: 200 OK
     "email":,
     "location": ,
     "info": ,
-    "logoImage":
+    "logoImage": // path as string
 }
 
