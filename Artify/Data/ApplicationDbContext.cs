@@ -6,6 +6,7 @@ using Artify.Models.DbModels.Users;
 using Artify.Models.DbModels.DbModels.Artworks.Attributes;
 using Artify.Models.DbModels.Users.Attributes;
 using Microsoft.Extensions.Hosting;
+using Image = Artify.Models.DbModels.DbModels.Artworks.Image;
 
 namespace Artify.Data
 {
