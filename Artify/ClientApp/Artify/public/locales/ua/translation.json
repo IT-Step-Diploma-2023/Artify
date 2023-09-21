@@ -6,7 +6,8 @@
     },
     "common": {
         "saveLong": "зберегти зміни",
-        "save": "зберегти"
+        "save": "зберегти",
+        "formError": "помилкові або неповні дані в полях форми"
     },
     "errorPage": {
         "undefinedError": {

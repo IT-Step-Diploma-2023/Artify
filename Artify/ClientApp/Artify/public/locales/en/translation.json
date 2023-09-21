@@ -6,7 +6,8 @@
         },
         "common": {
             "saveLong": "save changes",
-            "save": "save"
+            "save": "save",
+            "formError": "invalid or incomplete data in form fields"
         },
         "errorPage": {
             "undefinedError": {

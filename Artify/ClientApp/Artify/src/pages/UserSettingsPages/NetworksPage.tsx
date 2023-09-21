@@ -8,7 +8,7 @@ import { colors } from '../../assets/defaults/colors';
 import CommonButton from '../../components/UI/CommonButton';
 import CommonLabel from '../../components/UI/UserSettingsComponents/CommonLabel';
 import CommonInput from '../../components/UI/CommonInput';
-import useSocialProfiles, { SocialProfile } from '../../hooks/useSocialProfiles';
+import useSocialProfiles from '../../hooks/useSocialProfiles';
 import InputErrorMessage from '../../components/UI/InputErrorMessage';
 
 
@@ -19,6 +19,7 @@ const NetworksPage: FunctionComponent = () => {
     const { t } = useTranslation();
 
     const inputErrorMessage = t('accountPage.socialNetworksErrors.socialNetworkError');
+    const formErrorMessage = t('common.formError');
 
     /* #endregion */
 
@@ -28,7 +29,6 @@ const NetworksPage: FunctionComponent = () => {
     const [formData, setFormData] = useState(loadData);
 
     /* #region validation */
-
     // ^(http(s):\/\/.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$
 
     const errors: string[] = [];
@@ -39,23 +39,14 @@ const NetworksPage: FunctionComponent = () => {
     });
 
     const [inputErrors, setInputError] = useState(errors);
-    const [inputActive, setInputActive] = useState(states);
-
     const [formValid, setFormValid] = useState(false);
-    const [formActive, setFormActive] = useState(false);
 
     useEffect(() => {
         inputErrors.find((error) => error !== '') !== undefined ?
             setFormValid(false) :
             setFormValid(true);
     }, [inputErrors]);
-    
-    useEffect(() => {
-        inputActive.find((active) => active === false) !== undefined ?
-        setFormActive(false) :
-        setFormActive(true);
-    }, [inputActive]);
-    
+
     const validate = (id: number, name: string, value: string) => {
         const re = /^(http(s):\/\/.)[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$/;
         setInputError((prevData) => {
@@ -68,7 +59,6 @@ const NetworksPage: FunctionComponent = () => {
     }
 
     /* #endregion */
-
 
     const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();
@@ -86,8 +76,7 @@ const NetworksPage: FunctionComponent = () => {
     const submitHandler = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (!formValid) {
-            console.log('form error');
-            alert('dddd');
+            alert(formErrorMessage);
             return;
         }
         postData(formData);

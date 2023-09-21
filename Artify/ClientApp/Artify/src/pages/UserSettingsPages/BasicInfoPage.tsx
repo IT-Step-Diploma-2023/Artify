@@ -30,8 +30,14 @@ const BasicInfoPage: FunctionComponent = () => {
     const info = t('accountPage.about');
     const download = t('accountPage.download');
     const save = t('accountPage.save');
+    const formErrorMessage = t('common.formError');
 
     /* #endregion */
+
+    const { getData, postData, loadData } = useUserSettings();
+    const retriveData = getData();
+
+    const [formData, setFormData] = useState(loadData);
 
     /* #region validation */
 
@@ -60,13 +66,6 @@ const BasicInfoPage: FunctionComponent = () => {
             setFormActive(true);
     }, [fullNameActive, addressActive, infoActive]);
 
-    /* #endregion */
-
-    const { getData, postData, loadData } = useUserSettings();
-    const retriveData = getData();
-
-    const [formData, setFormData] = useState(loadData);
-
     const fullNameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         const re = /^([їЇіІєЄа-яА-Яa-zA-Z])[їЇіІєЄа-яА-Яa-zA-Z0-9" "-]{0,24}$/;
@@ -88,6 +87,8 @@ const BasicInfoPage: FunctionComponent = () => {
         value !== '' ? setInfoActive(true) : setInfoActive(false);
     }
 
+    /* #endregion */
+
     /* #region load profile icon image */
     const [selectedImage, setSelectedImage] = useState(new Blob);
 
@@ -104,12 +105,8 @@ const BasicInfoPage: FunctionComponent = () => {
 
     const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log(formValid);
-        console.log("fullNameError - " + fullNameError)
-        console.log("addressError - " + addressError)
-        console.log("infoError - " + infoError)
         if (!formValid) {
-            console.log('form error');
+            alert(formErrorMessage);
             return;
         }
         postData(formData, selectedImage);
@@ -310,7 +307,7 @@ const BasicInfoPage: FunctionComponent = () => {
                                     addressChangeHandler(e);
                                 }}
                             />
- 
+
                         </Box>
                     </Grid>
                     <Grid item xs={12}>
