@@ -87,6 +87,5 @@ namespace Artify.Controllers.users
                 return BadRequest(new { errorMessage = "Something went wrong" });
             }
         }
-        
     }
 }

@@ -108,7 +108,15 @@
             "deleteAccount": "delete account",
             "albums": "albums",
             "appreciations": "likes",
-            "followings": "subscriptions"
+            "followings": "subscriptions",
+            "basicInfoErrors": {
+                "userNameError": "incorrect username format",
+                "addressError": "incorrect address format",
+                "infoError": "incorrect text format "
+            },
+            "socialNetworksErrors": {
+                "socialNetworkError": "incorrect format for profile "
+            }
         },
         "accountPage2": {
             "portfolio": "portfolio",

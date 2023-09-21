@@ -74,13 +74,14 @@ Response
 -----------
 Status: 200 OK
 {
-    "userSocialProfiles": [
-        "socialProfile": {
+    "socialProfiles": [
+        {
             "name": ,
             "address": 
         }
     ]
 }
+
 
 ************
 
@@ -96,9 +97,8 @@ Each address can be set to exact value or be empty
 Payload 
 -----------
 {
-    "userSocialProfiles": [
-        "socialProfile": {
-            "id": ,
+    "socialProfiles": [
+        {
             "name": ,
             "address": 
         }

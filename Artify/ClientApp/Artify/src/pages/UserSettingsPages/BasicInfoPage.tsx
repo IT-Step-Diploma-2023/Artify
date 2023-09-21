@@ -8,7 +8,7 @@ import CommonLabel from '../../components/UI/UserSettingsComponents/CommonLabel'
 import CommonInput from '../../components/UI/CommonInput';
 import React from 'react';
 import { AddAPhoto } from '@mui/icons-material';
-import { Grid, MenuItem } from '@mui/material';
+import { Grid } from '@mui/material';
 import CommonTextArea from '../../components/UI/CommonTextArea';
 import { countriesNames } from '../../utils/getCountries';
 import CommonSelect from '../../components/UI/CommonSelect';
@@ -65,7 +65,7 @@ const BasicInfoPage: FunctionComponent = () => {
     const { getData, postData, loadData } = useUserSettings();
     const retriveData = getData();
 
-    const [formData, setFormData] = useState(() => loadData());
+    const [formData, setFormData] = useState(loadData);
 
     const fullNameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
@@ -310,9 +310,7 @@ const BasicInfoPage: FunctionComponent = () => {
                                     addressChangeHandler(e);
                                 }}
                             />
-                            {(addressActive && addressError) &&
-                                <InputErrorMessage message={addressError} />
-                            }
+ 
                         </Box>
                     </Grid>
                     <Grid item xs={12}>
