@@ -34,7 +34,6 @@ const EmailRegisterPage: FunctionComponent = () => {
         passwordRepeat: t('userAccountCreate.registerationPage.passwordRepeatError')
     }
 
-
     const navigate = useNavigate();
     const { registerUser } = useAuthorization();
     const [isFormError, setIsFormError] = useState<string>('');
@@ -71,8 +70,6 @@ const EmailRegisterPage: FunctionComponent = () => {
             focused: true,
             value: formData.username,
             check: /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9_]{6,24}$/,
-            // below regex should be used for fullName validation
-            // check: /^(?=.*[a-zїієа-я])(?=.*[A-ZЇІЄА-Я])[їЇіІєЄа-яА-Яa-zA-Z0-9_-]{6,36}$/,
         },
         {
             name: 'email',
@@ -166,24 +163,23 @@ const EmailRegisterPage: FunctionComponent = () => {
                 index = 3;
                 break;
             default:
-                index = -1;
-                break;
+                return;
         }
-        if (index !== -1) {
-            if (event.target.value != '') {
-                if (index !== 3) {
-                    if (!inputs[index].check.test(String(event.target.value)))
-                        setter(Object.values(errorMessages)[index]);
-                    else {
-                        if (index === 2 && formData.passwordRepeat !== '')
-                            checkPasswordRepeat();
-                        setter('');
-                    }
-                }
-                else
-                    checkPasswordRepeat();
-            }
-            else setter('');
+
+        if (event.target.value === '') {
+            setter('');
+            return;
+        }
+        if (index === 3) {
+            checkPasswordRepeat();
+            return;
+        }
+        if (!inputs[index].check.test(String(event.target.value)))
+            setter(Object.values(errorMessages)[index]);
+        else {
+            if (index === 2 && formData.passwordRepeat !== '')
+                checkPasswordRepeat();
+            setter('');
         }
 
         function checkPasswordRepeat() {
