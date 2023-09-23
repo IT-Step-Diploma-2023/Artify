@@ -162,7 +162,7 @@
         "addProjectName": "додайте назву проекту",
         "tags": "теги",
         "addTags": "додайте теги",
-        "until": "до",
+        "upTo": "(до 10)",
         "suggested": "запропоновано",
         "visibilityOfTheProject": "видимість проекту",
         "intervalsBetweenBlocks": "інтервали між блоками",

@@ -443,6 +443,7 @@ body {
     color: var(--violet);
     border: 2px dashed;
     border-color: var(--violet);
+    background-color: rgba(211, 211, 211, 0.3);
 }
 
 .link2-active {

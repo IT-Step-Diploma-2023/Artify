@@ -22,7 +22,7 @@ const ProfileMenu = ({ translation }: { translation: TFunction<"translation", un
       ]
 
     return <>
-        <Box sx={{ display: 'flex', flexDirection: 'row', width: '32.5rem', justifyContent: 'center', margin: 'auto' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'row', width: '32.5rem', justifyContent: 'center', margin: 'auto', marginBottom: '1rem' }}>
             {pages.map((page) => (
                 <NavLink
                     key={page}

@@ -162,7 +162,7 @@
             "addProjectName": "add a project name",
             "tags": "tags",
             "addTags": "add tags",
-            "until": "until",
+            "upTo": "(up to 10)",
             "suggested": "suggested",
             "visibilityOfTheProject": "visibility of the project",
             "intervalsBetweenBlocks": "intervals between blocks",

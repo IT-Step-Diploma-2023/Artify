@@ -10,11 +10,11 @@ const HomePage: FunctionComponent = () => {
     display='flex' 
     flexDirection='row' 
     justifyContent='center' 
-    sx={{margin:{xs:'12px 16px 0', md: '48px 170px 0'}}}>
+    sx={{margin:{xs:'12px 16px 35px', md: '48px 170px 70px'}}}>
       <Box width='30%' sx={{display: {xs:'none', md:'block'}}}>
         <HomeButtonFilter />
       </Box>
-      <HomeTabs />
+      {/* <HomeTabs /> */}
       <Box width='30%' sx={{display: {xs:'none', md:'block'}}}>
       </Box>
     </Box>

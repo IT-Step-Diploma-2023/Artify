@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Tabs,{ tabsClasses }  from '@mui/material/Tabs';
+import Tabs, { tabsClasses } from '@mui/material/Tabs';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 import Tab from '@mui/material/Tab';
@@ -50,31 +50,30 @@ export default function ScrollableTabsButtonVisible() {
 
 
   return (
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        variant="scrollable"
-        centered
-        
-        scrollButtons
-        
-        sx={{          
-          [`& .${tabsClasses.scrollButtons}`]: {
-            '&.Mui-disabled': { opacity: 0.3}
-          }
-        }}
-        style={{ width: '410px', height: '44px', gap: '20px'}}>
-          {pages.map((page) => (
-              <NavLink 
-              
-              key={page}
-              to={pathes[pages.indexOf(page)]}
-              className={({ isActive }) => (isActive ? 'link1-active' : 'link1')}
-            ><Tab className='link1' sx={{height:'2px'}} label={page} />              
-            </NavLink>
-          ))}
-    
-      </Tabs> 
+    <Tabs
+      value={value}
+      onChange={handleChange}
+      variant="scrollable"
+      // centered
+
+      scrollButtons
+
+      sx={{
+        [`& .${tabsClasses.scrollButtons}`]: {
+          '&.Mui-disabled': { opacity: 0.3 }
+        }
+      }}
+      style={{ width: '410px', height: '44px', gap: '20px' }}>
+      {pages.map((page) => (
+        <NavLink
+          key={page}
+          to={pathes[pages.indexOf(page)]}
+          className={({ isActive }) => (isActive ? 'link1-active' : 'link1')}
+        ><Tab className='link1' sx={{ height: '2px' }} label={page} />
+        </NavLink>
+      ))}
+
+    </Tabs>
   );
 }
 

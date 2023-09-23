@@ -12,8 +12,8 @@ const GoogleIgonG: FunctionComponent = () => {
                     <path d="M21.786 8.8457H20.9V8.80005H11V13.2H17.2167C16.7828 14.4191 16.0013 15.4843 14.9688 16.2641L14.9704 16.263L18.375 19.1439C18.1341 19.3628 22 16.5 22 11C22 10.2625 21.9241 9.54255 21.786 8.8457Z" fill="#1976D2" />
                 </g>
                 <defs>
-                    <filter id="filter0_i_30_560" x="0" y="0" width="23" height="23" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <filter id="filter0_i_30_560" x="0" y="0" width="23" height="23" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                        <feFlood floodOpacity="0" result="BackgroundImageFix" />
                         <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
                         <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
                         <feOffset dx="1" dy="1" />

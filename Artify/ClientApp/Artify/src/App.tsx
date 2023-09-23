@@ -33,6 +33,8 @@ import HirePage from './pages/MenuPages/HirePage';
 //
 import MessagePage from './pages/MessagePage';
 import ProfilePage2 from './pages/ProfilePage2';
+import SharePage1 from './pages/UserProfilePages/SharePage1';
+import SharePage2 from './pages/UserProfilePages/SharePage2';
 
 function App() {
   const router = createBrowserRouter([
@@ -53,6 +55,8 @@ function App() {
         { path: 'about', element: <AboutMePage /> },
         { path: 'liked', element: <LikedPage /> },
         { path: 'share', element: <SharePage /> },
+        { path: 'share1', element: <SharePage1 /> },
+        { path: 'share2', element: <SharePage2 /> },
         { path: 'delete-account', element: <DelAccountPage /> },
         { path: 'saved', element: <SavedPage /> },
         { path: 'collectionItems', element: <CollectionItemPage /> },
