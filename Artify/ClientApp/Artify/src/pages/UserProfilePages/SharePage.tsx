@@ -4,54 +4,62 @@ import { Button } from '@mui/base/Button';
 import Typography from '@mui/material/Typography';
 
 import { Box, Divider, IconButton, Input, ListItemButton, ListItemText, Menu, MenuItem, Paper, Select, Slider, Stack } from '@mui/material';
-import { FunctionComponent, useState } from 'react';
+import { ChangeEvent, FunctionComponent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AutorenewRounded, DeleteForeverRounded, North, South } from '@mui/icons-material';
 import CommonInput from '../../components/UI/CommonInput';
 import CommonLabel from '../../components/UI/UserSettingsComponents/CommonLabel';
 import { colors } from '../../assets/defaults/colors';
 import { sizes } from '../../assets/defaults/sizes';
-import { height } from '@mui/system';
+import { borderColor, height } from '@mui/system';
 import { red } from '@mui/material/colors';
 import CrossIcon from '../../components/UI/CrossIcon';
 import { TAG_BOX_STYLE, DROPDOWN_STYLE, DROPDOWN_HIDDEN_STYLE, DROPDOWN_ITEM_STYLE, SELECTED_TAG_STYLE } from './SharePageStyles';
-// import * as styles from './SharePageStyles';
-
-const availableTags = [
-  'design',
-  'illustration',
-  'ui',
-  'logo',
-  'branding',
-  'graphic design',
-  'vector',
-  'ux',
-  'typography',
-  'app',
-  'photo'
-]
 
 
+interface VisibilityOption {
+  index: number,
+  option: string
+}
 
 const SharePage: FunctionComponent = () => {
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const addToGetStarted = t('share.addToGetStarted');
   const text = t('share.text');
   const image = t('share.image');
   const video = t('share.video');
-  const projectName = t('share.projectName');
-  const addProjectName = t('share.addProjectName')
+  const project = t('share.project');
+  const addProjectTitle = t('share.addProjectTitle')
   const tags = t('share.tags');
   const addTags = t('share.addTags');
   const upTo = t('share.upTo');
   const suggested = t('share.suggested');
-  const visibilityOfTheProject = t('share.visibilityOfTheProject');
+  const visibility = t('share.visibility');
   const intervalsBetweenBlocks = t('share.intervalsBetweenBlocks');
   const saveAsDraft = t('share.saveAsDraft');
   const myContinue = t('share.myContinue');
   const addBlock = t('share.addBlock');
+
+  const availableTags = [
+    'design',
+    'illustration',
+    'ui',
+    'logo',
+    'branding',
+    'graphic design',
+    'vector',
+    'ux',
+    'typography',
+    'app',
+    'photo'
+  ]
+
+  const visibilityOptions = [
+    t('share.visibilityOptions.public'),
+    t('share.visibilityOptions.private')
+  ]
 
   const pathes = [
     '/text',
@@ -59,10 +67,26 @@ const SharePage: FunctionComponent = () => {
     '/video'
   ]
 
+  const [projectTitle, setProjectTitle] = useState('');
+
   const [plaseholder, setPlaseholder] = useState(addTags);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [dropDownVisible, setDropdownVisible] = useState(false)
+  const [tagsMenuVisible, setTagsMenuVisible] = useState(false);
 
+  const [visibylity, setVisibility] = useState<VisibilityOption>({ index: 0, option: visibilityOptions[0] });
+  const [visibilityMenuVisible, setVisibilityMenuVisible] = useState(false);
+
+  React.useEffect(() => {
+    selectedTags.length > 0 ? setPlaseholder('') : setPlaseholder(addTags);
+  }, [addTags, selectedTags]);
+
+  React.useEffect(() => {
+    const index = visibylity.index;
+    setVisibility({ index: index, option: visibilityOptions[index] });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [i18n.resolvedLanguage]);
+
+  /* #region just not in use */
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -72,16 +96,9 @@ const SharePage: FunctionComponent = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  /* #endregion */
 
-
-  React.useEffect(() => {
-    selectedTags.length > 0 ? setPlaseholder('') : setPlaseholder(addTags);
-  }, [addTags, selectedTags])
-
-  const tagsFieldClickHandler = () => {
-    setDropdownVisible(!dropDownVisible);
-  }
-
+  /* #region tags handlers */
   const tagItemClickHandler = (e: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
     e.stopPropagation();
     const newTag = e.currentTarget.innerText;
@@ -92,6 +109,7 @@ const SharePage: FunctionComponent = () => {
     setSelectedTags(newSelectedTags);
   }
 
+
   const removeTagClickHandler = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
     const removedTag = e.currentTarget.id;
@@ -101,6 +119,41 @@ const SharePage: FunctionComponent = () => {
     });
     setSelectedTags(updatedTags);
   }
+  /* #endregion */
+
+  /* #region visibility handlers */
+  const visibilityOptionClickHandler = (e: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
+    e.stopPropagation();
+    const index = parseInt(e.currentTarget.id);
+    setVisibility({ index: index, option: visibilityOptions[index] });
+    setVisibilityMenuVisible(false);
+  }
+  /* #endregion */
+
+  /* #region components */
+  const dropdown = (
+    itemSet: string[],
+    id: string,
+    displayCondition: boolean,
+    setter: (value: React.SetStateAction<boolean>) => void,
+    handler: (e: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => void
+  ) => {
+    return <Box
+      id={id}
+      tabIndex={0}
+      style={displayCondition ? DROPDOWN_STYLE : DROPDOWN_HIDDEN_STYLE}
+      onBlur={() => setter(false)}>
+      <Divider />
+      {itemSet.map((item) => (
+        <Typography key={item}
+          id={`${itemSet.indexOf(item)}`}
+          sx={DROPDOWN_ITEM_STYLE}
+          onClick={(e: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => handler(e)}
+        >{item}</Typography>
+      ))}
+    </Box>;
+  }
+  /* #endregion */
 
   return <>
     <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
@@ -193,30 +246,52 @@ const SharePage: FunctionComponent = () => {
         </Box>
       </Paper> */}
       <Box style={{ display: 'block', marginBottom: '45px', width: '28%' }}>
+        {/* project name */}
         <Box sx={{ width: '100%' }}>
-          <CommonLabel htmlFor='projectName'>
-            {projectName}
+          <CommonLabel htmlFor='projectNameLabel'>
+            {project}
           </CommonLabel>
           <CommonInput
-            sx={{ width: '100%' }}
+            sx={{
+              width: '100%',
+              color: colors.violet,
+              fontWeight: projectTitle ? 700 : 400,
+              borderColor: projectTitle ? colors.violet : colors.grey
+            }}
             color='primary'
             height='bg'
-            title='projectName'
-            id='projectName'
-            name='projectName'
-            placeholder={addProjectName}
-            aria-label={addProjectName}
+            title='projectNameLabel'
+            id='projectNameLabel'
+            name='projectNameLabel'
+            placeholder={addProjectTitle}
+            aria-label={addProjectTitle}
+            value={projectTitle}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              setProjectTitle(e.target.value);
+            }}
+
           />
         </Box>
-        <Box sx={{ width: '100%', marginTop: '12px' }}>
-          <CommonLabel htmlFor='tags'>
+        {/* tags */}
+        <Box sx={{ width: '100%', marginTop: '12px' }} id='dddd'>
+          <CommonLabel htmlFor=''>
             {tags}<span style={{ fontWeight: 400 }}> {upTo}</span>
           </CommonLabel>
           <Box sx={{ position: 'relative' }}>
             <Box id='tagBox'
               sx={TAG_BOX_STYLE}
-              onClick={() => tagsFieldClickHandler()}
-            >
+              style={tagsMenuVisible ? {
+                position: 'absolute',
+                left: '0',
+                top: '0',
+                borderColor: selectedTags.length > 0 ? colors.violet : colors.grey
+              } : {
+                borderColor: selectedTags.length > 0 ? colors.violet : colors.grey
+              }}
+              onClick={() => {
+                setTagsMenuVisible(!tagsMenuVisible);
+                setVisibilityMenuVisible(false);
+              }}>
               <Typography id='tagsPlaceholder'
                 sx={{ color: 'grey', lineHeight: '35px', marginLeft: '14px' }}>
                 {plaseholder}
@@ -239,45 +314,48 @@ const SharePage: FunctionComponent = () => {
                   </Box>
                 </Box>
               ))}
-              <Box id='dropDown' tabIndex={0} style={dropDownVisible ? DROPDOWN_STYLE : DROPDOWN_HIDDEN_STYLE}
-                onBlur={() => setDropdownVisible(false)}>
-                <Divider />
-                {availableTags.map((tag) => (
-                  <Typography key={tag}
-                    id={tag}
-                    sx={DROPDOWN_ITEM_STYLE}
-                    onClick={(e: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => tagItemClickHandler(e)}
-                  >{tag}</Typography>
-                ))}
-              </Box>
+              {dropdown(availableTags, 'tagsMenu', tagsMenuVisible, setTagsMenuVisible, tagItemClickHandler)}
             </Box>
           </Box>
-          <Box style={{ padding: '0 0 12px 24px', position: 'relative', top: '70px'}}>
-            <Typography sx={{ display: 'inline', color: colors.grey }}>{suggested}: </Typography>
-            {availableTags.map((tag) => (
-              <Typography key={tag}
-                sx={{ display: 'inline', color: colors.darkViolet }}>{tag}; </Typography>
-            ))}
+          {selectedTags.length === 0 && (
+            <Box sx={{ padding: '0 0 12px 24px', marginTop: '8px' }}>
+              <Typography sx={{ display: 'inline', color: colors.grey }}>{suggested}: </Typography>
+              {availableTags.map((tag) => (
+                <Typography key={tag}
+                  sx={{ display: 'inline', color: colors.darkViolet }}>{tag}; </Typography>
+              ))}
+            </Box>
+          )}
+        </Box>
+        {/* visibility */}
+        <Box sx={{ width: '100%', marginTop: '12px' }}>
+          <CommonLabel htmlFor=''>
+            {visibility}
+          </CommonLabel>
+          <Box sx={{ position: 'relative' }}>
+            <Box id='visibilityBox'
+              sx={TAG_BOX_STYLE}
+              style={visibilityMenuVisible ? {
+                position: 'absolute',
+                left: '0',
+                top: '0',
+                borderColor: colors.violet
+              } : { borderColor: colors.violet }}
+              onClick={() => {
+                setVisibilityMenuVisible(!visibilityMenuVisible);
+                setTagsMenuVisible(false);
+              }}>
+              <Typography
+                sx={{ color: colors.violet, fontWeight: 700, lineHeight: '35px', marginLeft: '14px' }}>
+                {visibylity.option}
+              </Typography>
+              {dropdown(visibilityOptions, 'visibilityMenu', visibilityMenuVisible, setVisibilityMenuVisible, visibilityOptionClickHandler)}
+            </Box>
           </Box>
         </Box>
-        {/* <Typography sx={{ color: '#6A4BD9', fontWeight: 'bold' }}>{visibilityOfTheProject}</Typography>
-        <Select className='select'
-          style={{ marginTop: '10px', width: '400px', height: '47px', display: 'block' }}
-          sx={{ color: '#6A4BD9', border: '1px solid #6A4BD9', borderRadius: '30px' }}
-          required
-        >
-          <Stack direction="column" spacing={1}>
-            <ListItemButton component="a" href="#simple-list">
-              <ListItemText primary="Spam" />
-            </ListItemButton>
-            <ListItemButton component="a" href="#simple-list">
-              <ListItemText primary="Spam" />
-            </ListItemButton>
-          </Stack>
 
-        </Select> */}
 
-        {/* <Box style={{ display: 'flex', marginTop: '45px' }}>
+        <Box style={{ display: 'flex', marginTop: '45px' }}>
           <Typography sx={{ color: '#6A4BD9', fontWeight: 'bold' }}>{intervalsBetweenBlocks}</Typography>
           <Input className='input2'
             placeholder="0"
@@ -301,11 +379,14 @@ const SharePage: FunctionComponent = () => {
           style={{ width: '400px', height: '47px', padding: '18px, 72px, 18px, 72px', display: 'block', marginTop: '18px', color: '#FFFFFF', borderRadius: '50px' }}
         >
           {myContinue}
-        </Button> */}
+        </Button>
       </Box>
     </Box>
   </>
 };
 export default SharePage;
+
+
+
 
 

@@ -2,10 +2,7 @@ import { colors } from "../../assets/defaults/colors"
 import { sizes } from "../../assets/defaults/sizes"
 
 export const TAG_BOX_STYLE = {
-    position: 'absolute',
     width: '100%',
-    left: '0',
-    top: '0',
     display: 'inline-block',
     boxSizing: 'border-box',
     color: colors.darkViolet,
@@ -32,6 +29,7 @@ export const TAG_BOX_STYLE = {
     padding: '7.5px 0 10px 0',
     backgroundColor: 'transparent',
     transition: 'all 0.15s ease-out',
+    zIndex: 5
     // maxHeight: '240px',
     // overflow: 'auto',
   }
