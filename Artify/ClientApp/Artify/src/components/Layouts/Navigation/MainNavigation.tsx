@@ -56,7 +56,7 @@ const Navbar: FunctionComponent = () => {
     '/inspire',
     '/buy',
     '/hire',
-    '/help',
+    '/help-center',
   ]
 
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -182,6 +182,11 @@ const Navbar: FunctionComponent = () => {
           key={'show-borders'}
           onClick={() => { handleClickMenuItem('/show-borders') }}>
           Show Borders
+        </MenuItem>
+        <MenuItem
+          key={'filter'}
+          onClick={() => { handleClickMenuItem('/filter') }}>
+          Filter Page
         </MenuItem>
       </>
     return <>

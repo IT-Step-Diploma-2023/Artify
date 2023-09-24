@@ -36,7 +36,7 @@ const Footer: FunctionComponent<Position> = ({ pos }) => {
         '/inspire',
         '/buy',
         '/hire',
-        '/help',
+        '/help-center',
         '/about-us'
     ]
 

@@ -2,7 +2,10 @@ import { colors } from "../../assets/defaults/colors"
 import { sizes } from "../../assets/defaults/sizes"
 
 export const TAG_BOX_STYLE = {
+    position: 'absolute',
     width: '100%',
+    left: '0',
+    top: '0',
     display: 'inline-block',
     boxSizing: 'border-box',
     color: colors.darkViolet,
@@ -19,7 +22,8 @@ export const TAG_BOX_STYLE = {
     '&:active': {
       boxShadow: '0px 3px 8px 0px rgba(39, 24, 70, 0.60)'
     },
-    borderRadius: sizes.radiusBg
+    borderRadius: sizes.radiusBg,
+    zIndex: 1
   }
   
   export const DROPDOWN_STYLE = {

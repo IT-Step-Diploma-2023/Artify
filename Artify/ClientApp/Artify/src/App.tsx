@@ -29,12 +29,14 @@ import CollectionItemPage from './pages/UserProfilePages/CollectionItemPage';
 import SavedPage from './pages/UserProfilePages/SavedPage';
 import SubscriptionsPage from './pages/UserProfilePages/SubscriptionsPage';
 // main menu / footer menu pages
-import HirePage from './pages/MenuPages/HirePage';
+import HirePage from './pages/HirePages/HirePage';
+import HelpCenterPage from './pages/UserHelpPages/HelpCenterPage';
 //
 import MessagePage from './pages/MessagePage';
 import ProfilePage2 from './pages/ProfilePage2';
 import SharePage1 from './pages/UserProfilePages/SharePage1';
 import SharePage2 from './pages/UserProfilePages/SharePage2';
+import FilterPage from './pages/FilterPage';
 
 function App() {
   const router = createBrowserRouter([
@@ -63,18 +65,19 @@ function App() {
         { path: 'subscriptions', element: <SubscriptionsPage /> },
         // MAIN MENU / FOOTER MENU
         { path: 'hire', element: <HirePage /> },
+        { path: 'help-center', element: <HelpCenterPage /> },
         // 
         { path: 'messagesPage', element: <MessagePage /> },
         { path: 'accountPage2', element: <ProfilePage2 /> },
         // TEMPORARY HELPER PAGE
-        { path: 'show-borders', element: <ShowBorders /> }
+        { path: 'show-borders', element: <ShowBorders /> },
+        { path: 'filter', element: <FilterPage /> },
       ],
     },
     { path: 'login', element: <LoginPage /> },
     { path: 'select-register', element: <SelectRegisterPage /> },
     { path: 'google-register', element: <GoogleRegisterPage /> },
     { path: 'email-register', element: <EmailRegisterPage /> },
-
   ]);
 
   return (

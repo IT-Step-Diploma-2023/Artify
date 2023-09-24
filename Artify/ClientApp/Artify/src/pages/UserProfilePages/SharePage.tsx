@@ -212,51 +212,53 @@ const SharePage: FunctionComponent = () => {
           <CommonLabel htmlFor='tags'>
             {tags}<span style={{ fontWeight: 400 }}> {upTo}</span>
           </CommonLabel>
-          <Box id='tagBox'
-            sx={TAG_BOX_STYLE}
-            onClick={() => tagsFieldClickHandler()}
-          >
-            <Typography id='tagsPlaceholder'
-              sx={{ color: 'grey', lineHeight: '35px' , marginLeft: '14px'}}>
-              {plaseholder}
-            </Typography>
-            {selectedTags.map((tag) => (
-              <Box key={tag}
-                sx={SELECTED_TAG_STYLE}>
-                <Typography sx={{
-                  display: 'inline',
-                  lineHeight: '19px',
-                  marginRight: '4px'
-                }}>
-                  {tag}
-                </Typography>
-                <Box
-                  id={tag}
-                  sx={{ height: '19px' }}
-                  onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => removeTagClickHandler(event)}>
-                  <CrossIcon />
+          <Box sx={{ position: 'relative' }}>
+            <Box id='tagBox'
+              sx={TAG_BOX_STYLE}
+              onClick={() => tagsFieldClickHandler()}
+            >
+              <Typography id='tagsPlaceholder'
+                sx={{ color: 'grey', lineHeight: '35px', marginLeft: '14px' }}>
+                {plaseholder}
+              </Typography>
+              {selectedTags.map((tag) => (
+                <Box key={tag}
+                  sx={SELECTED_TAG_STYLE}>
+                  <Typography sx={{
+                    display: 'inline',
+                    lineHeight: '19px',
+                    marginRight: '4px'
+                  }}>
+                    {tag}
+                  </Typography>
+                  <Box
+                    id={tag}
+                    sx={{ height: '19px' }}
+                    onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => removeTagClickHandler(event)}>
+                    <CrossIcon />
+                  </Box>
                 </Box>
-              </Box>
-            ))}
-            <Box id='dropDown' tabIndex={0} style={dropDownVisible ? DROPDOWN_STYLE : DROPDOWN_HIDDEN_STYLE}
-              onBlur={() => setDropdownVisible(false)}>
-              <Divider />
-              {availableTags.map((tag) => (
-                <Typography key={tag}
-                  id={tag}
-                  sx={DROPDOWN_ITEM_STYLE}
-                  onClick={(e: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => tagItemClickHandler(e)}
-                >{tag}</Typography>
               ))}
+              <Box id='dropDown' tabIndex={0} style={dropDownVisible ? DROPDOWN_STYLE : DROPDOWN_HIDDEN_STYLE}
+                onBlur={() => setDropdownVisible(false)}>
+                <Divider />
+                {availableTags.map((tag) => (
+                  <Typography key={tag}
+                    id={tag}
+                    sx={DROPDOWN_ITEM_STYLE}
+                    onClick={(e: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => tagItemClickHandler(e)}
+                  >{tag}</Typography>
+                ))}
+              </Box>
             </Box>
           </Box>
-          {/* <Box style={{ padding: '0 0 12px 24px' }}>
+          <Box style={{ padding: '0 0 12px 24px', position: 'relative', top: '70px'}}>
             <Typography sx={{ display: 'inline', color: colors.grey }}>{suggested}: </Typography>
             {availableTags.map((tag) => (
               <Typography key={tag}
                 sx={{ display: 'inline', color: colors.darkViolet }}>{tag}; </Typography>
             ))}
-          </Box> */}
+          </Box>
         </Box>
         {/* <Typography sx={{ color: '#6A4BD9', fontWeight: 'bold' }}>{visibilityOfTheProject}</Typography>
         <Select className='select'
