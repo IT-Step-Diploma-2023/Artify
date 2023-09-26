@@ -15,6 +15,8 @@ import { borderColor, height } from '@mui/system';
 import { red } from '@mui/material/colors';
 import CrossIcon from '../../components/UI/CrossIcon';
 import { TAG_BOX_STYLE, DROPDOWN_STYLE, DROPDOWN_HIDDEN_STYLE, DROPDOWN_ITEM_STYLE, SELECTED_TAG_STYLE } from './SharePageStyles';
+import * as BtnStyles from '../../components/UI/CustomButtonStyles';
+import CustomButton from '../../components/UI/CustomButton';
 
 
 interface VisibilityOption {
@@ -69,7 +71,6 @@ const SharePage: FunctionComponent = () => {
 
   const [projectTitle, setProjectTitle] = useState('');
 
-  const [plaseholder, setPlaseholder] = useState(addTags);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [tagsMenuVisible, setTagsMenuVisible] = useState(false);
 
@@ -77,14 +78,12 @@ const SharePage: FunctionComponent = () => {
   const [visibilityMenuVisible, setVisibilityMenuVisible] = useState(false);
 
   React.useEffect(() => {
-    selectedTags.length > 0 ? setPlaseholder('') : setPlaseholder(addTags);
-  }, [addTags, selectedTags]);
-
-  React.useEffect(() => {
     const index = visibylity.index;
     setVisibility({ index: index, option: visibilityOptions[index] });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i18n.resolvedLanguage]);
+
+  const [interval, setInterval] = useState(16);
 
   /* #region just not in use */
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -130,6 +129,18 @@ const SharePage: FunctionComponent = () => {
   }
   /* #endregion */
 
+  const saveDraft = () => {
+    const draft = {
+      title: projectTitle,
+      tags: [...selectedTags],
+      visibility: visibylity.index,
+      interval: interval
+    }
+    
+    localStorage.setItem('draft', JSON.stringify(draft));
+    console.log(draft);
+  }
+
   /* #region components */
   const dropdown = (
     itemSet: string[],
@@ -157,7 +168,7 @@ const SharePage: FunctionComponent = () => {
 
   return <>
     <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-      {/* <Paper className='paper' elevation={0}
+      <Paper className='paper' elevation={0}
         sx={{ display: 'block', padding: '10px, 30px, 10px, 30px', width: '50%', height: '410px', borderRadius: '30px', border: '1px solid #CACACA' }}>
         <Box>
           <Menu
@@ -244,7 +255,7 @@ const SharePage: FunctionComponent = () => {
             </Box>
           </Button>
         </Box>
-      </Paper> */}
+      </Paper>
       <Box style={{ display: 'block', marginBottom: '45px', width: '28%' }}>
         {/* project name */}
         <Box sx={{ width: '100%' }}>
@@ -294,7 +305,7 @@ const SharePage: FunctionComponent = () => {
               }}>
               <Typography id='tagsPlaceholder'
                 sx={{ color: 'grey', lineHeight: '35px', marginLeft: '14px' }}>
-                {plaseholder}
+                {selectedTags.length > 0 ? '' : addTags}
               </Typography>
               {selectedTags.map((tag) => (
                 <Box key={tag}
@@ -353,33 +364,52 @@ const SharePage: FunctionComponent = () => {
             </Box>
           </Box>
         </Box>
-
-
-        <Box style={{ display: 'flex', marginTop: '45px' }}>
-          <Typography sx={{ color: '#6A4BD9', fontWeight: 'bold' }}>{intervalsBetweenBlocks}</Typography>
-          <Input className='input2'
-            placeholder="0"
-            style={{ width: '10%', height: '25px', display: 'block', backgroundColor: '#CACACA', marginLeft: '130px' }}
-            required
-          />
-          <Typography sx={{ marginLeft: '5px' }}>px</Typography>
+        <Box style={{ display: 'flex', marginTop: '45px', justifyContent: 'space-between' }}>
+          <CommonLabel htmlFor='interval'>
+            {intervalsBetweenBlocks}
+          </CommonLabel>
+          <Box sx={{ padding: '0 24px 12px 0' }}>
+            <CommonInput
+              sx={{
+                width: '4rem',
+                height: '1.5rem',
+                backgroundColor: colors.grey,
+                borderColor: colors.grey,
+                padding: '0 0.75rem',
+                textAlign: 'center'
+              }}
+              readOnly
+              id='interval'
+              name='interval'
+              aria-label='interval'
+              value={interval}
+            />
+            <Typography sx={{ marginLeft: '5px', display: 'inline' }}>px</Typography>
+          </Box>
         </Box>
         <Slider
-          aria-label="Temperature"
-          defaultValue={0}
-          sx={{ color: '#6A4BD9', width: '400px', marginLeft: '10px', marginTop: '30px' }}
-        />
-        <Button className='button2'
-          style={{ width: '400px', height: '47px', padding: '18px, 72px, 18px, 72px', marginTop: '40px', color: '#FFFFFF', borderRadius: '50px' }}>
-          {saveAsDraft}
-        </Button>
-        <Button
-          type='submit'
-          className='button3'
-          style={{ width: '400px', height: '47px', padding: '18px, 72px, 18px, 72px', display: 'block', marginTop: '18px', color: '#FFFFFF', borderRadius: '50px' }}
-        >
-          {myContinue}
-        </Button>
+          sx={{
+            color: colors.violet,
+            width: 'calc(100% - 20px)',
+            margin: '36px 0 0 10px'
+          }}
+          aria-label="interval"
+          value={interval}
+          max={64}
+          onChange={(e: Event, newValue: number | number[]) => setInterval(newValue as number)} />
+        <Box sx={{ marginTop: '36px' }}>
+          <CustomButton height='bg'
+            sx={BtnStyles.GREY_BTN_STYLE}
+            style={{ width: '100%' }}
+            onClick={()=> saveDraft()}>
+            {saveAsDraft}
+          </CustomButton>
+          <CustomButton height='bg'
+            sx={BtnStyles.VIOLET_BTN_STYLE}
+            style={{ width: '100%', marginTop: '12px' }}>
+            {myContinue}
+          </CustomButton>
+        </Box>
       </Box>
     </Box>
   </>
