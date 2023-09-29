@@ -42,6 +42,7 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\" />
+    <Folder Include="Controllers\users\DTO\SocialProfilesDTO\" />
     <Folder Include="Migrations\" />
     <Folder Include="Models\DbModels\WorkPreferences\" />
     <Folder Include="uploads\thumbnails\" />
