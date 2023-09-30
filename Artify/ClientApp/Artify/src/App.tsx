@@ -65,7 +65,7 @@ function App() {
         { path: 'subscriptions', element: <SubscriptionsPage /> },
         // MAIN MENU / FOOTER MENU
         { path: 'hire', element: <HirePage /> },
-        { path: 'help-center', element: <HelpCenterPage /> },
+        { path: 'help-center', element: <HelpCenterPage /> }, // renamed HelpPage
         //////////////////////////////////////////////////////
         // !!! NOT IN USE
         { path: 'messagesPage', element: <MessagePage /> },
