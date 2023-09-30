@@ -2,13 +2,13 @@ import { colors } from "../../assets/defaults/colors"
 import { effects } from "../../assets/defaults/effects"
 
 
-export const DISABLE_BTN_STYLE = {
+export const disableBtn = {
     color: colors.white,
     border: '1px solid ' + colors.grey,
     backgroundColor: colors.grey
 }
 
-export const LIGHT_GREY_BTN_STYLE = {
+export const lightGreyBtn = {
     color: colors.darkViolet,
     border: '1px solid ' + colors.darkViolet,
     backgroundColor: colors.lightGrey,
@@ -23,7 +23,7 @@ export const LIGHT_GREY_BTN_STYLE = {
     },
   }
 
-export const GREY_BTN_STYLE = {
+export const greyBtn = {
     color: colors.white,
     border: '1px solid ' + colors.grey,
     backgroundColor: colors.grey,
@@ -38,7 +38,7 @@ export const GREY_BTN_STYLE = {
     },
 }
 
-export const VIOLET_BTN_STYLE = {
+export const violetBtn = {
     color: colors.white,
     border: '1px solid ' + colors.violet,
     backgroundColor: colors.violet,

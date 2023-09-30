@@ -9,8 +9,8 @@ import { Avatar,  Grid, ImageListItem,  Paper } from '@mui/material';
 import { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import LocationOn from '@mui/icons-material/LocationOn';
-import ProfileMenu from '../components/UI/UserProfileComponents/ProfileMenu';
 
+import ProfileMenu from '../components/UI/UserProfileComponents/ProfileMenu';
 
 interface Lngs {
   ua: string
@@ -62,7 +62,7 @@ const lngs: Lngs = {
                   </Typography>
                 </Button>
                 <Link to={'/messagesPage'}>
-                  <Button className='button4'
+                  <Button className='button5'
                     style={{ display:'inline-block',width: '130px',height:'42px',marginLeft:'10px',border: '1px solid #271846',borderRadius: '30px',gap:'10px',padding:'10px, 22px, 10px, 22px'}}>
                     <Typography component='div' sx={{float:'center',padding:'1px 6px'}}>
                       {write}

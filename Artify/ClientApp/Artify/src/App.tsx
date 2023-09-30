@@ -66,7 +66,8 @@ function App() {
         // MAIN MENU / FOOTER MENU
         { path: 'hire', element: <HirePage /> },
         { path: 'help-center', element: <HelpCenterPage /> },
-        // 
+        //////////////////////////////////////////////////////
+        // !!! NOT IN USE
         { path: 'messagesPage', element: <MessagePage /> },
         { path: 'accountPage2', element: <ProfilePage2 /> },
         // TEMPORARY HELPER PAGE

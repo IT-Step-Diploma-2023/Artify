@@ -3,20 +3,40 @@ import * as React from 'react';
 
 import { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
+
+
+
 import { styled } from '@mui/system';
+
+
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import { Grid, IconButton, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-import styles from '../../App.css';
 
 
- 
+interface Lngs {
+  ua: string
+  en: string
+}
+
+const lngs: Lngs = {
+  ua: 'UA',
+  en: 'EN'
+}
+  
   const HelpCenterPage: FunctionComponent = () => {
 
     const { t } = useTranslation(); 
 
-  
+    const helpCenter=t('help.helpCenter');
+    const addWork=t('help.addWork');
+    const getJob=t('help.getJob');
+    const hireDesigner=t('help.hireDesigner');
+    const createAccount=t('help.createAccount');
+    const aboutUs=t('help.aboutUs');
+
+
     const Search = styled('div')(({ theme }) => ({
       position: 'relative',
       borderRadius: '21px',
@@ -62,14 +82,13 @@ import styles from '../../App.css';
   
  
   return <>
-
-  <Typography sx={{marginTop:'100px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'70px', color:'#271846',fontWeight:'400', lineHeight:'84px', fontFamily:'Sofia Sans'}}>
-    центр допомоги
+  <Typography sx={{marginTop:'100px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'70px', color:'#271846',fontWeight:'700', lineHeight:'84px', fontStyle:'Sofia Sans'}}>
+    {helpCenter}
   </Typography>
 
   <Grid container spacing={2} marginTop={'38.22px'} display={'flex'}>
   <Grid item xs={4.5}></Grid>
-  <Grid item  xs={3}>
+  <Grid item xs={3}>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -89,10 +108,12 @@ import styles from '../../App.css';
         <Typography sx={{display:'flex',fontSize:'20px', color:'#271846',fontWeight:'700', lineHeight:'84px', fontStyle:'Nunito'}}>
         <IconButton className={'iconButtonBack'} aria-label="back">
           <svg width="12" height="22" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0.999999 21L11 11L1 1" stroke="#271846" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M0.999999 21L11 11L1 1" stroke="#271846" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </IconButton>     
-          <Typography sx={{marginLeft:'10px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'500', fontStyle:'Nunito'}}>як додати роботу?..</Typography>
+          <Typography sx={{marginLeft:'10px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'500', fontStyle:'Nunito'}}>
+            {addWork}
+            </Typography>
         </Typography>
       </Link>
 
@@ -100,11 +121,11 @@ import styles from '../../App.css';
         <Typography sx={{marginTop:'20px',display:'flex',fontSize:'20px', color:'#271846',fontWeight:'700', lineHeight:'84px', fontStyle:'Nunito'}}>
         <IconButton className={'iconButtonBack'} aria-label="back">
           <svg width="12" height="22" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0.999999 21L11 11L1 1" stroke="#271846" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M0.999999 21L11 11L1 1" stroke="#271846" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </IconButton>     
           <Typography sx={{marginLeft:'10px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'500', fontStyle:'Nunito'}}>
-            як придбати роботу?..
+            {getJob}
           </Typography>
         </Typography>
       </Link>
@@ -113,11 +134,11 @@ import styles from '../../App.css';
         <Typography sx={{marginTop:'20px',display:'flex',fontSize:'20px', color:'#271846',fontWeight:'700', lineHeight:'84px', fontStyle:'Nunito'}}>
         <IconButton className={'iconButtonBack'} aria-label="back">
           <svg width="12" height="22" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0.999999 21L11 11L1 1" stroke="#271846" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M0.999999 21L11 11L1 1" stroke="#271846" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </IconButton>     
           <Typography sx={{marginLeft:'10px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'500', fontStyle:'Nunito'}}>
-            як найняти дизайнера?..
+            {hireDesigner}
           </Typography>
         </Typography>
       </Link>
@@ -126,11 +147,11 @@ import styles from '../../App.css';
         <Typography sx={{marginTop:'20px',display:'flex',fontSize:'20px', color:'#271846',fontWeight:'700', lineHeight:'84px', fontStyle:'Nunito'}}>
         <IconButton className={'iconButtonBack'} aria-label="back">
           <svg width="12" height="22" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0.999999 21L11 11L1 1" stroke="#271846" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M0.999999 21L11 11L1 1" stroke="#271846" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </IconButton>     
           <Typography sx={{marginLeft:'10px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'500', fontStyle:'Nunito'}}>
-            як створити свій акаунт?..
+            {createAccount}
           </Typography>
         </Typography>
       </Link>
@@ -139,20 +160,25 @@ import styles from '../../App.css';
         <Typography sx={{marginTop:'20px',display:'flex',fontSize:'20px', color:'#271846',fontWeight:'700', lineHeight:'84px', fontStyle:'Nunito'}}>
         <IconButton className={'iconButtonBack'} aria-label="back">
           <svg width="12" height="22" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0.999999 21L11 11L1 1" stroke="#271846" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M0.999999 21L11 11L1 1" stroke="#271846" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </IconButton>     
           <Typography sx={{marginLeft:'10px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'500', fontStyle:'Nunito'}}>
-            про нас
+            {aboutUs}
           </Typography>
         </Typography>
       </Link>
+
     </Grid>
   </Grid> 
    
   </>
 };
 export default HelpCenterPage;
+
+
+
+
 
 
 

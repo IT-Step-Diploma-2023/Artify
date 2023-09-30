@@ -186,5 +186,14 @@
             "budget": "your budget",
             "send": "send a message",
             "subscribe": "subscribe"
+        },
+        "help": {
+            "helpCenter":"help center",
+            "addWork":"how to add work?..",
+            "getJob":"how to get a job?..",
+            "hireDesigner":"how to hire a designer?..",
+            "createAccount":"how to create your account?..",
+            "aboutUs":"about us"
         }
+
     }
