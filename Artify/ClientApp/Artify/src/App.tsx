@@ -38,6 +38,11 @@ import SharePage1 from './pages/UserProfilePages/SharePage1';
 import SharePage2 from './pages/UserProfilePages/SharePage2';
 import FilterPage from './pages/FilterPage';
 
+import HowAddWorkPage from './pages/UserHelpPages/HowAddWorkPage';
+import HowBuyWorkPage from './pages/UserHelpPages/HowBuyWorkPage';
+import HowHireDesignerPage from './pages/UserHelpPages/HowHireDesignerPage';
+
+
 function App() {
   const router = createBrowserRouter([
     {
@@ -79,6 +84,10 @@ function App() {
     { path: 'select-register', element: <SelectRegisterPage /> },
     { path: 'google-register', element: <GoogleRegisterPage /> },
     { path: 'email-register', element: <EmailRegisterPage /> },
+
+    { path: 'howAddWork', element: <HowAddWorkPage /> },
+    { path: 'howBuyWork', element: <HowBuyWorkPage /> },
+    { path: 'howHireDesigner', element: <HowHireDesignerPage /> },       
   ]);
 
   return (
