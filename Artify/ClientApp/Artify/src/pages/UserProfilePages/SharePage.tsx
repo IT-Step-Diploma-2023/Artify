@@ -3,8 +3,8 @@ import * as React from "react";
 import { Button } from "@mui/base/Button";
 import Typography from "@mui/material/Typography";
 
-import { Box, Divider, IconButton, Input, ListItemButton, ListItemText, Menu, MenuItem, Paper, Select, Slider, Stack } from "@mui/material";
-import { ChangeEvent, FunctionComponent, useState } from "react";
+import { Box, Divider, IconButton, Input, ListItemButton, ListItemText, Menu, MenuItem, Modal, Paper, Select, Slider, Stack } from "@mui/material";
+import { ChangeEvent, FunctionComponent, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AutorenewRounded, DeleteForeverRounded, North, South } from "@mui/icons-material";
 import CommonInput from "../../components/UI/CommonInput";
@@ -15,6 +15,9 @@ import * as PageStyles from "./SharePageStyles";
 import * as BtnStyles from "../../components/UI/CustomButtonStyles";
 import CustomButton from "../../components/UI/CustomButton";
 import { getAuthToken } from "../../hooks/useAuthorization";
+import { padding } from "@mui/system";
+import CommonTextArea from "../../components/UI/CommonTextArea";
+import CommonButton from "../../components/UI/CommonButton";
 
 
 interface VisibilityOption {
@@ -55,7 +58,8 @@ const SharePage: FunctionComponent = () => {
   const saveAsDraft = t("share.saveAsDraft");
   const myContinue = t("share.myContinue");
   const addBlock = t("share.addBlock");
-
+  const descriptionText = t("share.description.placeholder");
+  const descriptionCuption = t("share.description.cuption");
   const iconText = [
     t("share.text"),
     t("share.image"),
@@ -92,6 +96,8 @@ const SharePage: FunctionComponent = () => {
 
   const [description, setDescription] = useState<string>("");
 
+  const [open, setOpen] = React.useState(false);
+
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [tagsMenuVisible, setTagsMenuVisible] = useState(false);
 
@@ -101,6 +107,8 @@ const SharePage: FunctionComponent = () => {
   const [interval, setInterval] = useState(16);
 
   const [selectedFiles, setSelectedFiles] = useState<File[]>([])
+
+  const [addBlockActive, setAddBlockActive] = useState(false);
 
   React.useEffect(() => {
     const index = visibylity.index;
@@ -156,14 +164,22 @@ const SharePage: FunctionComponent = () => {
   const loadImageHandler = () => {
     const inputElement = window.document.getElementById("loadFileInput")!
     inputElement.click();
+    setAddBlockActive(false);
   }
 
-  const addDescriptionHandler = () => {
-    console.log("addDescriptionHandler");
+  const openModalHandler = () => setOpen(true);
+  const closeModalHandler = () => setOpen(false);
+
+  const addDescription = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    closeModalHandler();
+    console.log("addDescription");
+    console.log(open);
   }
 
   const loadVideoHandler = () => {
     console.log("loadVideoHandler");
+    setAddBlockActive(false);
   }
 
   const loadInputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -173,6 +189,7 @@ const SharePage: FunctionComponent = () => {
     setSelectedFiles(updatedFiles);
     console.log(selectedFiles);
   }
+
   /* #endregion */
 
   /* #region post data */
@@ -250,36 +267,78 @@ const SharePage: FunctionComponent = () => {
     </svg>
   ]
 
+  const plusIcon =
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none" color="inherit">
+      <path d="M17.416 10.0837H11.916V4.58366C11.916 4.34054 11.8194 4.10739 11.6475 3.93548C11.4756 3.76357 11.2425 3.66699 10.9993 3.66699C10.7562 3.66699 10.5231 3.76357 10.3512 3.93548C10.1793 4.10739 10.0827 4.34054 10.0827 4.58366V10.0837H4.58268C4.33957 10.0837 4.10641 10.1802 3.9345 10.3521C3.76259 10.5241 3.66602 10.7572 3.66602 11.0003C3.66602 11.2434 3.76259 11.4766 3.9345 11.6485C4.10641 11.8204 4.33957 11.917 4.58268 11.917H10.0827V17.417C10.0827 17.6601 10.1793 17.8933 10.3512 18.0652C10.5231 18.2371 10.7562 18.3337 10.9993 18.3337C11.2425 18.3337 11.4756 18.2371 11.6475 18.0652C11.8194 17.8933 11.916 17.6601 11.916 17.417V11.917H17.416C17.6591 11.917 17.8923 11.8204 18.0642 11.6485C18.2361 11.4766 18.3327 11.2434 18.3327 11.0003C18.3327 10.7572 18.2361 10.5241 18.0642 10.3521C17.8923 10.1802 17.6591 10.0837 17.416 10.0837Z" fill="currentcolor" />
+    </svg>
+
   const loadImageHandlers = [
-    addDescriptionHandler,
+    openModalHandler,
     loadImageHandler,
     loadVideoHandler
   ]
 
+  const itemIconsBlock = () => {
+    return <Box sx={{ display: "flex", justifyContent: "center", margin: "0 auto" }}>
+      {itemIcons.map((icon) => <Box
+        key={itemIcons.indexOf(icon)}
+        component="button"
+        sx={PageStyles.addItemButton}
+        onClick={loadImageHandlers[itemIcons.indexOf(icon)]}>
+        {itemIcons[itemIcons.indexOf(icon)]}
+        <Typography sx={{ fontSize: "0.875rem" }}>
+          {iconText[itemIcons.indexOf(icon)]}
+        </Typography>
+      </Box>)}
+    </Box>;
+  }
+
+  const descriptionModal = () => {
+    return <Box id="modaParent">
+      <Modal
+        open={open}
+        onClose={closeModalHandler}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={PageStyles.modal} component="form"
+          onSubmit={addDescription}>
+          <Typography variant="h6" component="h2" sx={{ textAlign: "center", marginBottom: "24px" }}>
+            {descriptionCuption}
+          </Typography>
+          <CommonTextArea
+            sx={{ width: '100%', marginBottom: "24px" }}
+            color='primary'
+            borderRaius='bg'
+            rows={6}
+            title={description}
+            id={description}
+            name={description}
+            placeholder={descriptionText}
+            aria-label={description}>
+          </CommonTextArea>
+          <CustomButton height="bg"
+            type="submit"
+            sx={BtnStyles.violetBtn}
+            style={{ display: "block", width: "200px", margin: "8px auto 18px" }}>
+            {myContinue}
+          </CustomButton>
+        </Box>
+      </Modal >
+    </Box >
+  }
+
 
   return <>
     <Box sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
-      {(selectedFiles.length === 0) &&
+      {(selectedFiles.length === 0 && description.length === 0) &&
         <Box sx={{ width: "50%" }}>
           <Box
             sx={PageStyles.addImageBox}>
             <Typography sx={{ color: "inherit", textAlign: "center", marginBottom: "40px" }}>
               {addToGetStarted}
             </Typography>
-            <Box sx={{ display: "flex", justifyContent: "center", margin: "0 auto" }}>
-              {itemIcons.map((icon) =>
-                <Box
-                  key={itemIcons.indexOf(icon)}
-                  component="button"
-                  sx={PageStyles.addItemButton}
-                  onClick={loadImageHandlers[itemIcons.indexOf(icon)]}>
-                  {itemIcons[itemIcons.indexOf(icon)]}
-                  <Typography sx={{ fontSize: "0.875rem" }}>
-                    {iconText[itemIcons.indexOf(icon)]}
-                  </Typography>
-                </Box>)}
-            </Box>
-
+            {itemIconsBlock()}
             {/* #region move update delete image menu */}
             <>
               {/* <Menu
@@ -325,26 +384,48 @@ const SharePage: FunctionComponent = () => {
           </Box>
         </Box>
       }
-      <Box>
-        {(selectedFiles.length > 0) &&
-          selectedFiles.map((file) =>
-          (
-            <img
-              key={file.name}
-              alt="not found"
-              width={"147px"}
-              style={{
-                border: "1px solid",
-                color: "#271846",
-                display: "block",
-                borderRadius: "50%",
-                marginBottom: (interval.toString() + "px")
-              }}
-              src={URL.createObjectURL(file)}
-            // src="/public/images/sample_luna_profile.png"
-            />
-          ))}
-      </Box>
+      {(selectedFiles.length > 0 || description.length > 0) &&
+        <Box sx={{ width: "50%", paddingBottom: "1rem" }}>
+          <Box sx={{ width: "100%", borderRadius: "30px", overflow: "hidden" }}>
+            {(selectedFiles.length > 0) &&
+              <>
+                {selectedFiles.map((file) =>
+                  <Box
+                    key={selectedFiles.indexOf(file)}
+                    sx={PageStyles.imageBlock}
+                    style={{
+                      marginBottom:
+                        selectedFiles.indexOf(file) < selectedFiles.length - 1 ?
+                          (interval.toString() + "px") : "0",
+                      backgroundImage: "url('" + (URL.createObjectURL(file)) + "')",
+                    }}>
+                  </Box>
+                )}
+              </>
+            }
+            {(description.length > 0) &&
+              <Box sx={PageStyles.textBlock}
+                style={{ marginTop: selectedFiles.length > 0 ? interval : 0 }}>
+                {description}
+              </Box>
+            }
+          </Box >
+          <Box
+            component="button"
+            sx={PageStyles.addBlockButton}
+            onClick={() => setAddBlockActive(!addBlockActive)}>
+            <Box sx={{ display: "block", paddingTop: "9px" }}>{plusIcon}</Box>
+            <Typography sx={{ marginLeft: "10px" }}>
+              {addBlock}
+            </Typography>
+          </Box>
+          {(addBlockActive) &&
+            <Box style={{ paddingTop: "36px" }}>{itemIconsBlock()}</Box>
+          }
+        </Box>
+      }
+
+      {descriptionModal()}
       <Box style={{ display: "block", marginBottom: "45px", width: "28%" }}>
         {/* project name */}
         <Box sx={{ width: "100%" }}>
@@ -369,7 +450,6 @@ const SharePage: FunctionComponent = () => {
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
               setProjectTitle(e.target.value);
             }}
-
           />
         </Box>
         {/* tags */}
@@ -514,8 +594,4 @@ const SharePage: FunctionComponent = () => {
   </>
 };
 export default SharePage;
-
-
-
-
 

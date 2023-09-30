@@ -165,14 +165,18 @@
             "upTo": "(up to 10)",
             "suggested": "suggested",
             "visibility": "visibility of the project",
-            "visibilityOptions":{
+            "visibilityOptions": {
                 "public": "public",
                 "private": "private"
             },
             "intervalsBetweenBlocks": "intervals between blocks",
             "saveAsDraft": "save as draft",
             "myContinue": "continue",
-            "addBlock": "add block"
+            "addBlock": "add block",
+            "description": {
+                "placeholder": "enter text",
+                "cuption": "edit description"
+            }
         },
         "hire": {
             "tags": "tags",
@@ -188,12 +192,11 @@
             "subscribe": "subscribe"
         },
         "help": {
-            "helpCenter":"help center",
-            "addWork":"how to add work?..",
-            "getJob":"how to get a job?..",
-            "hireDesigner":"how to hire a designer?..",
-            "createAccount":"how to create your account?..",
-            "aboutUs":"about us"
+            "helpCenter": "help center",
+            "addWork": "how to add work?..",
+            "getJob": "how to get a job?..",
+            "hireDesigner": "how to hire a designer?..",
+            "createAccount": "how to create your account?..",
+            "aboutUs": "about us"
         }
-
     }

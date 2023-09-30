@@ -1,3 +1,4 @@
+import { color } from "@mui/system"
 import { colors } from "../../assets/defaults/colors"
 import { effects } from "../../assets/defaults/effects"
 import { sizes } from "../../assets/defaults/sizes"
@@ -71,7 +72,7 @@ export const addImageBox = {
   backgroundColor: "white",
   caretColor: "transparent",
   cursor: "arrow",
-  padding: 0, 
+  padding: 0,
   borderRadius: "30px",
   display: "flex",
   flexDirection: "column",
@@ -87,21 +88,41 @@ export const addImageBox = {
   },
 }
 
-export const imageBox = {
+export const imageBlock = {
   aspectRatio: 1.43,
   boxSizing: "border-box",
   caretColor: "transparent",
-  padding: 0, 
-  // borderRadius: "30px",
+  padding: 0,
+  backgroundSize: "cover",
+  backgroundPosition: "center",
   // transition: "all 0.15s ease-out",
   // "&:hover": {
   //   borderColor: colors.violet,
-  //   boxShadow: effects.shadowVioletHover,
+  //   boxShadow:44444 effects.shadowVioletHover,
   // },
   // "&:active": {
   //   boxShadow: effects.shadowVioletActive,
   // },
 }
+
+export const textBlock = {
+  backgroundColor: colors.white,
+  boxSizing: "border-box",
+  caretColor: "transparent",
+  padding: "20px 20px 40px",
+}
+
+export const modal = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  borderRadius: "30px",
+  width: 600,
+  bgcolor: colors.white,
+  boxShadow: 24,
+  p: 4,
+};
 
 export const addItemButton = {
   padding: "0 5px",
@@ -116,11 +137,39 @@ export const addItemButton = {
   transition: "all 0.15s ease-out",
   "&:hover": {
     color: colors.white,
-    backgroundColor: colors.violet
+    backgroundColor: colors.violet,
+    boxShadow: effects.shadowVioletHover,
   },
   "&:active": {
     color: colors.white,
-    backgroundColor: colors.violet
+    backgroundColor: colors.violet,
+    boxShadow: effects.shadowVioletActive,
   }
 }
+
+export const addBlockButton = {
+  textAlign: "center",
+  margin: "-27px auto 0",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: 'center',
+  width: "180px",
+  height: "54px",
+  borderRadius: "50px",
+  border: 0,
+  color: colors.white,
+  backgroundColor: colors.violet,
+  transition: "all 0.15s ease-out",
+  lineHeight: "22px",
+  caret: "transparent",
+  "&:hover": {
+    borderColor: colors.violet,
+    boxShadow: effects.shadowVioletHover,
+  },
+  "&:active": {
+    boxShadow: effects.shadowVioletActive,
+  }
+}
+
+
 

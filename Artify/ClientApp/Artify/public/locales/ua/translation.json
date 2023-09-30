@@ -165,14 +165,18 @@
         "upTo": "(до 10)",
         "suggested": "запропоновано",
         "visibility": "видимість проекту",
-        "visibilityOptions":{
+        "visibilityOptions": {
             "public": "загальнодоступний",
             "private": "приватний"
         },
         "intervalsBetweenBlocks": "інтервали між блоками",
         "saveAsDraft": "зберегти як чернетку",
         "myContinue": "продовжити",
-        "addBlock": "додати блок"
+        "addBlock": "додати блок",
+        "description": {
+            "placeholder": "введіть текст",
+            "cuption": "редагувати опис"
+        }
     },
     "hire": {
         "tags": "теги",
@@ -188,11 +192,11 @@
         "subscribe": "підписатись"
     },
     "help": {
-        "helpCenter":" центр допомоги",
-        "addWork":"як додати роботу?..",
-        "getJob":"як придбати роботу?..",
-        "hireDesigner":"як найняти дизайнера?..",
-        "createAccount":"як створити свій акаунт?..",
-        "aboutUs":"про нас"
+        "helpCenter": " центр допомоги",
+        "addWork": "як додати роботу?..",
+        "getJob": "як придбати роботу?..",
+        "hireDesigner": "як найняти дизайнера?..",
+        "createAccount": "як створити свій акаунт?..",
+        "aboutUs": "про нас"
     }
 }
