@@ -641,3 +641,16 @@ background-color: #ECEAEF;
     background-color: var(--dark-violet);
     box-shadow: 0px 4px 8px 0px rgba(39, 24, 70, 0.40);
 }
+
+.link3 {
+    border-radius:7px;
+    border:2px dashed #271846;
+}
+
+
+.link3:hover {
+    border: none;
+    color: var(--light-grey);
+    background-color: var(--violet);
+    box-shadow: 0px 4px 8px 0px rgba(39, 24, 70, 0.40);
+}

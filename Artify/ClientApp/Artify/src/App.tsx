@@ -42,6 +42,14 @@ import HowAddWorkPage from './pages/UserHelpPages/HowAddWorkPage';
 import HowBuyWorkPage from './pages/UserHelpPages/HowBuyWorkPage';
 import HowHireDesignerPage from './pages/UserHelpPages/HowHireDesignerPage';
 
+import AboutUsBrandsPage from './pages/UserHelpPages/AboutUsBrandsPage';
+import AboutUsIllustratorsPage from './pages/UserHelpPages/AboutUsIllustratorsPage';
+import AboutUsPage from './pages/UserHelpPages/AboutUsPage';
+import AboutUsProductDesignersPage from './pages/UserHelpPages/AboutUsProductDesignersPage';
+import AboutUsUiUxPage from './pages/UserHelpPages/AboutUsUiUxPage';
+import AboutUsWebDesignersPage from './pages/UserHelpPages/AboutUsWebDesignersPage';
+import AboutUsPhotographsPage from './pages/UserHelpPages/AboutUsPhotographsPage';
+
 
 function App() {
   const router = createBrowserRouter([
@@ -87,7 +95,15 @@ function App() {
 
     { path: 'howAddWork', element: <HowAddWorkPage /> },
     { path: 'howBuyWork', element: <HowBuyWorkPage /> },
-    { path: 'howHireDesigner', element: <HowHireDesignerPage /> },       
+    { path: 'howHireDesigner', element: <HowHireDesignerPage /> },    
+    
+    { path: 'aboutUs', element: <AboutUsPage /> },          
+    { path: 'photographs', element: <AboutUsPhotographsPage /> },  
+    { path: 'brands', element: <AboutUsBrandsPage /> },  
+    { path: 'uiUx', element: <AboutUsUiUxPage /> },  
+    { path: 'productDesigners', element: <AboutUsProductDesignersPage /> },  
+    { path: 'illustrators', element: <AboutUsIllustratorsPage /> },  
+    { path: 'webDesigners', element: <AboutUsWebDesignersPage /> }, 
   ]);
 
   return (
