@@ -104,7 +104,7 @@ const lngs: Lngs = {
   <Grid container spacing={2} marginTop={'38.22px'} display={'flex'}>
     <Grid item xs={5.2}></Grid>
     <Grid item xs={3}>
-      <Link className='link1' to={'/howAddWork'}>
+      <Link className='link1' to={'/how-add-work'}>
         <Typography sx={{display:'flex',fontSize:'20px', color:'#271846',fontWeight:'700', lineHeight:'84px', fontStyle:'Nunito'}}>
         <IconButton className={'iconButtonBack'} aria-label="back">
           <svg width="12" height="22" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -117,7 +117,7 @@ const lngs: Lngs = {
         </Typography>
       </Link>
 
-      <Link className='link1' to={'/howBuyWork'}>
+      <Link className='link1' to={'/how-buy-work'}>
         <Typography sx={{marginTop:'20px',display:'flex',fontSize:'20px', color:'#271846',fontWeight:'700', lineHeight:'84px', fontStyle:'Nunito'}}>
         <IconButton className={'iconButtonBack'} aria-label="back">
           <svg width="12" height="22" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -130,7 +130,7 @@ const lngs: Lngs = {
         </Typography>
       </Link>
 
-      <Link className='link1' to={'/howHireDesigner'}>
+      <Link className='link1' to={'/how-hire-designer'}>
         <Typography sx={{marginTop:'20px',display:'flex',fontSize:'20px', color:'#271846',fontWeight:'700', lineHeight:'84px', fontStyle:'Nunito'}}>
         <IconButton className={'iconButtonBack'} aria-label="back">
           <svg width="12" height="22" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -143,7 +143,7 @@ const lngs: Lngs = {
         </Typography>
       </Link>
 
-      <Link className='link1' to={'/howCreateAccount'}>
+      <Link className='link1' to={'/how-create-account'}>
         <Typography sx={{marginTop:'20px',display:'flex',fontSize:'20px', color:'#271846',fontWeight:'700', lineHeight:'84px', fontStyle:'Nunito'}}>
         <IconButton className={'iconButtonBack'} aria-label="back">
           <svg width="12" height="22" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -79,6 +79,18 @@ function App() {
         // MAIN MENU / FOOTER MENU
         { path: 'hire', element: <HirePage /> },
         { path: 'help-center', element: <HelpCenterPage /> }, // renamed HelpPage
+        { path: 'how-add-work', element: <HowAddWorkPage /> }, 
+        { path: 'how-buy-work', element: <HowBuyWorkPage /> }, 
+        { path: 'how-hire-designer', element: <HowHireDesignerPage /> }, 
+        // { path: 'how-create-account', element: <HowCreateAccount /> },
+        { path: 'about-us', element: <AboutUsPage /> }, 
+        { path: 'about-us-brands', element: <AboutUsBrandsPage /> }, 
+        { path: 'about-us-illustrators', element: <AboutUsIllustratorsPage /> }, 
+        { path: 'about-us-photographs', element: <AboutUsPhotographsPage /> }, 
+        { path: 'about-us-designers', element: <AboutUsProductDesignersPage /> }, 
+        { path: 'about-us-uiux', element: <AboutUsUiUxPage /> }, 
+        { path: 'about-us-web', element: <AboutUsWebDesignersPage /> }, 
+
         //////////////////////////////////////////////////////
         // !!! NOT IN USE
         { path: 'messagesPage', element: <MessagePage /> },

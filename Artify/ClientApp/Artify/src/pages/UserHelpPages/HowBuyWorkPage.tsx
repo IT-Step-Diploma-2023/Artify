@@ -8,9 +8,11 @@ import { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import {  Close, LocationOn } from '@mui/icons-material';
 
-import MainNavigation from '../components/Layouts/Navigation/MainNavigation';
+
 import { Link } from 'react-router-dom';
-import HomeButtonFilter2 from '../components/UI/HomeButtonFilter2';
+import MainNavigation from '../../components/Layouts/Navigation/MainNavigation';
+import HomeButtonFilter2 from '../../components/UI/HomeButtonFilter2';
+
 
 
 interface Lngs {
