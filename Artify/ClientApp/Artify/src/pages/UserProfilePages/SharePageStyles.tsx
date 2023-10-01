@@ -123,7 +123,6 @@ export const modal = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   borderRadius: "30px",
-  width: 600,
   bgcolor: colors.white,
   boxShadow: 24,
   p: 4,

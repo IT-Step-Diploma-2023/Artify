@@ -177,7 +177,18 @@
             "addBlock": "add block",
             "description": {
                 "placeholder": "enter text",
-                "cuption": "edit description"
+                "caption": "edit description"
+            },
+            "publicate": {
+                "coverCaption": "project cover",
+                "edit": "edit",
+                "saveDraft": "save as draft",
+                "publiсateProject": "publish",
+                "editCoverCaption": "edit cover",
+                "saveCover": "save",
+                "cancelCover": "cancel",
+                "progressMessage": "publishing project...",
+                "progressExplane": "this may take some time"
             }
         },
         "hire": {

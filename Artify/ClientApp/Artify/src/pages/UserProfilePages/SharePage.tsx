@@ -19,7 +19,8 @@ import { getAuthToken } from "../../hooks/useAuthorization";
 import { padding } from "@mui/system";
 import CommonTextArea from "../../components/UI/CommonTextArea";
 import CommonButton from "../../components/UI/CommonButton";
-import addDescriptionModal from "../../components/UI/SharePageComponents/AddDescriptionModal";
+import addDescriptionModal from "../../components/UI/SharePageComponents/addDescriptionModal";
+import publicateModal from "../../components/UI/SharePageComponents/publicateModal";
 
 interface VisibilityOption {
   index: number,
@@ -61,7 +62,7 @@ const SharePage: FunctionComponent = () => {
   const myContinue = t("share.myContinue");
   const addBlock = t("share.addBlock");
   const descriptionText = t("share.description.placeholder");
-  const descriptionCaption = t("share.description.cuption");
+  const descriptionCaption = t("share.description.caption");
 
   const iconText = [
     t("share.text"),
@@ -93,7 +94,6 @@ const SharePage: FunctionComponent = () => {
   const [title, setTitle] = useState("");
 
   const [description, setDescription] = useState<string>("");
-
   const [openDescriptionModal, setOpenDescriptionModal] = useState(false);
 
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -111,6 +111,7 @@ const SharePage: FunctionComponent = () => {
   const [addBlockActive, setAddBlockActive] = useState(false);
 
   const addBlockRef = useRef(null);
+  const [openPublicateModal, setOpenPublicateModal] = useState(false);
 
   const [cover, setCover] = useState("");
   const [coverEditActive, setCoverEditActive] = useState(false);
@@ -176,9 +177,9 @@ const SharePage: FunctionComponent = () => {
     inputElement.click();
     setAddBlockActive(false);
   }
-
   const openDescriptionModalHandler = () => setOpenDescriptionModal(true);
   const closeDescriptionModalHandler = () => setOpenDescriptionModal(false);
+
 
   const addDescription = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -201,6 +202,10 @@ const SharePage: FunctionComponent = () => {
     setSelectedFiles(updatedFiles);
     console.log(selectedFiles);
   }
+
+  const openPublicateModalHandler = () => setOpenPublicateModal(true);
+  const closePublicateModalHandler = () => setOpenPublicateModal(false);
+
   /* #endregion */
 
   /* #region post data */
@@ -605,9 +610,18 @@ const SharePage: FunctionComponent = () => {
           <CustomButton height="bg"
             sx={BtnStyles.violetBtn}
             style={{ width: "100%", marginTop: "12px" }}
-            onClick={() => postData()}>
+            onClick={() => { setOpenPublicateModal(true) }}>
             {myContinue}
           </CustomButton>
+          {publicateModal(
+            t,
+            selectedFiles,
+            openPublicateModal,
+            coverEditActive,
+            setCoverEditActive,
+            closePublicateModalHandler,
+            postData
+          )}
         </Box>
       </Box>
     </Box>
