@@ -37,7 +37,7 @@ const lngs: Lngs = {
 <img src="../images/team.jpg"
 style={{background: 'url(pexels-huy-chien-tran-1756665.jpg)',
 filter:'drop-shadow(0px 4px 8px rgba(39, 24, 70, 0.4))',
-width:'1240px',height:'626px',marginTop:'100px',marginLeft:'100px',borderRadius: '10px'}}>
+width:'1240px',height:'626px',marginTop:'100px',display:'block',marginLeft:'auto',marginRight:'auto',borderRadius: '10px'}}>
 </img>
 
 <Typography sx={{marginTop:'100px',marginLeft:'100px',fontSize:'70px', color:'#271846',fontWeight:'500', lineHeight:'84px', fontStyle:'Sofia Sans'}}>
