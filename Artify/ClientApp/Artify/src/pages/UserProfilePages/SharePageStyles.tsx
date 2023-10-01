@@ -1,7 +1,11 @@
-import { color } from "@mui/system"
-import { colors } from "../../assets/defaults/colors"
-import { effects } from "../../assets/defaults/effects"
-import { sizes } from "../../assets/defaults/sizes"
+import { colors } from "../../assets/defaults/colors";
+import { effects } from "../../assets/defaults/effects";
+import { sizes } from "../../assets/defaults/sizes";
+
+export const inputBox = {
+  width: "100%", 
+  marginTop: "12px"
+}
 
 export const tagBox = {
   width: "100%",
@@ -95,10 +99,11 @@ export const imageBlock = {
   padding: 0,
   backgroundSize: "cover",
   backgroundPosition: "center",
+  boxShadow: effects.shadowVioletHover,
   // transition: "all 0.15s ease-out",
   // "&:hover": {
   //   borderColor: colors.violet,
-  //   boxShadow:44444 effects.shadowVioletHover,
+  //   boxShadow: effects.shadowVioletHover,
   // },
   // "&:active": {
   //   boxShadow: effects.shadowVioletActive,

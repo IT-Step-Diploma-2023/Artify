@@ -4,21 +4,22 @@ import { Button } from "@mui/base/Button";
 import Typography from "@mui/material/Typography";
 
 import { Box, Divider, IconButton, Input, ListItemButton, ListItemText, Menu, MenuItem, Modal, Paper, Select, Slider, Stack } from "@mui/material";
-import { ChangeEvent, FunctionComponent, useRef, useState } from "react";
+import { ChangeEvent, FunctionComponent, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AutorenewRounded, DeleteForeverRounded, North, South } from "@mui/icons-material";
 import CommonInput from "../../components/UI/CommonInput";
 import CommonLabel from "../../components/UI/UserSettingsComponents/CommonLabel";
 import { colors } from "../../assets/defaults/colors";
+import { effects } from "../../assets/defaults/effects";
 import CrossIcon from "../../components/UI/CrossIcon";
-import * as PageStyles from "./SharePageStyles";
+import * as pageSyles from "./SharePageStyles";
 import * as BtnStyles from "../../components/UI/CustomButtonStyles";
 import CustomButton from "../../components/UI/CustomButton";
 import { getAuthToken } from "../../hooks/useAuthorization";
 import { padding } from "@mui/system";
 import CommonTextArea from "../../components/UI/CommonTextArea";
 import CommonButton from "../../components/UI/CommonButton";
-
+import addDescriptionModal from "../../components/UI/SharePageComponents/AddDescriptionModal";
 
 interface VisibilityOption {
   index: number,
@@ -28,6 +29,9 @@ interface VisibilityOption {
 interface UploadedData {
   title?: string,
   tags?: string[],
+  description?: string,
+  price?: number,
+  gap?: number,
   images?: {
     fileName: string,
     price: string
@@ -45,21 +49,20 @@ const SharePage: FunctionComponent = () => {
   const addToGetStarted = t("share.addToGetStarted");
 
   const project = t("share.project");
-  const addProjectTitle = t("share.addProjectTitle");
-  const text = t("share.text");
-  const image = t("share.image");
-  const video = t("share.video");
+  const addTitle = t("share.addTitle");
   const tags = t("share.tags");
   const addTags = t("share.addTags");
   const upTo = t("share.upTo");
   const suggested = t("share.suggested");
   const visibility = t("share.visibility");
-  const intervalsBetweenBlocks = t("share.intervalsBetweenBlocks");
+  const priceTitle = t("share.price");
+  const blocksGap = t("share.blocksGap");
   const saveAsDraft = t("share.saveAsDraft");
   const myContinue = t("share.myContinue");
   const addBlock = t("share.addBlock");
   const descriptionText = t("share.description.placeholder");
-  const descriptionCuption = t("share.description.cuption");
+  const descriptionCaption = t("share.description.cuption");
+
   const iconText = [
     t("share.text"),
     t("share.image"),
@@ -85,18 +88,13 @@ const SharePage: FunctionComponent = () => {
     t("share.visibilityOptions.private")
   ]
 
-  const pathes = [
-    "/text",
-    "/image",
-    "/video"
-  ]
   /* #endregion */
 
-  const [projectTitle, setProjectTitle] = useState("");
+  const [title, setTitle] = useState("");
 
   const [description, setDescription] = useState<string>("");
 
-  const [open, setOpen] = React.useState(false);
+  const [openDescriptionModal, setOpenDescriptionModal] = useState(false);
 
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [tagsMenuVisible, setTagsMenuVisible] = useState(false);
@@ -104,17 +102,30 @@ const SharePage: FunctionComponent = () => {
   const [visibylity, setVisibility] = useState<VisibilityOption>({ index: 0, option: visibilityOptions[0] });
   const [visibilityMenuVisible, setVisibilityMenuVisible] = useState(false);
 
-  const [interval, setInterval] = useState(16);
+  const [gap, setInterval] = useState(16);
+
+  const [price, setPrice] = useState(0.00);
 
   const [selectedFiles, setSelectedFiles] = useState<File[]>([])
 
   const [addBlockActive, setAddBlockActive] = useState(false);
 
-  React.useEffect(() => {
+  const addBlockRef = useRef(null);
+
+  const [cover, setCover] = useState("");
+  const [coverEditActive, setCoverEditActive] = useState(false);
+
+  useEffect(() => {
     const index = visibylity.index;
     setVisibility({ index: index, option: visibilityOptions[index] });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i18n.resolvedLanguage]);
+
+  useEffect(() => {
+    if (addBlockActive && addBlockRef.current !== null) {
+      (addBlockRef.current as HTMLDivElement).scrollIntoView()
+    }
+  }, [addBlockActive])
 
   /* #region just not in use */
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -139,7 +150,6 @@ const SharePage: FunctionComponent = () => {
     setSelectedTags(newSelectedTags);
   }
 
-
   const removeTagClickHandler = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
     const removedTag = e.currentTarget.id;
@@ -161,24 +171,26 @@ const SharePage: FunctionComponent = () => {
   /* #endregion */
 
   /* #region add description, images, video */
-  const loadImageHandler = () => {
+  const addImageHandler = () => {
     const inputElement = window.document.getElementById("loadFileInput")!
     inputElement.click();
     setAddBlockActive(false);
   }
 
-  const openModalHandler = () => setOpen(true);
-  const closeModalHandler = () => setOpen(false);
+  const openDescriptionModalHandler = () => setOpenDescriptionModal(true);
+  const closeDescriptionModalHandler = () => setOpenDescriptionModal(false);
 
   const addDescription = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    closeModalHandler();
-    console.log("addDescription");
-    console.log(open);
+    const formData = new FormData(event.currentTarget);
+    const newDescription = formData.get('description')?.toString() ?? '';
+    setDescription(newDescription);
+    setAddBlockActive(false);
+    closeDescriptionModalHandler();
   }
 
-  const loadVideoHandler = () => {
-    console.log("loadVideoHandler");
+  const addVideoHandler = () => {
+    console.log("addVideoHandler");
     setAddBlockActive(false);
   }
 
@@ -189,41 +201,44 @@ const SharePage: FunctionComponent = () => {
     setSelectedFiles(updatedFiles);
     console.log(selectedFiles);
   }
-
   /* #endregion */
 
   /* #region post data */
-  const postData = async (): Promise<void> => {
+  const postData = () => {
     const uploadedData: UploadedData = {};
-    uploadedData.title = projectTitle;
+    uploadedData.title = title;
     uploadedData.tags = [...selectedTags];
     uploadedData.images = [];
+    uploadedData.description = description;
+    uploadedData.price = price;
+    uploadedData.gap = gap;
     selectedFiles.forEach((file) => {
       uploadedData.images?.push({
         fileName: file.name,
         price: "0.00"
       })
     });
-    const formData = new FormData;
-    formData.append("value", JSON.stringify(uploadedData));
-    selectedFiles.forEach((file) => formData.append("images[]", file));
-    const response = await fetch(url, {
-      method: "POST",
-      // body: formData,
-      headers: {
-        "Authorization": "Bearer " + token,
-      }
-    });
-    if (response.status !== 200) return;
+    console.log(uploadedData);
+    // const formData = new FormData;
+    // formData.append("value", JSON.stringify(uploadedData));
+    // selectedFiles.forEach((file) => formData.append("images[]", file));
+    // const response = await fetch(url, {
+    //   method: "POST",
+    //   // body: formData,
+    //   headers: {
+    //     "Authorization": "Bearer " + token,
+    //   }
+    // });
+    // if (response.status !== 200) return;
   }
   /* #endregion */
 
   const saveDraft = () => {
     const draft = {
-      title: projectTitle,
+      title: title,
       tags: [...selectedTags],
       visibility: visibylity.index,
-      interval: interval
+      gap: gap
     }
 
     localStorage.setItem("draft", JSON.stringify(draft));
@@ -231,7 +246,7 @@ const SharePage: FunctionComponent = () => {
   }
 
   /* #region components */
-  const dropdown = (
+  const tagsDropdown = (
     itemSet: string[],
     id: string,
     displayCondition: boolean,
@@ -241,13 +256,13 @@ const SharePage: FunctionComponent = () => {
     return <Box
       id={id}
       tabIndex={0}
-      style={displayCondition ? PageStyles.dropdown : PageStyles.dropdownHidden}
+      style={displayCondition ? pageSyles.dropdown : pageSyles.dropdownHidden}
       onBlur={() => setter(false)}>
       <Divider />
       {itemSet.map((item) => (
         <Typography key={item}
-          id={`${itemSet.indexOf(item)}`}
-          sx={PageStyles.dropdownItem}
+          id={itemSet.indexOf(item).toString()}
+          sx={pageSyles.dropdownItem}
           onClick={(e: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => handler(e)}
         >{item}</Typography>
       ))}
@@ -273,68 +288,35 @@ const SharePage: FunctionComponent = () => {
     </svg>
 
   const loadImageHandlers = [
-    openModalHandler,
-    loadImageHandler,
-    loadVideoHandler
+    openDescriptionModalHandler,
+    addImageHandler,
+    addVideoHandler
   ]
 
-  const itemIconsBlock = () => {
-    return <Box sx={{ display: "flex", justifyContent: "center", margin: "0 auto" }}>
-      {itemIcons.map((icon) => <Box
-        key={itemIcons.indexOf(icon)}
-        component="button"
-        sx={PageStyles.addItemButton}
-        onClick={loadImageHandlers[itemIcons.indexOf(icon)]}>
-        {itemIcons[itemIcons.indexOf(icon)]}
-        <Typography sx={{ fontSize: "0.875rem" }}>
-          {iconText[itemIcons.indexOf(icon)]}
-        </Typography>
-      </Box>)}
-    </Box>;
-  }
-
-  const descriptionModal = () => {
-    return <Box id="modaParent">
-      <Modal
-        open={open}
-        onClose={closeModalHandler}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={PageStyles.modal} component="form"
-          onSubmit={addDescription}>
-          <Typography variant="h6" component="h2" sx={{ textAlign: "center", marginBottom: "24px" }}>
-            {descriptionCuption}
-          </Typography>
-          <CommonTextArea
-            sx={{ width: '100%', marginBottom: "24px" }}
-            color='primary'
-            borderRaius='bg'
-            rows={6}
-            title={description}
-            id={description}
-            name={description}
-            placeholder={descriptionText}
-            aria-label={description}>
-          </CommonTextArea>
-          <CustomButton height="bg"
-            type="submit"
-            sx={BtnStyles.violetBtn}
-            style={{ display: "block", width: "200px", margin: "8px auto 18px" }}>
-            {myContinue}
-          </CustomButton>
-        </Box>
-      </Modal >
-    </Box >
-  }
-
+  const itemIconsBlock = () => <Box
+    sx={{
+      display: "flex",
+      justifyContent: "center",
+      margin: "0 auto"
+    }}>
+    {itemIcons.map((icon) => <Box
+      key={itemIcons.indexOf(icon)}
+      component="button"
+      sx={pageSyles.addItemButton}
+      onClick={loadImageHandlers[itemIcons.indexOf(icon)]}>
+      {itemIcons[itemIcons.indexOf(icon)]}
+      <Typography sx={{ fontSize: "0.875rem" }}>
+        {iconText[itemIcons.indexOf(icon)]}
+      </Typography>
+    </Box>)}
+  </Box>
 
   return <>
     <Box sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
       {(selectedFiles.length === 0 && description.length === 0) &&
         <Box sx={{ width: "50%" }}>
           <Box
-            sx={PageStyles.addImageBox}>
+            sx={pageSyles.addImageBox}>
             <Typography sx={{ color: "inherit", textAlign: "center", marginBottom: "40px" }}>
               {addToGetStarted}
             </Typography>
@@ -353,7 +335,7 @@ const SharePage: FunctionComponent = () => {
                   vertical: "top",
                   horizontal: "right",
                 }}
-                open={Boolean(anchorEl)}
+                openDescriptionModal={Boolean(anchorEl)}
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose}>
@@ -386,49 +368,60 @@ const SharePage: FunctionComponent = () => {
       }
       {(selectedFiles.length > 0 || description.length > 0) &&
         <Box sx={{ width: "50%", paddingBottom: "1rem" }}>
-          <Box sx={{ width: "100%", borderRadius: "30px", overflow: "hidden" }}>
+          <Box sx={{ width: "100%", borderRadius: "30px", overflow: "hidden", boxShadow: effects.shadowVioletHover }}>
             {(selectedFiles.length > 0) &&
               <>
                 {selectedFiles.map((file) =>
                   <Box
                     key={selectedFiles.indexOf(file)}
-                    sx={PageStyles.imageBlock}
+                    sx={pageSyles.imageBlock}
                     style={{
                       marginBottom:
                         selectedFiles.indexOf(file) < selectedFiles.length - 1 ?
-                          (interval.toString() + "px") : "0",
-                      backgroundImage: "url('" + (URL.createObjectURL(file)) + "')",
+                          (gap.toString() + "px") : "0",
+                      backgroundImage: "url('" + (URL.createObjectURL(file)) + "')"
                     }}>
                   </Box>
                 )}
               </>
             }
             {(description.length > 0) &&
-              <Box sx={PageStyles.textBlock}
-                style={{ marginTop: selectedFiles.length > 0 ? interval : 0 }}>
-                {description}
+              <Box sx={pageSyles.textBlock}
+                style={{ marginTop: selectedFiles.length > 0 ? gap : 0 }}>
+                {description.split('\n').map((row) =>
+                (row !== "" ?
+                  <p key={Math.random()}>{row}</p> :
+                  <br key={Math.random()} />)
+                )}
               </Box>
             }
           </Box >
           <Box
             component="button"
-            sx={PageStyles.addBlockButton}
-            onClick={() => setAddBlockActive(!addBlockActive)}>
+            sx={pageSyles.addBlockButton}
+            onClick={() => { setAddBlockActive(!addBlockActive) }}>
             <Box sx={{ display: "block", paddingTop: "9px" }}>{plusIcon}</Box>
             <Typography sx={{ marginLeft: "10px" }}>
               {addBlock}
             </Typography>
           </Box>
           {(addBlockActive) &&
-            <Box style={{ paddingTop: "36px" }}>{itemIconsBlock()}</Box>
+            <Box ref={addBlockRef} style={{ paddingTop: "36px" }}>{itemIconsBlock()}</Box>
           }
         </Box>
       }
-
-      {descriptionModal()}
+      {addDescriptionModal(
+        openDescriptionModal,
+        closeDescriptionModalHandler,
+        addDescription,
+        descriptionCaption,
+        descriptionText,
+        description,
+        myContinue
+      )}
       <Box style={{ display: "block", marginBottom: "45px", width: "28%" }}>
-        {/* project name */}
         <Box sx={{ width: "100%" }}>
+          {/* project name */}
           <CommonLabel htmlFor="projectNameLabel">
             {project}
           </CommonLabel>
@@ -436,30 +429,30 @@ const SharePage: FunctionComponent = () => {
             sx={{
               width: "100%",
               color: colors.violet,
-              fontWeight: projectTitle ? 700 : 400,
-              borderColor: projectTitle ? colors.violet : colors.grey
+              fontWeight: title ? 700 : 400,
+              borderColor: title ? colors.violet : colors.grey
             }}
             color="primary"
             height="bg"
             title="projectNameLabel"
             id="projectNameLabel"
             name="projectNameLabel"
-            placeholder={addProjectTitle}
-            aria-label={addProjectTitle}
-            value={projectTitle}
+            placeholder={addTitle}
+            aria-label={addTitle}
+            value={title}
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
-              setProjectTitle(e.target.value);
+              setTitle(e.target.value);
             }}
           />
         </Box>
         {/* tags */}
-        <Box sx={{ width: "100%", marginTop: "12px" }} id="dddd">
+        <Box sx={pageSyles.inputBox}>
           <CommonLabel htmlFor="">
             {tags}<span style={{ fontWeight: 400 }}> {upTo}</span>
           </CommonLabel>
           <Box sx={{ position: "relative" }}>
             <Box id="tagBox"
-              sx={PageStyles.tagBox}
+              sx={pageSyles.tagBox}
               style={tagsMenuVisible ? {
                 position: "absolute",
                 left: "0",
@@ -478,7 +471,7 @@ const SharePage: FunctionComponent = () => {
               </Typography>
               {selectedTags.map((tag) => (
                 <Box key={tag}
-                  sx={PageStyles.selectedTag}>
+                  sx={pageSyles.selectedTag}>
                   <Typography sx={{
                     display: "inline",
                     lineHeight: "19px",
@@ -494,7 +487,7 @@ const SharePage: FunctionComponent = () => {
                   </Box>
                 </Box>
               ))}
-              {dropdown(availableTags, "tagsMenu", tagsMenuVisible, setTagsMenuVisible, tagItemClickHandler)}
+              {tagsDropdown(availableTags, "tagsMenu", tagsMenuVisible, setTagsMenuVisible, tagItemClickHandler)}
             </Box>
           </Box>
           {selectedTags.length === 0 && (
@@ -508,13 +501,13 @@ const SharePage: FunctionComponent = () => {
           )}
         </Box>
         {/* visibility */}
-        <Box sx={{ width: "100%", marginTop: "12px" }}>
+        <Box sx={pageSyles.inputBox}>
           <CommonLabel htmlFor="">
             {visibility}
           </CommonLabel>
           <Box sx={{ position: "relative" }}>
             <Box id="visibilityBox"
-              sx={PageStyles.tagBox}
+              sx={pageSyles.tagBox}
               style={visibilityMenuVisible ? {
                 position: "absolute",
                 left: "0",
@@ -529,13 +522,48 @@ const SharePage: FunctionComponent = () => {
                 sx={{ color: colors.violet, fontWeight: 700, lineHeight: "35px", marginLeft: "14px" }}>
                 {visibylity.option}
               </Typography>
-              {dropdown(visibilityOptions, "visibilityMenu", visibilityMenuVisible, setVisibilityMenuVisible, visibilityOptionClickHandler)}
+              {tagsDropdown(visibilityOptions, "visibilityMenu", visibilityMenuVisible, setVisibilityMenuVisible, visibilityOptionClickHandler)}
             </Box>
           </Box>
         </Box>
+        {/* price */}
+        <Box sx={pageSyles.inputBox}>
+          <CommonLabel htmlFor="priceLabel">
+            {priceTitle}
+          </CommonLabel>
+          <CommonInput
+            sx={{
+              width: "100%",
+              color: price > 0 ? colors.violet : "grey",
+              fontWeight: price > 0 ? 700 : 400,
+              borderColor: price > 0 ? colors.violet : colors.grey,
+              "&:hover": {
+                boxShadow: effects.shadowVioletHover
+              },
+              "&:active": {
+                boxShadow: effects.shadowVioletActive
+              }
+            }}
+            type="number"
+            min="0.00"
+            step=".01"
+            color="primary"
+            height="bg"
+            title="priceLabel"
+            id="priceLabel"
+            name="priceLabel"
+            aria-label="price"
+            placeholder="0.00"
+            value={price}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              setPrice(parseFloat(e.target.value));
+            }}
+          />
+        </Box>
+        {/* gap */}
         <Box style={{ display: "flex", marginTop: "45px", justifyContent: "space-between" }}>
-          <CommonLabel htmlFor="interval">
-            {intervalsBetweenBlocks}
+          <CommonLabel htmlFor="gap">
+            {blocksGap}
           </CommonLabel>
           <Box sx={{ padding: "0 24px 12px 0" }}>
             <CommonInput
@@ -548,22 +576,23 @@ const SharePage: FunctionComponent = () => {
                 textAlign: "center"
               }}
               readOnly
-              id="interval"
-              name="interval"
-              aria-label="interval"
-              value={interval}
+              id="gap"
+              name="gap"
+              aria-label="gap"
+              value={gap}
             />
             <Typography sx={{ marginLeft: "5px", display: "inline" }}>px</Typography>
           </Box>
         </Box>
+        {/* gap slider */}
         <Slider
           sx={{
             color: colors.violet,
             width: "calc(100% - 20px)",
             margin: "36px 0 0 10px"
           }}
-          aria-label="interval"
-          value={interval}
+          aria-label="gap"
+          value={gap}
           max={64}
           onChange={(e: Event, newValue: number | number[]) => setInterval(newValue as number)} />
         <Box sx={{ marginTop: "36px" }}>

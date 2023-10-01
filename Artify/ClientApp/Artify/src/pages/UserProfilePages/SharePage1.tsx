@@ -17,7 +17,7 @@ const SharePage1: FunctionComponent = () => {
   const until = t('share.until');
   const suggested = t('share.suggested');
   const visibilityOfTheProject = t('share.visibilityOfTheProject');
-  const intervalsBetweenBlocks = t('share.intervalsBetweenBlocks');
+  const blocksGap = t('share.blocksGap');
   const saveAsDraft = t('share.saveAsDraft');
   const myContinue = t('share.myContinue');
   const addBlock = t('share.addBlock');
@@ -104,7 +104,7 @@ const SharePage1: FunctionComponent = () => {
           </Select>
 
           <div style={{ display: 'flex', marginTop: '45px' }}>
-            <Typography sx={{ color: '#6A4BD9', fontWeight: 'bold' }}>{intervalsBetweenBlocks}</Typography>
+            <Typography sx={{ color: '#6A4BD9', fontWeight: 'bold' }}>{blocksGap}</Typography>
             <Input className='input2'
               placeholder="0"
               style={{ width: '10%', height: '25px', display: 'block', backgroundColor: '#CACACA', marginLeft: '130px' }}
