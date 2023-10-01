@@ -139,7 +139,7 @@ width:'1240px',height:'626px',marginTop:'100px',display:'block',marginLeft:'auto
     </Grid>
   </Grid>  
 
-        <Link to={'/aboutUs'}>
+        <Link to={'/about-us'}>
               <Button className='button1'
                 style={{ width: '121.23px',height:'46.18px',margin:'100px auto 50px auto',borderRadius: '30px',gap:'10px',backgroundColor:'#271846',color:'#FFFFFF',display: 'flex',alignItems: 'center', justifyContent: 'center'}}>
                 <Typography sx={{fontFamily:'Nunito',fontSize:'17.32px', textTransform:'lowercase'}}>
