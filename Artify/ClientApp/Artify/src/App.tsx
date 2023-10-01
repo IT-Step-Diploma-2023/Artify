@@ -82,7 +82,6 @@ function App() {
         { path: 'how-add-work', element: <HowAddWorkPage /> }, 
         { path: 'how-buy-work', element: <HowBuyWorkPage /> }, 
         { path: 'how-hire-designer', element: <HowHireDesignerPage /> }, 
-        // { path: 'how-create-account', element: <HowCreateAccount /> },
         { path: 'about-us', element: <AboutUsPage /> }, 
         { path: 'about-us-brands', element: <AboutUsBrandsPage /> }, 
         { path: 'about-us-illustrators', element: <AboutUsIllustratorsPage /> }, 
@@ -90,6 +89,18 @@ function App() {
         { path: 'about-us-designers', element: <AboutUsProductDesignersPage /> }, 
         { path: 'about-us-uiux', element: <AboutUsUiUxPage /> }, 
         { path: 'about-us-web', element: <AboutUsWebDesignersPage /> }, 
+
+        { path: 'howAddWork', element: <HowAddWorkPage /> },
+        { path: 'howBuyWork', element: <HowBuyWorkPage /> },
+        { path: 'howHireDesigner', element: <HowHireDesignerPage /> },    
+        
+        { path: 'aboutUs', element: <AboutUsPage /> },          
+        { path: 'photographs', element: <AboutUsPhotographsPage /> },  
+        { path: 'brands', element: <AboutUsBrandsPage /> },  
+        { path: 'uiUx', element: <AboutUsUiUxPage /> },  
+        { path: 'productDesigners', element: <AboutUsProductDesignersPage /> },  
+        { path: 'illustrators', element: <AboutUsIllustratorsPage /> },  
+        { path: 'webDesigners', element: <AboutUsWebDesignersPage /> }, 
 
         //////////////////////////////////////////////////////
         // !!! NOT IN USE
@@ -100,22 +111,14 @@ function App() {
         { path: 'filter', element: <FilterPage /> },
       ],
     },
+    //////////////////////////////////////////////////////
+    // !!! СЮДИ ІНШІ РОУТИ НЕ ДОДАВАТИ !!!
     { path: 'login', element: <LoginPage /> },
     { path: 'select-register', element: <SelectRegisterPage /> },
     { path: 'google-register', element: <GoogleRegisterPage /> },
     { path: 'email-register', element: <EmailRegisterPage /> },
 
-    { path: 'howAddWork', element: <HowAddWorkPage /> },
-    { path: 'howBuyWork', element: <HowBuyWorkPage /> },
-    { path: 'howHireDesigner', element: <HowHireDesignerPage /> },    
-    
-    { path: 'aboutUs', element: <AboutUsPage /> },          
-    { path: 'photographs', element: <AboutUsPhotographsPage /> },  
-    { path: 'brands', element: <AboutUsBrandsPage /> },  
-    { path: 'uiUx', element: <AboutUsUiUxPage /> },  
-    { path: 'productDesigners', element: <AboutUsProductDesignersPage /> },  
-    { path: 'illustrators', element: <AboutUsIllustratorsPage /> },  
-    { path: 'webDesigners', element: <AboutUsWebDesignersPage /> }, 
+
   ]);
 
   return (

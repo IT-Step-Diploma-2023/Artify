@@ -83,17 +83,17 @@ const HowAddWorkPage: FunctionComponent = () => {
 
 
 
-    <Box id="stepOne" sx={{ 
-      width: '86%', 
-      aspectRatio: 1.778, 
-      backgroundImage: "url(./images/components/helpCenterPages/addWork1.png)", 
+    <Box id="firstScreen" sx={{
+      width: '86%',
+      aspectRatio: 1.778,
+      backgroundImage: "url(./images/components/helpCenterPages/addWork1.png)",
       backgroundSize: "cover",
       backgroundPosition: "center",
-      borderRadius: '25.34px', 
-      boxShadow: '0px 5.65322732925415px 11.3064546585083px 0px #27184666', 
-      marginLeft: 'auto', 
-      marginRight: 'auto' 
-      }}>
+      borderRadius: '25.34px',
+      boxShadow: '0px 5.65322732925415px 11.3064546585083px 0px #27184666',
+      marginLeft: 'auto',
+      marginRight: 'auto'
+    }}>
     </Box>
 
 
