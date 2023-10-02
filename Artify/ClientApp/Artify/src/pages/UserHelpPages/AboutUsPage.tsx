@@ -37,7 +37,7 @@ const lngs: Lngs = {
 <img src="../images/team.jpg"
 style={{background: 'url(pexels-huy-chien-tran-1756665.jpg)',
 filter:'drop-shadow(0px 4px 8px rgba(39, 24, 70, 0.4))',
-width:'1240px',height:'626px',marginTop:'100px',marginLeft:'100px',borderRadius: '10px'}}>
+width:'1240px',height:'626px',marginTop:'100px',display:'block',marginLeft:'auto',marginRight:'auto',borderRadius: '10px'}}>
 </img>
 
 <Typography sx={{marginTop:'100px',marginLeft:'100px',fontSize:'70px', color:'#271846',fontWeight:'500', lineHeight:'84px', fontStyle:'Sofia Sans'}}>
@@ -127,14 +127,14 @@ width:'1240px',height:'626px',marginTop:'100px',marginLeft:'100px',borderRadius:
     <Grid item xs={2.9} style={{display:'inline-block'}}>
       <Stack>
         <Paper elevation={0} sx={{display:'inline-block',width:'264px',height:'252px', backgroundColor:'#ECEAEF'}}>
-          <Link to={'/photographs'} style={{textDecoration:'none'}}>
+          <Link to={'/about-us-photographs'} style={{textDecoration:'none'}}>
             <Typography className='link3' sx={{width:'264px',height:'252px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'40px', color:'#271846',fontWeight:'500', lineHeight:'48px', fontStyle:'Sofia Sans'}}>
               фотографи
             </Typography>
           </Link>
         </Paper>
         <Paper elevation={0} sx={{display:'inline-block',width:'264px',height:'252px',marginTop:'100px', backgroundColor:'#ECEAEF'}}>
-          <Link to={'/brands'} style={{textDecoration:'none'}}>
+          <Link to={'/about-us-brands'} style={{textDecoration:'none'}}>
             <Typography className='link3' sx={{width:'264px',height:'252px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'40px', color:'#271846',fontWeight:'500', lineHeight:'48px', fontStyle:'Sofia Sans'}}>
               бренди
             </Typography>
@@ -146,7 +146,7 @@ width:'1240px',height:'626px',marginTop:'100px',marginLeft:'100px',borderRadius:
     <Grid item xs={2.9} style={{display:'inline-block'}}>
       <Stack>
         <Paper elevation={0} sx={{display:'inline-block',width:'264px',height:'252px', backgroundColor:'#ECEAEF'}}>
-          <Link to={'/uiUx'} style={{textDecoration:'none'}}>
+          <Link to={'/about-us-uiux'} style={{textDecoration:'none'}}>
             <Typography className='link3' sx={{width:'264px',height:'252px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'40px', color:'#271846',fontWeight:'500', lineHeight:'48px', fontStyle:'Sofia Sans'}}>
               ui-ux 
               <br></br>
@@ -155,7 +155,7 @@ width:'1240px',height:'626px',marginTop:'100px',marginLeft:'100px',borderRadius:
           </Link>
         </Paper>
         <Paper elevation={0} sx={{display:'inline-block',width:'264px',height:'252px',marginTop:'100px', backgroundColor:'#ECEAEF'}}>
-          <Link to={'/productDesigners'} style={{textDecoration:'none'}}>
+          <Link to={'/about-us-designers'} style={{textDecoration:'none'}}>
             <Typography className='link3' sx={{width:'264px',height:'252px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'40px', color:'#271846',fontWeight:'500', lineHeight:'48px', fontStyle:'Sofia Sans'}}>
               дизайнери
               <br></br>
@@ -168,14 +168,14 @@ width:'1240px',height:'626px',marginTop:'100px',marginLeft:'100px',borderRadius:
     <Grid item xs={2.9} style={{display:'inline-block'}}>
       <Stack>
         <Paper elevation={0} sx={{display:'inline-block',width:'264px',height:'252px', backgroundColor:'#ECEAEF'}}>
-          <Link to={'/illustrators'} style={{textDecoration:'none'}}>
+          <Link to={'/about-us-illustrators'} style={{textDecoration:'none'}}>
             <Typography className='link3' sx={{width:'264px',height:'252px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'35px', color:'#271846',fontWeight:'500', lineHeight:'42px', fontStyle:'Sofia Sans'}}>
             ілюстратори
             </Typography>
           </Link>
         </Paper>
         <Paper elevation={0} sx={{display:'inline-block',width:'264px',height:'252px',marginTop:'100px', backgroundColor:'#ECEAEF'}}>
-          <Link to={'/webDesigners'} style={{textDecoration:'none'}}>
+          <Link to={'/about-us-web'} style={{textDecoration:'none'}}>
             <Typography className='link3' sx={{width:'264px',height:'252px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'35px', color:'#271846',fontWeight:'500', lineHeight:'42px', fontStyle:'Sofia Sans'}}>
             вебдизайнери
             </Typography>
