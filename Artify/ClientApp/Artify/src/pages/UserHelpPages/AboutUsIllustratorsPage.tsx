@@ -127,14 +127,14 @@ width:'1240px',height:'626px',marginTop:'100px',display:'block',marginLeft:'auto
     <Grid item xs={5} style={{display:'inline-block'}}>
       <Stack>
         <img src="../images/illustrators1.png"></img>
-        <img src="../images/illustrator4.png" style={{marginTop:'28.5px'}}></img>
+        <img src="../images/illustrators4.png" style={{marginTop:'28.5px'}}></img>
       </Stack>
     </Grid>
     <Grid item xs={5} style={{display:'inline-block'}}>
       <Stack>
-        <img src="../images/illustrator2.png"></img>
-        <img src="../images/illustrator3.png" style={{marginTop:'28.5px'}}></img>
-        <img src="../images/illustrator5.png" style={{marginTop:'28.5px'}}></img>
+        <img src="../images/illustrators2.png"></img>
+        <img src="../images/illustrators3.png" style={{marginTop:'28.5px'}}></img>
+        <img src="../images/illustrators5.png" style={{marginTop:'28.5px'}}></img>
       </Stack>
     </Grid>
   </Grid>  
