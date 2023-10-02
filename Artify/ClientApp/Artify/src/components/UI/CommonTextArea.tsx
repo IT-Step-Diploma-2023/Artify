@@ -13,13 +13,15 @@ const CommonTextArea = styled('textarea')(({
     borderRaius,
     rows,
     cols,
-    isValid
+    isValid,
+    autocomplete
 }: {
     color?: 'primary' | 'secondary',
     borderRaius?: 'bg' | 'md',
     rows?: number,
     cols?: number,
-    isValid?: boolean
+    isValid?: boolean,
+    autocomplete?: "on" | "off"
 }) => (
     {
         fontFamily: 'Nunito',

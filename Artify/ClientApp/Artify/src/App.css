@@ -621,7 +621,7 @@ background-color: #ECEAEF;
 
 
 
-.button4 {
+.button5 {
     cursor: pointer;
     font-family: 'Nunito', sans-serif !important;
     font-size: 18px;
@@ -634,10 +634,23 @@ background-color: #ECEAEF;
     color: var(--dark-violet);
 }
 
-.button4:hover {
+.button5:hover {
     border: none;
     color: var(--light-grey);
     font-weight: bold;
     background-color: var(--dark-violet);
+    box-shadow: 0px 4px 8px 0px rgba(39, 24, 70, 0.40);
+}
+
+.link3 {
+    border-radius:7px;
+    border:2px dashed #271846;
+}
+
+
+.link3:hover {
+    border: none;
+    color: var(--light-grey);
+    background-color: var(--violet);
     box-shadow: 0px 4px 8px 0px rgba(39, 24, 70, 0.40);
 }

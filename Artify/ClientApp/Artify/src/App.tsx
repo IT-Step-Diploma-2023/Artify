@@ -38,6 +38,19 @@ import SharePage1 from './pages/UserProfilePages/SharePage1';
 import SharePage2 from './pages/UserProfilePages/SharePage2';
 import FilterPage from './pages/FilterPage';
 
+import HowAddWorkPage from './pages/UserHelpPages/HowAddWorkPage';
+import HowBuyWorkPage from './pages/UserHelpPages/HowBuyWorkPage';
+import HowHireDesignerPage from './pages/UserHelpPages/HowHireDesignerPage';
+
+import AboutUsBrandsPage from './pages/UserHelpPages/AboutUsBrandsPage';
+import AboutUsIllustratorsPage from './pages/UserHelpPages/AboutUsIllustratorsPage';
+import AboutUsPage from './pages/UserHelpPages/AboutUsPage';
+import AboutUsProductDesignersPage from './pages/UserHelpPages/AboutUsProductDesignersPage';
+import AboutUsUiUxPage from './pages/UserHelpPages/AboutUsUiUxPage';
+import AboutUsWebDesignersPage from './pages/UserHelpPages/AboutUsWebDesignersPage';
+import AboutUsPhotographsPage from './pages/UserHelpPages/AboutUsPhotographsPage';
+
+
 function App() {
   const router = createBrowserRouter([
     {
@@ -65,8 +78,32 @@ function App() {
         { path: 'subscriptions', element: <SubscriptionsPage /> },
         // MAIN MENU / FOOTER MENU
         { path: 'hire', element: <HirePage /> },
-        { path: 'help-center', element: <HelpCenterPage /> },
-        // 
+        { path: 'help-center', element: <HelpCenterPage /> }, // renamed HelpPage
+        { path: 'how-add-work', element: <HowAddWorkPage /> }, 
+        { path: 'how-buy-work', element: <HowBuyWorkPage /> }, 
+        { path: 'how-hire-designer', element: <HowHireDesignerPage /> }, 
+        { path: 'about-us', element: <AboutUsPage /> }, 
+        { path: 'about-us-brands', element: <AboutUsBrandsPage /> }, 
+        { path: 'about-us-illustrators', element: <AboutUsIllustratorsPage /> }, 
+        { path: 'about-us-photographs', element: <AboutUsPhotographsPage /> }, 
+        { path: 'about-us-designers', element: <AboutUsProductDesignersPage /> }, 
+        { path: 'about-us-uiux', element: <AboutUsUiUxPage /> }, 
+        { path: 'about-us-web', element: <AboutUsWebDesignersPage /> }, 
+
+        { path: 'howAddWork', element: <HowAddWorkPage /> },
+        { path: 'howBuyWork', element: <HowBuyWorkPage /> },
+        { path: 'howHireDesigner', element: <HowHireDesignerPage /> },    
+        
+        { path: 'aboutUs', element: <AboutUsPage /> },          
+        { path: 'photographs', element: <AboutUsPhotographsPage /> },  
+        { path: 'brands', element: <AboutUsBrandsPage /> },  
+        { path: 'uiUx', element: <AboutUsUiUxPage /> },  
+        { path: 'productDesigners', element: <AboutUsProductDesignersPage /> },  
+        { path: 'illustrators', element: <AboutUsIllustratorsPage /> },  
+        { path: 'webDesigners', element: <AboutUsWebDesignersPage /> }, 
+
+        //////////////////////////////////////////////////////
+        // !!! NOT IN USE
         { path: 'messagesPage', element: <MessagePage /> },
         { path: 'accountPage2', element: <ProfilePage2 /> },
         // TEMPORARY HELPER PAGE
@@ -74,10 +111,14 @@ function App() {
         { path: 'filter', element: <FilterPage /> },
       ],
     },
+    //////////////////////////////////////////////////////
+    // !!! СЮДИ ІНШІ РОУТИ НЕ ДОДАВАТИ !!!
     { path: 'login', element: <LoginPage /> },
     { path: 'select-register', element: <SelectRegisterPage /> },
     { path: 'google-register', element: <GoogleRegisterPage /> },
     { path: 'email-register', element: <EmailRegisterPage /> },
+
+
   ]);
 
   return (

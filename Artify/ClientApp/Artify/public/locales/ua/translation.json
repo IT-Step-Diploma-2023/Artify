@@ -159,20 +159,37 @@
         "image": "зображення",
         "video": "відео",
         "project": "назва проекту",
-        "addProjectTitle": "додайте назву проекту",
+        "addTitle": "додайте назву проекту",
         "tags": "теги",
         "addTags": "додайте теги",
         "upTo": "(до 10)",
         "suggested": "запропоновано",
         "visibility": "видимість проекту",
-        "visibilityOptions":{
+        "visibilityOptions": {
             "public": "загальнодоступний",
             "private": "приватний"
         },
-        "intervalsBetweenBlocks": "інтервали між блоками",
+        "price": "ціна",
+        "addPrice": "0.00",
+        "blocksGap": "інтервали між блоками",
         "saveAsDraft": "зберегти як чернетку",
         "myContinue": "продовжити",
-        "addBlock": "додати блок"
+        "addBlock": "додати блок",
+        "description": {
+            "placeholder": "введіть текст",
+            "caption": "редагувати опис"
+        },
+        "publicate": {
+            "coverCaption": "обкладинка проєкта",
+            "edit": "редагувати",
+            "saveDraft": "зберегти як чернетку",
+            "publiсateProject": "опублікувати",
+            "editCoverCaption": "редагувати обкладинку",
+            "saveCover": "зберегти",
+            "cancelCover": "скасувати",
+            "progressMessage": "публікація проєкту...",
+            "progressExplane": "це може зайняти трохи часу"
+        }
     },
     "hire": {
         "tags": "теги",
@@ -186,5 +203,13 @@
         "budget": "ваш бюджет",
         "send": "відправити повідомлення",
         "subscribe": "підписатись"
+    },
+    "help": {
+        "helpCenter": " центр допомоги",
+        "addWork": "як додати роботу?..",
+        "getJob": "як придбати роботу?..",
+        "hireDesigner": "як найняти дизайнера?..",
+        "createAccount": "як створити свій акаунт?..",
+        "aboutUs": "про нас"
     }
 }

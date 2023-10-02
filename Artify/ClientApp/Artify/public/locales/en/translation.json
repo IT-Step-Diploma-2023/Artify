@@ -159,20 +159,37 @@
             "image": "image",
             "video": "video",
             "project": "project name",
-            "addProjectTitle": "add a project name",
+            "addTitle": "add a project name",
             "tags": "tags",
             "addTags": "add tags",
             "upTo": "(up to 10)",
             "suggested": "suggested",
             "visibility": "visibility of the project",
-            "visibilityOptions":{
+            "visibilityOptions": {
                 "public": "public",
                 "private": "private"
             },
-            "intervalsBetweenBlocks": "intervals between blocks",
+            "price": "price",
+            "addPrice": "0.00",
+            "blocksGap": "intervals between blocks",
             "saveAsDraft": "save as draft",
             "myContinue": "continue",
-            "addBlock": "add block"
+            "addBlock": "add block",
+            "description": {
+                "placeholder": "enter text",
+                "caption": "edit description"
+            },
+            "publicate": {
+                "coverCaption": "project cover",
+                "edit": "edit",
+                "saveDraft": "save as draft",
+                "publiсateProject": "publish",
+                "editCoverCaption": "edit cover",
+                "saveCover": "save",
+                "cancelCover": "cancel",
+                "progressMessage": "publishing project...",
+                "progressExplane": "this may take some time"
+            }
         },
         "hire": {
             "tags": "tags",
@@ -186,5 +203,13 @@
             "budget": "your budget",
             "send": "send a message",
             "subscribe": "subscribe"
+        },
+        "help": {
+            "helpCenter": "help center",
+            "addWork": "how to add work?..",
+            "getJob": "how to get a job?..",
+            "hireDesigner": "how to hire a designer?..",
+            "createAccount": "how to create your account?..",
+            "aboutUs": "about us"
         }
     }
