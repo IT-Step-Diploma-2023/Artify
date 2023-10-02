@@ -12,6 +12,15 @@ namespace Artify.Models.DbModels.DbModels.Artworks
 
         [Required]
         public string Title { get; set; } = string.Empty;
+        [Required]
+        public string Description { get; set; } = string.Empty;
+        [Required]
+        public double Price { get; set; }
+        [Required]
+        public bool isPublic { get; set;}
+        public bool isDraft { get; set;} = false;
+        [Required]
+        public int blocksGap { get; set; } = 0;
 
         [Required]
         [DataType(DataType.DateTime)]

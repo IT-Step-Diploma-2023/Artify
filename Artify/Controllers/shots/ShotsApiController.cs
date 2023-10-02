@@ -75,7 +75,10 @@ namespace Artify.Controllers.shots
                 {
                     UserId = jwtUser.Id,
                     Title = inputJson.title ?? "Default title",
-                    CreatedDateTime = DateTime.UtcNow
+                    CreatedDateTime = DateTime.UtcNow,
+                    isDraft = inputJson.isDraft,
+                    isPublic = inputJson.isPublic,
+                    blocksGap = inputJson.blocksGap
                 };
                 //Adding genres
                 //foreach(string inputGenre in inputJson?.genres ?? Enumerable.Empty<string>())
