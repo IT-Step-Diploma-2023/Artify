@@ -113,7 +113,7 @@ const SharePage: FunctionComponent = () => {
   const addBlockRef = useRef(null);
   const [openPublicateModal, setOpenPublicateModal] = useState(false);
 
-  const [cover, setCover] = useState("");
+  const [cover, setCover] = useState<File>();
   const [coverEditActive, setCoverEditActive] = useState(false);
 
   useEffect(() => {
@@ -200,6 +200,7 @@ const SharePage: FunctionComponent = () => {
     if (event.target.files.length === 0) return;
     const updatedFiles = [...selectedFiles, ...event.target.files];
     setSelectedFiles(updatedFiles);
+    setCover(updatedFiles[0]);
     console.log(selectedFiles);
   }
 
@@ -620,7 +621,7 @@ const SharePage: FunctionComponent = () => {
             coverEditActive,
             setCoverEditActive,
             closePublicateModalHandler,
-            postData
+            cover,
           )}
         </Box>
       </Box>
