@@ -22,7 +22,8 @@ Status: 200 OK
 ************
 
 002
-GET /settings-profinfo
+GET  /GetUserProfInfo
+PAGE /settings-profinfo
 
 Description
 -----------
