@@ -31,32 +31,33 @@ Get information about profession, skills and education
 Response
 -----------
 Status: 200 OK
-{
-    "workPreference": {
-        "skills": ,
-        "educations": [
-            education: {
-                "id": ,
-                "degree": ,
-                "institution": ,
-                "startYear": ,
-                "finisYear": ,
-            }
-        ],
-        "specialties": [
-            specialty: {
-                "id": ,
-                "name": 
-            }
-        ],
-        "jobs": [
+{                               // WorkPreference model
+    "skills":,
+    "educations": [
+        {                       // Education model
+            "id": ,
+            "degree": ,
+            "institution": ,
+            "startYear": ,
+            "finisYear": ,
+        }
+    ],
+    "specialties": [            
+        {                       // Specialty model
+            "id": ,
+            "name": 
+        }
+    ],
+    "jobs": [
+        {                       // Job model
             "id": ,
             "position": ,
             "company": ,
             "startYear": ,
             "finisYear": 
-        ]
-    }
+        }
+    ],
+    "webSite":
 }
 
 ************

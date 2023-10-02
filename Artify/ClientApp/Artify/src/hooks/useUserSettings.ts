@@ -1,7 +1,7 @@
 import { getAuthToken } from '../hooks/useAuthorization';
 
 
-const url = 'api/UsersApi/GetCurrentUserData';
+const url = 'api/users/UsersApi/GetCurrentUserData';
 const token = getAuthToken() ?? '';
 const split = "_"
 
