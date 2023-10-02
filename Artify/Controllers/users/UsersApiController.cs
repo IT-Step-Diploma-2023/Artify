@@ -43,6 +43,7 @@ namespace Artify.Controllers.users
                 return BadRequest(new { errorMessage = "Something went wrong" });
             }
         }
+        
         private class UserSocialProfileDTO : BaseDTOUser, ISocialProfilesList
         {
             public UserSocialProfileDTO(User user) : base(user) { } 
@@ -87,6 +88,26 @@ namespace Artify.Controllers.users
                 return BadRequest(new { errorMessage = "Something went wrong" });
             }
         }
-        
+
+        [Route("api/[controller]/[action]")]
+        [HttpGet]
+        [Authorize]
+        public IActionResult UpdateUserSocialProfiles()
+        {
+            try
+            {
+                JwtUser? model = UsersService.GetCurrentUser(this.HttpContext);
+                if (model == null)
+                    return Forbid();
+                User? user = _usersRepository.Query(user => user.Id == model.Id).FirstOrDefault();
+                if (user == null) return NotFound(new { errorMessage = "UserDTO was not found in the database" });
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return Ok();
+        }
     }
 }

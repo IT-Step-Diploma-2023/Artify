@@ -9,9 +9,9 @@ namespace Artify.Models.DbModels.DbModels.Artworks
         [Key]
         public int Id { get; set; }
 
-        [Required]
-        [Column(TypeName = "money")]
-        public decimal Price { get; set; }
+        //[Required]
+        //[Column(TypeName = "money")]
+        //public decimal Price { get; set; }
 
         [Required]
         public int ShotId { get; set; }

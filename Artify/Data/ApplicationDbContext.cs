@@ -52,7 +52,7 @@ namespace Artify.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Image>().Property(si => si.Price).HasPrecision(18, 2);
+           // modelBuilder.Entity<Image>().Property(si => si.Price).HasPrecision(18, 2);
 
             modelBuilder.Entity<Salary>().Property(s => s.MinSalary).HasPrecision(18, 2);
             modelBuilder.Entity<Salary>().Property(s => s.MaxSalary).HasPrecision(18, 2);
