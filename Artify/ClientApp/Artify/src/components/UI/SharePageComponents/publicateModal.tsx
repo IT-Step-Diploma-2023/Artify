@@ -13,11 +13,10 @@ const publicateModal = (
     t: TFunction<"translation", undefined>,
     files: File[],
     openModal: boolean,
-    coverEditActive: boolean,
-    setCoverEditActive: React.Dispatch<React.SetStateAction<boolean>>,
+    editActive: boolean,
+    setEditActive: React.Dispatch<React.SetStateAction<boolean>>,
     closeModalHandler: () => void,
-    submitHandler: (event: React.FormEvent<HTMLFormElement>) => void,
-
+    coverFile?: File,
 ) => {
 
     /* #region localisation const */
@@ -31,7 +30,6 @@ const publicateModal = (
     const progressMessage = t("share.publicate.progressMessage");
     const progressExplane = t("share.publicate.progressExplane");
     /* #endregion */
-
 
     /* #region styles */
 
@@ -54,7 +52,6 @@ const publicateModal = (
         margin: "12px auto 0",
         color: colors.violet,
         cursor: "pointer",
-
     }
 
     const editMenuText = {
@@ -91,7 +88,7 @@ const publicateModal = (
                     width: "480px",
                     padding: "48px 48px 54px"
                 }}>
-                {!coverEditActive &&
+                {!editActive &&
                     <Box sx={container} id="step1">
                         <Typography
                             variant="h6"
@@ -102,15 +99,17 @@ const publicateModal = (
                             }}>
                             {coverCaption}
                         </Typography>
-                        <Box
-                            sx={cover}
-                            style={{
-                                backgroundImage: files.length > 0 ? "url('" + (URL.createObjectURL(files[0])) + "')" : 'none'
-                            }}>
-                        </Box>
+                        {files.length > 0 && (
+                            <Box
+                                sx={cover}
+                                style={{
+                                    backgroundImage: coverFile !== undefined ? "url('" + (URL.createObjectURL(coverFile)) + "')" : 'none'
+                                }}>
+                            </Box>
+                        )}
                         <Box sx={editMenu}
                             onClick={() => {
-                                setCoverEditActive(true);
+                                setEditActive(true);
                                 console.log("edit")
                             }}>
                             {editIcon}
@@ -134,11 +133,11 @@ const publicateModal = (
                         </Box>
                     </Box>
                 }
-                {coverEditActive &&
+                {editActive &&
                     <Box sx={container} id="step2">
                         <Box sx={editMenu}
                             onClick={() => {
-                                setCoverEditActive(false)
+                                setEditActive(false)
                                 console.log("edit")
                             }}>
                             {editIcon}
