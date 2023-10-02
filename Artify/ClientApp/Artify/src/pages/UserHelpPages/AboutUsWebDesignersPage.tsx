@@ -8,6 +8,7 @@ import { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Link } from 'react-router-dom';
+import AboutUsMenu from '../../components/UI/AboutUsMenu';
 
 
 interface Lngs {
@@ -26,6 +27,7 @@ const lngs: Lngs = {
     
 
   return <>
+    <AboutUsMenu/>
     <Typography sx={{marginTop:'100px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'70px', color:'#271846',fontWeight:'400', lineHeight:'84px', fontStyle:'Sofia Sans'}}>
   отже, що ж до нас?..
   </Typography>
