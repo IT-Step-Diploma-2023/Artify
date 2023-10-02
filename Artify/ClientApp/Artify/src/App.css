@@ -182,9 +182,14 @@ h6 {
 }
 
 @font-face {
-    font-family: 'Soyuz Grotesk Bold';
-    font-style: normal;
-    src: local('Soyuz Grotesk Bold'), url('./src/assets/fonts/SoyuzGroteskBold.woff') format('woff');
+	font-family: 'SoyuzGrotesk-Bold';
+    src: url('./assets/fonts/SoyuzGroteskBold/'); /* IE 9 Compatibility Mode */
+	src: url('./assets/fonts/SoyuzGroteskBold/soyuzgrotesk-bold.eot'); /* IE 9 Compatibility Mode */
+	src: url('./assets/fonts/SoyuzGroteskBold/soyuzgrotesk-bold.eot?#iefix') format('embedded-opentype'), /* IE < 9 */
+		url('./assets/fonts/SoyuzGroteskBold/soyuzgrotesk-bold.woff2') format('woff2'), /* Super Modern Browsers */
+		url('./assets/fonts/SoyuzGroteskBold/soyuzgrotesk-bold.woff') format('woff'), /* Firefox >= 3.6, any other modern browser */
+		url('./assets/fonts/SoyuzGroteskBold/soyuzgrotesk-bold.ttf') format('truetype'), /* Safari, Android, iOS */
+		url('./assets/fonts/SoyuzGroteskBold/soyuzgrotesk-bold.svg#soyuzgrotesk-bold') format('svg'); /* Chrome < 4, Legacy iOS */
 }
 
 body {
@@ -234,6 +239,8 @@ body {
 }
 
 .link-active {
+    color: var(--violet);
+    font-weight: 700;
     text-align: center;
     text-decoration: none;
     font-size: 18px;
@@ -443,6 +450,7 @@ body {
     color: var(--violet);
     border: 2px dashed;
     border-color: var(--violet);
+    background-color: rgba(211, 211, 211, 0.3);
 }
 
 .link2-active {

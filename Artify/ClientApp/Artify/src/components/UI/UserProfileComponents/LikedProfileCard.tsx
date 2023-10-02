@@ -11,7 +11,7 @@ const LikedProfileCard = (
         <Paper elevation={0}
             style={{
                 width: 'calc(100% - 12px)',
-                height: 259,
+                minHeight: 260,
                 borderRadius: '10px',
                 backgroundImage: 'url("images/bg_subscriptions.jpg")',
                 backgroundRepeat: 'no-repeat',

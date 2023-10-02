@@ -1,15 +1,12 @@
 import { useTranslation } from 'react-i18next';
 import { FunctionComponent, useState } from 'react';
 import Box from '@mui/material/Box';
-import { Container, Paper } from '@mui/material';
-import { colors } from '../../assets/defaults/colors';
-import FormPanelBackground from '../../components/UI/FormPanelBackground';
-import FormTitle from '../../components/UI/FormTitle';
-import FormPanel from '../../components/UI/FormPanel';
+import { Typography } from '@mui/material';
 import CommonButton from '../../components/UI/CommonButton';
 import Separator from '../../components/UI/Separator';
 import { useNavigate } from 'react-router-dom';
 import RegLogPageContent from '../../components/Layouts/RegLogPageContent';
+import GoogleIconG from '../../components/UI/GoogleIconG';
 
 
 const SelectRegisterPage: FunctionComponent = () => {
@@ -23,7 +20,12 @@ const SelectRegisterPage: FunctionComponent = () => {
             <CommonButton color='primary' height='bg' type='button'
                 sx={{ width: '100%', marginTop: '2.5rem' }}
                 onClick={(() => { navigate('/google-register') })}>
-                {t('userAccountCreate.registerationMetodPage.withGoogle')}
+                <Box sx={{ margin: '0 1rem', display: 'flex', alignItems: 'center' }}>
+                    <GoogleIconG />
+                    <Typography sx={{ marginLeft: '0.75rem' }}>
+                        {t('userAccountCreate.registerationMetodPage.withGoogle')}
+                    </Typography>
+                </Box>
             </CommonButton>
             <Separator text={t('userLoginPage.alternative')} />
             <CommonButton color='secondary' height='bg' type='button'

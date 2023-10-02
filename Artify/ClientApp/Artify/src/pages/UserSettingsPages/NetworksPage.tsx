@@ -1,65 +1,86 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import Box from '@mui/material/Box';
-import { FunctionComponent, useState } from 'react';
+import { ChangeEvent, FormEvent, FunctionComponent, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import SettingsMenu from '../../components/UI/UserSettingsComponents/SettingsMenu';
 import { colors } from '../../assets/defaults/colors';
 import CommonButton from '../../components/UI/CommonButton';
 import CommonLabel from '../../components/UI/UserSettingsComponents/CommonLabel';
 import CommonInput from '../../components/UI/CommonInput';
-import networksData from '../../assets/data/networksData.json'
+import useSocialProfiles from '../../hooks/useSocialProfiles';
+import InputErrorMessage from '../../components/UI/InputErrorMessage';
 
-
-interface SocialProfile {
-    id: number
-    name: string
-    address: string
-}
 
 const NetworksPage: FunctionComponent = () => {
 
+    /* #region localization */
+
     const { t } = useTranslation();
 
-    const networks = networksData;
+    const inputErrorMessage = t('accountPage.socialNetworksErrors.socialNetworkError');
+    const formErrorMessage = t('common.formError');
 
-    const [editFormData, setEditFormData] = useState({ ...networks });
+    /* #endregion */
 
-    const handleFieldChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        event.preventDefault();
-        const fieldName = event.target.getAttribute("name");
-        const fieldValue = event.target.value;
-        const newFormData = { ...editFormData };
+    const { getData, postData, loadData, } = useSocialProfiles();
+    const retriveData = getData();
 
-        for (let i = 0; i < Object.keys(editFormData).length; i++) {
-            if (newFormData[i].name === fieldName)
-                newFormData[i].address = fieldValue;
-        }
-        setEditFormData(newFormData);
-    };
-    
+    const [formData, setFormData] = useState(loadData);
+
+    /* #region validation */
     // ^(http(s):\/\/.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const errors: string[] = [];
+    const states: boolean[] = [];
+    formData.forEach(() => {
+        errors.push('');
+        states.push(false);
+    });
+
+    const [inputErrors, setInputError] = useState(errors);
+    const [formValid, setFormValid] = useState(false);
+
+    useEffect(() => {
+        inputErrors.find((error) => error !== '') !== undefined ?
+            setFormValid(false) :
+            setFormValid(true);
+    }, [inputErrors]);
+
+    const validate = (id: number, name: string, value: string) => {
+        const re = /^(http(s):\/\/.)[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$/;
+        setInputError((prevData) => {
+            const newData = [...prevData]
+            re.test(String(value)) && value.includes('.' + name + '.') || value === '' ?
+                newData[id] = '' :
+                newData[id] = inputErrorMessage;
+            return newData;
+        });
+    }
+
+    /* #endregion */
+
+    const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();
-
-        const userSocialProfiles: SocialProfile[] = [];
-
-        for (let i = 0; i < Object.keys(editFormData).length; i++) {
-            userSocialProfiles.push(editFormData[i]);
-        }
-        ////
-        // here will be fetch with PUT request
-        ////
-        console.log(userSocialProfiles);
+        const id = parseInt(event.target.id);
+        const name = event.target.name;
+        const value = event.target.value;
+        setFormData((prevData) => {
+            const newData = [...prevData];
+            newData[id].address = value;
+            return newData;
+        });
+        validate(id, name, value);
     };
 
-    const placeholders = [
-        'instagram',
-        'behance',
-        'facebook',
-        'pinterest'
-    ];
+    const submitHandler = (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        if (!formValid) {
+            alert(formErrorMessage);
+            return;
+        }
+        postData(formData);
+    }
 
     return <>
         <Box sx={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
@@ -68,27 +89,33 @@ const NetworksPage: FunctionComponent = () => {
             </Box>
             <Box
                 component='form'
-                onSubmit={handleSubmit}
+                onSubmit={submitHandler}
                 sx={{ width: '100%', padding: '0 275px', marginBottom: '130px' }}>
-                {networks.map((network) => (
-                    <Box key={networks.indexOf(network)}>
-                        <CommonLabel htmlFor={network.name}
-                            sx={{ marginTop: networks.indexOf(network) !== 0 ? '1.5rem' : '0' }}>
-                            {network.name}
+                {formData.map((profile) => (
+                    <Box key={formData.indexOf(profile)}>
+                        <CommonLabel htmlFor={profile.name}
+                            sx={{ marginTop: formData.indexOf(profile) !== 0 ? '1.5rem' : '0' }}>
+                            {profile.name}
                         </CommonLabel>
                         <CommonInput
+                            isValid={inputErrors[formData.indexOf(profile)] === '' || profile.address.length === 0}
                             sx={{ width: '100%' }}
                             color='primary'
                             height='bg'
-                            title={network.name}
-                            id={network.name}
-                            name={network.name}
-                            placeholder={network.address !== "" ? network.address : placeholders[networks.indexOf(network)]}
-                            aria-label={network.name}
-                            onChange={handleFieldChange}
+                            title={profile.name}
+                            id={formData.indexOf(profile).toString()}
+                            name={profile.name}
+                            placeholder={profile.name}
+                            aria-label={profile.name}
+                            value={profile.address}
+                            onChange={changeHandler}
                         />
+                        {(inputErrors[formData.indexOf(profile)]) &&
+                            <InputErrorMessage message={inputErrorMessage + profile.name} />
+                        }
                     </Box>
                 ))}
+
                 <CommonButton
                     type='submit'
                     color='primary'
@@ -96,7 +123,8 @@ const NetworksPage: FunctionComponent = () => {
                     sx={{
                         padding: '0 48px',
                         display: 'block',
-                        margin: '4rem auto 0'
+                        margin: '4rem auto 0',
+                        backgroundColor: ((formValid) ? colors.darkViolet : colors.grey)
                     }}
                 >
                     {t('common.saveLong')}

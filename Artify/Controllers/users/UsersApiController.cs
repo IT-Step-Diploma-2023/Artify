@@ -7,15 +7,16 @@ using Artify.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json.Serialization;
-
 namespace Artify.Controllers.users
 {
     [ApiController]
     public class UsersApiController : ControllerBase
     {
         private UsersRepository _usersRepository;
-        public UsersApiController(IRepository<User> usersRepository) {
+        private SocialProfilesRepository _userProfilesRepository;
+        public UsersApiController(IRepository<User> usersRepository, IRepository<SocialProfile> userProfilesRepository) {
             this._usersRepository = (UsersRepository)usersRepository;
+            this._userProfilesRepository = (SocialProfilesRepository)userProfilesRepository;
         }
 
         /// <summary>
@@ -24,7 +25,7 @@ namespace Artify.Controllers.users
         /// /// <response code="200">Returns user in json format</response>
         /// <response code="404">UserDTO was not found in the database</response>
         /// <response code="500">Can't fetch user right now</response>
-        [Route("api/[controller]/[action]")]
+        [Route("api/users/[controller]/[action]")]
         [HttpGet]
         [Authorize]
         public IActionResult GetCurrentUserData()
@@ -55,7 +56,7 @@ namespace Artify.Controllers.users
         /// /// <response code="200">Returns user with the social profiles in json format</response>
         /// <response code="404">UserDTO was not found in the database</response>
         /// <response code="500">Can't fetch user right now</response>
-        [Route("api/[controller]/[action]")]
+        [Route("api/users/[controller]/[action]")]
         [HttpGet]
         [Authorize]
         public IActionResult GetUserSocialProfiles()

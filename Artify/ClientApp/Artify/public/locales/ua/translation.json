@@ -6,7 +6,8 @@
     },
     "common": {
         "saveLong": "зберегти зміни",
-        "save": "зберегти"
+        "save": "зберегти",
+        "formError": "помилкові або неповні дані в полях форми"
     },
     "errorPage": {
         "undefinedError": {
@@ -108,7 +109,15 @@
         "edit": "редагувати",
         "albums": "альбоми",
         "appreciations": "вподобання",
-        "followings": "підписки"
+        "followings": "підписки",
+        "basicInfoErrors": {
+            "userNameError": "некоректний формат імені користувача",
+            "addressError": "некоректний формат адреси",
+            "infoError": "некоректний формат тексту "
+        },
+        "socialNetworksErrors": {
+            "socialNetworkError": "некоректний формат для профілю "
+        }
     },
     "accountPage2": {
         "portfolio": "портфоліо",
@@ -144,42 +153,38 @@
         "inWeb": "в інтернеті",
         "tags": "теги"
     },
-
     "share": {
-        "addToGetStarted":"додайте щоб розпочати",
-        "text":"текст",
-        "image":"зображення",
-        "video":"відео",
-        "projectName":"назва проекту",
-        "addProjectName":"додайте назву проекту",
-        "tags":"теги",
-        "addTags":"додайте теги",
-        "until":"до",
-        "suggested":"запропоновано",
-        "visibilityOfTheProject":"видимість проекту",
-        "intervalsBetweenBlocks":"інтервали між блоками",
-        "saveAsDraft":"зберегти як чернетку",
-        "myContinue":"продовжити",
-        "addBlock":"додати блок"        
+        "addToGetStarted": "додайте щоб розпочати",
+        "text": "текст",
+        "image": "зображення",
+        "video": "відео",
+        "project": "назва проекту",
+        "addProjectTitle": "додайте назву проекту",
+        "tags": "теги",
+        "addTags": "додайте теги",
+        "upTo": "(до 10)",
+        "suggested": "запропоновано",
+        "visibility": "видимість проекту",
+        "visibilityOptions":{
+            "public": "загальнодоступний",
+            "private": "приватний"
+        },
+        "intervalsBetweenBlocks": "інтервали між блоками",
+        "saveAsDraft": "зберегти як чернетку",
+        "myContinue": "продовжити",
+        "addBlock": "додати блок"
     },
-
-
-
-
-
     "hire": {
-        "tags":"теги",
-        "profession":"професія",
-        "location":"місцезнаходження",
-        "salary":"діапазон зарплат",
-        "hr":"год",
-        "write":"написати",
-        "message":"ваше повідомлення",
-        "interested":"я зацікавлений(-а) в наймі",
-        "budget":"ваш бюджет",
-        "send":"відправити повідомлення",
-        "subscribe":"підписатись"
-    } 
-
-
+        "tags": "теги",
+        "profession": "професія",
+        "location": "місцезнаходження",
+        "salary": "діапазон зарплат",
+        "hr": "год",
+        "write": "написати",
+        "message": "ваше повідомлення",
+        "interested": "я зацікавлений(-а) в наймі",
+        "budget": "ваш бюджет",
+        "send": "відправити повідомлення",
+        "subscribe": "підписатись"
+    }
 }

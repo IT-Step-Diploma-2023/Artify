@@ -6,7 +6,8 @@
         },
         "common": {
             "saveLong": "save changes",
-            "save": "save"
+            "save": "save",
+            "formError": "invalid or incomplete data in form fields"
         },
         "errorPage": {
             "undefinedError": {
@@ -108,7 +109,15 @@
             "deleteAccount": "delete account",
             "albums": "albums",
             "appreciations": "likes",
-            "followings": "subscriptions"
+            "followings": "subscriptions",
+            "basicInfoErrors": {
+                "userNameError": "incorrect username format",
+                "addressError": "incorrect address format",
+                "infoError": "incorrect text format "
+            },
+            "socialNetworksErrors": {
+                "socialNetworkError": "incorrect format for profile "
+            }
         },
         "accountPage2": {
             "portfolio": "portfolio",
@@ -149,13 +158,17 @@
             "text": "text",
             "image": "image",
             "video": "video",
-            "projectName": "project name",
-            "addProjectName": "add a project name",
+            "project": "project name",
+            "addProjectTitle": "add a project name",
             "tags": "tags",
             "addTags": "add tags",
-            "until": "until",
+            "upTo": "(up to 10)",
             "suggested": "suggested",
-            "visibilityOfTheProject": "visibility of the project",
+            "visibility": "visibility of the project",
+            "visibilityOptions":{
+                "public": "public",
+                "private": "private"
+            },
             "intervalsBetweenBlocks": "intervals between blocks",
             "saveAsDraft": "save as draft",
             "myContinue": "continue",

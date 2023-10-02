@@ -5,13 +5,12 @@ import Logo from "../../UI/Logo";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import NavMenu from "../../UI/NavMenu";
-import { margin, padding } from "@mui/system";
 
 const buttonIcons = [
-    { target: "#", image: "/images/footer/phone_icon.svg" },
-    { target: "#", image: "/images/footer/instagram_icon.svg" },
-    { target: "#", image: "/images/footer/facebook_icon.svg" },
-    { target: "#", image: "/images/footer/mail_icon.svg", }
+    { target: "#", image: "/images/components/layouts/footer/phone_icon.svg" },
+    { target: "#", image: "/images/components/layouts/footer/instagram_icon.svg" },
+    { target: "#", image: "/images/components/layouts/footer/facebook_icon.svg" },
+    { target: "#", image: "/images/components/layouts/footer/mail_icon.svg", }
 ];
 
 interface Position {
@@ -37,7 +36,7 @@ const Footer: FunctionComponent<Position> = ({ pos }) => {
         '/inspire',
         '/buy',
         '/hire',
-        '/help',
+        '/help-center',
         '/about-us'
     ]
 

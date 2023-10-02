@@ -3,6 +3,7 @@ using Artify.Data;
 using Artify.Models.DbModels.DbModels.Artworks;
 using Artify.Models.DbModels.DbModels.Artworks.Attributes;
 using Artify.Models.DbModels.Users;
+using Artify.Models.DbModels.Users.Attributes;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.PlatformAbstractions;
@@ -55,6 +56,7 @@ builder.Services.AddTransient<IRepository<UserRole>, UserRolesRepository>();
 builder.Services.AddTransient<IRepository<Shot>, ShotsRepository>();
 builder.Services.AddTransient<IRepository<Genre>, GenresRepository>();
 builder.Services.AddTransient<IRepository<Tag>, TagsRepository>();
+builder.Services.AddTransient<IRepository<SocialProfile>, SocialProfilesRepository>();
 
 var app = builder.Build();
 
