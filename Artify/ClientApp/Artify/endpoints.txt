@@ -362,7 +362,7 @@ For use in User Profile PAGE
 Response
 -----------
 Status: 200 OK
-"Portfolio": [                      // Portfolio.UserId == UserId               
+"portfolio": [                      // Portfolio.UserId == UserId               
     "shot": {
         "shotId":,
         "coverImage":
@@ -378,7 +378,7 @@ For use in User Profile PAGE
 Response
 -----------
 Status: 200 OK
-"Albums": [                           // Album.UserId == UserId
+"albums": [                           // Album.UserId == UserId
     "shot": {
         "shotId":,
         "coverImage":
@@ -394,7 +394,7 @@ For use in User Profile PAGE
 Response
 -----------
 Status: 200 OK
-"Appreciations": [                           // Appreciation.UserId == UserId
+"appreciations": [                           // Appreciation.UserId == UserId
     "shot": {
         "shotId":,
         "coverImage":
@@ -410,11 +410,11 @@ For use in User Profile PAGE
 Response
 -----------
 Status: 200 OK
-"Followings": [                           // Appreciation.UserId == UserId
+"followings": [                           // Appreciation.UserId == UserId
     "user": {
         "userId":,
         "username":,
-        "userFullName":,
+        "fullName":,
         "logoImage":,
         "specialties":[
             "name":
