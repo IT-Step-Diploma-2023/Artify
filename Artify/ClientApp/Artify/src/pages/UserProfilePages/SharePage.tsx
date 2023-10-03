@@ -210,7 +210,7 @@ const SharePage: FunctionComponent = () => {
   /* #endregion */
 
   /* #region post data */
-  const postData = () => {
+  const postData = async ():Promise<void>=> {
     const uploadedData: UploadedData = {};
     uploadedData.title = title;
     uploadedData.tags = [...selectedTags];
@@ -225,17 +225,17 @@ const SharePage: FunctionComponent = () => {
       })
     });
     console.log(uploadedData);
-    // const formData = new FormData;
-    // formData.append("value", JSON.stringify(uploadedData));
-    // selectedFiles.forEach((file) => formData.append("images[]", file));
-    // const response = await fetch(url, {
-    //   method: "POST",
-    //   // body: formData,
-    //   headers: {
-    //     "Authorization": "Bearer " + token,
-    //   }
-    // });
-    // if (response.status !== 200) return;
+    const formData = new FormData;
+    formData.append("value", JSON.stringify(uploadedData));
+    selectedFiles.forEach((file) => formData.append("images[]", file));
+    const response = await fetch(url, {
+      method: "POST",
+      body: formData,
+      headers: {
+        "Authorization": "Bearer " + token,
+      }
+    });
+    if (response.status !== 200) return;
   }
   /* #endregion */
 
@@ -605,7 +605,7 @@ const SharePage: FunctionComponent = () => {
           <CustomButton height="bg"
             sx={BtnStyles.greyBtn}
             style={{ width: "100%" }}
-            onClick={() => saveDraft()}>
+            onClick={() => postData()}>
             {saveAsDraft}
           </CustomButton>
           <CustomButton height="bg"

@@ -46,6 +46,44 @@ const publicateModal = (
         margin: "auto"
     }
 
+    const editedCover = {
+        width: "370px",
+        height: "200px",
+        borderRadius: "10px",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        margin: "auto"
+    }
+
+    const thumbnailsContainer = {
+        display: "flex",
+        width: "370px",
+        backgroundColor: "blue",
+        margin: "auto",
+        marginTop: "12px",
+        overflowX: "auto"
+    }
+
+    const addImageBtn = {
+        width: "84px",
+        height: "60px",
+        backgroundColor: colors.grey,
+        borderRadius: "4px",
+        textAlign: "center",
+        color: colors.violet
+
+    }
+
+    const thumbnail = {
+        width: "84px",
+        height: "60px",
+        borderRadius: "4px",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        marginRight: "12px",
+        border: "5px solid red",
+    }
+
     const editMenu = {
         padding: "10px 22px",
         width: "fit-content",
@@ -75,6 +113,12 @@ const publicateModal = (
     }
     /* #endregion */
 
+    const plusIcon =
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" color="inherit">
+            <path d="M8.00065 3.33301V12.6663M3.33398 7.99967H12.6673" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+
+
     return <Box id="modaParent">
         <Modal
             open={openModal}
@@ -103,7 +147,9 @@ const publicateModal = (
                             <Box
                                 sx={cover}
                                 style={{
-                                    backgroundImage: coverFile !== undefined ? "url('" + (URL.createObjectURL(coverFile)) + "')" : 'none'
+                                    backgroundImage: coverFile !== undefined ?
+                                        "url('" + (URL.createObjectURL(coverFile)) + "')" :
+                                        'none'
                                 }}>
                             </Box>
                         )}
@@ -114,7 +160,7 @@ const publicateModal = (
                             }}>
                             {editIcon}
                             <Typography sx={editMenuText}>
-                                {editCoverCaption}
+                                {edit}
                             </Typography>
                         </Box>
                         <Box style={btnWrapper}>
@@ -135,21 +181,46 @@ const publicateModal = (
                 }
                 {editActive &&
                     <Box sx={container} id="step2">
-                        <Box sx={editMenu}
-                            onClick={() => {
-                                setEditActive(false)
-                                console.log("edit")
+                        <Typography
+                            variant="h6"
+                            component="h2"
+                            sx={{
+                                textAlign: "center",
+                                marginBottom: "24px"
                             }}>
-                            {editIcon}
-                            <Typography sx={editMenuText}>
-                                back
-                            </Typography>
+                            {editCoverCaption}
+                        </Typography>
+                        <Box
+                            sx={editedCover}
+                            style={{
+                                backgroundImage: coverFile !== undefined ?
+                                    "url('" + (URL.createObjectURL(coverFile)) + "')" :
+                                    'none'
+                            }}>
+                        </Box>
+                        <Box sx={thumbnailsContainer}>
+                            {files.map((file) => 
+                            
+                            <Box 
+                            key={files.indexOf(file)}
+                            sx={thumbnail}
+                            style={{
+                                backgroundImage: "url('" + (URL.createObjectURL(file)) + "')"
+                            }}>
+                            </Box>
+                            )}
+                            <Box sx={addImageBtn}>
+                                {plusIcon}
+                            </Box>
                         </Box>
                         <Box style={btnWrapper}>
                             <CustomButton height="md"
                                 sx={BtnStyles.lightGreyBtn}
                                 style={btnStyle}
-                                onClick={() => console.log("cancelCover")}>
+                                onClick={() => {
+                                    setEditActive(false);
+                                    console.log("cancelCover");
+                                }}>
                                 {cancelCover}
                             </CustomButton>
                             <CustomButton height="md"
