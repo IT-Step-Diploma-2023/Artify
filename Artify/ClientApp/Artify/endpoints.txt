@@ -323,3 +323,106 @@ Status: 200 OK
     "logoImage": // path as string
 }
 
+/////////////////////////////////
+add new model Portfolio
+or rename Project to Portfolio
+
+public class Portfolio
+{
+    [Key]
+    public int Id { get; set; }
+    [Required]
+    public int UserId { get; set; } // UserDTO created Follower
+
+    [Required]
+    [DataType(DataType.DateTime)]
+    public DateTime CreatedDateTime { get; set; }
+    // NAVIGATION PROPERTIES
+    [ForeignKey(nameof(UserId))]
+    public virtual User User { get; set; } = null!;
+    public virtual List<Shot> Shots { get; set; } = new();
+}
+
+/////////////////////////////////
+add properties to Album
+
+[Required]
+public bool IsPublic { get; set;}
+
+public string Title { get; set; } = string.Empty;
+
+
+GET /ShotsApi/GetPortfolio?userId=[userId] // userId of portfolio`s owner, if current user is not owner
+
+Description
+-----------
+Authorization: NO
+For use in User Profile PAGE
+
+Response
+-----------
+Status: 200 OK
+"Portfolio": [                      // Portfolio.UserId == UserId               
+    "shot": {
+        "shotId":,
+        "coverImage":
+    }
+]
+
+GET /ShotsApi/GetAlbums?userId=[userId] // userId of album`s owner, if current user is not owner
+Description
+-----------
+Authorization: NO
+For use in User Profile PAGE
+
+Response
+-----------
+Status: 200 OK
+"Albums": [                           // Album.UserId == UserId
+    "shot": {
+        "shotId":,
+        "coverImage":
+    }
+]
+
+GET /ShotsApi/GetAppreciations?userId=[userId] // userId of appreciation`s owner, if current user is not owner
+Description
+-----------
+Authorization: NO
+For use in User Profile PAGE
+
+Response
+-----------
+Status: 200 OK
+"Appreciations": [                           // Appreciation.UserId == UserId
+    "shot": {
+        "shotId":,
+        "coverImage":
+    }
+]
+
+GET /users/UsersApi/GetFollowings?userId=[userId] // userId of profile`s owner, if current user is not owner
+Description
+-----------
+Authorization: NO
+For use in User Profile PAGE
+
+Response
+-----------
+Status: 200 OK
+"Followings": [                           // Appreciation.UserId == UserId
+    "user": {
+        "userId":,
+        "username":,
+        "userFullName":,
+        "logoImage":,
+        "specialties":[
+            "name":
+        ]
+    }
+]
+
+
+
+
+
