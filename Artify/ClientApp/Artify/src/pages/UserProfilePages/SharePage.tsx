@@ -20,7 +20,7 @@ import { padding } from "@mui/system";
 import CommonTextArea from "../../components/UI/CommonTextArea";
 import CommonButton from "../../components/UI/CommonButton";
 import addDescriptionModal from "../../components/UI/SharePageComponents/addDescriptionModal";
-import publicateModal from "../../components/UI/SharePageComponents/publicateModal";
+import PublicateModal from "../../components/UI/SharePageComponents/publicateModal";
 
 interface VisibilityOption {
   index: number,
@@ -200,7 +200,7 @@ const SharePage: FunctionComponent = () => {
     if (event.target.files.length === 0) return;
     const updatedFiles = [...selectedFiles, ...event.target.files];
     setSelectedFiles(updatedFiles);
-    setCover(updatedFiles[0]);
+    cover === undefined && setCover(updatedFiles[0]);
     console.log(selectedFiles);
   }
 
@@ -614,13 +614,15 @@ const SharePage: FunctionComponent = () => {
             onClick={() => { setOpenPublicateModal(true) }}>
             {myContinue}
           </CustomButton>
-          {publicateModal(
+          {PublicateModal(
             t,
             selectedFiles,
             openPublicateModal,
             coverEditActive,
             setCoverEditActive,
             closePublicateModalHandler,
+            addImageHandler,
+            setCover,
             cover,
           )}
         </Box>
