@@ -1,48 +1,145 @@
 import ImageListItem from '@mui/material/ImageListItem';
-import { Avatar, Box, Grid, Typography } from '@mui/material';
+import { Avatar, Box, Divider, Grid, Typography } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
-
+import { existedTags } from "../../assets/data/tags";
+import { prices } from "../../assets/data/prices";
+import { extensions } from "../../assets/data/extensions";
+import { colors } from "../../assets/defaults/colors";
 import '../../App.css';
+import { useContext } from 'react';
+import Context from "../../utils/Context";
+import { useTranslation } from 'react-i18next';
+import { TFunction } from 'i18next';
+
+/* #region styles */
+const container = {
+  width: "100%",
+  display: "flex",
+}
+
+const filterBlock = {
+  width: "25%",
+}
+/* #endregion */
 
 
-export default function StandardImageList() {
+
+export default function HomeImageList() {
+
+  const { t } = useTranslation();
+
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
+  const { filterActive } = useContext(Context);
+
+  const existedPrices: string[] = [];
+  prices.map((price) => {
+    existedPrices.push(price.name);
+  });
+
   return (<>
-    <Grid container spacing={{ xs: 2, md: 5 }}>
-      {itemData.map((item) => (
-        <Grid item xs={12} md={6} lg={3} key={item.img}>
-          <ImageListItem >
-            <img
-              style={{ width: '100%', aspectRatio: '1.4', borderRadius: 10, boxShadow: '0px 4px 8px 0px #27184666' }}
-              src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-              srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-              alt={item.title}
-              loading="lazy"
-            />
-            <Box>
-              <Box sx={{ verticalAlign: 'center', marginRight: 'auto' }}>
-                <Avatar sx={{ float: 'left', marginTop: '0.4375rem', width: '1.25rem', height: '1.25rem' }}
-                  alt="Remy Sharp"
-                  src="images/default_profile.png"
-                />
+    <Box sx={container}>
+      <Box
+        sx={filterBlock}
+        style={{ display: filterActive ? "block" : "none" }}>
+        <Box sx={{ width: "100%", paddingRight: "40px" }}>
+          {filterParamlist(t, t("homePage.params.category"), existedTags)}
+          {filterParamlist(t, t("homePage.params.price"), existedPrices)}
+          {filterParamlist(t, t("homePage.params.extension"), extensions)}
+        </Box>
+      </Box>
+      <Grid container spacing={{ xs: 2, md: 5 }} sx={{ height: "fit-content" }}>
+        {itemData.map((item) => (
+          <Grid item xs={12} md={6} lg={3} key={item.img} id={itemData.indexOf(item).toString()} >
+            <ImageListItem >
+              <img
+                style={{ width: '100%', aspectRatio: '1.4', borderRadius: 10, boxShadow: '0px 4px 8px 0px #27184666' }}
+                src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
+                srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                alt={item.title}
+                loading="lazy"
+              />
+              <Box>
+                <Box sx={{ verticalAlign: 'center', marginRight: 'auto' }}>
+                  <Avatar sx={{ float: 'left', marginTop: '0.4375rem', width: '1.25rem', height: '1.25rem' }}
+                    alt="Remy Sharp"
+                    src="images/default_profile.png"
+                  />
+                </Box>
+                <Typography sx={{ float: 'left', fontSize: '0.875rem', fontWeight: 700, padding: '0.4375rem 0 0 0.4375rem' }}>fvfsvsvvs dgbdgbb</Typography>
+                <Typography sx={{ float: 'right', fontSize: '0.875rem', fontWeight: 400, color: '#9E9AA2', padding: '0.4375rem 0 0 0.4375rem' }}>12</Typography>
+                <Box >
+                  <Checkbox {...label} icon={<FavoriteBorder sx={{ color: '#9E9AA2', width: '1rem' }} />} checkedIcon={<Favorite sx={{ color: '#D65353', width: '1rem' }} />}
+                    sx={{ width: '18px', height: '18px', float: 'right', marginTop: '0.4375rem' }} />
+                </Box>
               </Box>
-              <Typography sx={{ float: 'left', fontSize: '0.875rem', fontWeight: 700, padding: '0.4375rem 0 0 0.4375rem' }}>fvfsvsvvs dgbdgbb</Typography>
-              <Typography sx={{ float: 'right', fontSize: '0.875rem', fontWeight: 400, color: '#9E9AA2', padding: '0.4375rem 0 0 0.4375rem'}}>12</Typography>
-              <Box >
-                <Checkbox {...label} icon={<FavoriteBorder sx={{ color: '#9E9AA2', width: '1rem' }} />} checkedIcon={<Favorite sx={{ color: '#D65353' , width: '1rem'}} />}
-                  sx={{ width: '18px', height: '18px', float: 'right', marginTop: '0.4375rem' }} />
-              </Box>
-            </Box>
-          </ImageListItem>
-        </Grid>
-      ))}
-    </Grid>
+            </ImageListItem>
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
   </>
   );
+}
 
+function filterParamlist(
+  t: TFunction<"translation", undefined>,
+  title: string,
+  filterParams: string[]
+) {
+
+  /* #region styles */
+  const titleStyle = {
+    fontSize: '1.25rem',
+    fontWeight: '700',
+    margin: "24px 0 12px"
+  }
+
+  const checkboxStyle = {
+    marginLeft: "-9px",
+    color: '#271846',
+    '&.Mui-checked': {
+      color: '#271846',
+    }
+  }
+
+  const paramNameStyle = {
+    display: 'inline-block',
+    marginTop: '8px',
+    marginLeft: '0px',
+    color: colors.darkViolet,
+    fontWeight: '400'
+  }
+  /* #endregion */
+
+  return <Box sx={{ marginBottom: "36px" }}>
+    <Divider sx={{ color: colors.darkViolet, borderColor: colors.darkViolet, marginTop: "10px" }} />
+    <Typography sx={titleStyle}>{title}</Typography>
+    <div style={{ display: 'block' }}>
+      <div style={{ display: 'inline-block' }}>
+        <Checkbox disableRipple
+          sx={checkboxStyle} />
+      </div>
+      <Typography component='div'
+        sx={paramNameStyle}>
+        {t("homePage.params.all")}
+      </Typography>
+    </div>
+    {filterParams.map((param) => (
+      <div style={{ display: 'block' }} key={filterParams.indexOf(param)}>
+        <div style={{ display: 'inline-block' }}>
+          <Checkbox disableRipple
+            sx={checkboxStyle} />
+        </div>
+        <Typography component='div'
+          sx={paramNameStyle}>
+          {param}
+        </Typography>
+      </div>
+    ))}
+  </Box>
 }
 
 const itemData = [

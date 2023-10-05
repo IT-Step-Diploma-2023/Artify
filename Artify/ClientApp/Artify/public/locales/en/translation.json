@@ -2,7 +2,15 @@
         "title": "English",
         "buttonFetch": "Fetch Data",
         "homePage": {
-            "text": "Home Page"
+            "text": "Home Page",
+            "filterButton": "filter",
+            "params": {
+                "category": "category",
+                "price": "price",
+                "priceFree": "free",
+                "extension": "format",
+                "selectAll": "all"
+            }
         },
         "common": {
             "saveLong": "save changes",

@@ -16,11 +16,9 @@ import * as pageSyles from "./SharePageStyles";
 import * as BtnStyles from "../../components/UI/CustomButtonStyles";
 import CustomButton from "../../components/UI/CustomButton";
 import { getAuthToken } from "../../hooks/useAuthorization";
-import { padding } from "@mui/system";
-import CommonTextArea from "../../components/UI/CommonTextArea";
-import CommonButton from "../../components/UI/CommonButton";
 import addDescriptionModal from "../../components/UI/SharePageComponents/addDescriptionModal";
 import PublicateModal from "../../components/UI/SharePageComponents/publicateModal";
+import {existedTags} from "../../assets/data/tags";
 
 interface VisibilityOption {
   index: number,
@@ -70,19 +68,19 @@ const SharePage: FunctionComponent = () => {
     t("share.video")
   ]
 
-  const existedTags = [
-    "design",
-    "illustration",
-    "ui",
-    "logo",
-    "branding",
-    "graphic design",
-    "vector",
-    "ux",
-    "typography",
-    "app",
-    "photo"
-  ]
+  // const existedTags = [
+  //   "design",
+  //   "illustration",
+  //   "ui",
+  //   "logo",
+  //   "branding",
+  //   "graphic design",
+  //   "vector",
+  //   "ux",
+  //   "typography",
+  //   "app",
+  //   "photo"
+  // ]
 
   const visibilityOptions = [
     t("share.visibilityOptions.public"),

@@ -2,7 +2,15 @@
     "title": "Українська",
     "buttonFetch": "Отримати дані",
     "homePage": {
-        "text": "Домашня Сторінка"
+        "text": "Домашня Сторінка",
+        "filterButton": "фільтр",
+        "params": {
+            "category": "категорія",
+            "price": "ціна",
+            "priceFree": "безкоштовно",
+            "extension": "формат",
+            "selectAll": "усі"
+        }
     },
     "common": {
         "saveLong": "зберегти зміни",
