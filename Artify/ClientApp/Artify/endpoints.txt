@@ -22,7 +22,8 @@ Status: 200 OK
 ************
 
 002
-GET /settings-profinfo
+GET  /GetUserProfInfo
+PAGE /settings-profinfo
 
 Description
 -----------
@@ -31,32 +32,33 @@ Get information about profession, skills and education
 Response
 -----------
 Status: 200 OK
-{
-    "workPreference": {
-        "skills": ,
-        "educations": [
-            education: {
-                "id": ,
-                "degree": ,
-                "institution": ,
-                "startYear": ,
-                "finisYear": ,
-            }
-        ],
-        "specialties": [
-            specialty: {
-                "id": ,
-                "name": 
-            }
-        ],
-        "jobs": [
+{                               // WorkPreference model
+    "skills":,
+    "educations": [
+        {                       // Education model
+            "id": ,
+            "degree": ,
+            "institution": ,
+            "startYear": ,
+            "finisYear": ,
+        }
+    ],
+    "specialties": [            
+        {                       // Specialty model
+            "id": ,
+            "name": 
+        }
+    ],
+    "jobs": [
+        {                       // Job model
             "id": ,
             "position": ,
             "company": ,
             "startYear": ,
             "finisYear": 
-        ]
-    }
+        }
+    ],
+    "webSite":
 }
 
 ************
@@ -320,4 +322,107 @@ Status: 200 OK
     "info": ,
     "logoImage": // path as string
 }
+
+/////////////////////////////////
+add new model Portfolio
+or rename Project to Portfolio
+
+public class Portfolio
+{
+    [Key]
+    public int Id { get; set; }
+    [Required]
+    public int UserId { get; set; } // UserDTO created Follower
+
+    [Required]
+    [DataType(DataType.DateTime)]
+    public DateTime CreatedDateTime { get; set; }
+    // NAVIGATION PROPERTIES
+    [ForeignKey(nameof(UserId))]
+    public virtual User User { get; set; } = null!;
+    public virtual List<Shot> Shots { get; set; } = new();
+}
+
+/////////////////////////////////
+add properties to Album
+
+[Required]
+public bool IsPublic { get; set;}
+
+public string Title { get; set; } = string.Empty;
+
+
+GET /ShotsApi/GetPortfolio?userId=[userId] // userId of portfolio`s owner, if current user is not owner
+
+Description
+-----------
+Authorization: NO
+For use in User Profile PAGE
+
+Response
+-----------
+Status: 200 OK
+"portfolio": [                      // Portfolio.UserId == UserId               
+    "shot": {
+        "shotId":,
+        "coverImage":
+    }
+]
+
+GET /ShotsApi/GetAlbums?userId=[userId] // userId of album`s owner, if current user is not owner
+Description
+-----------
+Authorization: NO
+For use in User Profile PAGE
+
+Response
+-----------
+Status: 200 OK
+"albums": [                           // Album.UserId == UserId
+    "shot": {
+        "shotId":,
+        "coverImage":
+    }
+]
+
+GET /ShotsApi/GetAppreciations?userId=[userId] // userId of appreciation`s owner, if current user is not owner
+Description
+-----------
+Authorization: NO
+For use in User Profile PAGE
+
+Response
+-----------
+Status: 200 OK
+"appreciations": [                           // Appreciation.UserId == UserId
+    "shot": {
+        "shotId":,
+        "coverImage":
+    }
+]
+
+GET /users/UsersApi/GetFollowings?userId=[userId] // userId of profile`s owner, if current user is not owner
+Description
+-----------
+Authorization: NO
+For use in User Profile PAGE
+
+Response
+-----------
+Status: 200 OK
+"followings": [                           // Appreciation.UserId == UserId
+    "user": {
+        "userId":,
+        "username":,
+        "fullName":,
+        "logoImage":,
+        "specialties":[
+            "name":
+        ]
+    }
+]
+
+
+
+
 

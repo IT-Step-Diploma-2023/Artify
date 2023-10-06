@@ -20,7 +20,10 @@ const addDescriptionModal = (
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
-            <Box sx={pageStyles.modal} component="form"
+            <Box
+                sx={pageStyles.modal}
+                style={{ width: 600 }}
+                component="form"
                 onSubmit={addDescription}>
                 <Typography
                     variant="h6"

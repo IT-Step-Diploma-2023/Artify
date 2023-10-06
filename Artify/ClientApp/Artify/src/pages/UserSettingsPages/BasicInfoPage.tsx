@@ -10,16 +10,14 @@ import React from 'react';
 import { AddAPhoto } from '@mui/icons-material';
 import { Grid } from '@mui/material';
 import CommonTextArea from '../../components/UI/CommonTextArea';
-import { countriesNames } from '../../utils/getCountries';
+import { countries } from '../../utils/getCountries';
 import CommonSelect from '../../components/UI/CommonSelect';
 import useUserSettings from '../../hooks/useUserSettings';
 import InputErrorMessage from '../../components/UI/InputErrorMessage';
 
 const BasicInfoPage: FunctionComponent = () => {
 
-    const countries = countriesNames;
-
-    /* #region localization */
+      /* #region localization */
 
     const { t } = useTranslation();
 

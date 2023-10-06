@@ -52,3 +52,21 @@ export const violetBtn = {
         boxShadow: effects.shadowVioletActive,
     },
 }
+
+export const darkVioletBtn = {
+    color: colors.white,
+    border: '1px solid ' + colors.darkViolet,
+    backgroundColor: colors.darkViolet,
+    '&:hover': {
+        color: colors.white,
+        backgroundColor: colors.darkViolet,
+        border: '1px solid ' + colors.darkViolet,
+        boxShadow: effects.shadowVioletHover,
+    },
+    '&:active': {
+        boxShadow: effects.shadowVioletActive,
+        border: '1px solid ' + colors.darkViolet,
+
+        
+    },
+}

@@ -4,7 +4,7 @@ import { Button } from "@mui/base/Button";
 import Typography from "@mui/material/Typography";
 
 import { Box, Divider, IconButton, Input, ListItemButton, ListItemText, Menu, MenuItem, Modal, Paper, Select, Slider, Stack } from "@mui/material";
-import { ChangeEvent, FunctionComponent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, FunctionComponent, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AutorenewRounded, DeleteForeverRounded, North, South } from "@mui/icons-material";
 import CommonInput from "../../components/UI/CommonInput";
@@ -16,10 +16,9 @@ import * as pageSyles from "./SharePageStyles";
 import * as BtnStyles from "../../components/UI/CustomButtonStyles";
 import CustomButton from "../../components/UI/CustomButton";
 import { getAuthToken } from "../../hooks/useAuthorization";
-import { padding } from "@mui/system";
-import CommonTextArea from "../../components/UI/CommonTextArea";
-import CommonButton from "../../components/UI/CommonButton";
-import addDescriptionModal from "../../components/UI/SharePageComponents/AddDescriptionModal";
+import addDescriptionModal from "../../components/UI/SharePageComponents/addDescriptionModal";
+import PublicateModal from "../../components/UI/SharePageComponents/publicateModal";
+import {existedTags} from "../../assets/data/tags";
 
 interface VisibilityOption {
   index: number,
@@ -61,7 +60,7 @@ const SharePage: FunctionComponent = () => {
   const myContinue = t("share.myContinue");
   const addBlock = t("share.addBlock");
   const descriptionText = t("share.description.placeholder");
-  const descriptionCaption = t("share.description.cuption");
+  const descriptionCaption = t("share.description.caption");
 
   const iconText = [
     t("share.text"),
@@ -69,19 +68,19 @@ const SharePage: FunctionComponent = () => {
     t("share.video")
   ]
 
-  const availableTags = [
-    "design",
-    "illustration",
-    "ui",
-    "logo",
-    "branding",
-    "graphic design",
-    "vector",
-    "ux",
-    "typography",
-    "app",
-    "photo"
-  ]
+  // const existedTags = [
+  //   "design",
+  //   "illustration",
+  //   "ui",
+  //   "logo",
+  //   "branding",
+  //   "graphic design",
+  //   "vector",
+  //   "ux",
+  //   "typography",
+  //   "app",
+  //   "photo"
+  // ]
 
   const visibilityOptions = [
     t("share.visibilityOptions.public"),
@@ -93,11 +92,13 @@ const SharePage: FunctionComponent = () => {
   const [title, setTitle] = useState("");
 
   const [description, setDescription] = useState<string>("");
-
   const [openDescriptionModal, setOpenDescriptionModal] = useState(false);
 
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [tagsMenuVisible, setTagsMenuVisible] = useState(false);
+  const [availableTags, setAvailableTags] = useState<string[]>([...existedTags]);
+  const [tagInputValue, setTagInputValue] = useState("");
+
+  const [tags2MenuVisible, setTagsMenuVisible] = useState(false);
 
   const [visibylity, setVisibility] = useState<VisibilityOption>({ index: 0, option: visibilityOptions[0] });
   const [visibilityMenuVisible, setVisibilityMenuVisible] = useState(false);
@@ -111,9 +112,9 @@ const SharePage: FunctionComponent = () => {
   const [addBlockActive, setAddBlockActive] = useState(false);
 
   const addBlockRef = useRef(null);
+  const [openPublicateModal, setOpenPublicateModal] = useState(false);
 
-  const [cover, setCover] = useState("");
-  const [coverEditActive, setCoverEditActive] = useState(false);
+  const [cover, setCover] = useState<File>();
 
   useEffect(() => {
     const index = visibylity.index;
@@ -140,17 +141,42 @@ const SharePage: FunctionComponent = () => {
   /* #endregion */
 
   /* #region tags handlers */
+
   const tagItemClickHandler = (e: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
     e.stopPropagation();
     const newTag = e.currentTarget.innerText;
     if (selectedTags.length === 10) return;
-    if ((selectedTags.find((tag) => tag === newTag)) !== undefined) return;
+    if ((selectedTags.find((tag) => tag === newTag)) !== undefined) {
+      setTagInputValue("");
+      return;
+    }
     const newSelectedTags = [...selectedTags];
     newSelectedTags.push(newTag);
     setSelectedTags(newSelectedTags);
+    setTagInputValue("");
   }
 
-  const removeTagClickHandler = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const tagInputKeyDownHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key !== "Enter" && event.key !== "Escape") return;
+    if (selectedTags.length === 10 || event.key === "Escape") {
+      setTagsMenuVisible(false);
+      setTagInputValue("");
+      return;
+    }
+    const newTag = event.currentTarget.value;
+    if ((selectedTags.find((tag) => tag === newTag)) !== undefined) {
+      setTagsMenuVisible(false);
+      setTagInputValue("");
+      return;
+    }
+    const newSelectedTags = [...selectedTags];
+    newSelectedTags.push(newTag);
+    setSelectedTags(newSelectedTags);
+    setTagsMenuVisible(false);
+    setTagInputValue("");
+  }
+
+  const removeTag2ClickHandler = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
     const removedTag = e.currentTarget.id;
     const updatedTags: string[] = [];
@@ -158,6 +184,13 @@ const SharePage: FunctionComponent = () => {
       if (tag !== removedTag) updatedTags.push(tag)
     });
     setSelectedTags(updatedTags);
+  }
+
+  const filterTags = (e: ChangeEvent<HTMLInputElement>): void => {
+    const text = e.target.value;
+    const visibleTags = existedTags.filter((tag) => tag.includes(text));
+    setAvailableTags([...visibleTags]);
+    console.log(availableTags);
   }
   /* #endregion */
 
@@ -176,9 +209,9 @@ const SharePage: FunctionComponent = () => {
     inputElement.click();
     setAddBlockActive(false);
   }
-
   const openDescriptionModalHandler = () => setOpenDescriptionModal(true);
   const closeDescriptionModalHandler = () => setOpenDescriptionModal(false);
+
 
   const addDescription = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -199,12 +232,18 @@ const SharePage: FunctionComponent = () => {
     if (event.target.files.length === 0) return;
     const updatedFiles = [...selectedFiles, ...event.target.files];
     setSelectedFiles(updatedFiles);
+    cover === undefined && setCover(updatedFiles[0]);
     console.log(selectedFiles);
   }
+
+  const openPublicateModalHandler = () => setOpenPublicateModal(true);
+  const closePublicateModalHandler = () => setOpenPublicateModal(false);
+
+
   /* #endregion */
 
   /* #region post data */
-  const postData = () => {
+  const postData = async (): Promise<void> => {
     const uploadedData: UploadedData = {};
     uploadedData.title = title;
     uploadedData.tags = [...selectedTags];
@@ -219,17 +258,17 @@ const SharePage: FunctionComponent = () => {
       })
     });
     console.log(uploadedData);
-    // const formData = new FormData;
-    // formData.append("value", JSON.stringify(uploadedData));
-    // selectedFiles.forEach((file) => formData.append("images[]", file));
-    // const response = await fetch(url, {
-    //   method: "POST",
-    //   // body: formData,
-    //   headers: {
-    //     "Authorization": "Bearer " + token,
-    //   }
-    // });
-    // if (response.status !== 200) return;
+    const formData = new FormData;
+    formData.append("value", JSON.stringify(uploadedData));
+    selectedFiles.forEach((file) => formData.append("images[]", file));
+    const response = await fetch(url, {
+      method: "POST",
+      body: formData,
+      headers: {
+        "Authorization": "Bearer " + token,
+      }
+    });
+    if (response.status !== 200) return;
   }
   /* #endregion */
 
@@ -255,7 +294,7 @@ const SharePage: FunctionComponent = () => {
   ) => {
     return <Box
       id={id}
-      tabIndex={0}
+      tabIndex={1}
       style={displayCondition ? pageSyles.dropdown : pageSyles.dropdownHidden}
       onBlur={() => setter(false)}>
       <Divider />
@@ -267,6 +306,33 @@ const SharePage: FunctionComponent = () => {
         >{item}</Typography>
       ))}
     </Box>;
+  }
+
+  const tags2Dropdown = (
+    itemSet: string[],
+    id: string,
+    displayCondition: boolean,
+    setter: (value: React.SetStateAction<boolean>) => void,
+    handler: (e: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => void
+  ) => {
+    return <Box
+      id={id}
+      tabIndex={1}
+      style={displayCondition ? pageSyles.dropdown : pageSyles.dropdownHidden}
+      onBlur={() => setter(false)}>
+      <Divider color={selectedTags.length > 0 ? colors.violet : colors.grey} />
+      {itemSet.map((item) => (
+        <Typography key={item}
+          id={itemSet.indexOf(item).toString()}
+          sx={pageSyles.dropdownItem}
+          onClick={(e: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
+            console.log(e.currentTarget.innerText)
+            handler(e);
+            setTagsMenuVisible(false);
+          }}
+        >{item}</Typography>
+      ))}
+    </Box>
   }
   /* #endregion */
 
@@ -310,6 +376,21 @@ const SharePage: FunctionComponent = () => {
       </Typography>
     </Box>)}
   </Box>
+
+  const displayImages = useMemo(() => {
+    return <>
+      {selectedFiles.map((file) => <Box
+        key={selectedFiles.indexOf(file)}
+        sx={pageSyles.imageBlock}
+        style={{
+          marginBottom: selectedFiles.indexOf(file) < selectedFiles.length - 1 ?
+            (gap.toString() + "px") : "0",
+          backgroundImage: "url('" + (URL.createObjectURL(file)) + "')"
+        }}>
+      </Box>
+      )}
+    </>
+  }, [selectedFiles, gap]);
 
   return <>
     <Box sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
@@ -370,20 +451,7 @@ const SharePage: FunctionComponent = () => {
         <Box sx={{ width: "50%", paddingBottom: "1rem" }}>
           <Box sx={{ width: "100%", borderRadius: "30px", overflow: "hidden", boxShadow: effects.shadowVioletHover }}>
             {(selectedFiles.length > 0) &&
-              <>
-                {selectedFiles.map((file) =>
-                  <Box
-                    key={selectedFiles.indexOf(file)}
-                    sx={pageSyles.imageBlock}
-                    style={{
-                      marginBottom:
-                        selectedFiles.indexOf(file) < selectedFiles.length - 1 ?
-                          (gap.toString() + "px") : "0",
-                      backgroundImage: "url('" + (URL.createObjectURL(file)) + "')"
-                    }}>
-                  </Box>
-                )}
-              </>
+              displayImages
             }
             {(description.length > 0) &&
               <Box sx={pageSyles.textBlock}
@@ -445,7 +513,7 @@ const SharePage: FunctionComponent = () => {
             }}
           />
         </Box>
-        {/* tags */}
+        {/* NEW tags */}
         <Box sx={pageSyles.inputBox}>
           <CommonLabel htmlFor="">
             {tags}<span style={{ fontWeight: 400 }}> {upTo}</span>
@@ -453,22 +521,14 @@ const SharePage: FunctionComponent = () => {
           <Box sx={{ position: "relative" }}>
             <Box id="tagBox"
               sx={pageSyles.tagBox}
-              style={tagsMenuVisible ? {
+              style={tags2MenuVisible ? {
                 position: "absolute",
                 left: "0",
                 top: "0",
                 borderColor: selectedTags.length > 0 ? colors.violet : colors.grey
               } : {
                 borderColor: selectedTags.length > 0 ? colors.violet : colors.grey
-              }}
-              onClick={() => {
-                setTagsMenuVisible(!tagsMenuVisible);
-                setVisibilityMenuVisible(false);
               }}>
-              <Typography id="tagsPlaceholder"
-                sx={{ color: "grey", lineHeight: "35px", marginLeft: "14px" }}>
-                {selectedTags.length > 0 ? "" : addTags}
-              </Typography>
               {selectedTags.map((tag) => (
                 <Box key={tag}
                   sx={pageSyles.selectedTag}>
@@ -482,18 +542,48 @@ const SharePage: FunctionComponent = () => {
                   <Box
                     id={tag}
                     sx={{ height: "19px" }}
-                    onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => removeTagClickHandler(event)}>
+                    onClick={removeTag2ClickHandler}>
                     <CrossIcon />
                   </Box>
                 </Box>
               ))}
-              {tagsDropdown(availableTags, "tagsMenu", tagsMenuVisible, setTagsMenuVisible, tagItemClickHandler)}
+              <input
+                type="text"
+                placeholder={addTags}
+                value={tagInputValue}
+                style={{
+                  padding: 0,
+                  outline: "none",
+                  border: "none",
+                  lineHeight: "35px",
+                  marginLeft: "14px",
+                  fontFamily: "Nunito",
+                  fontSize: "1rem"
+                }}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  setVisibilityMenuVisible(false);
+                  setTagsMenuVisible(true);
+                  setTagInputValue(e.target.value);
+                  filterTags(e);
+                }}
+                onFocus={() => {
+                  setTagsMenuVisible(true);
+                }}
+                onKeyDown={tagInputKeyDownHandler}
+              />
+              {tags2Dropdown(
+                availableTags,
+                "tags2Menu",
+                tags2MenuVisible,
+                setTagsMenuVisible,
+                tagItemClickHandler
+              )}
             </Box>
           </Box>
           {selectedTags.length === 0 && (
             <Box sx={{ padding: "0 0 12px 24px", marginTop: "8px" }}>
               <Typography sx={{ display: "inline", color: colors.grey }}>{suggested}: </Typography>
-              {availableTags.map((tag) => (
+              {existedTags.map((tag) => (
                 <Typography key={tag}
                   sx={{ display: "inline", color: colors.darkViolet }}>{tag}; </Typography>
               ))}
@@ -522,7 +612,13 @@ const SharePage: FunctionComponent = () => {
                 sx={{ color: colors.violet, fontWeight: 700, lineHeight: "35px", marginLeft: "14px" }}>
                 {visibylity.option}
               </Typography>
-              {tagsDropdown(visibilityOptions, "visibilityMenu", visibilityMenuVisible, setVisibilityMenuVisible, visibilityOptionClickHandler)}
+              {tagsDropdown(
+                visibilityOptions,
+                "visibilityMenu",
+                visibilityMenuVisible,
+                setVisibilityMenuVisible,
+                visibilityOptionClickHandler
+              )}
             </Box>
           </Box>
         </Box>
@@ -599,15 +695,24 @@ const SharePage: FunctionComponent = () => {
           <CustomButton height="bg"
             sx={BtnStyles.greyBtn}
             style={{ width: "100%" }}
-            onClick={() => saveDraft()}>
+            onClick={() => postData()}>
             {saveAsDraft}
           </CustomButton>
           <CustomButton height="bg"
             sx={BtnStyles.violetBtn}
             style={{ width: "100%", marginTop: "12px" }}
-            onClick={() => postData()}>
+            onClick={() => openPublicateModalHandler()}>
             {myContinue}
           </CustomButton>
+          {PublicateModal(
+            t,
+            selectedFiles,
+            openPublicateModal,
+            closePublicateModalHandler,
+            addImageHandler,
+            setCover,
+            cover,
+          )}
         </Box>
       </Box>
     </Box>
