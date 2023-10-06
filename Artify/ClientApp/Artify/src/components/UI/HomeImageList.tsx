@@ -124,7 +124,7 @@ function filterParamlist(
       </div>
       <Typography component='div'
         sx={paramNameStyle}>
-        {t("homePage.params.all")}
+        {t("homePage.params.selectAll")}
       </Typography>
     </div>
     {filterParams.map((param) => (
