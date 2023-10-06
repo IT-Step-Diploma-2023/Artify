@@ -41,15 +41,15 @@ const lngs: Lngs = {
     
 
   return <>
-  <Typography sx={{marginTop:'100px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'70px', color:'#271846',fontWeight:'700', lineHeight:'84px', fontStyle:'Sofia Sans'}}>
+  <Typography sx={{marginTop:'100px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'70px', color:'#271846',fontWeight:'700', lineHeight:'84px', fontFamily:'Sofia Sans'}}>
     як придбати роботу
   </Typography>
 
 
   <Grid container spacing={2} display={'flex'}>
     <Grid item xs={8.65} style={{display:'inline-block'}}>
-    <Typography sx={{marginLeft:'140px',marginTop:'100px',width:'960px',height:'95px',border:'1px solid #271846',borderRadius:'24px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontStyle:'Nunito'}}>
-      <Typography sx={{width:'892px',height:'54px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontStyle:'Nunito'}}>
+    <Typography sx={{marginLeft:'140px',marginTop:'100px',width:'960px',height:'95px',border:'1px solid #271846',borderRadius:'24px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
+      <Typography sx={{width:'892px',height:'54px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
         натисніть кнопку “купівля” і вас перенесе на блок, де ви зможете придбати якусь роботу.
       </Typography>
     </Typography>
@@ -64,8 +64,8 @@ const lngs: Lngs = {
   </Grid>
   
     <Grid item xs={10} style={{display:'inline-block'}}>
-    <Typography sx={{marginLeft:'140px',marginTop:'100px',width:'960px',height:'122px',border:'1px solid #271846',borderRadius:'24px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontStyle:'Nunito'}}>
-      <Typography sx={{width:'892px',height:'54px',display:'flex',marginLeft:'40px',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontStyle:'Nunito'}}>
+    <Typography sx={{marginLeft:'140px',marginTop:'100px',width:'960px',height:'122px',border:'1px solid #271846',borderRadius:'24px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
+      <Typography sx={{width:'892px',height:'54px',display:'flex',marginLeft:'40px',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
         натисніть на кнопку “кошик”. перед вами зʼявиться віконце для заповнення ваших даних, щоб купити роботу.
       </Typography>
       <div style={{marginTop:'815px',marginRight:'-120px'}}>
@@ -77,8 +77,8 @@ const lngs: Lngs = {
     
     <Grid container spacing={2} display={'flex'}>
     <Grid item xs={8.65} style={{display:'inline-block'}}>
-    <Typography sx={{marginLeft:'-110px',marginTop:'100px',width:'960px',height:'95px',border:'1px solid #271846',borderRadius:'24px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontStyle:'Nunito'}}>
-      <Typography sx={{width:'892px',height:'54px',display:'flex',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontStyle:'Nunito'}}>
+    <Typography sx={{marginLeft:'-110px',marginTop:'100px',width:'960px',height:'95px',border:'1px solid #271846',borderRadius:'24px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
+      <Typography sx={{width:'892px',height:'54px',display:'flex',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
       завдяки фільтрам ви зможете вибрати ту категорію робіт, які вам потрібні.
       </Typography>
       
@@ -605,8 +605,8 @@ const lngs: Lngs = {
 
 <Grid container spacing={2} display={'flex'}>
     <Grid item xs={8.65} style={{display:'inline-block'}}>
-    <Typography sx={{marginLeft:'140px',marginTop:'100px',width:'960px',height:'95px',border:'1px solid #271846',borderRadius:'24px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontStyle:'Nunito'}}>
-      <Typography sx={{width:'892px',height:'54px',display:'flex',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontStyle:'Nunito'}}>
+    <Typography sx={{marginLeft:'140px',marginTop:'100px',width:'960px',height:'95px',border:'1px solid #271846',borderRadius:'24px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
+      <Typography sx={{width:'892px',height:'54px',display:'flex',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
       щоб придбати роботу, введіть свої дані.
       </Typography>
     </Typography>

@@ -82,7 +82,7 @@ const lngs: Lngs = {
   
  
   return <>
-  <Typography sx={{marginTop:'100px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'70px', color:'#271846',fontWeight:'700', lineHeight:'84px', fontStyle:'Sofia Sans'}}>
+  <Typography sx={{marginTop:'100px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'70px', color:'#271846',fontWeight:'700', lineHeight:'84px', fontFamily:'Sofia Sans'}}>
     {helpCenter}
   </Typography>
 
@@ -105,65 +105,65 @@ const lngs: Lngs = {
     <Grid item xs={5.2}></Grid>
     <Grid item xs={3}>
       <Link className='link1' to={'/how-add-work'}>
-        <Typography sx={{display:'flex',fontSize:'20px', color:'#271846',fontWeight:'700', lineHeight:'84px', fontStyle:'Nunito'}}>
+        <Typography sx={{display:'flex',fontSize:'20px', color:'#271846',fontWeight:'700', lineHeight:'84px', fontFamily:'Nunito'}}>
         <IconButton className={'iconButtonBack'} aria-label="back">
           <svg width="12" height="22" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M0.999999 21L11 11L1 1" stroke="#271846" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </IconButton>     
-          <Typography sx={{marginLeft:'10px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'500', fontStyle:'Nunito'}}>
+          <Typography sx={{marginLeft:'10px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'500', fontFamily:'Nunito'}}>
             {addWork}
             </Typography>
         </Typography>
       </Link>
 
       <Link className='link1' to={'/how-buy-work'}>
-        <Typography sx={{marginTop:'20px',display:'flex',fontSize:'20px', color:'#271846',fontWeight:'700', lineHeight:'84px', fontStyle:'Nunito'}}>
+        <Typography sx={{marginTop:'20px',display:'flex',fontSize:'20px', color:'#271846',fontWeight:'700', lineHeight:'84px', fontFamily:'Nunito'}}>
         <IconButton className={'iconButtonBack'} aria-label="back">
           <svg width="12" height="22" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M0.999999 21L11 11L1 1" stroke="#271846" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </IconButton>     
-          <Typography sx={{marginLeft:'10px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'500', fontStyle:'Nunito'}}>
+          <Typography sx={{marginLeft:'10px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'500', fontFamily:'Nunito'}}>
             {getJob}
           </Typography>
         </Typography>
       </Link>
 
       <Link className='link1' to={'/how-hire-designer'}>
-        <Typography sx={{marginTop:'20px',display:'flex',fontSize:'20px', color:'#271846',fontWeight:'700', lineHeight:'84px', fontStyle:'Nunito'}}>
+        <Typography sx={{marginTop:'20px',display:'flex',fontSize:'20px', color:'#271846',fontWeight:'700', lineHeight:'84px', fontFamily:'Nunito'}}>
         <IconButton className={'iconButtonBack'} aria-label="back">
           <svg width="12" height="22" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M0.999999 21L11 11L1 1" stroke="#271846" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </IconButton>     
-          <Typography sx={{marginLeft:'10px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'500', fontStyle:'Nunito'}}>
+          <Typography sx={{marginLeft:'10px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'500', fontFamily:'Nunito'}}>
             {hireDesigner}
           </Typography>
         </Typography>
       </Link>
 
       <Link className='link1' to={'/how-create-account'}>
-        <Typography sx={{marginTop:'20px',display:'flex',fontSize:'20px', color:'#271846',fontWeight:'700', lineHeight:'84px', fontStyle:'Nunito'}}>
+        <Typography sx={{marginTop:'20px',display:'flex',fontSize:'20px', color:'#271846',fontWeight:'700', lineHeight:'84px', fontFamily:'Nunito'}}>
         <IconButton className={'iconButtonBack'} aria-label="back">
           <svg width="12" height="22" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M0.999999 21L11 11L1 1" stroke="#271846" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </IconButton>     
-          <Typography sx={{marginLeft:'10px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'500', fontStyle:'Nunito'}}>
+          <Typography sx={{marginLeft:'10px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'500', fontFamily:'Nunito'}}>
             {createAccount}
           </Typography>
         </Typography>
       </Link>
 
       <Link className='link1' to={'/AboutUsPage'}>
-        <Typography sx={{marginTop:'20px',display:'flex',fontSize:'20px', color:'#271846',fontWeight:'700', lineHeight:'84px', fontStyle:'Nunito'}}>
+        <Typography sx={{marginTop:'20px',display:'flex',fontSize:'20px', color:'#271846',fontWeight:'700', lineHeight:'84px', fontFamily:'Nunito'}}>
         <IconButton className={'iconButtonBack'} aria-label="back">
           <svg width="12" height="22" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M0.999999 21L11 11L1 1" stroke="#271846" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </IconButton>     
-          <Typography sx={{marginLeft:'10px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'500', fontStyle:'Nunito'}}>
+          <Typography sx={{marginLeft:'10px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'500', fontFamily:'Nunito'}}>
             {aboutUs}
           </Typography>
         </Typography>

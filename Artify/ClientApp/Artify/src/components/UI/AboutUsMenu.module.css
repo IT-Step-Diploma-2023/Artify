@@ -1,0 +1,45 @@
+:root {
+    --light-grey: #ECEAEF;
+    --grey: #CACACA;
+    --red: #D65353;
+    --violet: #6A4BD9;
+    --dark-violet: #271846;
+}
+
+.link,
+.link-active{
+    text-decoration: none;
+    font-size: 20px;
+    text-align: left;
+    display: inline-block;
+    padding: 0.6875rem 1.185rem;
+    margin-left: 0;
+    color:var(--dark-violet);
+    Line-height:27.28px;
+    margin-top: 44px;
+
+}
+
+.link:hover
+ {
+    font-weight: 600;
+    color: var(--violet);
+    text-decoration: underline;
+}
+
+.link-active,
+.link-active:hover {
+    font-weight: 600;
+    background-color:var(--dark-violet);
+    border-radius: 25px; 
+    color:#ECEAEF;
+}
+
+.separator-line2 {
+    background-color: #4D3589;
+    margin-left: 104px;
+    height: 1px;
+    width: 1236px;
+    color:#4D3589;
+    margin-top:37px;
+}
