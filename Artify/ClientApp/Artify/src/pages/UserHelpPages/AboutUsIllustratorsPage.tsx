@@ -28,10 +28,10 @@ const lngs: Lngs = {
 
   return <>
     <AboutUsMenu/>
-    <Typography sx={{marginTop:'100px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'70px', color:'#271846',fontWeight:'400', lineHeight:'84px', fontStyle:'Sofia Sans'}}>
+    <Typography sx={{marginTop:'100px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'70px', color:'#271846',fontWeight:'400', lineHeight:'84px', fontFamily:'Sofia Sans'}}>
   отже, що ж до нас?..
   </Typography>
-  <Typography sx={{display:'flex',justifyContent:'center',alignItems:'center',fontSize:'25px', color:'#271846',fontWeight:'400', lineHeight:'84px', fontStyle:'Sofia Sans'}}>
+  <Typography sx={{display:'flex',justifyContent:'center',alignItems:'center',fontSize:'25px', color:'#271846',fontWeight:'400', lineHeight:'84px', fontFamily:'Sofia Sans'}}>
   зараз розповімо вам
   </Typography>
 
@@ -42,14 +42,14 @@ filter:'drop-shadow(0px 4px 8px rgba(39, 24, 70, 0.4))',
 width:'1240px',height:'626px',marginTop:'100px',display:'block',marginLeft:'auto',marginRight:'auto',borderRadius: '10px'}}>
 </img>
 
-<Typography sx={{marginTop:'100px',marginLeft:'100px',fontSize:'70px', color:'#271846',fontWeight:'500', lineHeight:'84px', fontStyle:'Sofia Sans'}}>
+<Typography sx={{marginTop:'100px',marginLeft:'100px',fontSize:'70px', color:'#271846',fontWeight:'500', lineHeight:'84px', fontFamily:'Sofia Sans'}}>
   про нас
   </Typography>
 
   <Grid container spacing={2} display={'flex'}>
     <Grid item xs={8.65} style={{display:'inline-block'}}>
-    <Typography sx={{marginLeft:'100px',marginTop:'20px',width:'920px',height:'176px',border:'1px solid #271846',borderRadius:'24px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontStyle:'Nunito'}}>
-      <Typography sx={{width:'892px',height:'54px',display:'flex',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontStyle:'Nunito'}}>
+    <Typography sx={{marginLeft:'100px',marginTop:'20px',width:'920px',height:'176px',border:'1px solid #271846',borderRadius:'24px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
+      <Typography sx={{width:'892px',height:'54px',display:'flex',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
       безліч дизайнерів шукають своє місце під сонцем, і що ж скажемо, зараз це досить важко зробити в наш час. тому ми пропонуємо вам платформу для реалізації своїх потенціалів. тут ви зможете познайомитися з іншими дизайнерами і створювати спільні проєкти разом. надіємося, що вам сподобається і ви доєднаєтеся до нашої цікавої спільноти...
       </Typography>
     </Typography>
@@ -84,23 +84,23 @@ width:'1240px',height:'626px',marginTop:'100px',display:'block',marginLeft:'auto
     </Typography>  
   </Grid>
 
-  <Typography sx={{marginTop:'200px',marginLeft:'100px',fontSize:'70px', color:'#271846',fontWeight:'500', lineHeight:'84px', fontStyle:'Sofia Sans'}}>
+  <Typography sx={{marginTop:'200px',marginLeft:'100px',fontSize:'70px', color:'#271846',fontWeight:'500', lineHeight:'84px', fontFamily:'Sofia Sans'}}>
   наша ціль
   </Typography>
 
   <Grid container spacing={2} display={'flex'}>
     <Grid item xs={8.5} style={{display:'inline-block'}}>
-    <Typography sx={{marginLeft:'100px',marginTop:'20px',width:'920px',height:'176px',border:'1px solid #271846',borderRadius:'24px',display:'block',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontStyle:'Nunito'}}>
-      <Typography sx={{display:'block',marginLeft:'28px',marginTop:'24px',fontSize:'20px', color:'#271846',fontWeight:'700', lineHeight:'27.28pxpx', fontStyle:'Nunito'}}>
+    <Typography sx={{marginLeft:'100px',marginTop:'20px',width:'920px',height:'176px',border:'1px solid #271846',borderRadius:'24px',display:'block',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
+      <Typography sx={{display:'block',marginLeft:'28px',marginTop:'24px',fontSize:'20px', color:'#271846',fontWeight:'700', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
       ми тут, щоб дати вам: 
       </Typography>
-      <Typography sx={{display:'block',marginLeft:'48px',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontStyle:'Nunito'}}>
+      <Typography sx={{display:'block',marginLeft:'48px',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
       - хороші ідеї для вашого майбутнього шедевру 
       </Typography>
-      <Typography sx={{display:'block',marginLeft:'48px',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontStyle:'Nunito'}}>
+      <Typography sx={{display:'block',marginLeft:'48px',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
       - шанс створити власне портфоліо
       </Typography>
-      <Typography sx={{display:'block',marginLeft:'48px',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontStyle:'Nunito'}}>
+      <Typography sx={{display:'block',marginLeft:'48px',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
       - можливість придбати одну з робіт дизайнерів
       </Typography>
     </Typography>
@@ -118,7 +118,7 @@ width:'1240px',height:'626px',marginTop:'100px',display:'block',marginLeft:'auto
   </Grid>
 </Grid>
 
-  <Typography sx={{marginTop:'200px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'70px', color:'#271846',fontWeight:'500', lineHeight:'84px', fontStyle:'Sofia Sans'}}>
+  <Typography sx={{marginTop:'200px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'70px', color:'#271846',fontWeight:'500', lineHeight:'84px', fontFamily:'Sofia Sans'}}>
   ілюстратори
   </Typography>
 

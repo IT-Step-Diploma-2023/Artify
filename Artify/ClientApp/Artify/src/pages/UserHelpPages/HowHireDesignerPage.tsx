@@ -52,15 +52,15 @@ const lngs: Lngs = {
   
 
   return <>
-  <Typography sx={{marginTop:'100px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'70px', color:'#271846',fontWeight:'700', lineHeight:'84px', fontStyle:'Sofia Sans'}}>
+  <Typography sx={{marginTop:'100px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'70px', color:'#271846',fontWeight:'700', lineHeight:'84px', fontFamily:'Sofia Sans'}}>
   як найняти дизайнера
   </Typography>
 
 
   <Grid container spacing={2} display={'flex'}>
     <Grid item xs={8.65} style={{display:'inline-block'}}>
-    <Typography sx={{marginLeft:'140px',marginTop:'100px',width:'960px',height:'95px',border:'1px solid #271846',borderRadius:'24px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontStyle:'Nunito'}}>
-      <Typography sx={{width:'892px',height:'54px',display:'flex',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontStyle:'Nunito'}}>
+    <Typography sx={{marginLeft:'140px',marginTop:'100px',width:'960px',height:'95px',border:'1px solid #271846',borderRadius:'24px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
+      <Typography sx={{width:'892px',height:'54px',display:'flex',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
       натисніть кнопку “найняти” і вас перенесе на блок, де ви зможете найняти дизайнера
       </Typography>
     </Typography>
@@ -202,8 +202,8 @@ const lngs: Lngs = {
 
 <Grid container spacing={2} display={'flex'}>
     <Grid item xs={8.65} style={{display:'inline-block'}}>
-    <Typography sx={{marginLeft:'140px',width:'960px',height:'95px',border:'1px solid #271846',borderRadius:'24px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontStyle:'Nunito'}}>
-      <Typography sx={{width:'892px',height:'54px',display:'flex',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontStyle:'Nunito'}}>
+    <Typography sx={{marginLeft:'140px',width:'960px',height:'95px',border:'1px solid #271846',borderRadius:'24px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
+      <Typography sx={{width:'892px',height:'54px',display:'flex',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
       натисніть на фотографію чи на імʼя, і ви перейдете на сторінку дизайнера.
       </Typography>
     </Typography>
@@ -316,8 +316,8 @@ const lngs: Lngs = {
 
 <Grid container spacing={2} display={'flex'}>
     <Grid item xs={8.65} style={{display:'inline-block'}}>
-    <Typography sx={{marginLeft:'140px',marginTop:'100px',width:'960px',height:'95px',border:'1px solid #271846',borderRadius:'24px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontStyle:'Nunito'}}>
-      <Typography sx={{width:'892px',height:'54px',display:'flex',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontStyle:'Nunito'}}>
+    <Typography sx={{marginLeft:'140px',marginTop:'100px',width:'960px',height:'95px',border:'1px solid #271846',borderRadius:'24px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
+      <Typography sx={{width:'892px',height:'54px',display:'flex',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
       натисніть кнопку “написати” і ви матимете змогу звʼязатися з дизайнером.
       </Typography>
     </Typography>

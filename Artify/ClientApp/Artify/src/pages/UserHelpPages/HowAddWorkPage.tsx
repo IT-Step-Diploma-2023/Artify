@@ -61,7 +61,7 @@ const HowAddWorkPage: FunctionComponent = () => {
   };
 
   return <>
-    <Typography sx={{ marginTop: '100px', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '70px', color: '#271846', fontWeight: '700', lineHeight: '84px', fontStyle: 'Sofia Sans' }}>
+    <Typography sx={{ marginTop: '100px', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '70px', color: '#271846', fontWeight: '700', lineHeight: '84px', fontFamily:'Sofia Sans' }}>
       як додати роботу
     </Typography>
 
