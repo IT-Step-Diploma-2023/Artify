@@ -31,7 +31,7 @@ namespace Artify.Controllers.shots
         [HttpPost]
         [Route("api/[controller]/[action]")]
         [Authorize]
-        public IActionResult Example(ShotUploadDTO data )
+        public IActionResult Example(ShotUploadDTO data)
         {
             return Ok();
         }
@@ -52,7 +52,7 @@ namespace Artify.Controllers.shots
             if (jwtUser == null)
                 return Forbid();
             ShotUploadDTO? inputJson;
-           /// string returnInformation = "";
+            /// string returnInformation = "";
             try
             {
                 inputJson = JsonConvert.DeserializeObject<ShotUploadDTO>(value);
@@ -79,8 +79,7 @@ namespace Artify.Controllers.shots
                     CreatedDateTime = DateTime.UtcNow,
                     IsDraft = inputJson.isDraft,
                     IsPublic = inputJson.isPublic,
-                    BlocksGap = inputJson.blocksGap,
-                    Cover = inputJson.cover
+                    BlocksGap = inputJson.blocksGap
                 };
                 //Adding genres
                 //foreach(string inputGenre in inputJson?.genres ?? Enumerable.Empty<string>())
@@ -99,6 +98,7 @@ namespace Artify.Controllers.shots
                         newShot.Tags.Add(tag);
                 }
                 //Uploading images
+                int coverImageId = 0;
                 foreach (IFormFile img in images)
                 {
                     ImageUploaderResult uploadResult = await ImageUploader.UploadImage(img, "shots");
@@ -107,6 +107,10 @@ namespace Artify.Controllers.shots
                     if (uploadResult.ResultCode == ImageUploaderResultCode.ForbiddenExtension)
                         throw new BadImageFormatException("Unsupported file extension");
                     imagesPathes.Add(new OldNewImageFilePath() { OldFileName = img.FileName, NewFilePath = uploadResult.FileName });
+
+                    if (img.FileName == inputJson?.cover)
+                        coverImageId = imagesPathes.Count() - 1;
+
                 }
                 foreach (OldNewImageFilePath imagePath in imagesPathes)
                 {
@@ -119,6 +123,7 @@ namespace Artify.Controllers.shots
                     };
                     newShot.Images.Add(newImage);
                 }
+                newShot.Cover = newShot.Images[coverImageId].ThumbnailFullPath;
 
                 //If there are images to upload
                 //if(inputJson?.images != null) { 
@@ -206,7 +211,7 @@ namespace Artify.Controllers.shots
 
         [HttpGet]
         [Route("api/[controller]/[action]")]
-        public async Task<IActionResult> GetShots(int page = 0,string filters="", int pageSize = 20)
+        public async Task<IActionResult> GetShots(int page = 0, string filters = "", int pageSize = 20)
         {
             if (filters != "") return BadRequest("Currently, filters are not supported");
             if (pageSize > 50)
@@ -219,7 +224,7 @@ namespace Artify.Controllers.shots
 
             List<GetShotDTO> returnableShots = new List<GetShotDTO>();
 
-            await _shotsRepository.GetAll().OrderByDescending(shot=>shot.Id).Skip(page * pageSize).Take(pageSize).ForEachAsync(shot =>
+            await _shotsRepository.GetAll().OrderByDescending(shot => shot.Id).Skip(page * pageSize).Take(pageSize).ForEachAsync(shot =>
             {
                 GetShotDTO getShotDTO = new GetShotDTO(shot);
                 shot.Images.ForEach(image =>

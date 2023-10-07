@@ -19,6 +19,7 @@ import { getAuthToken } from "../../hooks/useAuthorization";
 import addDescriptionModal from "../../components/UI/SharePageComponents/addDescriptionModal";
 import PublicateModal from "../../components/UI/SharePageComponents/publicateModal";
 import { existedTags } from "../../assets/data/tags";
+import { useNavigate } from "react-router";
 
 interface IVisibilityOption {
   index: number,
@@ -27,15 +28,13 @@ interface IVisibilityOption {
 
 interface IUploadedData {
   title?: string,
-  tags?: string[],
   description?: string,
+  tags?: string[],
+  isPublic?: boolean,
+  isDraft?: boolean,
   price?: number,
   gap?: number,
   cover?: string,
-  images?: {
-    fileName: string,
-    price: string
-  }[]
 }
 
 const url = "api/ShotsApi/UploadShot";
@@ -89,6 +88,8 @@ const SharePage: FunctionComponent = () => {
   ]
 
   /* #endregion */
+
+  const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
 
@@ -240,15 +241,17 @@ const SharePage: FunctionComponent = () => {
   const openPublicateModalHandler = () => setOpenPublicateModal(true);
   const closePublicateModalHandler = () => setOpenPublicateModal(false);
 
+
   /* #endregion */
 
   /* #region post data */
   const postData = async (): Promise<void> => {
     const uploadedData: IUploadedData = {};
     uploadedData.title = title;
-    uploadedData.tags = [...selectedTags];
-    uploadedData.images = [];
     uploadedData.description = description;
+    uploadedData.tags = [...selectedTags];
+    uploadedData.isPublic = true;
+    uploadedData.isDraft = false;
     uploadedData.price = price;
     uploadedData.gap = gap;
     cover ? uploadedData.cover = cover.name : "";
@@ -267,9 +270,11 @@ const SharePage: FunctionComponent = () => {
       body: formData,
       headers: {
         "Authorization": "Bearer " + token,
+        // "content-type": "multipart/form-data",
       }
     });
     if (response.status !== 200) return;
+    // navigate("/");
   }
   /* #endregion */
 

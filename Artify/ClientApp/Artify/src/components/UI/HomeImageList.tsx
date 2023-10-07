@@ -25,11 +25,21 @@ import { getAuthToken } from '../../hooks/useAuthorization';
 // }
 
 interface IShot {
+  title: string,
+  description: string,
+  tags?: string[]
+  isPublic: boolean,
+  isDraft: boolean,
+  price: number;
+  gap: number,
+  cover: string,
+  
+  thumbnailsPaths: string[],
   id: number,
-  title: string
   createdDateTime: string,
   userId: number,
-  thumbnailsPaths: string[]
+  username: number,
+  userFullName: string,
 }
 
 /* #region styles */
@@ -70,12 +80,12 @@ export default function HomeImageList() {
     if (response.status !== 200) return;
     const responseJson: IShot[] = await response.json();
     setHots([...responseJson]);
-    
+
   }
 
   //const q = getData();
 
-  useEffect(() => { void getData()},[])
+  useEffect(() => { void getData() }, [])
   return (<>
     <Box sx={container}>
       <Box
@@ -89,23 +99,23 @@ export default function HomeImageList() {
       </Box>
       <Grid container spacing={{ xs: 2, md: 5 }} sx={{ height: "fit-content" }}>
 
-      {shots.map((shot) => (
+        {shots.map((shot) => (
           <Grid item xs={12} md={6} lg={3} key={shot.id} id={shots.indexOf(shot).toString()} >
             <ImageListItem >
               <img
                 style={{ width: '100%', aspectRatio: '1.4', borderRadius: 10, boxShadow: '0px 4px 8px 0px #27184666' }}
-                src={shot.thumbnailsPaths[0]}
+                src={"api/" + shot.cover}
                 alt={shot.title}
                 loading="lazy"
               />
               <Box>
                 <Box sx={{ verticalAlign: 'center', marginRight: 'auto' }}>
                   <Avatar sx={{ float: 'left', marginTop: '0.4375rem', width: '1.25rem', height: '1.25rem' }}
-                    alt={shot.userId.toString()}
+                    alt={shot.userFullName}
                     src="images/default_profile.png"
                   />
                 </Box>
-                <Typography sx={{ float: 'left', fontSize: '0.875rem', fontWeight: 700, padding: '0.4375rem 0 0 0.4375rem' }}>{shot.userId}</Typography>
+                <Typography sx={{ float: 'left', fontSize: '0.875rem', fontWeight: 700, padding: '0.4375rem 0 0 0.4375rem' }}>{shot.username}</Typography>
                 <Typography sx={{ float: 'right', fontSize: '0.875rem', fontWeight: 400, color: '#9E9AA2', padding: '0.4375rem 0 0 0.4375rem' }}>12</Typography>
                 <Box >
                   <Checkbox {...label} icon={<FavoriteBorder sx={{ color: '#9E9AA2', width: '1rem' }} />} checkedIcon={<Favorite sx={{ color: '#D65353', width: '1rem' }} />}
