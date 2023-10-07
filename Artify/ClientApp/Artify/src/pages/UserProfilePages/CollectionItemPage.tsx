@@ -19,7 +19,7 @@ const CollectionItemPage: FunctionComponent = () => {
         <Link to={'/saved'}>
           <IconButton className={'iconButtonBack'} aria-label="back">
             <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M28 14L18 24L28 34" stroke="#271846" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M28 14L18 24L28 34" stroke="#271846" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </IconButton>
         </Link>
