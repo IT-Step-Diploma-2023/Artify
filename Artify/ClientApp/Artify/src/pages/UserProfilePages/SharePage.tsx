@@ -98,7 +98,7 @@ const SharePage: FunctionComponent = () => {
   const [availableTags, setAvailableTags] = useState<string[]>([...existedTags]);
   const [tagInputValue, setTagInputValue] = useState("");
 
-  const [tags2MenuVisible, setTagsMenuVisible] = useState(false);
+  const [tagsMenuVisible, setTagsMenuVisible] = useState(false);
 
   const [visibylity, setVisibility] = useState<VisibilityOption>({ index: 0, option: visibilityOptions[0] });
   const [visibilityMenuVisible, setVisibilityMenuVisible] = useState(false);
@@ -285,7 +285,7 @@ const SharePage: FunctionComponent = () => {
   }
 
   /* #region components */
-  const tagsDropdown = (
+  const visibilityDropDown = (
     itemSet: string[],
     id: string,
     displayCondition: boolean,
@@ -308,7 +308,7 @@ const SharePage: FunctionComponent = () => {
     </Box>;
   }
 
-  const tags2Dropdown = (
+  const tagsDropdown = (
     itemSet: string[],
     id: string,
     displayCondition: boolean,
@@ -521,7 +521,7 @@ const SharePage: FunctionComponent = () => {
           <Box sx={{ position: "relative" }}>
             <Box id="tagBox"
               sx={pageSyles.tagBox}
-              style={tags2MenuVisible ? {
+              style={tagsMenuVisible ? {
                 position: "absolute",
                 left: "0",
                 top: "0",
@@ -571,10 +571,10 @@ const SharePage: FunctionComponent = () => {
                 }}
                 onKeyDown={tagInputKeyDownHandler}
               />
-              {tags2Dropdown(
+              {tagsDropdown(
                 availableTags,
-                "tags2Menu",
-                tags2MenuVisible,
+                "tagsMenu",
+                tagsMenuVisible,
                 setTagsMenuVisible,
                 tagItemClickHandler
               )}
@@ -612,7 +612,7 @@ const SharePage: FunctionComponent = () => {
                 sx={{ color: colors.violet, fontWeight: 700, lineHeight: "35px", marginLeft: "14px" }}>
                 {visibylity.option}
               </Typography>
-              {tagsDropdown(
+              {visibilityDropDown(
                 visibilityOptions,
                 "visibilityMenu",
                 visibilityMenuVisible,

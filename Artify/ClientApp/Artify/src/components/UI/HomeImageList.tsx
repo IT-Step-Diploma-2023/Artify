@@ -8,10 +8,29 @@ import { prices } from "../../assets/data/prices";
 import { extensions } from "../../assets/data/extensions";
 import { colors } from "../../assets/defaults/colors";
 import '../../App.css';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Context from "../../utils/Context";
 import { useTranslation } from 'react-i18next';
 import { TFunction } from 'i18next';
+import { getAuthToken } from '../../hooks/useAuthorization';
+
+// interface IShot  {
+//   id: number,
+//   createdDateTime: string,
+//   userid: number,
+//   price: number,
+//   isPublic: boolean,
+//   isDraft: boolean,
+//   title: string
+// }
+
+interface IShot {
+  id: number,
+  title: string
+  createdDateTime: string,
+  userId: number,
+  thumbnailsPaths: string[]
+}
 
 /* #region styles */
 const container = {
@@ -24,7 +43,8 @@ const filterBlock = {
 }
 /* #endregion */
 
-
+const url = 'api/ShotsApi/GetShots';
+const token = getAuthToken() ?? '';
 
 export default function HomeImageList() {
 
@@ -34,11 +54,28 @@ export default function HomeImageList() {
 
   const { filterActive } = useContext(Context);
 
+  const [shots, setHots] = useState<IShot[]>([]);
+
   const existedPrices: string[] = [];
   prices.map((price) => {
     existedPrices.push(price.name);
   });
 
+  const getData = async (): Promise<void> => {
+    const response = await fetch(url, {
+      headers: {
+        "Authorization": "Bearer " + token,
+      },
+    });
+    if (response.status !== 200) return;
+    const responseJson: IShot[] = await response.json();
+    setHots([...responseJson]);
+    
+  }
+
+  //const q = getData();
+
+  useEffect(() => { void getData()},[])
   return (<>
     <Box sx={container}>
       <Box
@@ -51,6 +88,34 @@ export default function HomeImageList() {
         </Box>
       </Box>
       <Grid container spacing={{ xs: 2, md: 5 }} sx={{ height: "fit-content" }}>
+
+      {shots.map((shot) => (
+          <Grid item xs={12} md={6} lg={3} key={shot.id} id={shots.indexOf(shot).toString()} >
+            <ImageListItem >
+              <img
+                style={{ width: '100%', aspectRatio: '1.4', borderRadius: 10, boxShadow: '0px 4px 8px 0px #27184666' }}
+                src={shot.thumbnailsPaths[0]}
+                alt={shot.title}
+                loading="lazy"
+              />
+              <Box>
+                <Box sx={{ verticalAlign: 'center', marginRight: 'auto' }}>
+                  <Avatar sx={{ float: 'left', marginTop: '0.4375rem', width: '1.25rem', height: '1.25rem' }}
+                    alt={shot.userId.toString()}
+                    src="images/default_profile.png"
+                  />
+                </Box>
+                <Typography sx={{ float: 'left', fontSize: '0.875rem', fontWeight: 700, padding: '0.4375rem 0 0 0.4375rem' }}>{shot.userId}</Typography>
+                <Typography sx={{ float: 'right', fontSize: '0.875rem', fontWeight: 400, color: '#9E9AA2', padding: '0.4375rem 0 0 0.4375rem' }}>12</Typography>
+                <Box >
+                  <Checkbox {...label} icon={<FavoriteBorder sx={{ color: '#9E9AA2', width: '1rem' }} />} checkedIcon={<Favorite sx={{ color: '#D65353', width: '1rem' }} />}
+                    sx={{ width: '18px', height: '18px', float: 'right', marginTop: '0.4375rem' }} />
+                </Box>
+              </Box>
+            </ImageListItem>
+          </Grid>
+        ))}
+
         {itemData.map((item) => (
           <Grid item xs={12} md={6} lg={3} key={item.img} id={itemData.indexOf(item).toString()} >
             <ImageListItem >
