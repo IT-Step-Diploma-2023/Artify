@@ -3,12 +3,14 @@
     public class ShotUploadDTO
     {
         public string? title { get; set; }
+        public string? description { get; set; }
         public string? createDateTime { get; set; }
         //public List<string>? genres { get; set; }
         public List<string>? tags { get; set; }
         public bool isPublic { get; set; } = false;
         public bool isDraft { get; set; } = false;
         public int blocksGap { get; set; } = 0;
+        public string cover { get; set; } = "";
         //public List<ShoutUploadDTO_Image>? images { get; set; }
     }
     //public class ShoutUploadDTO_Image

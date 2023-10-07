@@ -75,10 +75,12 @@ namespace Artify.Controllers.shots
                 {
                     UserId = jwtUser.Id,
                     Title = inputJson.title ?? "Default title",
+                    Description = inputJson.description ?? "",
                     CreatedDateTime = DateTime.UtcNow,
-                    isDraft = inputJson.isDraft,
-                    isPublic = inputJson.isPublic,
-                    blocksGap = inputJson.blocksGap
+                    IsDraft = inputJson.isDraft,
+                    IsPublic = inputJson.isPublic,
+                    BlocksGap = inputJson.blocksGap,
+                    Cover = inputJson.cover
                 };
                 //Adding genres
                 //foreach(string inputGenre in inputJson?.genres ?? Enumerable.Empty<string>())
@@ -111,8 +113,8 @@ namespace Artify.Controllers.shots
                     ImageUploaderResult compressedImage = CompressImage(imagePath.NewFilePath, "shots");
                     Image newImage = new Image()
                     {
-                        imagePath = imagePath.NewFilePath,
-                        thumbnailFullPath = compressedImage.FileName ?? imagePath.NewFilePath
+                        ImagePath = imagePath.NewFilePath,
+                        ThumbnailFullPath = compressedImage.FileName ?? imagePath.NewFilePath
                         //Price = 0
                     };
                     newShot.Images.Add(newImage);
@@ -222,7 +224,7 @@ namespace Artify.Controllers.shots
                 GetShotDTO getShotDTO = new GetShotDTO(shot);
                 shot.Images.ForEach(image =>
                 {
-                    getShotDTO.thumbnailsPaths.Add(UploadsController.PrepareImagePath(image.thumbnailFullPath));
+                    getShotDTO.thumbnailsPaths.Add(UploadsController.PrepareImagePath(image.ThumbnailFullPath));
                 });
                 returnableShots.Add(getShotDTO);
             }

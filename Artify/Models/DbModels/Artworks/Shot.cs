@@ -17,10 +17,13 @@ namespace Artify.Models.DbModels.DbModels.Artworks
         [Required]
         public double Price { get; set; }
         [Required]
-        public bool isPublic { get; set;}
-        public bool isDraft { get; set;} = false;
+        public bool IsPublic { get; set; } = true;
+
+        public bool IsDraft { get; set;} = false;
         [Required]
-        public int blocksGap { get; set; } = 0;
+        public int BlocksGap { get; set; } = 0;
+        [Required]
+        public string Cover { get; set; } = string.Empty;
 
         [Required]
         [DataType(DataType.DateTime)]

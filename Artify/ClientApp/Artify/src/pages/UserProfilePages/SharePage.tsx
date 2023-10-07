@@ -18,19 +18,20 @@ import CustomButton from "../../components/UI/CustomButton";
 import { getAuthToken } from "../../hooks/useAuthorization";
 import addDescriptionModal from "../../components/UI/SharePageComponents/addDescriptionModal";
 import PublicateModal from "../../components/UI/SharePageComponents/publicateModal";
-import {existedTags} from "../../assets/data/tags";
+import { existedTags } from "../../assets/data/tags";
 
-interface VisibilityOption {
+interface IVisibilityOption {
   index: number,
   option: string
 }
 
-interface UploadedData {
+interface IUploadedData {
   title?: string,
   tags?: string[],
   description?: string,
   price?: number,
   gap?: number,
+  cover?: string,
   images?: {
     fileName: string,
     price: string
@@ -100,7 +101,7 @@ const SharePage: FunctionComponent = () => {
 
   const [tagsMenuVisible, setTagsMenuVisible] = useState(false);
 
-  const [visibylity, setVisibility] = useState<VisibilityOption>({ index: 0, option: visibilityOptions[0] });
+  const [visibylity, setVisibility] = useState<IVisibilityOption>({ index: 0, option: visibilityOptions[0] });
   const [visibilityMenuVisible, setVisibilityMenuVisible] = useState(false);
 
   const [gap, setInterval] = useState(16);
@@ -239,18 +240,18 @@ const SharePage: FunctionComponent = () => {
   const openPublicateModalHandler = () => setOpenPublicateModal(true);
   const closePublicateModalHandler = () => setOpenPublicateModal(false);
 
-
   /* #endregion */
 
   /* #region post data */
   const postData = async (): Promise<void> => {
-    const uploadedData: UploadedData = {};
+    const uploadedData: IUploadedData = {};
     uploadedData.title = title;
     uploadedData.tags = [...selectedTags];
     uploadedData.images = [];
     uploadedData.description = description;
     uploadedData.price = price;
     uploadedData.gap = gap;
+    cover ? uploadedData.cover = cover.name : "";
     selectedFiles.forEach((file) => {
       uploadedData.images?.push({
         fileName: file.name,

@@ -21,9 +21,9 @@ namespace Artify.Models.DbModels.DbModels.Artworks
         public DateTime CreatedDateTime { get; set; }
 
         [Required]
-        public string imagePath { get; set; } = string.Empty;
+        public string ImagePath { get; set; } = string.Empty;
         [Required]
-        public string thumbnailFullPath { get; set; } = string.Empty;
+        public string ThumbnailFullPath { get; set; } = string.Empty;
         // NAVIGATION PROPERTIES
         [ForeignKey(nameof(ShotId))]
         public virtual Shot Shot { get; set; } = null!;
