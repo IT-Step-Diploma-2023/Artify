@@ -101,14 +101,14 @@ const lngs: Lngs = {
           </Grid>
   </Grid> 
 
-  <Grid container spacing={2} marginTop={'38.22px'} display={'flex'}>
+  <Grid container spacing={2} marginTop={'38.22px'} display={'flex'} height={'250px'} >
     <Grid item xs={5.2}></Grid>
-    <Grid item xs={3}>
+    <Grid item xs={3} sx={{height:'250px'}}>
       <Link className='link1' to={'/how-add-work'}>
         <Typography sx={{display:'flex',fontSize:'20px', color:'#271846',fontWeight:'700', lineHeight:'84px', fontFamily:'Nunito'}}>
         <IconButton className={'iconButtonBack'} aria-label="back">
           <svg width="12" height="22" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0.999999 21L11 11L1 1" stroke="#271846" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M0.999999 21L11 11L1 1" stroke="#271846" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </IconButton>     
           <Typography sx={{marginLeft:'10px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'500', fontFamily:'Nunito'}}>
@@ -121,7 +121,7 @@ const lngs: Lngs = {
         <Typography sx={{marginTop:'20px',display:'flex',fontSize:'20px', color:'#271846',fontWeight:'700', lineHeight:'84px', fontFamily:'Nunito'}}>
         <IconButton className={'iconButtonBack'} aria-label="back">
           <svg width="12" height="22" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0.999999 21L11 11L1 1" stroke="#271846" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M0.999999 21L11 11L1 1" stroke="#271846" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </IconButton>     
           <Typography sx={{marginLeft:'10px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'500', fontFamily:'Nunito'}}>
@@ -134,7 +134,7 @@ const lngs: Lngs = {
         <Typography sx={{marginTop:'20px',display:'flex',fontSize:'20px', color:'#271846',fontWeight:'700', lineHeight:'84px', fontFamily:'Nunito'}}>
         <IconButton className={'iconButtonBack'} aria-label="back">
           <svg width="12" height="22" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0.999999 21L11 11L1 1" stroke="#271846" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M0.999999 21L11 11L1 1" stroke="#271846" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </IconButton>     
           <Typography sx={{marginLeft:'10px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'500', fontFamily:'Nunito'}}>
@@ -147,7 +147,7 @@ const lngs: Lngs = {
         <Typography sx={{marginTop:'20px',display:'flex',fontSize:'20px', color:'#271846',fontWeight:'700', lineHeight:'84px', fontFamily:'Nunito'}}>
         <IconButton className={'iconButtonBack'} aria-label="back">
           <svg width="12" height="22" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0.999999 21L11 11L1 1" stroke="#271846" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M0.999999 21L11 11L1 1" stroke="#271846" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </IconButton>     
           <Typography sx={{marginLeft:'10px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'500', fontFamily:'Nunito'}}>
@@ -160,7 +160,7 @@ const lngs: Lngs = {
         <Typography sx={{marginTop:'20px',display:'flex',fontSize:'20px', color:'#271846',fontWeight:'700', lineHeight:'84px', fontFamily:'Nunito'}}>
         <IconButton className={'iconButtonBack'} aria-label="back">
           <svg width="12" height="22" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0.999999 21L11 11L1 1" stroke="#271846" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M0.999999 21L11 11L1 1" stroke="#271846" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </IconButton>     
           <Typography sx={{marginLeft:'10px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'500', fontFamily:'Nunito'}}>
