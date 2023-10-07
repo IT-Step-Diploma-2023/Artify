@@ -34,7 +34,8 @@ interface IUploadedData {
   isDraft?: boolean,
   price?: number,
   gap?: number,
-  cover?: string,
+  cover?: string
+
 }
 
 const url = "api/ShotsApi/UploadShot";
@@ -255,26 +256,20 @@ const SharePage: FunctionComponent = () => {
     uploadedData.price = price;
     uploadedData.gap = gap;
     cover ? uploadedData.cover = cover.name : "";
-    selectedFiles.forEach((file) => {
-      uploadedData.images?.push({
-        fileName: file.name,
-        price: "0.00"
-      })
-    });
     console.log(uploadedData);
     const formData = new FormData;
     formData.append("value", JSON.stringify(uploadedData));
-    selectedFiles.forEach((file) => formData.append("images[]", file));
+    selectedFiles.forEach((file) => formData.append("images", file));
+    console.log(formData);
     const response = await fetch(url, {
       method: "POST",
       body: formData,
       headers: {
         "Authorization": "Bearer " + token,
-        // "content-type": "multipart/form-data",
       }
     });
     if (response.status !== 200) return;
-    // navigate("/");
+    navigate("/");
   }
   /* #endregion */
 
