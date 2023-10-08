@@ -6,6 +6,7 @@ using Artify.Models.DbModels.DbModels.Artworks;
 using Artify.Models.DbModels.DbModels.Artworks.Attributes;
 using Artify.Models.HelperModels;
 using Artify.Services;
+using Azure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -94,7 +95,18 @@ namespace Artify.Controllers.shots
                 {
                     var tag = _tagsRepository.Query(
                         tag => tag.Name.ToLower() == inputTag.ToLower()).FirstOrDefault();
-                    if (tag != null)
+                    //if (tag != null)
+                    //    newShot.Tags.Add(tag);
+                    if (tag == null)
+                    {
+                        var newTag = new Tag
+                        {
+                            Name = inputTag.ToLower()
+                        };
+                        _tagsRepository.Add(newTag);
+                        _tagsRepository.Save();
+                    }
+                    else
                         newShot.Tags.Add(tag);
                 }
                 //Uploading images

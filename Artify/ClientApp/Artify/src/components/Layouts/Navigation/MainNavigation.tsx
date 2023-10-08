@@ -178,7 +178,7 @@ const Navbar: FunctionComponent = () => {
           onClick={() => { handleClickMenuItem('/logout') }}>
           {t('headerComponent.dropdownMenu.logоut')}
         </MenuItem>
-        <MenuItem
+        {/* <MenuItem
           key={'show-borders'}
           onClick={() => { handleClickMenuItem('/show-borders') }}>
           Show Borders
@@ -187,7 +187,7 @@ const Navbar: FunctionComponent = () => {
           key={'filter'}
           onClick={() => { handleClickMenuItem('/filter') }}>
           Filter Page
-        </MenuItem>
+        </MenuItem> */}
       </>
     return <>
       <MenuItem divider

@@ -79,8 +79,7 @@ export default function HomeImageList() {
     });
     if (response.status !== 200) return;
     const responseJson: IShot[] = await response.json();
-    setHots([...responseJson]);
-
+    setHots(responseJson);
   }
 
   //const q = getData();
@@ -115,7 +114,7 @@ export default function HomeImageList() {
                     src="images/default_profile.png"
                   />
                 </Box>
-                <Typography sx={{ float: 'left', fontSize: '0.875rem', fontWeight: 700, padding: '0.4375rem 0 0 0.4375rem' }}>{shot.username}</Typography>
+                <Typography sx={{ float: 'left', fontSize: '0.875rem', fontWeight: 700, padding: '0.4375rem 0 0 0.4375rem' }}>{shot.userFullName}</Typography>
                 <Typography sx={{ float: 'right', fontSize: '0.875rem', fontWeight: 400, color: '#9E9AA2', padding: '0.4375rem 0 0 0.4375rem' }}>12</Typography>
                 <Box >
                   <Checkbox {...label} icon={<FavoriteBorder sx={{ color: '#9E9AA2', width: '1rem' }} />} checkedIcon={<Favorite sx={{ color: '#D65353', width: '1rem' }} />}

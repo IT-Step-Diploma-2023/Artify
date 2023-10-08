@@ -3,7 +3,7 @@ import { getAuthToken } from '../hooks/useAuthorization';
 
 const url = 'api/users/UsersApi/GetCurrentUserData';
 const token = getAuthToken() ?? '';
-const split = "_"
+const separator = "_"
 
 export interface BasicUserData {
     username: string,
@@ -26,15 +26,19 @@ export interface BasicUserFormData {
 function useUserSettings() {
 
     const getCountry = (location: string): string => {
-        return location.split(split)[0];
+        if (location.indexOf(separator) !== 0)
+            return location.split(separator)[0];
+        return "";
     }
 
     const getAddress = (location: string): string => {
-        return location.split(split)[1];
+        if (location.indexOf(separator) !== -1)
+            return location.split(separator)[1];
+        return location;
     }
 
     const setLocation = (city: string, address: string): string => {
-        return city + split + address;
+        return city + separator + address;
     }
 
     const decodeData = (data: BasicUserData): BasicUserFormData => {

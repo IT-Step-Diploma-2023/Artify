@@ -33,9 +33,8 @@ interface IUploadedData {
   isPublic?: boolean,
   isDraft?: boolean,
   price?: number,
-  gap?: number,
+  blocksGap?: number,
   cover?: string
-
 }
 
 const url = "api/ShotsApi/UploadShot";
@@ -105,6 +104,10 @@ const SharePage: FunctionComponent = () => {
 
   const [visibylity, setVisibility] = useState<IVisibilityOption>({ index: 0, option: visibilityOptions[0] });
   const [visibilityMenuVisible, setVisibilityMenuVisible] = useState(false);
+
+  const isDraft = useRef(false);
+
+  console.log(isDraft.current);
 
   const [gap, setInterval] = useState(16);
 
@@ -254,7 +257,7 @@ const SharePage: FunctionComponent = () => {
     uploadedData.isPublic = true;
     uploadedData.isDraft = false;
     uploadedData.price = price;
-    uploadedData.gap = gap;
+    uploadedData.blocksGap = gap;
     cover ? uploadedData.cover = cover.name : "";
     console.log(uploadedData);
     const formData = new FormData;
