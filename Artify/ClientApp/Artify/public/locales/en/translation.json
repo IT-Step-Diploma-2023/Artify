@@ -283,6 +283,11 @@
         },
         "collection":{
             "text1":"collection"
+        },
+        "aboutUsMenu":{
+            "text1":"about us",
+            "text2":"team",
+            "text3":"media kit"
         }
     }
     

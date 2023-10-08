@@ -6,6 +6,7 @@ import Tab from '@mui/material/Tab';
 import { Box, fontSize } from '@mui/system';
 import classes from './AboutUsMenu.module.css';
 
+
 interface Lngs {
   ua: string
   en: string
@@ -18,7 +19,7 @@ const lngs: Lngs = {
 
 export default function AboutUsMenu() {
 
-
+  const { t } = useTranslation();
 
   const [value, setValue] = React.useState(0);
 
@@ -28,9 +29,9 @@ export default function AboutUsMenu() {
 
 
   const pages = [
-    'про нас',
-    'наша команда',
-    'медіа кіт',
+    t('aboutUsMenu.text1'),
+    t('aboutUsMenu.text2'),
+    t('aboutUsMenu.text3')
 
   ];
   const pathes = [
