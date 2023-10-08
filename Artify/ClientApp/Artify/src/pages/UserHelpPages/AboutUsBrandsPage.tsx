@@ -24,15 +24,28 @@ const lngs: Lngs = {
   const AboutUsBrandsPage: FunctionComponent = () => {   
  
     const { t } = useTranslation();  
-    
+
+    const text1=t('aboutUsPage.text1');
+    const text2=t('aboutUsPage.text2');
+    const text3=t('aboutUsPage.text3');
+    const text4=t('aboutUsPage.text4');
+    const text5=t('aboutUsPage.text5');
+    const text6=t('aboutUsPage.text6');
+    const text7=t('aboutUsPage.text7');
+    const text8=t('aboutUsPage.text8');
+    const text9=t('aboutUsPage.text9');
+    const text10=t('aboutUsPage.text12');
+
+    const text17=t('howBuyWorkPage.text6');
 
   return <>
-    <AboutUsMenu/>
-    <Typography sx={{marginTop:'100px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'70px', color:'#271846',fontWeight:'400', lineHeight:'84px', fontFamily:'Sofia Sans'}}>
-  отже, що ж до нас?..
+  <AboutUsMenu/>
+
+  <Typography sx={{marginTop:'100px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'70px', color:'#271846',fontWeight:'400', lineHeight:'84px', fontFamily:'Sofia Sans'}}>
+  {text1}
   </Typography>
   <Typography sx={{display:'flex',justifyContent:'center',alignItems:'center',fontSize:'25px', color:'#271846',fontWeight:'400', lineHeight:'84px', fontFamily:'Sofia Sans'}}>
-  зараз розповімо вам
+  {text2}
   </Typography>
 
 
@@ -43,14 +56,14 @@ width:'1240px',height:'626px',marginTop:'100px',display:'block',marginLeft:'auto
 </img>
 
 <Typography sx={{marginTop:'100px',marginLeft:'100px',fontSize:'70px', color:'#271846',fontWeight:'500', lineHeight:'84px', fontFamily:'Sofia Sans'}}>
-  про нас
+  {text3}
   </Typography>
 
   <Grid container spacing={2} display={'flex'}>
     <Grid item xs={8.65} style={{display:'inline-block'}}>
-    <Typography sx={{marginLeft:'100px',marginTop:'20px',width:'920px',height:'176px',border:'1px solid #271846',borderRadius:'24px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
-      <Typography sx={{width:'892px',height:'54px',display:'flex',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
-      безліч дизайнерів шукають своє місце під сонцем, і що ж скажемо, зараз це досить важко зробити в наш час. тому ми пропонуємо вам платформу для реалізації своїх потенціалів. тут ви зможете познайомитися з іншими дизайнерами і створювати спільні проєкти разом. надіємося, що вам сподобається і ви доєднаєтеся до нашої цікавої спільноти...
+    <Typography sx={{marginLeft:'100px',marginTop:'20px',width:'920px',height:'176px',border:'1px solid #271846',borderRadius:'24px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontStyle:'Nunito'}}>
+      <Typography sx={{width:'892px',height:'54px',display:'flex',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontStyle:'Nunito'}}>
+      {text4}
       </Typography>
     </Typography>
     </Grid>
@@ -85,23 +98,23 @@ width:'1240px',height:'626px',marginTop:'100px',display:'block',marginLeft:'auto
   </Grid>
 
   <Typography sx={{marginTop:'200px',marginLeft:'100px',fontSize:'70px', color:'#271846',fontWeight:'500', lineHeight:'84px', fontFamily:'Sofia Sans'}}>
-  наша ціль
+  {text5}
   </Typography>
 
   <Grid container spacing={2} display={'flex'}>
     <Grid item xs={8.5} style={{display:'inline-block'}}>
-    <Typography sx={{marginLeft:'100px',marginTop:'20px',width:'920px',height:'176px',border:'1px solid #271846',borderRadius:'24px',display:'block',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
-      <Typography sx={{display:'block',marginLeft:'28px',marginTop:'24px',fontSize:'20px', color:'#271846',fontWeight:'700', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
-      ми тут, щоб дати вам: 
+    <Typography sx={{marginLeft:'100px',marginTop:'20px',width:'920px',height:'176px',border:'1px solid #271846',borderRadius:'24px',display:'block',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontStyle:'Nunito'}}>
+      <Typography sx={{display:'block',marginLeft:'28px',marginTop:'24px',fontSize:'20px', color:'#271846',fontWeight:'700', lineHeight:'27.28pxpx', fontStyle:'Nunito'}}>
+      {text6}
       </Typography>
-      <Typography sx={{display:'block',marginLeft:'48px',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
-      - хороші ідеї для вашого майбутнього шедевру 
+      <Typography sx={{display:'block',marginLeft:'48px',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontStyle:'Nunito'}}>
+      {text7}
       </Typography>
-      <Typography sx={{display:'block',marginLeft:'48px',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
-      - шанс створити власне портфоліо
+      <Typography sx={{display:'block',marginLeft:'48px',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontStyle:'Nunito'}}>
+      {text8}
       </Typography>
-      <Typography sx={{display:'block',marginLeft:'48px',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
-      - можливість придбати одну з робіт дизайнерів
+      <Typography sx={{display:'block',marginLeft:'48px',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontStyle:'Nunito'}}>
+      {text9}
       </Typography>
     </Typography>
     </Grid>
@@ -118,8 +131,8 @@ width:'1240px',height:'626px',marginTop:'100px',display:'block',marginLeft:'auto
   </Grid>
 </Grid>
 
-  <Typography sx={{marginTop:'200px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'70px', color:'#271846',fontWeight:'500', lineHeight:'84px', fontFamily:'Sofia Sans'}}>
-  бренди
+  <Typography sx={{marginTop:'200px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'70px', color:'#271846',fontWeight:'500', lineHeight:'84px', fontStyle:'Sofia Sans'}}>
+  {text10}
   </Typography>
 
 
@@ -145,7 +158,7 @@ width:'1240px',height:'626px',marginTop:'100px',display:'block',marginLeft:'auto
               <Button className='button1'
                 style={{ width: '121.23px',height:'46.18px',margin:'100px auto 50px auto',borderRadius: '30px',gap:'10px',backgroundColor:'#271846',color:'#FFFFFF',display: 'flex',alignItems: 'center', justifyContent: 'center'}}>
                 <Typography sx={{fontFamily:'Nunito',fontSize:'17.32px', textTransform:'lowercase'}}>
-                  закрити
+                {text17}
                 </Typography>
               </Button>
         </Link>
