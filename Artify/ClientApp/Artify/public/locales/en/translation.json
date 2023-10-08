@@ -280,6 +280,9 @@
             "text17":"- use the logo to design your own company",
             "text18":"- use the logo as a sponsorship or collaboration with us without our permission",
             "text19":"- don't change the logo when you use it"
+        },
+        "collection":{
+            "text1":"collection"
         }
     }
     
