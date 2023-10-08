@@ -49,6 +49,7 @@ import AboutUsProductDesignersPage from './pages/UserHelpPages/AboutUsProductDes
 import AboutUsUiUxPage from './pages/UserHelpPages/AboutUsUiUxPage';
 import AboutUsWebDesignersPage from './pages/UserHelpPages/AboutUsWebDesignersPage';
 import AboutUsPhotographsPage from './pages/UserHelpPages/AboutUsPhotographsPage';
+import MediaKitPage from './pages/UserHelpPages/MediaKitPage';
 
 
 function App() {
@@ -89,6 +90,7 @@ function App() {
         { path: 'about-us-designers', element: <AboutUsProductDesignersPage /> }, 
         { path: 'about-us-uiux', element: <AboutUsUiUxPage /> }, 
         { path: 'about-us-web', element: <AboutUsWebDesignersPage /> }, 
+        { path: 'media-kit', element: <MediaKitPage /> },  
 
         { path: 'howAddWork', element: <HowAddWorkPage /> },
         { path: 'howBuyWork', element: <HowBuyWorkPage /> },
@@ -100,7 +102,7 @@ function App() {
         { path: 'uiUx', element: <AboutUsUiUxPage /> },  
         { path: 'productDesigners', element: <AboutUsProductDesignersPage /> },  
         { path: 'illustrators', element: <AboutUsIllustratorsPage /> },  
-        { path: 'webDesigners', element: <AboutUsWebDesignersPage /> }, 
+        { path: 'webDesigners', element: <AboutUsWebDesignersPage /> },        
 
         //////////////////////////////////////////////////////
         // !!! NOT IN USE

@@ -10,8 +10,8 @@ import {  Close, LocationOn } from '@mui/icons-material';
 
 
 import { Link } from 'react-router-dom';
-import MainNavigation from '../../components/Layouts/Navigation/MainNavigation';
-import HomeButtonFilter2 from '../../components/UI/HomeButtonFilter2';
+import MainNavigation from '../components/Layouts/Navigation/MainNavigation';
+import HomeButtonFilter2 from '../components/UI/HomeButtonFilter2';
 
 
 
@@ -38,11 +38,18 @@ const lngs: Lngs = {
 
   
     const { t } = useTranslation();  
+
+    const text1=t('howBuyWorkPage.text1');
+    const text2=t('howBuyWorkPage.text2');
+    const text3=t('howBuyWorkPage.text3');
+    const text4=t('howBuyWorkPage.text4');
+    const text5=t('howBuyWorkPage.text5');
+    const text6=t('howBuyWorkPage.text6');
     
 
   return <>
   <Typography sx={{marginTop:'100px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'70px', color:'#271846',fontWeight:'700', lineHeight:'84px', fontFamily:'Sofia Sans'}}>
-    як придбати роботу
+    {text1}
   </Typography>
 
 
@@ -50,7 +57,7 @@ const lngs: Lngs = {
     <Grid item xs={8.65} style={{display:'inline-block'}}>
     <Typography sx={{marginLeft:'140px',marginTop:'100px',width:'960px',height:'95px',border:'1px solid #271846',borderRadius:'24px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
       <Typography sx={{width:'892px',height:'54px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
-        натисніть кнопку “купівля” і вас перенесе на блок, де ви зможете придбати якусь роботу.
+        {text2}
       </Typography>
     </Typography>
     </Grid>
@@ -66,7 +73,7 @@ const lngs: Lngs = {
     <Grid item xs={10} style={{display:'inline-block'}}>
     <Typography sx={{marginLeft:'140px',marginTop:'100px',width:'960px',height:'122px',border:'1px solid #271846',borderRadius:'24px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
       <Typography sx={{width:'892px',height:'54px',display:'flex',marginLeft:'40px',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
-        натисніть на кнопку “кошик”. перед вами зʼявиться віконце для заповнення ваших даних, щоб купити роботу.
+        {text3}
       </Typography>
       <div style={{marginTop:'815px',marginRight:'-120px'}}>
       <svg width="170" height="688" viewBox="0 0 170 688" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -79,7 +86,7 @@ const lngs: Lngs = {
     <Grid item xs={8.65} style={{display:'inline-block'}}>
     <Typography sx={{marginLeft:'-110px',marginTop:'100px',width:'960px',height:'95px',border:'1px solid #271846',borderRadius:'24px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
       <Typography sx={{width:'892px',height:'54px',display:'flex',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
-      завдяки фільтрам ви зможете вибрати ту категорію робіт, які вам потрібні.
+      {text4}
       </Typography>
       
     </Typography>
@@ -607,7 +614,7 @@ const lngs: Lngs = {
     <Grid item xs={8.65} style={{display:'inline-block'}}>
     <Typography sx={{marginLeft:'140px',marginTop:'100px',width:'960px',height:'95px',border:'1px solid #271846',borderRadius:'24px',display:'flex',justifyContent:'center',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
       <Typography sx={{width:'892px',height:'54px',display:'flex',alignItems:'center',fontSize:'20px', color:'#271846',fontWeight:'400', lineHeight:'27.28pxpx', fontFamily:'Nunito'}}>
-      щоб придбати роботу, введіть свої дані.
+      {text5}
       </Typography>
     </Typography>
     </Grid>
@@ -816,7 +823,7 @@ const lngs: Lngs = {
               <Button className='button1'
                 style={{ width: '121.23px',height:'46.18px',margin:'100px auto 50px auto',borderRadius: '30px',gap:'10px',backgroundColor:'#271846',color:'#FFFFFF',display: 'flex',alignItems: 'center', justifyContent: 'center'}}>
                 <Typography sx={{fontFamily:'Nunito',fontSize:'17.32px', textTransform:'lowercase'}}>
-                  закрити
+                  {text6}
                 </Typography>
               </Button>
         </Link>

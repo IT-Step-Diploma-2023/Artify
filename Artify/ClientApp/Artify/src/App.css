@@ -654,3 +654,61 @@ background-color: #ECEAEF;
     background-color: var(--violet);
     box-shadow: 0px 4px 8px 0px rgba(39, 24, 70, 0.40);
 }
+
+
+.typography1 {
+    border: none;
+    border-radius:10px;
+    box-shadow: 0px 4px 8px 0px #27184666;
+}
+
+
+.typography1:hover {
+    border: none;
+    border-radius:10px;
+    color: var(--dark-violet);
+    box-shadow: none;
+    
+}
+.typography2 {
+    border: none;
+    border-radius:10px;
+    box-shadow: 0px 4px 8px 0px #27184666;
+}
+
+
+.typography2:hover {
+    border: none;
+    border-radius:10px;
+    color: var(--violet);
+    box-shadow: none;
+}
+.typography3 {
+    border: none;
+    border-radius:10px;
+    box-shadow: 0px 4px 8px 0px #27184666;
+}
+
+
+.typography3:hover {
+    border: none;
+    border-radius:10px;
+    color: #9E9AA2;
+    box-shadow: none;
+}
+.typography4 {
+    border: none;
+    border-radius:10px;
+    box-shadow: 0px 4px 8px 0px #27184666;
+}
+
+
+.typography4:hover {
+    border: none;
+    border-radius:10px;
+    color: var(--light-grey);
+    box-shadow: none;
+}
+
+
+
