@@ -17,7 +17,7 @@ const lngs: Lngs = {
   en: 'EN'
 }
 
-export default function AboutUsMenu() {
+function AboutUsMenu() {
 
   const { t } = useTranslation();
 
@@ -57,4 +57,6 @@ export default function AboutUsMenu() {
 </>
   );
 }
+
+export default AboutUsMenu;
 

@@ -10,8 +10,8 @@ import { LocationOn } from '@mui/icons-material';
 
 
 import { Link } from "react-router-dom";
-import MainNavigation from '../components/Layouts/Navigation/MainNavigation';
-import ProfileMenu from './UserProfileComponents/ProfileMenu';
+import MainNavigation from '../../components/Layouts/Navigation/MainNavigation';
+import ProfileMenu from '../../components/UI/UserProfileComponents/ProfileMenu';
 
 
 interface Lngs {

@@ -8,7 +8,7 @@ import { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import {  AutorenewRounded, DeleteForeverRounded, North, South } from '@mui/icons-material';
 
-import MainNavigation from '../components/Layouts/Navigation/MainNavigation';
+import MainNavigation from '../../components/Layouts/Navigation/MainNavigation';
 import { Link } from 'react-router-dom';
 
 

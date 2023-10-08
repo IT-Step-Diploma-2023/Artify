@@ -11,7 +11,7 @@ import { styled } from '@mui/system';
 
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
-import { Grid, IconButton, Typography } from '@mui/material';
+import { Grid, IconButton, Typography, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 
@@ -104,8 +104,8 @@ const HelpCenterPage: FunctionComponent = () => {
     <Grid container spacing={2} marginTop={'38.22px'} display={'flex'} height={'250px'} >
       <Grid item xs={5.2}></Grid>
       <Grid item xs={3} sx={{ height: '250px' }}>
-        <Link className='link1' to={'/how-add-work'}>
-          <Typography sx={{ display: 'flex', fontSize: '20px', color: '#271846', fontWeight: '700', lineHeight: '84px', fontFamily: 'Nunito' }}>
+        <Link className='link1' to={'/how-add-work'} style={{display: "block"}}>
+          <Box sx={{ display: 'flex', fontSize: '20px', color: '#271846', fontWeight: '700', lineHeight: '84px', fontFamily: 'Nunito' }}>
             <IconButton className={'iconButtonBack'} aria-label="back">
               <svg width="12" height="22" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0.999999 21L11 11L1 1" stroke="#271846" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -114,11 +114,11 @@ const HelpCenterPage: FunctionComponent = () => {
             <Typography sx={{ marginLeft: '10px', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '20px', color: '#271846', fontWeight: '500', fontFamily: 'Nunito' }}>
               {addWork}
             </Typography>
-          </Typography>
+          </Box>
         </Link>
-        <br/>
-        <Link className='link1' to={'/how-buy-work'}>
-          <Typography sx={{ marginTop: '20px', display: 'flex', fontSize: '20px', color: '#271846', fontWeight: '700', lineHeight: '84px', fontFamily: 'Nunito' }}>
+
+        <Link className='link1' to={'/how-buy-work'} style={{display: "block"}}>
+          <Box sx={{ marginTop: '20px', display: 'flex', fontSize: '20px', color: '#271846', fontWeight: '700', lineHeight: '84px', fontFamily: 'Nunito' }}>
             <IconButton className={'iconButtonBack'} aria-label="back">
               <svg width="12" height="22" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0.999999 21L11 11L1 1" stroke="#271846" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -127,11 +127,11 @@ const HelpCenterPage: FunctionComponent = () => {
             <Typography sx={{ marginLeft: '10px', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '20px', color: '#271846', fontWeight: '500', fontFamily: 'Nunito' }}>
               {getJob}
             </Typography>
-          </Typography>
+          </Box>
         </Link>
-        <br/>
-        <Link className='link1' to={'/how-hire-designer'}>
-          <Typography sx={{ marginTop: '20px', display: 'flex', fontSize: '20px', color: '#271846', fontWeight: '700', lineHeight: '84px', fontFamily: 'Nunito' }}>
+
+        <Link className='link1' to={'/how-hire-designer'} style={{display: "block"}}>
+          <Box sx={{ marginTop: '20px', display: 'flex', fontSize: '20px', color: '#271846', fontWeight: '700', lineHeight: '84px', fontFamily: 'Nunito' }}>
             <IconButton className={'iconButtonBack'} aria-label="back">
               <svg width="12" height="22" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0.999999 21L11 11L1 1" stroke="#271846" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -140,11 +140,11 @@ const HelpCenterPage: FunctionComponent = () => {
             <Typography sx={{ marginLeft: '10px', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '20px', color: '#271846', fontWeight: '500', fontFamily: 'Nunito' }}>
               {hireDesigner}
             </Typography>
-          </Typography>
+          </Box>
         </Link>
-        <br/>
-        <Link className='link1' to={'/how-create-account'}>
-          <Typography sx={{ marginTop: '20px', display: 'flex', fontSize: '20px', color: '#271846', fontWeight: '700', lineHeight: '84px', fontFamily: 'Nunito' }}>
+
+        <Link className='link1' to={'/how-create-account'} style={{display: "block"}}>
+          <Box sx={{ marginTop: '20px', display: 'flex', fontSize: '20px', color: '#271846', fontWeight: '700', lineHeight: '84px', fontFamily: 'Nunito' }}>
             <IconButton className={'iconButtonBack'} aria-label="back">
               <svg width="12" height="22" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0.999999 21L11 11L1 1" stroke="#271846" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -153,11 +153,11 @@ const HelpCenterPage: FunctionComponent = () => {
             <Typography sx={{ marginLeft: '10px', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '20px', color: '#271846', fontWeight: '500', fontFamily: 'Nunito' }}>
               {createAccount}
             </Typography>
-          </Typography>
+          </Box>
         </Link>
-        <br/>
-        <Link className='link1' to={'/about-us'}>
-          <Typography sx={{ marginTop: '20px', display: 'flex', fontSize: '20px', color: '#271846', fontWeight: '700', lineHeight: '84px', fontFamily: 'Nunito' }}>
+
+        <Link className='link1' to={'/about-us'} style={{display: "block"}}>
+          <Box sx={{ marginTop: '20px', display: 'flex', fontSize: '20px', color: '#271846', fontWeight: '700', lineHeight: '84px', fontFamily: 'Nunito' }}>
             <IconButton className={'iconButtonBack'} aria-label="back">
               <svg width="12" height="22" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0.999999 21L11 11L1 1" stroke="#271846" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -166,9 +166,9 @@ const HelpCenterPage: FunctionComponent = () => {
             <Typography sx={{ marginLeft: '10px', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '20px', color: '#271846', fontWeight: '500', fontFamily: 'Nunito' }}>
               {aboutUs}
             </Typography>
-          </Typography>
+          </Box>
         </Link>
-        <br/>
+
       </Grid>
     </Grid>
 

@@ -10,8 +10,8 @@ import {  Close, LocationOn } from '@mui/icons-material';
 
 
 import { Link } from 'react-router-dom';
-import MainNavigation from '../components/Layouts/Navigation/MainNavigation';
-import HomeButtonFilter2 from '../components/UI/HomeButtonFilter2';
+import MainNavigation from '../../components/Layouts/Navigation/MainNavigation';
+import HomeButtonFilter2 from '../../components/UI/HomeButtonFilter2';
 
 
 
