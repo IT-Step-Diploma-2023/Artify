@@ -1,4 +1,4 @@
-import { Avatar, Box, CircularProgress, Modal, Typography } from "@mui/material";
+import { Avatar, Box, CircularProgress, Modal, Typography, Divider } from "@mui/material";
 import * as pageStyles from "../../../pages/UserProfilePages/SharePageStyles"
 import * as BtnStyles from "../CustomButtonStyles"
 import CustomButton from "../CustomButton";
@@ -49,38 +49,21 @@ const ViewShotModal = (
     const footer = {
         position: 'fixed',
         bottom: '80px',
-        height: "120px",
-        backgroundColor: "grey",
-        with: "100%",
+        right: "100px",
+        left: "100px",
+        height: "120px"
     }
     
     const footerText = {
         fontSize: "2.375rem",
-        fontFamily: "Sofia Sans"
+        fontFamily: "Sofia Sans",
+        lineHeight: "120px"
     }
 
     const container = {
-        height: "calc(100% - 50px)",
+        height: "calc(100% - 170px)",
         boxSizing: "border-box",
         overflowY: "auto"
-    };
-
-    const cover = {
-        width: "280px",
-        height: "200px",
-        borderRadius: "10px",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        margin: "auto"
-    };
-
-    const editedCover = {
-        width: "370px",
-        height: "200px",
-        borderRadius: "10px",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        margin: "auto"
     };
 
     const modal = {
@@ -236,6 +219,7 @@ const ViewShotModal = (
                     )}
                 </Box>
                 <Box sx={footer}>
+                    <Divider/>
                     <Typography sx={footerText}>
                         переглянути більше робіт //
                     </Typography>
