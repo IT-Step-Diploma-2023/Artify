@@ -65,7 +65,7 @@ export default function HomeImageList() {
 
   const { filterActive } = useContext(Context);
 
-  const [shots, setHots] = useState<IShot[]>([]);
+  const [shots, setShots] = useState<IShot[]>([]);
   const [activeShot, setActiveShot] = useState<IShot>();
 
   const [shotModalOpen, setShotModalOpen] = useState(false);
@@ -83,7 +83,7 @@ export default function HomeImageList() {
     });
     if (response.status !== 200) return;
     const responseJson: IShot[] = await response.json();
-    setHots(responseJson);
+    setShots(responseJson);
   }
 
   useEffect(() => { void getData() }, []);
@@ -108,14 +108,14 @@ export default function HomeImageList() {
       <Grid container spacing={{ xs: 2, md: 5 }} sx={{ height: "fit-content" }}>
 
         {shots.map((shot) => (
-          <Grid item xs={12} md={6} lg={3} key={shot.id} id={shots.indexOf(shot).toString()}
-            onClick={() => openShotModalHandler(shot)}>
+          <Grid item xs={12} md={6} lg={3} key={shot.id} id={shots.indexOf(shot).toString()}>
             <ImageListItem >
               <img
                 style={{ width: '100%', aspectRatio: '1.4', borderRadius: 10, boxShadow: '0px 4px 8px 0px #27184666' }}
                 src={"api/" + shot.cover}
                 alt={shot.title}
                 loading="lazy"
+                onClick={() => openShotModalHandler(shot)}
               />
               <Box>
                 <Box sx={{ verticalAlign: 'center', marginRight: 'auto' }}>
