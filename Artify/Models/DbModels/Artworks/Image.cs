@@ -18,7 +18,7 @@ namespace Artify.Models.DbModels.DbModels.Artworks
 
         [Required]
         [DataType(DataType.DateTime)]
-        public DateTime CreatedDateTime { get; set; }
+        public DateTime CreatedDateTime { get; set; } = DateTime.UtcNow;
 
         [Required]
         public string ImagePath { get; set; } = string.Empty;
