@@ -8,11 +8,12 @@ import { prices } from "../../assets/data/prices";
 import { extensions } from "../../assets/data/extensions";
 import { colors } from "../../assets/defaults/colors";
 import '../../App.css';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useRef } from 'react';
 import Context from "../../utils/Context";
 import { useTranslation } from 'react-i18next';
 import { TFunction } from 'i18next';
 import { getAuthToken } from '../../hooks/useAuthorization';
+import ShotModal from './HomePageComponents/ShotModal';
 
 // interface IShot  {
 //   id: number,
@@ -24,7 +25,7 @@ import { getAuthToken } from '../../hooks/useAuthorization';
 //   title: string
 // }
 
-interface IShot {
+export interface IShot {
   title: string,
   description: string,
   tags?: string[]
@@ -33,7 +34,7 @@ interface IShot {
   price: number;
   gap: number,
   cover: string,
-  
+
   thumbnailsPaths: string[],
   id: number,
   createdDateTime: string,
@@ -65,6 +66,9 @@ export default function HomeImageList() {
   const { filterActive } = useContext(Context);
 
   const [shots, setHots] = useState<IShot[]>([]);
+  const [activeShot, setActiveShot] = useState<IShot>();
+
+  const [shotModalOpen, setShotModalOpen] = useState(false);
 
   const existedPrices: string[] = [];
   prices.map((price) => {
@@ -82,9 +86,14 @@ export default function HomeImageList() {
     setHots(responseJson);
   }
 
-  //const q = getData();
+  useEffect(() => { void getData() }, []);
 
-  useEffect(() => { void getData() }, [])
+  const openShotModalHandler = (shot: IShot) => {
+    setActiveShot(shot);
+    setShotModalOpen(true)
+  };
+  const closeShotModalHandler = () => setShotModalOpen(false);
+
   return (<>
     <Box sx={container}>
       <Box
@@ -99,7 +108,8 @@ export default function HomeImageList() {
       <Grid container spacing={{ xs: 2, md: 5 }} sx={{ height: "fit-content" }}>
 
         {shots.map((shot) => (
-          <Grid item xs={12} md={6} lg={3} key={shot.id} id={shots.indexOf(shot).toString()} >
+          <Grid item xs={12} md={6} lg={3} key={shot.id} id={shots.indexOf(shot).toString()}
+            onClick={() => openShotModalHandler(shot)}>
             <ImageListItem >
               <img
                 style={{ width: '100%', aspectRatio: '1.4', borderRadius: 10, boxShadow: '0px 4px 8px 0px #27184666' }}
@@ -153,6 +163,12 @@ export default function HomeImageList() {
           </Grid>
         ))}
       </Grid>
+      {ShotModal(
+        t,
+        shotModalOpen,
+        closeShotModalHandler,
+        activeShot
+      )}
     </Box>
   </>
   );

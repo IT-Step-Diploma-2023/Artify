@@ -38,9 +38,10 @@ interface IUploadedData {
 }
 
 const url = "api/ShotsApi/UploadShot";
-const token = getAuthToken() ?? "";
 
 const SharePage: FunctionComponent = () => {
+  
+  const token = getAuthToken() ?? "";
 
   const { t, i18n } = useTranslation();
 
@@ -264,13 +265,24 @@ const SharePage: FunctionComponent = () => {
     formData.append("value", JSON.stringify(uploadedData));
     selectedFiles.forEach((file) => formData.append("images", file));
     console.log(formData);
-    const response = await fetch(url, {
+    console.log(url);
+    console.log(uploadedData);
+    // const response = await fetch(url, {
+    //   method: "POST",
+    //   body: formData,
+    //   headers: {
+    //     "Authorization": "Bearer " + token,
+    //   }
+    // });
+    const request = {
       method: "POST",
       body: formData,
       headers: {
         "Authorization": "Bearer " + token,
       }
-    });
+    };
+    console.log(request);
+    const response = await fetch(url, request);
     if (response.status !== 200) return;
     navigate("/");
   }
