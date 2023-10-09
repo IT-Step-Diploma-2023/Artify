@@ -130,7 +130,8 @@ namespace Artify.Controllers.shots
                     Image newImage = new Image()
                     {
                         ImagePath = imagePath.NewFilePath,
-                        ThumbnailFullPath = compressedImage.FileName ?? imagePath.NewFilePath
+                        ThumbnailFullPath = compressedImage.FileName ?? imagePath.NewFilePath,
+                        CreatedDateTime = DateTime.UtcNow
                         //Price = 0
                     };
                     newShot.Images.Add(newImage);
