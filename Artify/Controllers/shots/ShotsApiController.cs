@@ -222,6 +222,14 @@ namespace Artify.Controllers.shots
 
         }
 
+        /// <summary>
+        /// Return a list with recent shots
+        /// Supports pagination
+        /// </summary>
+        /// <param name="page">Current page</param>
+        /// <param name="filters">Applied filter</param>
+        /// <param name="pageSize">Page size</param>
+        /// <returns>Shots list</returns>
         [HttpGet]
         [Route("api/[controller]/[action]")]
         public async Task<IActionResult> GetShots(int page = 0, string filters = "", int pageSize = 20)
@@ -248,6 +256,30 @@ namespace Artify.Controllers.shots
             }
             );
             return Ok(returnableShots);
+        }
+
+        /// <summary>
+        /// Return specific shot with links to the full size images
+        /// If shot is not public and user requesting it is not a creator, return Forbid
+        /// </summary>
+        /// <param name="id">Id of shot</param>
+        /// <returns>Shot model or Forbidden</returns>
+        [HttpGet]
+        [Route("api/[controller]/[action]")]
+        public IActionResult GetShot(int id)
+        {
+            var shot = _shotsRepository.Query(shot => shot.Id == id).FirstOrDefault();
+            if (shot == null)
+                return NotFound("Shot was not found");
+            if (!shot.IsPublic)
+            {
+                JwtUser? jwtUser = UsersService.GetCurrentUser(this.HttpContext);
+                if (jwtUser == null || jwtUser.Id != shot.UserId)
+                    return Forbid();
+            }
+
+            GetSingleShotDTO returnModel = new GetSingleShotDTO(shot);  
+            return Ok(returnModel);
         }
     }
 }

@@ -8,13 +8,13 @@ namespace Artify.Controllers.shots.DTO
         public string title { get; set; } = string.Empty;
         public DateTime createdDateTime { get; set; }
         public int userId { get; set; }
-        public string username { get; set; }
-        public string userFullName { get; set; }
+        public string username { get; set; } = string.Empty;
+        public string userFullName { get; set; } = string.Empty;
         public double price { get; set; }
         public bool isPublic { get; set; }
         public bool isDraft { get; set; }
         public int blocksGap { get; set; }
-        public string cover { get; set; }
+        public string cover { get; set; } = string.Empty;
         public List<string> thumbnailsPaths { get; set; } = new List<string>();
         public GetShotDTO(Shot shot)
         {

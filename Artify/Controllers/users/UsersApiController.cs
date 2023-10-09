@@ -104,7 +104,7 @@ namespace Artify.Controllers.users
                 if (user == null) return NotFound(new { errorMessage = "UserDTO was not found in the database" });
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
