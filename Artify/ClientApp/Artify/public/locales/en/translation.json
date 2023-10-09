@@ -288,6 +288,10 @@
             "text1":"about us",
             "text2":"team",
             "text3":"media kit"
+        },
+        "shotDetails": {
+            "buttonText": "view more",
+            "footerText": "view more works"
         }
     }
     
