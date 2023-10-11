@@ -1,8 +1,8 @@
 import { getAuthToken } from './useAuthorization';
 import availableProfiles from '../assets/data/availableSocialProfiles.json'
+import { urls } from '../assets/defaults/urls';
 
 
-const url = 'api/UsersApi/GetUserSocialProfiles';
 const token = getAuthToken() ?? '';
 
 export interface SocialProfile {
@@ -53,7 +53,7 @@ function useSocialProfiles() {
     }
 
     const getData = async (): Promise<void> => {
-        const response = await fetch(url, {
+        const response = await fetch(urls.getUserSocialProfiles, {
             headers: {
                 "Authorization": "Bearer " + token,
             },

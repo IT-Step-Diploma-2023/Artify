@@ -1,7 +1,8 @@
 import { getAuthToken } from '../hooks/useAuthorization';
+import { urls } from '../assets/defaults/urls';
 
 
-const url = 'api/users/UsersApi/GetCurrentUserData';
+
 const token = getAuthToken() ?? '';
 const separator = "_"
 
@@ -82,7 +83,7 @@ function useUserSettings() {
     }
 
     const getData = async (): Promise<void> => {
-        const response = await fetch(url, {
+        const response = await fetch(urls.getCurrentUserData, {
             headers: {
                 "Authorization": "Bearer " + token,
             },

@@ -17,7 +17,7 @@ import InputErrorMessage from '../../components/UI/InputErrorMessage';
 
 const BasicInfoPage: FunctionComponent = () => {
 
-      /* #region localization */
+    /* #region localization */
 
     const { t } = useTranslation();
 
@@ -33,7 +33,9 @@ const BasicInfoPage: FunctionComponent = () => {
     /* #endregion */
 
     const { getData, postData, loadData } = useUserSettings();
-    const retriveData = getData();
+    // const retriveData = getData();
+
+    useEffect(() => { void getData() });
 
     const [formData, setFormData] = useState(loadData);
 

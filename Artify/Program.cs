@@ -18,7 +18,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     var config = builder.Configuration;
+
     var connectionString = config.GetConnectionString("DefaultConnection");
+    //var connectionString = config.GetConnectionString("AzureConnection");
+
     options.UseSqlServer(connectionString);
     options.UseLazyLoadingProxies();
 });
@@ -44,11 +47,13 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-
-builder.Services.AddSwaggerGen(swagger =>
+if (builder.Environment.IsDevelopment())
 {
-    swagger.IncludeXmlComments(Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "SwaggerInfo.xml"));
-});
+    builder.Services.AddSwaggerGen(swagger =>
+    {
+        swagger.IncludeXmlComments(Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "SwaggerInfo.xml"));
+    });
+}
 
 //Adding repositories
 builder.Services.AddTransient<IRepository<User>, UsersRepository>();
@@ -66,12 +71,23 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
 
 app.UseAuthorization();
 
+//app.MapGet("/", () => "Hello World!");
+
 app.MapControllers();
+
+//using (var db = app.Services.GetService<ApplicationDbContext>())
+//{
+//    if (db != null)
+//        db.Database.Migrate();
+//}
+
+app.UseDeveloperExceptionPage();
 
 app.Run();

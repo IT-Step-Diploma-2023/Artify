@@ -14,34 +14,7 @@ import { useTranslation } from 'react-i18next';
 import { TFunction } from 'i18next';
 import { getAuthToken } from '../../hooks/useAuthorization';
 import ShotModal from './HomePageComponents/ShotModal';
-
-// interface IShot  {
-//   id: number,
-//   createdDateTime: string,
-//   userid: number,
-//   price: number,
-//   isPublic: boolean,
-//   isDraft: boolean,
-//   title: string
-// }
-
-export interface IShot {
-  title: string,
-  description: string,
-  tags?: string[]
-  isPublic: boolean,
-  isDraft: boolean,
-  price: number;
-  gap: number,
-  cover: string,
-
-  thumbnailsPaths: string[],
-  id: number,
-  createdDateTime: string,
-  userId: number,
-  username: number,
-  userFullName: string,
-}
+import { IShot } from '../../assets/interfaces/shotsInterfaces';
 
 /* #region styles */
 const container = {
@@ -55,9 +28,10 @@ const filterBlock = {
 /* #endregion */
 
 const url = 'api/ShotsApi/GetShots';
-const token = getAuthToken() ?? '';
 
 export default function HomeImageList() {
+
+  const token = getAuthToken() ?? '';
 
   const { t } = useTranslation();
 
@@ -86,6 +60,8 @@ export default function HomeImageList() {
     setShots(responseJson);
   }
 
+
+
   useEffect(() => { void getData() }, []);
 
   const openShotModalHandler = (shot: IShot) => {
@@ -112,7 +88,7 @@ export default function HomeImageList() {
             <ImageListItem >
               <img
                 style={{ width: '100%', aspectRatio: '1.4', borderRadius: 10, boxShadow: '0px 4px 8px 0px #27184666' }}
-                src={"api/" + shot.cover}
+                src={shot.cover}
                 alt={shot.title}
                 loading="lazy"
                 onClick={() => openShotModalHandler(shot)}
@@ -121,11 +97,13 @@ export default function HomeImageList() {
                 <Box sx={{ verticalAlign: 'center', marginRight: 'auto' }}>
                   <Avatar sx={{ float: 'left', marginTop: '0.4375rem', width: '1.25rem', height: '1.25rem' }}
                     alt={shot.userFullName}
-                    src="images/default_profile.png"
-                  />
+                    src={shot.logoImage !== "" ?
+                      shot.logoImage :
+                      "images/default_profile.png"
+                    } />
                 </Box>
                 <Typography sx={{ float: 'left', fontSize: '0.875rem', fontWeight: 700, padding: '0.4375rem 0 0 0.4375rem' }}>{shot.userFullName}</Typography>
-                <Typography sx={{ float: 'right', fontSize: '0.875rem', fontWeight: 400, color: '#9E9AA2', padding: '0.4375rem 0 0 0.4375rem' }}>12</Typography>
+                <Typography sx={{ float: 'right', fontSize: '0.875rem', fontWeight: 400, color: '#9E9AA2', padding: '0.4375rem 0 0 0.4375rem' }}>{shot.appreciationsCount}</Typography>
                 <Box >
                   <Checkbox {...label} icon={<FavoriteBorder sx={{ color: '#9E9AA2', width: '1rem' }} />} checkedIcon={<Favorite sx={{ color: '#D65353', width: '1rem' }} />}
                     sx={{ width: '18px', height: '18px', float: 'right', marginTop: '0.4375rem' }} />
@@ -163,12 +141,12 @@ export default function HomeImageList() {
           </Grid>
         ))}
       </Grid>
-      {ShotModal(
-        t,
-        shotModalOpen,
-        closeShotModalHandler,
-        activeShot
-      )}
+      {activeShot && <ShotModal
+        t={t}
+        openModal={shotModalOpen}
+        closeModalHandler={closeShotModalHandler}
+        shotId={activeShot.id}
+      />}
     </Box>
   </>
   );

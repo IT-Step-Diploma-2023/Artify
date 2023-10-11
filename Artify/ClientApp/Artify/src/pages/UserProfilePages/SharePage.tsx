@@ -20,6 +20,7 @@ import addDescriptionModal from "../../components/UI/SharePageComponents/addDesc
 import PublicateModal from "../../components/UI/SharePageComponents/publicateModal";
 import { existedTags } from "../../assets/data/tags";
 import { useNavigate } from "react-router";
+import { urls } from "../../assets/defaults/urls";
 
 interface IVisibilityOption {
   index: number,
@@ -40,7 +41,7 @@ interface IUploadedData {
 const url = "api/ShotsApi/UploadShot";
 
 const SharePage: FunctionComponent = () => {
-  
+
   const token = getAuthToken() ?? "";
 
   const { t, i18n } = useTranslation();
@@ -107,8 +108,6 @@ const SharePage: FunctionComponent = () => {
   const [visibilityMenuVisible, setVisibilityMenuVisible] = useState(false);
 
   const isDraft = useRef(false);
-
-  console.log(isDraft.current);
 
   const [gap, setInterval] = useState(16);
 
@@ -264,16 +263,7 @@ const SharePage: FunctionComponent = () => {
     const formData = new FormData;
     formData.append("value", JSON.stringify(uploadedData));
     selectedFiles.forEach((file) => formData.append("images", file));
-    console.log(formData);
-    console.log(url);
-    console.log(uploadedData);
-    // const response = await fetch(url, {
-    //   method: "POST",
-    //   body: formData,
-    //   headers: {
-    //     "Authorization": "Bearer " + token,
-    //   }
-    // });
+    
     const request = {
       method: "POST",
       body: formData,
@@ -281,8 +271,8 @@ const SharePage: FunctionComponent = () => {
         "Authorization": "Bearer " + token,
       }
     };
-    console.log(request);
-    const response = await fetch(url, request);
+
+    const response = await fetch(urls.uploadShot, request);
     if (response.status !== 200) return;
     navigate("/");
   }
