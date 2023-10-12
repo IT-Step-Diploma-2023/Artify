@@ -422,6 +422,82 @@ Status: 200 OK
     }
 ]
 
+POST api/ShotsApi/likeShot
+Description
+-----------
+Authorization: YES
+Set/unset Appreciation to current Shot from logged in User
+
+Request
+-----------
+{
+    "shotId":   //int
+    "liked":    //bool
+}
+
+Response
+-----------
+Status: 200 OK
+{
+    "shotId":   //int
+    "liked":    //bool
+}
+
+GET api/Albums/GetAlbums
+Description
+-----------
+Authorization: YES
+Get albums of logged in User
+
+Request
+-----------
+userId from tken
+
+Response
+-----------
+Status: 200 OK
+[
+    album: {
+        "id":
+        "userId":
+        "title":
+        "shots": [
+            // array of GetShotDTO where shot.album.id = id
+        ]
+    }   
+]
+
+POST api/ShotsApi/MarkShot
+Description
+-----------
+Authorization: YES
+Put shot to exact Album owned by logged in User
+
+Request
+-----------
+{
+    "shotId":   //int
+    "marked":    //bool
+}
+
+Response
+-----------
+Status: 200 OK
+{
+    "id":       //int
+    "shotId":   //int
+    "albumId":  //int
+    "marked":    //bool
+        album: {
+            "id":
+            "userId":
+            "title":
+            "shots": [
+                // array of GetShotDTO where shot.album.id = id
+            ]
+        }
+}
+
 
 
 

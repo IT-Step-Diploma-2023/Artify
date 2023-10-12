@@ -4,4 +4,5 @@ export const urls = {
     uploadShot: "api/ShotsApi/UploadShot",
     getShot: "api/ShotsApi/GetShot",
     setLike: "api/ShotsApi/likeShot",
+    setMark: "api/ShotsApi/markShot",
 }
