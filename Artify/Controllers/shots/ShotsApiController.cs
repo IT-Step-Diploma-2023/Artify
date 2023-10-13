@@ -324,5 +324,24 @@ namespace Artify.Controllers.shots
             GetSingleShotDTO returnModel = new GetSingleShotDTO(shot);  
             return Ok(returnModel);
         }
+
+        [HttpPut]
+        [Route("api/[controller]/[action]")]
+        public IActionResult AppreciateShot(int shotId, bool like = true)
+        {
+            JwtUser? jwtUser = UsersService.GetCurrentUser(this.HttpContext);
+            if (jwtUser == null)
+                return Forbid();
+            var shot = _shotsRepository.Query(shot => shot.Id == shotId).FirstOrDefault();
+            if (shot == null)
+                return NotFound("Invalid id");
+            if (!shot.IsPublic && shot.UserId != jwtUser.Id) {
+                return Forbid("The shot is private");
+            }
+
+
+
+            return Ok();
+        }
     }
 }
