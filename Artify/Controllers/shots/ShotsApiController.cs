@@ -4,14 +4,19 @@ using Artify.DAL;
 using Artify.Helpers.Uploaders;
 using Artify.Models.DbModels.DbModels.Artworks;
 using Artify.Models.DbModels.DbModels.Artworks.Attributes;
+using Artify.Models.DbModels.Users;
 using Artify.Models.HelperModels;
 using Artify.Services;
 using Azure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.IO;
+using System.Linq.Expressions;
+using System.Reflection.Metadata;
 using static Artify.Helpers.Uploaders.ImageUploader;
 using Image = Artify.Models.DbModels.DbModels.Artworks.Image;
 
@@ -234,7 +239,6 @@ namespace Artify.Controllers.shots
         [Route("api/[controller]/[action]")]
         public async Task<IActionResult> GetShots(int page = 0, string filters = "", int pageSize = 20)
         {
-            if (filters != "") return BadRequest("Currently, filters are not supported");
             if (pageSize > 50)
                 return BadRequest("Page size cannot be more than 50");
             if (page < 0)
@@ -245,7 +249,8 @@ namespace Artify.Controllers.shots
 
             List<GetShotDTO> returnableShots = new List<GetShotDTO>();
 
-            await _shotsRepository.GetAll().OrderByDescending(shot => shot.Id).Skip(page * pageSize).Take(pageSize).ForEachAsync(shot =>
+            
+            await _shotsRepository.Query(applyFilters(filters)).OrderByDescending(shot => shot.Id).Skip(page * pageSize).Take(pageSize).ForEachAsync(shot =>
             {
                 GetShotDTO getShotDTO = new(shot);
                 shot.Images.ForEach(image =>
@@ -256,6 +261,44 @@ namespace Artify.Controllers.shots
             }
             );
             return Ok(returnableShots);
+        }
+
+        private Expression<Func<Shot, bool>> applyFilters(string filters)
+        {
+            string[] splittedFilters = filters.Split('&');
+
+            var filterMappings = new Dictionary<string, Func<string, Expression<Func<Shot, bool>>>>
+            {
+                { "userId", value => shot => shot.UserId == int.Parse(value) },
+            };
+            ParameterExpression parameter = Expression.Parameter(typeof(Shot), "shot");
+            Expression<Func<Shot, bool>>? finalFilter = null;
+
+            foreach (string filterString in splittedFilters)
+            {
+                string[] splittedSingleFilter = filterString.Split('=');
+                if (splittedSingleFilter.Length != 2)
+                    continue;
+
+                if (filterMappings.TryGetValue(splittedSingleFilter[0], out var filterExpression))
+                {
+                    var value = splittedSingleFilter[1];
+                    var filter = filterExpression(value);
+
+                    if (finalFilter == null)
+                        finalFilter = filter;
+                    else
+                        finalFilter = Expression.Lambda<Func<Shot, bool>>(
+                    Expression.AndAlso(finalFilter.Body, filter.Body), parameter);
+                }
+
+            }
+            if(finalFilter != null)
+                return finalFilter;
+
+
+            //Expression<Func<Shot, bool>> trueExpression = shot => true;
+            return shot => true;
         }
 
         /// <summary>
