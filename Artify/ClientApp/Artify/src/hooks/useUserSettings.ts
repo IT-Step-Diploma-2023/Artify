@@ -1,39 +1,25 @@
 import { getAuthToken } from '../hooks/useAuthorization';
 import { urls } from '../assets/defaults/urls';
-
+import { Dispatch, SetStateAction } from "react";
+import { IBasicUserData, IBasicUserFormData } from '../assets/interfaces/usersInterfaces';
 
 
 const token = getAuthToken() ?? '';
 const separator = "_"
 
-export interface BasicUserData {
-    username: string,
-    fullName: string,
-    location: string,
-    info: string,
-    logoImage: string
-}
-
-export interface BasicUserFormData {
-    username: string,
-    fullName: string,
-    country: string,
-    address: string,
-    info: string,
-    logoImage: string
-}
-
 
 function useUserSettings() {
 
     const getCountry = (location: string): string => {
-        if (location.indexOf(separator) !== 0)
+        // if(location === undefined) return "";
+        if (location && location.indexOf(separator) !== 0)
             return location.split(separator)[0];
         return "";
     }
 
     const getAddress = (location: string): string => {
-        if (location.indexOf(separator) !== -1)
+        // if(location === undefined) return "";
+        if (location && location.indexOf(separator) !== -1)
             return location.split(separator)[1];
         return location;
     }
@@ -42,7 +28,8 @@ function useUserSettings() {
         return city + separator + address;
     }
 
-    const decodeData = (data: BasicUserData): BasicUserFormData => {
+    const decodeData = (data: IBasicUserData): IBasicUserFormData => {
+        console.log(data)
         return {
             username: data.username,
             fullName: data.fullName ?? '',
@@ -53,7 +40,7 @@ function useUserSettings() {
         }
     }
 
-    const encodeData = (data: BasicUserFormData, image: Blob): FormData => {
+    const encodeData = (data: IBasicUserFormData, image: Blob): FormData => {
         const udatedFormData = new FormData;
         udatedFormData.append('username', data.username);
         udatedFormData.append('fullName', data.fullName);
@@ -63,7 +50,7 @@ function useUserSettings() {
         return udatedFormData;
     }
 
-    const postData = (data: BasicUserFormData, image: Blob): void => {
+    const postData = (data: IBasicUserFormData, image: Blob): void => {
         const formData = encodeData(data, image);
         console.log(formData);
         for (const pair of formData.entries()) {
@@ -72,12 +59,12 @@ function useUserSettings() {
         sessionStorage.removeItem('basicUserFormData');
     }
 
-    const saveData = (data: BasicUserFormData) => {
+    const saveData = (data: IBasicUserFormData) => {
         sessionStorage.setItem('basicUserFormData', JSON.stringify(data));
     }
 
-    const loadData = (): BasicUserFormData => {
-        const data: BasicUserFormData = JSON.parse(sessionStorage.basicUserFormData as string)
+    const loadData = (): IBasicUserFormData => {
+        const data: IBasicUserFormData = JSON.parse(sessionStorage.basicUserFormData as string)
         //sessionStorage.removeItem('basicUserFormData');
         return data;
     }
@@ -89,11 +76,25 @@ function useUserSettings() {
             },
         });
         if (response.status !== 200) return;
-        const responseJson: BasicUserData = await response.json();
+        const responseJson: IBasicUserData = await response.json();
         saveData(decodeData(responseJson));
     }
 
-    return { getData, postData, saveData, loadData };
+    const getData2 = async (setItem: Dispatch<SetStateAction<IBasicUserFormData>>): Promise<void> => {
+        const response = await fetch(urls.getCurrentUserData, {
+            headers: {
+                "Authorization": "Bearer " + token,
+            },
+        });
+        if (response.status !== 200) return;
+        const responseJson: IBasicUserData = await response.json();
+        
+        setItem(decodeData(responseJson));
+    }
+
+
+
+    return { getData, postData, saveData, loadData, getData2 };
 }
 
 export default useUserSettings;

@@ -1,3 +1,5 @@
+import { number } from "react-i18next/icu.macro";
+
 export interface IShot {
     title: string,
     description: string,
@@ -25,6 +27,11 @@ export interface IAppreciation {
     ShotId: number
 }
 
+export interface IPortfolioShot {
+    id: number,
+    cover: string
+}
+
 export interface IShotDetails {
     id: number,
     title?: string,
@@ -40,4 +47,4 @@ export interface IShotDetails {
     images: string[],
     appreciations: IAppreciation[],
     tags: string[]
-  }
+}

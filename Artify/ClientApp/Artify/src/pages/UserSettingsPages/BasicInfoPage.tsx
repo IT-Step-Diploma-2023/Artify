@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box';
+import { Dispatch, SetStateAction } from "react";
 import { ChangeEvent, FunctionComponent, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import SettingsMenu from '../../components/UI/UserSettingsComponents/SettingsMenu';
@@ -14,6 +15,7 @@ import { countries } from '../../utils/getCountries';
 import CommonSelect from '../../components/UI/CommonSelect';
 import useUserSettings from '../../hooks/useUserSettings';
 import InputErrorMessage from '../../components/UI/InputErrorMessage';
+import { IBasicUserFormData } from '../../assets/interfaces/usersInterfaces';
 
 const BasicInfoPage: FunctionComponent = () => {
 
@@ -32,12 +34,15 @@ const BasicInfoPage: FunctionComponent = () => {
 
     /* #endregion */
 
-    const { getData, postData, loadData } = useUserSettings();
+    const { getData, postData, loadData, getData2 } = useUserSettings();
     // const retriveData = getData();
 
-    useEffect(() => { void getData() });
 
-    const [formData, setFormData] = useState(loadData);
+    const [formData, setFormData] = useState<IBasicUserFormData>(new Object as IBasicUserFormData);
+
+    useEffect(() => {
+        void getData2(setFormData)
+    }, []);
 
     /* #region validation */
 
