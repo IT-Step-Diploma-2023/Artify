@@ -15,12 +15,12 @@ import EmailRegisterPage from './pages/RegistrationPages/EmailRegistrationPage';
 import SelectRegisterPage from './pages/RegistrationPages/SelectRegistrationPage';
 import GoogleRegisterPage from './pages/RegistrationPages/GoogleRegistrationPage';
 // user settings pages
+import BasicInfoPage from './pages/UserSettingsPages/BasicInfoPage';
 import ProfInfoPage from './pages/UserSettingsPages/ProfInfoPage';
 import NetworksPage from './pages/UserSettingsPages/NetworksPage';
 import DelAccountPage from './pages/UserSettingsPages/DelAccountPage';
 // user profile pages
 import PortfolioPage from './pages/UserProfilePages/PortfolioPage';
-import BasicInfoPage from './pages/UserSettingsPages/BasicInfoPage';
 import ShowBorders from './pages/ShowBordersPage';
 import AboutMePage from './pages/UserProfilePages/AboutMePage';
 import LikedPage from './pages/UserProfilePages/LikedPage';

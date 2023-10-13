@@ -1,15 +1,12 @@
 import { FunctionComponent } from 'react';
-
 import { Box } from '@mui/system';
 import { FavoriteBorder, Favorite } from '@mui/icons-material';
 import { Grid, Paper, ImageListItem, Avatar, Typography, Checkbox } from '@mui/material';
 import HomeButtonFilter2 from '../components/UI/HomeButtonFilter2';
-import {existedTags} from "../assets/data/tags";
-
 
 
 const FilterPage: FunctionComponent = () => {
-
+  
   return <>
     <Box
       display='flex'

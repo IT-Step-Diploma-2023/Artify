@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import { Box, Grid, IconButton, ImageListItem } from '@mui/material';
 import { FunctionComponent } from 'react';
@@ -10,6 +9,24 @@ import PlusIcon from '../../components/UI/PlusIcon';
 import { useNavigate } from 'react-router';
 
 
+/* #region styles */
+const portfolioShot = {
+  width: '100%',
+  aspectRatio: '1.4',
+  borderRadius: 10,
+  boxShadow: '0px 4px 8px 0px #27184666'
+}
+
+const addPhotoBtn = {
+  border: '2px dashed #271846',
+  color: '#271846',
+  borderRadius: '10px',
+  width: '100%',
+  aspectRatio: '1.4',
+  display: 'flex',
+  flexDirection: 'column'
+}
+/* #endregion */
 
 const PortfolioPage: FunctionComponent = () => {
 
@@ -32,7 +49,7 @@ const PortfolioPage: FunctionComponent = () => {
         <Grid item xs={12} md={6} lg={3} key={item.img}>
           <ImageListItem >
             <img
-              style={{ width: '100%', aspectRatio: '1.4', borderRadius: 10, boxShadow: '0px 4px 8px 0px #27184666' }}
+              style={portfolioShot}
               src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
               srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
               alt={item.title}
@@ -44,15 +61,7 @@ const PortfolioPage: FunctionComponent = () => {
       <Grid item xs={12} md={6} lg={3}>
         <IconButton aria-label="addaphoto" className={'link2'}
           disableRipple
-          sx={{
-            border: '2px dashed #271846',
-            color: '#271846',
-            borderRadius: '10px',
-            width: '100%',
-            aspectRatio: '1.4',
-            display: 'flex',
-            flexDirection: 'column'
-          }}
+          sx={addPhotoBtn}
           onClick={clickHandle}>
           <Typography sx={{ marginBottom: '0.75rem' }} >{downloadWork}</Typography>
           <Box marginTop={'0.75rem'}>

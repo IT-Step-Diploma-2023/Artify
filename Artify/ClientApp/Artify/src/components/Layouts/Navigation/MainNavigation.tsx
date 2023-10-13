@@ -6,14 +6,11 @@ import { useNavigate, NavLink } from 'react-router-dom';
 import { FunctionComponent } from 'react';
 import { isUserLogged } from "../../../hooks/useAuthorization";
 import { useSelector } from "react-redux";
-//
 import { useTranslation } from 'react-i18next';
 import Logo from '../../UI/Logo';
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Button } from '@mui/base/Button';
 import { colors } from '../../../assets/defaults/colors';
-import useAuthorization from "../../../hooks/useAuthorization";
 import NavMenu from '../../UI/NavMenu';
 import CommonButton from '../../UI/CommonButton';
 
@@ -30,10 +27,16 @@ const lngs: Lngs = {
 }
 //#endregion
 
+interface IAuth {
+  auth: {
+    isAuthenticated: boolean
+  }
+}
+
 const Navbar: FunctionComponent = () => {
   //Cheking in local storage
   let username = isUserLogged();
-  const authStore = useSelector(state => state.auth);
+  const authStore = useSelector<IAuth, any>(state => state.auth);
   if (username === null && authStore.isAuthenticated === true) {
     username = authStore.username;
   }

@@ -1,5 +1,4 @@
 import { Box, CircularProgress, Modal, Typography } from "@mui/material";
-import * as pageStyles from "../../../pages/UserProfilePages/SharePageStyles"
 import * as BtnStyles from "../CustomButtonStyles"
 import CustomButton from "../CustomButton";
 import { TFunction } from "i18next";

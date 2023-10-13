@@ -3,28 +3,18 @@ import Tabs, { tabsClasses } from '@mui/material/Tabs';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 import Tab from '@mui/material/Tab';
-import { fontSize } from '@mui/system';
 
-interface Lngs {
-  ua: string
-  en: string
-}
-
-const lngs: Lngs = {
-  ua: 'UA',
-  en: 'EN'
-}
 
 export default function ScrollableTabsButtonVisible() {
 
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    console.log(event);
     setValue(newValue);
   };
-
 
   const pages = [
     t('headerComponent.tags.sites'),

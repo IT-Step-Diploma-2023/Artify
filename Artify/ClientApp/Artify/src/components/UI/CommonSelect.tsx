@@ -1,7 +1,7 @@
 import { styled } from "@mui/material/styles";
 import { sizes } from "../../assets/defaults/sizes";
 import { colors } from "../../assets/defaults/colors";
-import { Select } from "@mui/material";
+
 
 const positionHover = '0px 4px 8px 0px ';
 const positionActive = '0px 3px 8px 0px ';

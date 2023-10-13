@@ -21,7 +21,6 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
     var connectionString = config.GetConnectionString("DefaultConnection");
     //var connectionString = config.GetConnectionString("AzureConnection");
-
     options.UseSqlServer(connectionString);
     options.UseLazyLoadingProxies();
 });
@@ -65,7 +64,7 @@ builder.Services.AddTransient<IRepository<SocialProfile>, SocialProfilesReposito
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+//Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -78,7 +77,7 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
-//app.MapGet("/", () => "Hello World!");
+app.MapGet("/", () => "Online!!!");
 
 app.MapControllers();
 

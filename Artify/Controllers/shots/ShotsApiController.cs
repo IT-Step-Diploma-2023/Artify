@@ -247,7 +247,7 @@ namespace Artify.Controllers.shots
 
             await _shotsRepository.GetAll().OrderByDescending(shot => shot.Id).Skip(page * pageSize).Take(pageSize).ForEachAsync(shot =>
             {
-                GetShotDTO getShotDTO = new GetShotDTO(shot);
+                GetShotDTO getShotDTO = new(shot);
                 shot.Images.ForEach(image =>
                 {
                     getShotDTO.thumbnailsPaths.Add(UploadsController.PrepareImagePath(image.ThumbnailFullPath));

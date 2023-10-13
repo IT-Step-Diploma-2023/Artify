@@ -28,11 +28,11 @@ import { useTranslation } from 'react-i18next';
     const addBlock=t('share.addBlock');
 
     
-    const pathes = [
-      '/text',
-      '/image',
-      '/video'
-    ]
+    // const pathes = [
+    //   '/text',
+    //   '/image',
+    //   '/video'
+    // ]
 
   return <>
 

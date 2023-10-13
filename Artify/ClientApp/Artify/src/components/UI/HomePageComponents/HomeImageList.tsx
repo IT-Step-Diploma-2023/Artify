@@ -1,20 +1,21 @@
 import ImageListItem from '@mui/material/ImageListItem';
-import { Avatar, Box, Divider, Grid, Typography } from '@mui/material';
+import { Avatar, Box, Grid, Typography } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
-import { existedTags } from "../../assets/data/tags";
-import { prices } from "../../assets/data/prices";
-import { extensions } from "../../assets/data/extensions";
-import { colors } from "../../assets/defaults/colors";
-import '../../App.css';
-import { useContext, useEffect, useState, useRef } from 'react';
-import Context from "../../utils/Context";
+import { existedTags } from "../../../assets/data/tags";
+import { prices } from "../../../assets/data/prices";
+import { extensions } from "../../../assets/data/extensions";
+import { useContext, useEffect, useState } from 'react';
+import Context from "../../../utils/Context";
 import { useTranslation } from 'react-i18next';
-import { TFunction } from 'i18next';
-import { getAuthToken } from '../../hooks/useAuthorization';
-import ShotModal from './HomePageComponents/ShotModal';
-import { IShot } from '../../assets/interfaces/shotsInterfaces';
+// import { TFunction } from 'i18next';
+// import { getAuthToken } from '../../../hooks/useAuthorization';
+import ShotModal from './ShotModal';
+import { IShot } from '../../../assets/interfaces/shotsInterfaces';
+import FilterParamlist from './FilterParamList';
+import { getShotsData } from '../../../hooks/useShots';
+import ShotThumbnail from './Shots';
 
 /* #region styles */
 const container = {
@@ -27,11 +28,7 @@ const filterBlock = {
 }
 /* #endregion */
 
-const url = 'api/ShotsApi/GetShots';
-
 export default function HomeImageList() {
-
-  const token = getAuthToken() ?? '';
 
   const { t } = useTranslation();
 
@@ -49,20 +46,7 @@ export default function HomeImageList() {
     existedPrices.push(price.name);
   });
 
-  const getData = async (): Promise<void> => {
-    const response = await fetch(url, {
-      headers: {
-        "Authorization": "Bearer " + token,
-      },
-    });
-    if (response.status !== 200) return;
-    const responseJson: IShot[] = await response.json();
-    setShots(responseJson);
-  }
-
-
-
-  useEffect(() => { void getData() }, []);
+  useEffect(() => { void getShotsData(setShots) }, []);
 
   const openShotModalHandler = (shot: IShot) => {
     setActiveShot(shot);
@@ -76,40 +60,26 @@ export default function HomeImageList() {
         sx={filterBlock}
         style={{ display: filterActive ? "block" : "none" }}>
         <Box sx={{ width: "100%", paddingRight: "40px" }}>
-          {filterParamlist(t, t("homePage.params.category"), existedTags)}
-          {filterParamlist(t, t("homePage.params.price"), existedPrices)}
-          {filterParamlist(t, t("homePage.params.extension"), extensions)}
+          <FilterParamlist
+            t={t}
+            title={t("homePage.params.category")}
+            filterParams={existedTags} />
+          <FilterParamlist
+            t={t}
+            title={t("homePage.params.price")}
+            filterParams={existedPrices} />
+          <FilterParamlist
+            t={t}
+            title={t("homePage.params.extension")}
+            filterParams={extensions} />
         </Box>
       </Box>
       <Grid container spacing={{ xs: 2, md: 5 }} sx={{ height: "fit-content" }}>
-
         {shots.map((shot) => (
-          <Grid item xs={12} md={6} lg={3} key={shot.id} id={shots.indexOf(shot).toString()}>
-            <ImageListItem >
-              <img
-                style={{ width: '100%', aspectRatio: '1.4', borderRadius: 10, boxShadow: '0px 4px 8px 0px #27184666' }}
-                src={shot.cover}
-                alt={shot.title}
-                loading="lazy"
-                onClick={() => openShotModalHandler(shot)}
-              />
-              <Box>
-                <Box sx={{ verticalAlign: 'center', marginRight: 'auto' }}>
-                  <Avatar sx={{ float: 'left', marginTop: '0.4375rem', width: '1.25rem', height: '1.25rem' }}
-                    alt={shot.userFullName}
-                    src={shot.logoImage !== "" ?
-                      shot.logoImage :
-                      "images/default_profile.png"
-                    } />
-                </Box>
-                <Typography sx={{ float: 'left', fontSize: '0.875rem', fontWeight: 700, padding: '0.4375rem 0 0 0.4375rem' }}>{shot.userFullName}</Typography>
-                <Typography sx={{ float: 'right', fontSize: '0.875rem', fontWeight: 400, color: '#9E9AA2', padding: '0.4375rem 0 0 0.4375rem' }}>{shot.appreciationsCount}</Typography>
-                <Box >
-                  <Checkbox {...label} icon={<FavoriteBorder sx={{ color: '#9E9AA2', width: '1rem' }} />} checkedIcon={<Favorite sx={{ color: '#D65353', width: '1rem' }} />}
-                    sx={{ width: '18px', height: '18px', float: 'right', marginTop: '0.4375rem' }} />
-                </Box>
-              </Box>
-            </ImageListItem>
+          <Grid item xs={12} md={6} lg={3} key={shot.id.toString()}>
+            <ShotThumbnail
+              shot={shot}
+              openModalHandler={openShotModalHandler}/>
           </Grid>
         ))}
 
@@ -145,69 +115,13 @@ export default function HomeImageList() {
         t={t}
         openModal={shotModalOpen}
         closeModalHandler={closeShotModalHandler}
+        openModalHandler={openShotModalHandler}
         shotId={activeShot.id}
+        shots={shots}
       />}
     </Box>
   </>
   );
-}
-
-function filterParamlist(
-  t: TFunction<"translation", undefined>,
-  title: string,
-  filterParams: string[]
-) {
-
-  /* #region styles */
-  const titleStyle = {
-    fontSize: '1.25rem',
-    fontWeight: '700',
-    margin: "24px 0 12px"
-  }
-
-  const checkboxStyle = {
-    marginLeft: "-9px",
-    color: '#271846',
-    '&.Mui-checked': {
-      color: '#271846',
-    }
-  }
-
-  const paramNameStyle = {
-    display: 'inline-block',
-    marginTop: '8px',
-    marginLeft: '0px',
-    color: colors.darkViolet,
-    fontWeight: '400'
-  }
-  /* #endregion */
-
-  return <Box sx={{ marginBottom: "36px" }}>
-    <Divider sx={{ color: colors.darkViolet, borderColor: colors.darkViolet, marginTop: "10px" }} />
-    <Typography sx={titleStyle}>{title}</Typography>
-    <div style={{ display: 'block' }}>
-      <div style={{ display: 'inline-block' }}>
-        <Checkbox disableRipple
-          sx={checkboxStyle} />
-      </div>
-      <Typography component='div'
-        sx={paramNameStyle}>
-        {t("homePage.params.selectAll")}
-      </Typography>
-    </div>
-    {filterParams.map((param) => (
-      <div style={{ display: 'block' }} key={filterParams.indexOf(param)}>
-        <div style={{ display: 'inline-block' }}>
-          <Checkbox disableRipple
-            sx={checkboxStyle} />
-        </div>
-        <Typography component='div'
-          sx={paramNameStyle}>
-          {param}
-        </Typography>
-      </div>
-    ))}
-  </Box>
 }
 
 const itemData = [
@@ -264,4 +178,32 @@ const itemData = [
 
 
 
+
+function newFunction(shot: IShot, shots: IShot[], openShotModalHandler: (shot: IShot) => void, label: { inputProps: { 'aria-label': string; }; }) {
+  return <Grid item xs={12} md={6} lg={3} key={shot.id} id={shots.indexOf(shot).toString()}>
+    <ImageListItem>
+      <img
+        style={{ width: '100%', aspectRatio: '1.4', borderRadius: 10, boxShadow: '0px 4px 8px 0px #27184666' }}
+        src={shot.cover}
+        alt={shot.title}
+        loading="lazy"
+        onClick={() => openShotModalHandler(shot)} />
+      <Box>
+        <Box sx={{ verticalAlign: 'center', marginRight: 'auto' }}>
+          <Avatar sx={{ float: 'left', marginTop: '0.4375rem', width: '1.25rem', height: '1.25rem' }}
+            alt={shot.userFullName}
+            src={shot.logoImage !== "" ?
+              shot.logoImage :
+              "images/default_profile.png"} />
+        </Box>
+        <Typography sx={{ float: 'left', fontSize: '0.875rem', fontWeight: 700, padding: '0.4375rem 0 0 0.4375rem' }}>{shot.userFullName}</Typography>
+        <Typography sx={{ float: 'right', fontSize: '0.875rem', fontWeight: 400, color: '#9E9AA2', padding: '0.4375rem 0 0 0.4375rem' }}>{shot.appreciationsCount}</Typography>
+        <Box>
+          <Checkbox {...label} icon={<FavoriteBorder sx={{ color: '#9E9AA2', width: '1rem' }} />} checkedIcon={<Favorite sx={{ color: '#D65353', width: '1rem' }} />}
+            sx={{ width: '18px', height: '18px', float: 'right', marginTop: '0.4375rem' }} />
+        </Box>
+      </Box>
+    </ImageListItem>
+  </Grid>;
+}
 

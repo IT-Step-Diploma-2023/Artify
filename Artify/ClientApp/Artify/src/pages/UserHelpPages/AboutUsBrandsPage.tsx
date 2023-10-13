@@ -1,26 +1,13 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import * as React from 'react';
 import { Button } from '@mui/base/Button';
 import Typography from '@mui/material/Typography';
-
 import {  Grid,  ImageListItem,  ImageListItemBar,  Paper, Stack} from '@mui/material';
 import { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
-
 import { Link } from 'react-router-dom';
 import AboutUsMenu from '../../components/UI/AboutUsMenu';
 
 
-interface Lngs {
-  ua: string
-  en: string
-}
-
-const lngs: Lngs = {
-  ua: 'UA',
-  en: 'EN'
-}
-  
   const AboutUsBrandsPage: FunctionComponent = () => {   
  
     const { t } = useTranslation();  

@@ -3,6 +3,7 @@ export const urls = {
     getUserSocialProfiles: "api/UsersApi/GetUserSocialProfiles",
     uploadShot: "api/ShotsApi/UploadShot",
     getShot: "api/ShotsApi/GetShot",
+    getShots: "api/ShotsApi/GetShots",
     setLike: "api/ShotsApi/likeShot",
     setMark: "api/ShotsApi/markShot",
 }

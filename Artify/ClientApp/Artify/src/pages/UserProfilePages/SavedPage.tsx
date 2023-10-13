@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import * as React from 'react';
 import Typography from '@mui/material/Typography';
 
 import { Link } from "react-router-dom";
@@ -11,15 +10,6 @@ import { useTranslation } from 'react-i18next';
 import ProfileMenu from '../../components/UI/UserProfileComponents/ProfileMenu';
 import ProfileTopComponent from '../../components/UI/UserProfileComponents/ProfileTopComponent';
 
-interface Lngs {
-  ua: string
-  en: string
-}
-
-const lngs: Lngs = {
-  ua: 'UA',
-  en: 'EN'
-}
   
   const SavedPage: FunctionComponent = () => {
 
@@ -27,7 +17,7 @@ const lngs: Lngs = {
 
     const text1=t('collection.text1');
 
-    const [value, setValue] = React.useState(0);
+    // const [value, setValue] = React.useState(0);
   
   return <>
      

@@ -13,17 +13,7 @@ import { Link } from "react-router-dom";
 import MainNavigation from '../../components/Layouts/Navigation/MainNavigation';
 import ProfileMenu from '../../components/UI/UserProfileComponents/ProfileMenu';
 
-
-interface Lngs {
-  ua: string
-  en: string
-}
-
-const lngs: Lngs = {
-  ua: 'UA',
-  en: 'EN'
-}
-  
+ 
   const HowHireDesignerPage: FunctionComponent = () => {
 
     const [open, setOpen] = React.useState(false);
@@ -31,6 +21,8 @@ const lngs: Lngs = {
     const handleClickOpen = () => {
       setOpen(true);
     };
+
+    console.log(open); // for test build only
 
     const { t } = useTranslation();
 

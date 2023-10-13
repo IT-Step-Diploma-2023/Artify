@@ -15,7 +15,8 @@ export interface IShot {
     username: number,
     userFullName: string,
     logoImage: string,
-    appreciationsCount: number
+    appreciationsCount: number,
+    isLiked: boolean
 }
 
 export interface IAppreciation {

@@ -11,16 +11,6 @@ import {  AutorenewRounded, DeleteForeverRounded, North, South } from '@mui/icon
 import MainNavigation from '../../components/Layouts/Navigation/MainNavigation';
 import { Link } from 'react-router-dom';
 
-
-interface Lngs {
-  ua: string
-  en: string
-}
-
-const lngs: Lngs = {
-  ua: 'UA',
-  en: 'EN'
-}
   
   const HowAddWorkPage: FunctionComponent = () => {   
   
@@ -45,13 +35,12 @@ const lngs: Lngs = {
     const saveAsDraft=t('share.saveAsDraft');
     const myContinue=t('share.myContinue');
     const addBlock=t('share.addBlock');
-
     
-    const pathes = [
-      '/text',
-      '/image',
-      '/video'
-    ]
+    // const pathes = [
+    //   '/text',
+    //   '/image',
+    //   '/video'
+    // ]
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   

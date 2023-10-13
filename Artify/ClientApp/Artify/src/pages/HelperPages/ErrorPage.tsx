@@ -5,7 +5,7 @@ import PageContent from '../../components/Layouts/PageContent';
 import MainNavigation from '../../components/Layouts/Navigation/MainNavigation';
 import { FunctionComponent } from 'react';
 import Footer from '../../components/Layouts/FooterComponent/Footer';
-import { Box, Container } from '@mui/material';
+import { Container } from '@mui/material';
 const ErrorPage: FunctionComponent = () => {
   const error: any = useRouteError();
   let title = 'An error occured';

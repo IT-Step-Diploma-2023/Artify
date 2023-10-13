@@ -66,6 +66,8 @@ const BasicInfoPage: FunctionComponent = () => {
             setFormActive(true);
     }, [fullNameActive, addressActive, infoActive]);
 
+    console.log(formActive); // for build test only
+
     const fullNameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         const re = /^([їЇіІєЄа-яА-Яa-zA-Z])[їЇіІєЄа-яА-Яa-zA-Z0-9" "-]{0,24}$/;

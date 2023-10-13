@@ -1,8 +1,8 @@
-import { Box, Divider, Grid, Paper } from "@mui/material";
+import { Box, Divider, Grid } from "@mui/material";
 import { FunctionComponent } from "react";
 import { colors } from "../../../assets/defaults/colors";
 import Logo from "../../UI/Logo";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import NavMenu from "../../UI/NavMenu";
 
@@ -18,9 +18,10 @@ interface Position {
 }
 
 
-const Footer: FunctionComponent<Position> = ({ pos }) => {
+// const Footer: FunctionComponent<Position> = ({ pos }) => {
+const Footer: FunctionComponent<Position> = () => {
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const { t } = useTranslation();
 

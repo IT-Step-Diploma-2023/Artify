@@ -24,7 +24,8 @@ const NetworksPage: FunctionComponent = () => {
     /* #endregion */
 
     const { getData, postData, loadData, } = useSocialProfiles();
-    const retriveData = getData();
+       
+    useEffect(() => { void getData() });
 
     const [formData, setFormData] = useState(loadData);
 

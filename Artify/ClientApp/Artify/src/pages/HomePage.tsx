@@ -1,7 +1,7 @@
 import { FunctionComponent, useState } from 'react';
-import HomeImageList from '../components/UI/HomeImageList';
-import HomeButtonFilter from '../components/UI/HomeButtonFilter';
-import HomeTabs from '../components/UI/HomeTabs';
+import HomeImageList from '../components/UI/HomePageComponents/HomeImageList';
+import HomeButtonFilter from '../components/UI/HomePageComponents/HomeButtonFilter';
+// import HomeTabs from '../components/UI/HomeTabs';
 import { Box } from '@mui/system';
 import Context from '../utils/Context';
 

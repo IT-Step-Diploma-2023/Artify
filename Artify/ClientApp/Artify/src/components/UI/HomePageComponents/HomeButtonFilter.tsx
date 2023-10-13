@@ -1,22 +1,21 @@
-import { Button } from '@mui/base/Button';
 import FilterList from '@mui/icons-material/FilterList';
 import { useTranslation } from 'react-i18next';
 import { Typography } from '@mui/material';
 import { useContext } from 'react';
-import Context from '../../utils/Context';
-import CustomButton from './CustomButton';
-import * as BtnStyles from './CustomButtonStyles';
+import Context from '../../../utils/Context';
+import CustomButton from '../CustomButton';
+import * as BtnStyles from '../CustomButtonStyles';
 
-const filterButton = {
-  width: '119px',
-  height: '42px',
-  top: '161px',
-  left: '100px',
-  border: '1px solid #271846',
-  borderRadius: '30px',
-  gap: '10px',
-  padding: '10px, 22px, 10px, 22px'
-}
+// const filterButton = {
+//   width: '119px',
+//   height: '42px',
+//   top: '161px',
+//   left: '100px',
+//   border: '1px solid #271846',
+//   borderRadius: '30px',
+//   gap: '10px',
+//   padding: '10px, 22px, 10px, 22px'
+// }
 
 const filterListIcon = {
   width: '20px',

@@ -181,17 +181,6 @@ h6 {
     --inp-height-m: 44px;
 }
 
-@font-face {
-	font-family: 'SoyuzGrotesk-Bold';
-    src: url('./assets/fonts/SoyuzGroteskBold/'); /* IE 9 Compatibility Mode */
-	src: url('./assets/fonts/SoyuzGroteskBold/soyuzgrotesk-bold.eot'); /* IE 9 Compatibility Mode */
-	src: url('./assets/fonts/SoyuzGroteskBold/soyuzgrotesk-bold.eot?#iefix') format('embedded-opentype'), /* IE < 9 */
-		url('./assets/fonts/SoyuzGroteskBold/soyuzgrotesk-bold.woff2') format('woff2'), /* Super Modern Browsers */
-		url('./assets/fonts/SoyuzGroteskBold/soyuzgrotesk-bold.woff') format('woff'), /* Firefox >= 3.6, any other modern browser */
-		url('./assets/fonts/SoyuzGroteskBold/soyuzgrotesk-bold.ttf') format('truetype'), /* Safari, Android, iOS */
-		url('./assets/fonts/SoyuzGroteskBold/soyuzgrotesk-bold.svg#soyuzgrotesk-bold') format('svg'); /* Chrome < 4, Legacy iOS */
-}
-
 body {
     font-family: 'Nunito', sans-serif !important;
     font-weight: 400;

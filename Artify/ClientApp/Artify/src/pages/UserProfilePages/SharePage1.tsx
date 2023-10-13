@@ -23,11 +23,11 @@ const SharePage1: FunctionComponent = () => {
   const addBlock = t('share.addBlock');
 
 
-  const pathes = [
-    '/text',
-    '/image',
-    '/video'
-  ]
+  // const pathes = [
+  //   '/text',
+  //   '/image',
+  //   '/video'
+  // ]
 
   return <>
 

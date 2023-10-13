@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import * as React from "react";
-import { Button } from "@mui/base/Button";
 import Typography from "@mui/material/Typography";
 
-import { Box, Divider, IconButton, Input, ListItemButton, ListItemText, Menu, MenuItem, Modal, Paper, Select, Slider, Stack } from "@mui/material";
+import { Box, Divider, Slider } from "@mui/material";
 import { ChangeEvent, FunctionComponent, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { AutorenewRounded, DeleteForeverRounded, North, South } from "@mui/icons-material";
+// import { AutorenewRounded, DeleteForeverRounded, North, South } from "@mui/icons-material";
 import CommonInput from "../../components/UI/CommonInput";
 import CommonLabel from "../../components/UI/UserSettingsComponents/CommonLabel";
 import { colors } from "../../assets/defaults/colors";
@@ -37,8 +36,6 @@ interface IUploadedData {
   blocksGap?: number,
   cover?: string
 }
-
-const url = "api/ShotsApi/UploadShot";
 
 const SharePage: FunctionComponent = () => {
 
@@ -107,7 +104,7 @@ const SharePage: FunctionComponent = () => {
   const [visibylity, setVisibility] = useState<IVisibilityOption>({ index: 0, option: visibilityOptions[0] });
   const [visibilityMenuVisible, setVisibilityMenuVisible] = useState(false);
 
-  const isDraft = useRef(false);
+  // const isDraft = useRef(false);
 
   const [gap, setInterval] = useState(16);
 
@@ -135,15 +132,15 @@ const SharePage: FunctionComponent = () => {
   }, [addBlockActive])
 
   /* #region just not in use */
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  // const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
-  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+  // const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  // const handleClose = () => {
+  //   setAnchorEl(null);
+  // };
   /* #endregion */
 
   /* #region tags handlers */
@@ -263,7 +260,7 @@ const SharePage: FunctionComponent = () => {
     const formData = new FormData;
     formData.append("value", JSON.stringify(uploadedData));
     selectedFiles.forEach((file) => formData.append("images", file));
-    
+
     const request = {
       method: "POST",
       body: formData,
@@ -278,17 +275,17 @@ const SharePage: FunctionComponent = () => {
   }
   /* #endregion */
 
-  const saveDraft = () => {
-    const draft = {
-      title: title,
-      tags: [...selectedTags],
-      visibility: visibylity.index,
-      gap: gap
-    }
+  // const saveDraft = () => {
+  //   const draft = {
+  //     title: title,
+  //     tags: [...selectedTags],
+  //     visibility: visibylity.index,
+  //     gap: gap
+  //   }
 
-    localStorage.setItem("draft", JSON.stringify(draft));
-    console.log(draft);
-  }
+  //   localStorage.setItem("draft", JSON.stringify(draft));
+  //   console.log(draft);
+  // }
 
   /* #region components */
   const visibilityDropDown = (
@@ -696,7 +693,10 @@ const SharePage: FunctionComponent = () => {
           aria-label="gap"
           value={gap}
           max={64}
-          onChange={(e: Event, newValue: number | number[]) => setInterval(newValue as number)} />
+          onChange={(e: Event, newValue: number | number[]) => {
+            console.log(e);
+            setInterval(newValue as number);
+          }} />
         <Box sx={{ marginTop: "36px" }}>
           <CustomButton height="bg"
             sx={BtnStyles.greyBtn}

@@ -4,7 +4,6 @@ import { Divider } from '@mui/material';
 import { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import SettingsMenu from '../../components/UI/UserSettingsComponents/SettingsMenu';
-import { colors } from '../../assets/defaults/colors';
 import CommonButton from '../../components/UI/CommonButton';
 import CommonLabel from '../../components/UI/UserSettingsComponents/CommonLabel';
 import InputSub from '../../components/UI/UserSettingsComponents/InputSub';

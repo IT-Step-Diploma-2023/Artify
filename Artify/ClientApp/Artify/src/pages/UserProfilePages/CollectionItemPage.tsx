@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import * as React from 'react';
 import Typography from '@mui/material/Typography';
 
 import { Link } from "react-router-dom";
@@ -9,15 +8,7 @@ import { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 
 
-interface Lngs {
-  ua: string
-  en: string
-}
 
-const lngs: Lngs = {
-  ua: 'UA',
-  en: 'EN'
-}
   
   const CollectionItemPage: FunctionComponent = () => {
 
@@ -25,7 +16,7 @@ const lngs: Lngs = {
 
     const text1=t('collection.text1');
 
-    const [value, setValue] = React.useState(0);  
+    // const [value, setValue] = React.useState(0);  
  
   return <>
      

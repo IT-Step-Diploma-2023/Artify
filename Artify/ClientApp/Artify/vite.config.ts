@@ -11,6 +11,7 @@ export default defineConfig({
     proxy: {
       '/api': {
         target: 'https://localhost:3000',
+        // target: 'https://my-designo.azurewebsites.net',
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path.replace(/^\/api/, 'api'),

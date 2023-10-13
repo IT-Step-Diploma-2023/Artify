@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { FunctionComponent, useState } from 'react';
+import { FunctionComponent } from 'react';
 import Box from '@mui/material/Box';
 import { Typography } from '@mui/material';
 import CommonButton from '../../components/UI/CommonButton';

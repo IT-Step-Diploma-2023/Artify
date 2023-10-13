@@ -1,4 +1,4 @@
-import { Paper, Avatar, Typography, Button } from "@mui/material"
+import { Paper, Avatar, Typography  } from "@mui/material"
 import { Box } from "@mui/system"
 import CommonButton from "../CommonButton";
 

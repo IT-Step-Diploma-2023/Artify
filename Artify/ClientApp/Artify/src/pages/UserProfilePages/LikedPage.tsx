@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import Typography from '@mui/material/Typography';
-import { Avatar, Box, Checkbox, Grid, ImageListItem, Paper } from '@mui/material';
+import { Avatar, Box, Checkbox, Grid, ImageListItem } from '@mui/material';
 import { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FavoriteBorder, Favorite } from '@mui/icons-material';

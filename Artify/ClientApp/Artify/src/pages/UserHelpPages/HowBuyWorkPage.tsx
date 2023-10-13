@@ -13,24 +13,13 @@ import { Link } from 'react-router-dom';
 import MainNavigation from '../../components/Layouts/Navigation/MainNavigation';
 import HomeButtonFilter2 from '../../components/UI/HomeButtonFilter2';
 
-
-
-interface Lngs {
-  ua: string
-  en: string
-}
-
-const lngs: Lngs = {
-  ua: 'UA',
-  en: 'EN'
-}
-  
+ 
   const HowBuyWorkPage: FunctionComponent = () => {   
     const [open, setOpen] = React.useState(false);
 
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
+    // const handleClickOpen = () => {
+    //   setOpen(true);
+    // };
   
     const handleClose = () => {
       setOpen(false);

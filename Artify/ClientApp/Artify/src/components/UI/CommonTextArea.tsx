@@ -14,7 +14,7 @@ const CommonTextArea = styled('textarea')(({
     rows,
     cols,
     isValid,
-    autocomplete
+    // autocomplete
 }: {
     color?: 'primary' | 'secondary',
     borderRaius?: 'bg' | 'md',
