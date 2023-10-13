@@ -340,19 +340,25 @@ namespace Artify.Controllers.shots
         public IActionResult AppreciateShot(AppreciateShotInput input)
         {
             JwtUser? jwtUser = UsersService.GetCurrentUser(this.HttpContext);
+
             if (jwtUser == null)
                 return Unauthorized();
+
             var user = _usersRepository.Query(user => user.Id == jwtUser.Id).FirstOrDefault();
+
             if (user == null)
                 return Unauthorized();
 
             var shot = _shotsRepository.Query(shot => shot.Id == input.shotId).FirstOrDefault();
+
             if (shot == null)
                 return NotFound("Invalid id");
-            if (!shot.IsPublic && shot.UserId != jwtUser.Id) {
+
+            if (!shot.IsPublic && shot.UserId != jwtUser.Id) 
                 return Forbid("The shot is private");
-            }
+            
             var appreciation = shot.Appreciations.FirstOrDefault(user => user.Id == jwtUser.Id);
+
             if(appreciation == null && input.like)
             {
                 Appreciation newAppreciation = new Appreciation()
@@ -368,6 +374,7 @@ namespace Artify.Controllers.shots
                 _appreciationsRepository.Remove(appreciation.Id);
                 _appreciationsRepository.Save();
             }
+
             return GetAppreciations(input.shotId);
         }
 
