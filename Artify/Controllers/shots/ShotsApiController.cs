@@ -66,7 +66,7 @@ namespace Artify.Controllers.shots
         {
             JwtUser? jwtUser = UsersService.GetCurrentUser(this.HttpContext);
             if (jwtUser == null)
-                return Forbid();
+                return Unauthorized();
             ShotUploadDTO? inputJson;
             /// string returnInformation = "";
             try
@@ -341,10 +341,10 @@ namespace Artify.Controllers.shots
         {
             JwtUser? jwtUser = UsersService.GetCurrentUser(this.HttpContext);
             if (jwtUser == null)
-                return Forbid();
+                return Unauthorized();
             var user = _usersRepository.Query(user => user.Id == jwtUser.Id).FirstOrDefault();
             if (user == null)
-                return Forbid();
+                return Unauthorized();
 
             var shot = _shotsRepository.Query(shot => shot.Id == input.shotId).FirstOrDefault();
             if (shot == null)
