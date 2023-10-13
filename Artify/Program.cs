@@ -61,6 +61,7 @@ builder.Services.AddTransient<IRepository<Shot>, ShotsRepository>();
 builder.Services.AddTransient<IRepository<Genre>, GenresRepository>();
 builder.Services.AddTransient<IRepository<Tag>, TagsRepository>();
 builder.Services.AddTransient<IRepository<SocialProfile>, SocialProfilesRepository>();
+builder.Services.AddTransient<IRepository<Appreciation>, AppreciationsRepository>();
 
 var app = builder.Build();
 

@@ -28,11 +28,21 @@ namespace Artify.Controllers.shots
         private ShotsRepository _shotsRepository;
         private GenresRepository _genresRepository;
         private TagsRepository _tagsRepository;
-        public ShotsApiController(IRepository<Shot> shotsRepository, IRepository<Genre> genresRepository, IRepository<Tag> tagsRepository)
+        private AppreciationsRepository _appreciationsRepository;
+        private UsersRepository _usersRepository;
+
+        public ShotsApiController(IRepository<Shot> shotsRepository,
+            IRepository<Genre> genresRepository,
+            IRepository<Tag> tagsRepository,
+            IRepository<Appreciation> appreciationsRepository,
+            IRepository<User> usersRepository
+            )
         {
             _shotsRepository = (ShotsRepository)shotsRepository;
             _genresRepository = (GenresRepository)genresRepository;
             _tagsRepository = (TagsRepository)tagsRepository;
+            _appreciationsRepository = (AppreciationsRepository)appreciationsRepository;
+            _usersRepository = (UsersRepository)usersRepository;
         }
         [HttpPost]
         [Route("api/[controller]/[action]")]
@@ -325,23 +335,59 @@ namespace Artify.Controllers.shots
             return Ok(returnModel);
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("api/[controller]/[action]")]
-        public IActionResult AppreciateShot(int shotId, bool like = true)
+        public IActionResult AppreciateShot(AppreciateShotInput input)
         {
             JwtUser? jwtUser = UsersService.GetCurrentUser(this.HttpContext);
             if (jwtUser == null)
                 return Forbid();
-            var shot = _shotsRepository.Query(shot => shot.Id == shotId).FirstOrDefault();
+            var user = _usersRepository.Query(user => user.Id == jwtUser.Id).FirstOrDefault();
+            if (user == null)
+                return Forbid();
+
+            var shot = _shotsRepository.Query(shot => shot.Id == input.shotId).FirstOrDefault();
             if (shot == null)
                 return NotFound("Invalid id");
             if (!shot.IsPublic && shot.UserId != jwtUser.Id) {
                 return Forbid("The shot is private");
             }
+            var appreciation = shot.Appreciations.FirstOrDefault(user => user.Id == jwtUser.Id);
+            if(appreciation == null && input.like)
+            {
+                Appreciation newAppreciation = new Appreciation()
+                {
+                    Author = user,
+                    ShotId = input.shotId
+                };
+                shot.Appreciations.Add(newAppreciation);
+                _shotsRepository.Save();
+            }
+            else if (appreciation != null && !input.like)
+            {
+                _appreciationsRepository.Remove(appreciation.Id);
+                _appreciationsRepository.Save();
+            }
+            return GetAppreciations(input.shotId);
+        }
 
+        public class AppreciateShotInput
+        {
+            public int shotId { get; set; }
+            public bool like { get; set; } = true;
+        }
+        [HttpGet]
+        [Route("api/[controller]/[action]")]
+        public IActionResult GetAppreciations(int shotId)
+        {
+            var shot = _shotsRepository.Query(shot => shot.Id == shotId).FirstOrDefault();
+            if (shot == null) return NotFound();
 
-
-            return Ok();
+            return Ok(new
+            {
+                count = shot.Appreciations.Count(),
+                shoutId = shotId,
+            });
         }
     }
 }
