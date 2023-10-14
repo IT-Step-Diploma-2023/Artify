@@ -1,26 +1,27 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-import {useDispatch} from "react-redux";
-import {authActions} from "../store/auth";
+import { useDispatch } from "react-redux";
+import { authActions } from "../store/auth";
+import { urls } from "../assets/defaults/urls";
 
 function useAuthorization() {
     const dispatch = useDispatch();
     //Returns user login if success, or null if failed
-    const authenticateUser = async (userName: string, userPassword: string) : Promise<any> => {
+    const authenticateUser = async (userName: string, userPassword: string): Promise<any> => {
         const authData = {
             username: userName,
             password: userPassword,
         };
 
-        const response = await fetch('api/Authentication/Authentication', {
+        const response = await fetch(urls.authentication, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'text/plain',
             },
             body: JSON.stringify(authData),
         });
         if (response.status !== 200) return;
 
-        const responseJson :LoginResponse = await response.json();
+        const responseJson: ILoginResponse = await response.json();
 
         const token = responseJson.token;
         setToken(token);
@@ -33,7 +34,7 @@ function useAuthorization() {
             username: userName,
         };
 
-        const response = await fetch('api/Authentication/Registration', {
+        const response = await fetch(urls.registration, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -41,17 +42,17 @@ function useAuthorization() {
             body: JSON.stringify(registerData),
         });
         if (response.status !== 200) return;
-        const responseJson : LoginResponse = await response.json();
+        const responseJson: ILoginResponse = await response.json();
         const token = responseJson.token;
         setToken(token);
         return isUserLogged();
     }
-    const logOut = () =>{
+    const logOut = () => {
         localStorage.clear();
         dispatch(authActions.logout());
     }
 
-    const setToken = (token : string)=>{
+    const setToken = (token: string) => {
         localStorage.setItem('token', token);
         const expiration = new Date();
         expiration.setHours(expiration.getHours() + 1);
@@ -60,7 +61,7 @@ function useAuthorization() {
         dispatch(authActions.login(loggedUserName));
     }
 
-    return {authenticateUser, registerUser, logOut}
+    return { authenticateUser, registerUser, logOut }
 }
 
 
@@ -69,12 +70,21 @@ export default useAuthorization;
 
 
 //Returns null or username if user is logged in
-export const isUserLogged = () : any => {
+export const isUserLogged = (): string => {
     const token = getAuthToken();
-    if (token === null || token === 'EXPIRED') return null;
+    if (token === null || token === 'EXPIRED') return "";
     const tokenData = parseJwt(token);
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     return tokenData['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+}
+
+
+export const loggedInUserId = (): number => {
+    const token = getAuthToken();
+    if (token === null || token === 'EXPIRED') return -1;
+    const tokenData = parseJwt(token);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument
+    return parseInt(tokenData['Id']);
 }
 
 
@@ -92,14 +102,14 @@ export const logOut = () => {
     localStorage.clear();
 }
 
-export const getTokenDuration = () : number => {
+export const getTokenDuration = (): number => {
     const storedExpirationDate = localStorage.getItem('expires');
     const expirationDate = new Date(storedExpirationDate ?? '');
     const now = new Date();
     return expirationDate.getTime() - now.getTime();
 }
 
-function parseJwt(token: string) :any{
+function parseJwt(token: string): any {
     const base64Url = token.split('.')[1];
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
     const jsonPayload = decodeURIComponent(
@@ -115,6 +125,6 @@ function parseJwt(token: string) :any{
     return JSON.parse(jsonPayload);
 }
 
-interface LoginResponse{
-    token : string;
+interface ILoginResponse {
+    token: string;
 }

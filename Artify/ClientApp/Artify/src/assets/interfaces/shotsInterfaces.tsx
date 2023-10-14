@@ -1,5 +1,3 @@
-import { number } from "react-i18next/icu.macro";
-
 export interface IShot {
     title: string,
     description: string,

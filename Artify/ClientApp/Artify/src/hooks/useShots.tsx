@@ -9,6 +9,8 @@ export const getShotsData = async (
     setItem: Dispatch<SetStateAction<IShot[]>>
 ): Promise<void> => {
     const response = await fetch(urls.getShots, {
+        method: "get",
+        mode: "cors",
         headers: {
             "Authorization": "Bearer " + token,
         },
@@ -18,11 +20,28 @@ export const getShotsData = async (
     setItem(responseJson);
 }
 
+export const getPortfolioShotsData = async (
+    userId: number,
+    setItem: Dispatch<SetStateAction<IShot[]>>
+): Promise<void> => {
+    const response = await fetch(`${urls.getShots}?filters=userId%3D${userId}`, {
+        method: "get",
+        headers: {
+            "Authorization": "Bearer " + token,
+        },
+    });
+    if (response.status !== 200) return;
+    const responseJson: IShot[] = await response.json();
+    setItem(responseJson);
+}
+
+
 export const getShotData = async (
     shotId: number,
     setItem: Dispatch<SetStateAction<IShotDetails | undefined>>
 ): Promise<void> => {
     const response = await fetch(`${urls.getShot}?id=${shotId}`, {
+        method: "get",
         headers: {
             "Authorization": "Bearer " + token,
         },
@@ -31,6 +50,8 @@ export const getShotData = async (
     const responseJson: IShotDetails = await response.json();
     setItem(responseJson);
 }
+
+
 
 export const setLike = async (
     shotId: number,

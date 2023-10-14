@@ -1,4 +1,4 @@
-import { Avatar, Box, Checkbox, Grid, ImageListItem, Typography } from "@mui/material";
+import { Avatar, Box, Checkbox, ImageListItem, Typography } from "@mui/material";
 import { IShot } from "../../../assets/interfaces/shotsInterfaces";
 import { FavoriteBorder, Favorite } from "@mui/icons-material";
 

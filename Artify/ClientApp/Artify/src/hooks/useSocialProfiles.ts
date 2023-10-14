@@ -54,6 +54,7 @@ function useSocialProfiles() {
 
     const getData = async (): Promise<void> => {
         const response = await fetch(urls.getUserSocialProfiles, {
+            method: "GET",
             headers: {
                 "Authorization": "Bearer " + token,
             },
