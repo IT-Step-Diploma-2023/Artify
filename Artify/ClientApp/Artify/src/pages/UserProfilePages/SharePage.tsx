@@ -709,15 +709,13 @@ const SharePage: FunctionComponent = () => {
             onClick={() => openPublicateModalHandler()}>
             {myContinue}
           </CustomButton>
-          {PublicateModal(
-            t,
-            selectedFiles,
-            openPublicateModal,
-            closePublicateModalHandler,
-            addImageHandler,
-            setCover,
-            cover,
-          )}
+          <PublicateModal
+            files={selectedFiles}
+            openModal={openPublicateModal}
+            closeModalHandler={closePublicateModalHandler}
+            addImageHandler={addImageHandler}
+            setCover={setCover}
+            coverFile={cover} />
         </Box>
       </Box>
     </Box>

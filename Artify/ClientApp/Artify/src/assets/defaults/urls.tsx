@@ -14,7 +14,7 @@ export const urls = {
     authentication: `${REACT_APP_BASE_URL}api/Authentication/Authentication`,
     registration: `${REACT_APP_BASE_URL}api/Authentication/Registration`,
     getCurrentUserData: `${REACT_APP_BASE_URL}api/users/UsersApi/GetCurrentUserData`,
-    getPortfolioUserData: `${REACT_APP_BASE_URL}api/users/UsersApi/GetPortfolioUserData`,
+    getPortfolioUserData: `${REACT_APP_BASE_URL}api/users/UsersApi/GetUserData`,
     getUserSocialProfiles: `${REACT_APP_BASE_URL}api/UsersApi/GetUserSocialProfiles`,
     uploadShot: `${REACT_APP_BASE_URL}api/ShotsApi/UploadShot`,
     getShot: `${REACT_APP_BASE_URL}api/ShotsApi/GetShot`,
@@ -23,6 +23,6 @@ export const urls = {
     setMark: `${REACT_APP_BASE_URL}api/ShotsApi/markShot`,
 }
 
-export const corseMode = "cors";
-// export const corseMode = "no-cors";
-// export const corseMode = "same-origin";
+export const corsMod = "cors";
+// export const corsMod = "no-cors";
+// export const corsMod = "same-origin";

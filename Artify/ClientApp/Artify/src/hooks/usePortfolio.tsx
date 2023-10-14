@@ -1,4 +1,4 @@
-import { corseMode, urls } from "../assets/defaults/urls";
+import { corsMod, urls } from "../assets/defaults/urls";
 import { IPortfolioUserData } from "../assets/interfaces/usersInterfaces";
 import { getAuthToken } from "./useAuthorization";
 import { Dispatch, SetStateAction } from "react";
@@ -11,7 +11,7 @@ export const getUserData = async (
 ): Promise<void> => {
     const response = await fetch(urls.getCurrentUserData, {
         method: "get",
-        mode: corseMode,
+        mode: corsMod,
         headers: {
             "Authorization": "Bearer " + token,
         },
@@ -24,9 +24,9 @@ export const getPortfolioUserData = async (
     id: number,
     setItem: Dispatch<SetStateAction<IPortfolioUserData>>
 ): Promise<void> => {
-    const response = await fetch(`${urls.getPortfolioUserData}?filters=userId%3D${id}`, {
+    const response = await fetch(`${urls.getPortfolioUserData}?id=${id}`, {
         method: "get",
-        mode: corseMode,
+        mode: corsMod,
         headers: {
             "Authorization": "Bearer " + token,
         },
