@@ -285,6 +285,7 @@ namespace Artify.Controllers.shots
             {
                 { "userId", value => shot => shot.UserId == int.Parse(value) },
                 { "tag", value => shot => shot.Tags.Any(x => x.Name.ToLower().Contains(value.ToLower())) },
+                { "likedUserId", value => shot => shot.Appreciations.Any(x => x.UserId == int.Parse(value)) }
             };
             ParameterExpression parameter = Expression.Parameter(typeof(Shot), "shot");
             Expression<Func<Shot, bool>>? finalFilter = null;
