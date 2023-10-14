@@ -50,6 +50,7 @@ import AboutUsUiUxPage from './pages/UserHelpPages/AboutUsUiUxPage';
 import AboutUsWebDesignersPage from './pages/UserHelpPages/AboutUsWebDesignersPage';
 import AboutUsPhotographsPage from './pages/UserHelpPages/AboutUsPhotographsPage';
 import MediaKitPage from './pages/UserHelpPages/MediaKitPage';
+import TestingPage from "./pages/TestingPage";
 
 
 function App() {
@@ -111,6 +112,7 @@ function App() {
         // TEMPORARY HELPER PAGE
         { path: 'show-borders', element: <ShowBorders /> },
         { path: 'filter', element: <FilterPage /> },
+        { path: 'test', element: <TestingPage /> },
       ],
     },
     //////////////////////////////////////////////////////
