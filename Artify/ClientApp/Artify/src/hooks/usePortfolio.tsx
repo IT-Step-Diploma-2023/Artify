@@ -20,3 +20,18 @@ export const getUserData = async (
     const responseJson: IPortfolioUserData = await response.json();
     setItem(responseJson);
 }
+export const getPortfolioUserData = async (
+    id: number,
+    setItem: Dispatch<SetStateAction<IPortfolioUserData>>
+): Promise<void> => {
+    const response = await fetch(`${urls.getPortfolioUserData}?filters=userId%3D${id}`, {
+        method: "get",
+        mode: corseMode,
+        headers: {
+            "Authorization": "Bearer " + token,
+        },
+    });
+    if (response.status !== 200) return;
+    const responseJson: IPortfolioUserData = await response.json();
+    setItem(responseJson);
+}
