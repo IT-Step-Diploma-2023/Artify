@@ -1,5 +1,5 @@
 import {Dispatch, SetStateAction} from "react";
-import {urls} from "../assets/defaults/urls";
+import {corseMode, urls} from "../assets/defaults/urls";
 import {IShot, IShotDetails, ShotsFilter} from "../assets/interfaces/shotsInterfaces";
 import {getAuthToken} from "./useAuthorization";
 
@@ -8,21 +8,18 @@ const token = getAuthToken() ?? '';
 export const getShotsData = async (
     setItem: Dispatch<SetStateAction<IShot[]>>, filters: ShotsFilter[]
 ): Promise<void> => {
-    filters = [
-        {filter: "tag", parameter: "1"}
-    ]
     let outputFilter = "";
     filters.forEach((value: ShotsFilter) => {
         outputFilter += "\"" + value.filter + "\"" + "=" + "\"" + value.parameter + "\"";
     })
     const outputJson = {"output": outputFilter};
-    console.log(outputJson);
     const response = await fetch(urls.getShots, {
         method: "get",
         mode: corseMode,
         headers: {
             "Authorization": "Bearer " + token,
         },
+        body: JSON.stringify(outputJson),
     });
     if (response.status !== 200) return;
     const responseJson: IShot[] = await response.json();
