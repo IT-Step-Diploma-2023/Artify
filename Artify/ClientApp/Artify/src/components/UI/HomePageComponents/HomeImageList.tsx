@@ -16,6 +16,7 @@ import { IShot } from '../../../assets/interfaces/shotsInterfaces';
 import FilterParamlist from './FilterParamList';
 import { getShotsData } from '../../../hooks/useShots';
 import ShotThumbnail from './Shots';
+import useStorage from '../../../hooks/useStorage';
 
 /* #region styles */
 const container = {
@@ -48,11 +49,17 @@ export default function HomeImageList() {
 
   useEffect(() => { void getShotsData(setShots) }, []);
 
+  const { setTargetUserId } = useStorage();
+
   const openShotModalHandler = (shot: IShot) => {
     setActiveShot(shot);
-    setShotModalOpen(true)
+    setShotModalOpen(true);
+    setTargetUserId((shot.userId));
   };
-  const closeShotModalHandler = () => setShotModalOpen(false);
+
+  const closeShotModalHandler = () => {
+    setShotModalOpen(false);
+  };
 
   return (<>
     <Box sx={container}>
@@ -79,7 +86,7 @@ export default function HomeImageList() {
           <Grid item xs={12} md={6} lg={3} key={shot.id.toString()}>
             <ShotThumbnail
               shot={shot}
-              openModalHandler={openShotModalHandler}/>
+              openModalHandler={openShotModalHandler} />
           </Grid>
         ))}
 
@@ -178,32 +185,4 @@ const itemData = [
 
 
 
-
-function newFunction(shot: IShot, shots: IShot[], openShotModalHandler: (shot: IShot) => void, label: { inputProps: { 'aria-label': string; }; }) {
-  return <Grid item xs={12} md={6} lg={3} key={shot.id} id={shots.indexOf(shot).toString()}>
-    <ImageListItem>
-      <img
-        style={{ width: '100%', aspectRatio: '1.4', borderRadius: 10, boxShadow: '0px 4px 8px 0px #27184666' }}
-        src={shot.cover}
-        alt={shot.title}
-        loading="lazy"
-        onClick={() => openShotModalHandler(shot)} />
-      <Box>
-        <Box sx={{ verticalAlign: 'center', marginRight: 'auto' }}>
-          <Avatar sx={{ float: 'left', marginTop: '0.4375rem', width: '1.25rem', height: '1.25rem' }}
-            alt={shot.userFullName}
-            src={shot.logoImage !== "" ?
-              shot.logoImage :
-              "images/default_profile.png"} />
-        </Box>
-        <Typography sx={{ float: 'left', fontSize: '0.875rem', fontWeight: 700, padding: '0.4375rem 0 0 0.4375rem' }}>{shot.userFullName}</Typography>
-        <Typography sx={{ float: 'right', fontSize: '0.875rem', fontWeight: 400, color: '#9E9AA2', padding: '0.4375rem 0 0 0.4375rem' }}>{shot.appreciationsCount}</Typography>
-        <Box>
-          <Checkbox {...label} icon={<FavoriteBorder sx={{ color: '#9E9AA2', width: '1rem' }} />} checkedIcon={<Favorite sx={{ color: '#D65353', width: '1rem' }} />}
-            sx={{ width: '18px', height: '18px', float: 'right', marginTop: '0.4375rem' }} />
-        </Box>
-      </Box>
-    </ImageListItem>
-  </Grid>;
-}
 

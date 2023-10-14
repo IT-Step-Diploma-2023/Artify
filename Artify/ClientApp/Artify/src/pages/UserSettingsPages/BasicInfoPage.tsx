@@ -1,5 +1,4 @@
 import Box from '@mui/material/Box';
-import { Dispatch, SetStateAction } from "react";
 import { ChangeEvent, FunctionComponent, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import SettingsMenu from '../../components/UI/UserSettingsComponents/SettingsMenu';
@@ -34,7 +33,7 @@ const BasicInfoPage: FunctionComponent = () => {
 
     /* #endregion */
 
-    const { getData, postData, loadData, getData2 } = useUserSettings();
+    const { postData, getData2 } = useUserSettings();
     // const retriveData = getData();
 
 

@@ -29,6 +29,7 @@ const lngs: Lngs = {
 
 interface IAuth {
   auth: {
+    username: string,
     isAuthenticated: boolean
   }
 }
@@ -37,7 +38,7 @@ const Navbar: FunctionComponent = () => {
   //Cheking in local storage
   let username = isUserLogged();
   const authStore = useSelector<IAuth, any>(state => state.auth);
-  if (username === null && authStore.isAuthenticated === true) {
+  if (username === "" && authStore.isAuthenticated === true) {
     username = authStore.username;
   }
   console.log("auth - ")
@@ -161,7 +162,7 @@ const Navbar: FunctionComponent = () => {
   }
 
   const UserDropdownMenuItems = (): JSX.Element => {
-    if (username !== null)
+    if (username !== "")
       return <>
         <Typography
           textAlign="center"
@@ -181,16 +182,6 @@ const Navbar: FunctionComponent = () => {
           onClick={() => { handleClickMenuItem('/logout') }}>
           {t('headerComponent.dropdownMenu.logоut')}
         </MenuItem>
-        {/* <MenuItem
-          key={'show-borders'}
-          onClick={() => { handleClickMenuItem('/show-borders') }}>
-          Show Borders
-        </MenuItem>
-        <MenuItem
-          key={'filter'}
-          onClick={() => { handleClickMenuItem('/filter') }}>
-          Filter Page
-        </MenuItem> */}
       </>
     return <>
       <MenuItem divider
@@ -208,7 +199,6 @@ const Navbar: FunctionComponent = () => {
 
   return (
     <AppBar
-
       sx={{ position: 'fixed', boxShadow: 'none', backgroundColor: colors.lightGrey }}>
       <CssBaseline />
       <Toolbar sx={{
@@ -282,7 +272,7 @@ const Navbar: FunctionComponent = () => {
           flexGrow: 0,
           margin: '0 10px 0 20px'
         }}>
-          {username !== null && (
+          {username !== "" && (
             <CommonButton
               color='primary'
               height='bg'
@@ -293,11 +283,11 @@ const Navbar: FunctionComponent = () => {
           )}
         </Box>
         <Box sx={{ flexGrow: 0, marginRight: '10px' }}>
-          <Tooltip title={username !== null ? username : t('headerComponent.loggedOffMessage')}>
+          <Tooltip title={username !== "" ? username : t('headerComponent.loggedOffMessage')}>
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
               <Avatar
-                alt={username !== null ? username : t('headerComponent.loggedOffMessage')}
-                src={username !== null ? "/images/sample_christian_kouly_profile.jpg" : ""}
+                alt={username !== "" ? username : t('headerComponent.loggedOffMessage')}
+                src={username !== "" ? "/images/sample_christian_kouly_profile.jpg" : ""}
               />
             </IconButton>
           </Tooltip>

@@ -71,6 +71,7 @@ function useUserSettings() {
 
     const getData = async (): Promise<void> => {
         const response = await fetch(urls.getCurrentUserData, {
+            method: "GET",
             headers: {
                 "Authorization": "Bearer " + token,
             },
@@ -82,6 +83,7 @@ function useUserSettings() {
 
     const getData2 = async (setItem: Dispatch<SetStateAction<IBasicUserFormData>>): Promise<void> => {
         const response = await fetch(urls.getCurrentUserData, {
+            method: "GET",
             headers: {
                 "Authorization": "Bearer " + token,
             },
