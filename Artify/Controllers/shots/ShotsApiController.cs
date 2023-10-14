@@ -261,7 +261,8 @@ namespace Artify.Controllers.shots
 
             List<GetShotDTO> returnableShots = new List<GetShotDTO>();
 
-            
+            //var a = applyFilters(filters);
+
             await _shotsRepository.Query(applyFilters(filters)).OrderByDescending(shot => shot.Id).Skip(page * pageSize).Take(pageSize).ForEachAsync(shot =>
             {
                 GetShotDTO getShotDTO = new(shot);
@@ -279,12 +280,15 @@ namespace Artify.Controllers.shots
         {
             string[] splittedFilters = filters.Split('&');
 
+            //var a = _shotsRepository.Query(shot => shot.Tags.Any(x => x.Name.ToLower().StartsWith(value.ToLower())));
             var filterMappings = new Dictionary<string, Func<string, Expression<Func<Shot, bool>>>>
             {
                 { "userId", value => shot => shot.UserId == int.Parse(value) },
+                { "tag", value => shot => shot.Tags.Any(x => x.Name.ToLower().Contains(value.ToLower())) },
             };
             ParameterExpression parameter = Expression.Parameter(typeof(Shot), "shot");
             Expression<Func<Shot, bool>>? finalFilter = null;
+
 
             foreach (string filterString in splittedFilters)
             {
@@ -295,13 +299,21 @@ namespace Artify.Controllers.shots
                 if (filterMappings.TryGetValue(splittedSingleFilter[0], out var filterExpression))
                 {
                     var value = splittedSingleFilter[1];
+
                     var filter = filterExpression(value);
 
+                    // If the final filter expression is null, set it to the current filter expression.
                     if (finalFilter == null)
                         finalFilter = filter;
                     else
-                        finalFilter = Expression.Lambda<Func<Shot, bool>>(
-                    Expression.AndAlso(finalFilter.Body, filter.Body), parameter);
+                    {
+                        // Otherwise, combine the final filter expression and the current filter expression using the AND operator.s
+                        var body = Expression.AndAlso(
+                            Expression.Invoke(finalFilter, parameter),
+                            Expression.Invoke(filter, parameter)
+                        );
+                        finalFilter = Expression.Lambda<Func<Shot, bool>>(body, parameter);
+                    }
                 }
 
             }
