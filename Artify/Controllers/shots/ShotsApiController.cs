@@ -9,6 +9,7 @@ using Artify.Models.HelperModels;
 using Artify.Services;
 using Azure;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,7 @@ using Image = Artify.Models.DbModels.DbModels.Artworks.Image;
 namespace Artify.Controllers.shots
 {
     [ApiController]
+    [EnableCors]
     public class ShotsApiController : ControllerBase
     {
         private ShotsRepository _shotsRepository;

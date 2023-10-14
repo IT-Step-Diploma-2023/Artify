@@ -2,6 +2,7 @@
 using Artify.Models.DbModels.Users;
 using Artify.Models.HelperModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +17,7 @@ namespace Artify.Controllers
 {
     
     [ApiController]
+    [EnableCors]
     public class AuthenticationController : ControllerBase
     {
         private IConfiguration _configuration;
