@@ -9,9 +9,10 @@ import PlusIcon from '../../components/UI/PlusIcon';
 import { useNavigate } from 'react-router';
 import { IShot } from '../../assets/interfaces/shotsInterfaces';
 import { getPortfolioShotsData } from '../../hooks/useShots';
-import { loggedInUserId } from '../../hooks/useAuthorization';
+import { isUserLogged, loggedInUserId } from '../../hooks/useAuthorization';
 import ShotModal from '../../components/UI/HomePageComponents/ShotModal';
 import useStorage from '../../hooks/useStorage';
+import { baseUrl } from '../../assets/defaults/urls';
 
 
 /* #region styles */
@@ -40,11 +41,10 @@ const PortfolioPage: FunctionComponent = () => {
   const { getTargetUserId } = useStorage()
 
   const [shots, setShots] = useState<IShot[]>([]);
+
   const loggedUserId = loggedInUserId();
   const targetUserId = getTargetUserId();
-
-  console.log(targetUserId);
-
+  
   const getId = () => {
     if (targetUserId !== -1) return targetUserId;
     if (loggedUserId !== -1) return loggedUserId;
@@ -80,14 +80,14 @@ const PortfolioPage: FunctionComponent = () => {
           <ImageListItem >
             <img
               style={portfolioShot}
-              src={shot.cover}
+              src={baseUrl + shot.cover}
               alt={shot.title}
               loading="lazy"
               onClick={() => openShotModalHandler(shot)} />
           </ImageListItem>
         </Grid>
       ))}
-      <Grid item xs={12} md={6} lg={3}>
+      {isUserLogged() && <Grid item xs={12} md={6} lg={3}>
         <IconButton aria-label="addaphoto" className={'link2'}
           disableRipple
           sx={addPhotoBtn}
@@ -97,7 +97,7 @@ const PortfolioPage: FunctionComponent = () => {
             <PlusIcon size={'44px'} color={'inherit'} />
           </Box>
         </IconButton>
-      </Grid>
+      </Grid>}
     </Grid>
     {activeShot && <ShotModal
       t={t}

@@ -261,18 +261,17 @@ const SharePage: FunctionComponent = () => {
     formData.append("value", JSON.stringify(uploadedData));
     selectedFiles.forEach((file) => formData.append("images", file));
 
-    const request = {
+    const response = await fetch(urls.uploadShot, {
       method: "POST",
       body: formData,
       headers: {
         "Authorization": "Bearer " + token,
       }
-    };
-
-    const response = await fetch(urls.uploadShot, request);
+    });
     if (response.status !== 200) return;
     navigate("/");
   }
+
   /* #endregion */
 
   // const saveDraft = () => {

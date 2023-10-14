@@ -1,6 +1,6 @@
 import { getAuthToken } from './useAuthorization';
 import availableProfiles from '../assets/data/availableSocialProfiles.json'
-import { urls } from '../assets/defaults/urls';
+import { urls, corseMode } from '../assets/defaults/urls';
 
 
 const token = getAuthToken() ?? '';
@@ -55,6 +55,7 @@ function useSocialProfiles() {
     const getData = async (): Promise<void> => {
         const response = await fetch(urls.getUserSocialProfiles, {
             method: "GET",
+            mode: corseMode,
             headers: {
                 "Authorization": "Bearer " + token,
             },

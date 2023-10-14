@@ -2,6 +2,7 @@
 import { useDispatch } from "react-redux";
 import { authActions } from "../store/auth";
 import { urls } from "../assets/defaults/urls";
+import { corseMode } from "../assets/defaults/urls";
 
 function useAuthorization() {
     const dispatch = useDispatch();
@@ -14,8 +15,9 @@ function useAuthorization() {
 
         const response = await fetch(urls.authentication, {
             method: 'POST',
+            mode: corseMode,
             headers: {
-                'Content-Type': 'text/plain',
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify(authData),
         });
@@ -36,6 +38,7 @@ function useAuthorization() {
 
         const response = await fetch(urls.registration, {
             method: 'POST',
+            mode: corseMode,
             headers: {
                 'Content-Type': 'application/json',
             },

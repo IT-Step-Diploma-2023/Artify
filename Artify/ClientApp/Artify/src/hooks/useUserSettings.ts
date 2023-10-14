@@ -1,5 +1,5 @@
 import { getAuthToken } from '../hooks/useAuthorization';
-import { urls } from '../assets/defaults/urls';
+import { corseMode, urls } from '../assets/defaults/urls';
 import { Dispatch, SetStateAction } from "react";
 import { IBasicUserData, IBasicUserFormData } from '../assets/interfaces/usersInterfaces';
 
@@ -84,6 +84,7 @@ function useUserSettings() {
     const getData2 = async (setItem: Dispatch<SetStateAction<IBasicUserFormData>>): Promise<void> => {
         const response = await fetch(urls.getCurrentUserData, {
             method: "GET",
+            mode: corseMode,
             headers: {
                 "Authorization": "Bearer " + token,
             },

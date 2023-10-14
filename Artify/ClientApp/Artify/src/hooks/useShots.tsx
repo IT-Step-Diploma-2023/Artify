@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { urls } from "../assets/defaults/urls";
+import { corseMode, urls } from "../assets/defaults/urls";
 import { IShot, IShotDetails } from "../assets/interfaces/shotsInterfaces";
 import { getAuthToken } from "./useAuthorization";
 
@@ -10,7 +10,7 @@ export const getShotsData = async (
 ): Promise<void> => {
     const response = await fetch(urls.getShots, {
         method: "get",
-        mode: "cors",
+        mode: corseMode,
         headers: {
             "Authorization": "Bearer " + token,
         },
@@ -26,6 +26,7 @@ export const getPortfolioShotsData = async (
 ): Promise<void> => {
     const response = await fetch(`${urls.getShots}?filters=userId%3D${userId}`, {
         method: "get",
+        mode: corseMode,
         headers: {
             "Authorization": "Bearer " + token,
         },
@@ -42,6 +43,7 @@ export const getShotData = async (
 ): Promise<void> => {
     const response = await fetch(`${urls.getShot}?id=${shotId}`, {
         method: "get",
+        mode: corseMode,
         headers: {
             "Authorization": "Bearer " + token,
         },
