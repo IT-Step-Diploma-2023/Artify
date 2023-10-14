@@ -243,27 +243,29 @@ namespace Artify.Controllers.shots
         /// Return a list with recent shots
         /// Supports pagination
         /// </summary>
-        /// <param name="page">Current page</param>
-        /// <param name="filters">Applied filter</param>
-        /// <param name="pageSize">Page size</param>
+        /// <param name="input">Input json</param>
         /// <returns>Shots list</returns>
         [HttpGet]
         [Route("api/[controller]/[action]")]
-        public async Task<IActionResult> GetShots(int page = 0, string filters = "", int pageSize = 20)
+        public async Task<IActionResult> GetShots(GetShotsParameters? input = null)
         {
-            if (pageSize > 50)
+            if(input == null)
+            {
+                input = new GetShotsParameters();
+            }
+            if (input.pageSize > 50)
                 return BadRequest("Page size cannot be more than 50");
-            if (page < 0)
+            if (input.page < 0)
                 return BadRequest("Page cannot be negative");
-            int pages = _shotsRepository.Count() / pageSize;
-            if (page > pages)
+            int pages = _shotsRepository.Count() / input.pageSize;
+            if (input.page > pages)
                 return BadRequest("Wrong page");
 
             List<GetShotDTO> returnableShots = new List<GetShotDTO>();
 
             //var a = applyFilters(filters);
 
-            await _shotsRepository.Query(applyFilters(filters)).OrderByDescending(shot => shot.Id).Skip(page * pageSize).Take(pageSize).ForEachAsync(shot =>
+            await _shotsRepository.Query(applyFilters(input.filters)).OrderByDescending(shot => shot.Id).Skip(input.page * input.pageSize).Take(input.pageSize).ForEachAsync(shot =>
             {
                 GetShotDTO getShotDTO = new(shot);
                 shot.Images.ForEach(image =>
@@ -275,7 +277,11 @@ namespace Artify.Controllers.shots
             );
             return Ok(returnableShots);
         }
-
+        public class GetShotsParameters {
+            public int page { get; set; } = 0;
+            public string filters { get; set; } = "";
+            public int pageSize { get; set; } = 20;
+        }
         private Expression<Func<Shot, bool>> applyFilters(string filters)
         {
             string[] splittedFilters = filters.Split('&');

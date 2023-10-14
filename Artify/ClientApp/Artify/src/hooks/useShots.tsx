@@ -1,19 +1,25 @@
-import { Dispatch, SetStateAction } from "react";
-import { corseMode, urls } from "../assets/defaults/urls";
-import { IShot, IShotDetails } from "../assets/interfaces/shotsInterfaces";
-import { getAuthToken } from "./useAuthorization";
+import {Dispatch, SetStateAction} from "react";
+import {corseMode, urls} from "../assets/defaults/urls";
+import {IShot, IShotDetails, ShotsFilter} from "../assets/interfaces/shotsInterfaces";
+import {getAuthToken} from "./useAuthorization";
 
 const token = getAuthToken() ?? '';
 
 export const getShotsData = async (
-    setItem: Dispatch<SetStateAction<IShot[]>>
+    setItem: Dispatch<SetStateAction<IShot[]>>, filters: ShotsFilter[]
 ): Promise<void> => {
+    let outputFilter = "";
+    filters.forEach((value: ShotsFilter) => {
+        outputFilter += "\"" + value.filter + "\"" + "=" + "\"" + value.parameter + "\"";
+    })
+    const outputJson = {"output": outputFilter};
     const response = await fetch(urls.getShots, {
         method: "get",
         mode: corseMode,
         headers: {
             "Authorization": "Bearer " + token,
         },
+        body: JSON.stringify(outputJson),
     });
     if (response.status !== 200) return;
     const responseJson: IShot[] = await response.json();
@@ -52,7 +58,6 @@ export const getShotData = async (
     const responseJson: IShotDetails = await response.json();
     setItem(responseJson);
 }
-
 
 
 export const setLike = async (

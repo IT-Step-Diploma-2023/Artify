@@ -38,13 +38,22 @@ namespace Artify.Controllers.users
                 User? user = _usersRepository.Query(user => user.Id == model.Id).FirstOrDefault();
                 if (user == null)
                     return NotFound(new { errorMessage = "UserDTO was not found in the database" });
-                return new JsonResult(new BaseDTOUser(user));
+                return new JsonResult(new BaseDTOUser(user, true));
             }catch(Exception)
             {
                 return BadRequest(new { errorMessage = "Something went wrong" });
             }
         }
-        
+        [Route("api/[controller]/[action]")]
+        [HttpGet]
+        public IActionResult GetUserData(int id)
+        {
+            var user = _usersRepository.Query(user => user.Id == id).FirstOrDefault();
+            if (user == null)
+                return NotFound();
+
+            return new JsonResult(new BaseDTOUser(user));
+        }
         private class UserSocialProfileDTO : BaseDTOUser, ISocialProfilesList
         {
             public UserSocialProfileDTO(User user) : base(user) { } 
@@ -110,5 +119,7 @@ namespace Artify.Controllers.users
             }
             return Ok();
         }
+
+        
     }
 }
