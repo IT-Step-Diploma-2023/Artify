@@ -1,6 +1,7 @@
 import { Avatar, Box, Checkbox, ImageListItem, Typography } from "@mui/material";
 import { IShot } from "../../../assets/interfaces/shotsInterfaces";
 import { FavoriteBorder, Favorite } from "@mui/icons-material";
+import { baseUrl } from "../../../assets/defaults/urls";
 
 export const ShotThumbnail = ({
     shot,
@@ -12,7 +13,7 @@ export const ShotThumbnail = ({
     return <ImageListItem>
         <img
             style={{ width: '100%', aspectRatio: '1.4', borderRadius: 10, boxShadow: '0px 4px 8px 0px #27184666' }}
-            src={shot.cover}
+            src={baseUrl + shot.cover}
             alt={shot.title}
             loading="lazy"
             onClick={() => openModalHandler(shot)} />
@@ -21,7 +22,7 @@ export const ShotThumbnail = ({
                 <Avatar sx={{ float: 'left', marginTop: '0.4375rem', width: '1.25rem', height: '1.25rem' }}
                     alt={shot.userFullName}
                     src={shot.logoImage !== "" ?
-                        shot.logoImage :
+                        baseUrl + shot.logoImage :
                         "images/default_profile.png"} />
             </Box>
             <Typography sx={{ float: 'left', fontSize: '0.875rem', fontWeight: 700, padding: '0.4375rem 0 0 0.4375rem' }}>{shot.userFullName}</Typography>

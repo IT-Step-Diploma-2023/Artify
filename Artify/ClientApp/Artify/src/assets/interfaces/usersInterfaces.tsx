@@ -15,3 +15,15 @@ export interface IBasicUserFormData {
     logoImage: string
 }
 
+export interface IPortfolioUserData {
+    id: number,
+    username: string,
+    fullName: string,
+    email: string,
+    roleId: number,
+    location: string,
+    info: string,
+    webSite: string,
+    biography: string,
+    logoImage: string
+}

@@ -2,10 +2,13 @@
 // const REACT_APP_BASE_URL= "";
 
 //on dev 
-const REACT_APP_BASE_URL= "https://localhost:5000/";
+const REACT_APP_BASE_URL= "https://localhost:3000/";
+
 
 //on build
 // const REACT_APP_BASE_URL= "https://my-designo.azurewebsites.net/"
+
+export const baseUrl = REACT_APP_BASE_URL;
 
 export const urls = {
     authentication: `${REACT_APP_BASE_URL}api/Authentication/Authentication`,
@@ -18,3 +21,7 @@ export const urls = {
     setLike: `${REACT_APP_BASE_URL}api/ShotsApi/likeShot`,
     setMark: `${REACT_APP_BASE_URL}api/ShotsApi/markShot`,
 }
+
+export const corseMode = "cors";
+// export const corseMode = "no-cors";
+// export const corseMode = "same-origin";

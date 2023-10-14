@@ -19,7 +19,7 @@ export const getShotsData = async (
     console.log(outputJson);
     const response = await fetch(urls.getShots, {
         method: "get",
-        mode: "cors",
+        mode: corseMode,
         headers: {
             "Authorization": "Bearer " + token,
         },
@@ -35,6 +35,7 @@ export const getPortfolioShotsData = async (
 ): Promise<void> => {
     const response = await fetch(`${urls.getShots}?filters=userId%3D${userId}`, {
         method: "get",
+        mode: corseMode,
         headers: {
             "Authorization": "Bearer " + token,
         },
@@ -51,6 +52,7 @@ export const getShotData = async (
 ): Promise<void> => {
     const response = await fetch(`${urls.getShot}?id=${shotId}`, {
         method: "get",
+        mode: corseMode,
         headers: {
             "Authorization": "Bearer " + token,
         },

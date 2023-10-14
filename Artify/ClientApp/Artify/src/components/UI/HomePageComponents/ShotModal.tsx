@@ -10,6 +10,8 @@ import { effects } from "../../../assets/defaults/effects";
 import { useNavigate } from "react-router";
 import ShotThumbnail from "./Shots";
 import { scrollTo } from "../../../utils/scrollTo";
+import { baseUrl } from "../../../assets/defaults/urls";
+import useStorage from "../../../hooks/useStorage";
 
 
 /* #region styles */
@@ -233,11 +235,21 @@ const ViewShotModal = ({ t, openModal, closeModalHandler, openModalHandler, shot
 
     const navigate = useNavigate();
 
+    const { setTargetUserId, setTargetUser } = useStorage();
+
+    const avatarClickHandler = () => {
+        if (shot === undefined) return;
+        setTargetUserId(shot.authorId);
+        navigate("portfolio");
+    }
+
+
     /* #region localisation const */
 
     /* #endregion */
 
     if (shot === undefined) return <></>
+
     console.log(shot.authorFullName)
     return <Box id="modaParent">
         <Modal
@@ -264,10 +276,10 @@ const ViewShotModal = ({ t, openModal, closeModalHandler, openModalHandler, shot
                                 shot.authorUsername}
                             src={
                                 shot.authorLogoImage !== "" ?
-                                    shot.authorLogoImage :
+                                    baseUrl + shot.authorLogoImage :
                                     "images/default_profile.png"
                             }
-                            onClick={() => { navigate("portfolio") }} />
+                            onClick={ avatarClickHandler } />
                         <Typography sx={headerText}>{shot.title}</Typography>
                         <CustomButton height="md"
                             sx={BtnStyles.darkVioletBtn}
@@ -286,7 +298,7 @@ const ViewShotModal = ({ t, openModal, closeModalHandler, openModalHandler, shot
                         {shot.images.map((image) =>
                             <Box key={shot.images.indexOf(image)}>
                                 <img
-                                    src={image}
+                                    src={baseUrl + image}
                                     alt={shot.images.indexOf(image).toString()}
                                     style={{
                                         width: "100%",

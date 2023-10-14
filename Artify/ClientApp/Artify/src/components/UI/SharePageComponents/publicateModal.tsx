@@ -6,6 +6,7 @@ import { colors } from "../../../assets/defaults/colors";
 import { editIcon } from "./editIcon";
 import { effects } from "../../../assets/defaults/effects";
 import { useState } from "react";
+import { baseUrl } from "../../../assets/defaults/urls";
 
 
 const PublicateModal = (
@@ -276,7 +277,7 @@ const PublicateModal = (
                                                 key={files.indexOf(file)}
                                                 sx={thumbnail}
                                                 style={{
-                                                    backgroundImage: "url('" + (URL.createObjectURL(file)) + "')",
+                                                    backgroundImage: "url('" + (baseUrl + URL.createObjectURL(file)) + "')",
                                                     border: file.name === tempCover?.name ? "2px solid " + colors.violet : "none"
                                                 }}
                                                 onClick={() => {
