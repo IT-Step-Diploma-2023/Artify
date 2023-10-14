@@ -28,7 +28,7 @@ const ProfileMainImage = () => {
             getTargetUserId(),
             setCurrentUser as Dispatch<SetStateAction<IPortfolioUserData>>
         )
-    }, [getTargetUserId])
+    }, [])
 
     return <>
         <Box sx={{ margin: '0 auto 40px', width: '500px', height: '150px', display: 'flex', justifyContent: 'left' }}>
