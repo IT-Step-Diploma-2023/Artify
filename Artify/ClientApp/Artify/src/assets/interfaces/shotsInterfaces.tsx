@@ -46,3 +46,9 @@ export interface IShotDetails {
     appreciations: IAppreciation[],
     tags: string[]
 }
+
+
+export interface ShotsFilter {
+    filter: string,
+    parameter: string
+}
