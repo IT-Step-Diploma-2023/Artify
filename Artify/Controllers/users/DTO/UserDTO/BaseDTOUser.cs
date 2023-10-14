@@ -22,17 +22,20 @@ namespace Artify.Controllers.users.DTO.UserDTO
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string? LogoImage { get; set; }
 
-        public BaseDTOUser(User user)
+        public BaseDTOUser(User user, bool privateData = false)
         {
-            fillFields(user);
+
+            fillFields(user, privateData);
         }
         public BaseDTOUser() { }
-        public void fillFields(User user)
+        public void fillFields(User user, bool privateData)
         {
             Id = user.Id;
             Username = user.Username;
-            Email = user.Email;
-            RoleId = user.RoleId;
+            if(privateData)
+                Email = user.Email;
+            if (privateData)
+                RoleId = user.RoleId;
 
 
             if (IsNotEmpty(user.FullName))
