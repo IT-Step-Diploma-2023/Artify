@@ -9,7 +9,7 @@ namespace Artify.Models.DbModels.Users.Attributes
         public int Id { get; set; }
 
         [Required]
-        public int UserId { get; set; } // User is author
+        public int UserId { get; set; } // UserDTO is author
 
         [Required]
         public int EmployerId { get; set; } // Employer is subject

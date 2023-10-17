@@ -6,14 +6,14 @@ import { useNavigate, NavLink } from 'react-router-dom';
 import { FunctionComponent } from 'react';
 import { isUserLogged } from "../../../hooks/useAuthorization";
 import { useSelector } from "react-redux";
-//
 import { useTranslation } from 'react-i18next';
 import Logo from '../../UI/Logo';
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Button } from '@mui/base/Button';
 import { colors } from '../../../assets/defaults/colors';
-import useAuthorization from "../../../hooks/useAuthorization";
+import NavMenu from '../../UI/NavMenu';
+import CommonButton from '../../UI/CommonButton';
+import UserDropdownMenuItems from './UserDropDownMenuItems';
 
 
 //#region localization languages
@@ -28,11 +28,18 @@ const lngs: Lngs = {
 }
 //#endregion
 
+interface IAuth {
+  auth: {
+    username: string,
+    isAuthenticated: boolean
+  }
+}
+
 const Navbar: FunctionComponent = () => {
   //Cheking in local storage
   let username = isUserLogged();
-  const authStore = useSelector(state => state.auth);
-  if (username === null && authStore.isAuthenticated === true) {
+  const authStore = useSelector<IAuth, any>(state => state.auth);
+  if (username === "" && authStore.isAuthenticated === true) {
     username = authStore.username;
   }
   console.log("auth - ")
@@ -44,17 +51,17 @@ const Navbar: FunctionComponent = () => {
   const { t, i18n } = useTranslation();
 
   const pages = [
-    t('headerComponent.menue.hire'),
-    t('headerComponent.menue.job'),
+    t('headerComponent.menue.inspiration'),
     t('headerComponent.menue.buy'),
+    t('headerComponent.menue.hire'),
     t('headerComponent.menue.help'),
   ];
 
   const pathes = [
-    '/hire',
-    '/job',
+    '/inspire',
     '/buy',
-    '/help',
+    '/hire',
+    '/help-center',
   ]
 
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -85,7 +92,7 @@ const Navbar: FunctionComponent = () => {
     position: 'relative',
     borderRadius: '21px',
     border: `1px solid ${colors.darkViolet}`,
-    backgroundColor: 'white !important',
+    // backgroundColor: 'white !important',
     '&:hover': {
     },
     marginLeft: 0,
@@ -124,30 +131,14 @@ const Navbar: FunctionComponent = () => {
     },
   }));
 
-  const NavMenuItems = (): JSX.Element => {
-    return <>
-      {pages.map((page) => (
-        <NavLink
-          key={page}
-          to={pathes[pages.indexOf(page)]}
-          className={({ isActive }) => (isActive ? 'link-active' : 'link')}
-        >
-          {page}
-        </NavLink>
-      ))}
-    </>
-  }
-
   const NavDropdownMenuItems = (): JSX.Element => {
     return <>
-      {pages.map((page) => (<>
+      {pages.map((page) => (
         <MenuItem
-          key={page}
+          key={pages.indexOf(page)}
           onClick={() => { handleClickMenuItem(pathes[pages.indexOf(page)]) }}>
-          <Typography textAlign="center">{page}</Typography>
+          <Typography textAlign="center">{page}-</Typography>
         </MenuItem>
-        {pages.indexOf(page) === pages.length - 1 && <Divider />}
-      </>
       ))}
     </>
   }
@@ -171,59 +162,22 @@ const Navbar: FunctionComponent = () => {
     </>
   }
 
-  const UserDropdownMenuItems = (): JSX.Element => {
-    if (username !== null)
-      return <>
-        <Typography
-          textAlign="center"
-          style={{ margin: '10px auto', fontWeight: '600', caret: 'transparent', cursor: 'default' }}>{username}</Typography >
-        <MenuItem
-          key={'workPrefs'}
-          onClick={() => { handleClickMenuItem('/portfolio') }}>
-          {t('headerComponent.dropdownMenu.workPrefs')}
-        </MenuItem>
-        <MenuItem divider
-          key={'settings'}
-          onClick={() => { handleClickMenuItem('/profile-basicinfo') }}>
-          {t('headerComponent.dropdownMenu.settings')}
-        </MenuItem>
-        <MenuItem
-          key={'logout'}
-          onClick={() => { handleClickMenuItem('/logout') }}>
-          {t('headerComponent.dropdownMenu.logоut')}
-        </MenuItem>
-        <MenuItem
-          key={'show-borders'}
-          onClick={() => { handleClickMenuItem('/show-borders') }}>
-          Show Borders
-        </MenuItem>
-      </>
-    return <>
-      <MenuItem divider
-        key={'login'}
-        onClick={() => { handleClickMenuItem('/login') }}>
-        {t('headerComponent.dropdownMenu.login')}
-      </MenuItem>
-      <MenuItem
-        key={'register'}
-        onClick={() => { handleClickMenuItem('/select-register') }}>
-        {t('headerComponent.dropdownMenu.register')}
-      </MenuItem>
-    </>
-  }
-
   return (
     <AppBar
-      position='static'
-      sx={{ boxShadow: 'none', backgroundColor: 'transparent' }}>
+      sx={{ position: 'fixed', boxShadow: 'none', backgroundColor: colors.lightGrey }}>
       <CssBaseline />
-      <Toolbar sx={{ marginTop: { xs: '12px', md: '40px' }, width: 'auto', padding: { xs: '0 20px', md: '0 50px' } }}>
+      <Toolbar sx={{
+        marginTop: { xs: '12px', md: '30px' },
+        marginBottom: { xs: '12px', md: '30px' },
+        width: 'auto',
+        padding: { xs: '0 20px', md: '0 100px' }
+      }}>
         {/* for sm size */}
         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
           <IconButton
             size="large"
             aria-label="account of current user"
-            aria-controls="menu-appbar"
+            aria-controls="menu-appbar-xs"
             aria-haspopup="true"
             onClick={handleOpenNavMenu}
             sx={{ color: `${colors.darkViolet}` }}
@@ -231,7 +185,7 @@ const Navbar: FunctionComponent = () => {
             <MenuIcon />
           </IconButton>
           <Menu
-            id="menu-appbar"
+            id="menu-appbar-xs"
             anchorEl={anchorElNav}
             anchorOrigin={{
               vertical: 'bottom',
@@ -249,6 +203,7 @@ const Navbar: FunctionComponent = () => {
             }}
           >
             <NavDropdownMenuItems />
+            <Divider />
             <MenuItem key='lng'>
               <LangSwitcher />
             </MenuItem>
@@ -259,7 +214,7 @@ const Navbar: FunctionComponent = () => {
             </NavLink>
           </Box>
         </Box>
-        {/* for md size */}
+        {/*for md size */}
         <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
           <NavLink to='/' className="logo">
             <Logo />
@@ -274,35 +229,36 @@ const Navbar: FunctionComponent = () => {
             />
           </Search>
         </Box>
-        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, height: '25px' }}>
-          <NavMenuItems />
+        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, height: '25px', justifyContent: 'center' }}>
+          <NavMenu pages={pages} pathes={pathes} />
         </Box>
         {/* for all sizes */}
         <Box sx={{
           flexGrow: 0,
-          marginRight: '10px'
+          margin: '0 10px 0 20px'
         }}>
-          {username !== null && (
-            <Button
-              className='button button-dark button-m'
-              style={{ width: '200px' }}>
+          {username !== "" && (
+            <CommonButton
+              color='primary'
+              height='bg'
+              sx={{ width: { lg: '200px', md: '150px' } }}
+              onClick={() => navigate('/share')}>
               {t('headerComponent.share')}
-            </Button>
+            </CommonButton>
           )}
-
         </Box>
         <Box sx={{ flexGrow: 0, marginRight: '10px' }}>
-          <Tooltip title={username !== null ? username : t('headerComponent.loggedOffMessage')}>
+          <Tooltip title={username !== "" ? username : t('headerComponent.loggedOffMessage')}>
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
               <Avatar
-                alt={username !== null ? username : t('headerComponent.loggedOffMessage')}
-                src={username !== null ? "/images/sample_christian_kouly_profile.jpg" : ""}
+                alt={username !== "" ? username : t('headerComponent.loggedOffMessage')}
+                src={username !== "" ? "/images/sample_christian_kouly_profile.jpg" : ""}
               />
             </IconButton>
           </Tooltip>
           <Menu
-            sx={{ mt: '45px', borderRadius: '20px' }}
-            id="menu-appbar"
+            sx={{ mt: '45px' }}
+            id="menu-appbar-md"
             anchorEl={anchorElUser}
             anchorOrigin={{
               vertical: 'top',
@@ -316,7 +272,10 @@ const Navbar: FunctionComponent = () => {
             open={Boolean(anchorElUser)}
             onClose={handleCloseUserMenu}
           >
-            <UserDropdownMenuItems />
+            <UserDropdownMenuItems
+              username={username}
+              handleClick={handleClickMenuItem}
+            />
           </Menu>
         </Box>
         <Box sx={{ flexgrow: 1, display: { xs: 'none', md: 'flex' } }}>

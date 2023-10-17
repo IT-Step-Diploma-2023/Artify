@@ -13,7 +13,9 @@ namespace Artify.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20230819100815_fixed database bug")]
+#pragma warning disable CS8981 // The type name only contains lower-cased ascii characters. Such names may become reserved for the language.
     partial class fixeddatabasebug
+#pragma warning restore CS8981 // The type name only contains lower-cased ascii characters. Such names may become reserved for the language.
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -481,7 +483,7 @@ namespace Artify.Migrations
                     b.ToTable("Teams");
                 });
 
-            modelBuilder.Entity("Artify.Models.DbModels.Users.User", b =>
+            modelBuilder.Entity("Artify.Models.DbModels.Users.UserDTO", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -895,13 +897,13 @@ namespace Artify.Migrations
 
             modelBuilder.Entity("Artify.Models.DbModels.DbModels.Artworks.Album", b =>
                 {
-                    b.HasOne("Artify.Models.DbModels.Users.User", "User")
+                    b.HasOne("Artify.Models.DbModels.Users.UserDTO", "UserDTO")
                         .WithMany("Albums")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("UserDTO");
                 });
 
             modelBuilder.Entity("Artify.Models.DbModels.DbModels.Artworks.Attributes.Appreciation", b =>
@@ -912,7 +914,7 @@ namespace Artify.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Artify.Models.DbModels.Users.User", "Author")
+                    b.HasOne("Artify.Models.DbModels.Users.UserDTO", "Author")
                         .WithMany("Appreciations")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -931,7 +933,7 @@ namespace Artify.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Artify.Models.DbModels.Users.User", "Author")
+                    b.HasOne("Artify.Models.DbModels.Users.UserDTO", "Author")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -955,40 +957,40 @@ namespace Artify.Migrations
 
             modelBuilder.Entity("Artify.Models.DbModels.DbModels.Artworks.Project", b =>
                 {
-                    b.HasOne("Artify.Models.DbModels.Users.User", "User")
+                    b.HasOne("Artify.Models.DbModels.Users.UserDTO", "UserDTO")
                         .WithMany("Projects")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("UserDTO");
                 });
 
             modelBuilder.Entity("Artify.Models.DbModels.DbModels.Artworks.Shot", b =>
                 {
-                    b.HasOne("Artify.Models.DbModels.Users.User", "User")
+                    b.HasOne("Artify.Models.DbModels.Users.UserDTO", "UserDTO")
                         .WithMany("Shots")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("UserDTO");
                 });
 
             modelBuilder.Entity("Artify.Models.DbModels.Users.Attributes.Employer", b =>
                 {
-                    b.HasOne("Artify.Models.DbModels.Users.User", "User")
+                    b.HasOne("Artify.Models.DbModels.Users.UserDTO", "UserDTO")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("UserDTO");
                 });
 
             modelBuilder.Entity("Artify.Models.DbModels.Users.Attributes.TeamMember", b =>
                 {
-                    b.HasOne("Artify.Models.DbModels.Users.User", "MemberUser")
+                    b.HasOne("Artify.Models.DbModels.Users.UserDTO", "MemberUser")
                         .WithMany()
                         .HasForeignKey("MemberUserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1005,7 +1007,7 @@ namespace Artify.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Artify.Models.DbModels.Users.User", "User")
+                    b.HasOne("Artify.Models.DbModels.Users.UserDTO", "UserDTO")
                         .WithMany("UserEmployerComments")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1013,7 +1015,7 @@ namespace Artify.Migrations
 
                     b.Navigation("Employer");
 
-                    b.Navigation("User");
+                    b.Navigation("UserDTO");
                 });
 
             modelBuilder.Entity("Artify.Models.DbModels.Users.Attributes.UserSocialProfile", b =>
@@ -1024,7 +1026,7 @@ namespace Artify.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Artify.Models.DbModels.Users.User", "User")
+                    b.HasOne("Artify.Models.DbModels.Users.UserDTO", "UserDTO")
                         .WithMany("UserSocialProfiles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1032,7 +1034,7 @@ namespace Artify.Migrations
 
                     b.Navigation("SocialProfile");
 
-                    b.Navigation("User");
+                    b.Navigation("UserDTO");
                 });
 
             modelBuilder.Entity("Artify.Models.DbModels.Users.Attributes.Vacancy", b =>
@@ -1056,16 +1058,16 @@ namespace Artify.Migrations
 
             modelBuilder.Entity("Artify.Models.DbModels.Users.Team", b =>
                 {
-                    b.HasOne("Artify.Models.DbModels.Users.User", "User")
+                    b.HasOne("Artify.Models.DbModels.Users.UserDTO", "UserDTO")
                         .WithMany("Teams")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("UserDTO");
                 });
 
-            modelBuilder.Entity("Artify.Models.DbModels.Users.User", b =>
+            modelBuilder.Entity("Artify.Models.DbModels.Users.UserDTO", b =>
                 {
                     b.HasOne("Artify.Models.DbModels.Users.UserRole", "UserRole")
                         .WithMany("Users")
@@ -1130,13 +1132,13 @@ namespace Artify.Migrations
 
             modelBuilder.Entity("Artify.Models.DbModels.WorkPreferences.WorkPreference", b =>
                 {
-                    b.HasOne("Artify.Models.DbModels.Users.User", "User")
+                    b.HasOne("Artify.Models.DbModels.Users.UserDTO", "UserDTO")
                         .WithOne("WorkPreference")
                         .HasForeignKey("Artify.Models.DbModels.WorkPreferences.WorkPreference", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("UserDTO");
                 });
 
             modelBuilder.Entity("BillingUser", b =>
@@ -1147,7 +1149,7 @@ namespace Artify.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Artify.Models.DbModels.Users.User", null)
+                    b.HasOne("Artify.Models.DbModels.Users.UserDTO", null)
                         .WithMany()
                         .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1162,7 +1164,7 @@ namespace Artify.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Artify.Models.DbModels.Users.User", null)
+                    b.HasOne("Artify.Models.DbModels.Users.UserDTO", null)
                         .WithMany()
                         .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1295,7 +1297,7 @@ namespace Artify.Migrations
                     b.Navigation("UserSocialProfiles");
                 });
 
-            modelBuilder.Entity("Artify.Models.DbModels.Users.User", b =>
+            modelBuilder.Entity("Artify.Models.DbModels.Users.UserDTO", b =>
                 {
                     b.Navigation("Albums");
 

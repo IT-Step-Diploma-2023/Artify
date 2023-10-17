@@ -6,6 +6,7 @@ using Artify.Models.DbModels.Users;
 using Artify.Models.DbModels.DbModels.Artworks.Attributes;
 using Artify.Models.DbModels.Users.Attributes;
 using Microsoft.Extensions.Hosting;
+using Image = Artify.Models.DbModels.DbModels.Artworks.Image;
 
 namespace Artify.Data
 {
@@ -51,7 +52,7 @@ namespace Artify.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Image>().Property(si => si.Price).HasPrecision(18, 2);
+           // modelBuilder.Entity<Image>().Property(si => si.Price).HasPrecision(18, 2);
 
             modelBuilder.Entity<Salary>().Property(s => s.MinSalary).HasPrecision(18, 2);
             modelBuilder.Entity<Salary>().Property(s => s.MaxSalary).HasPrecision(18, 2);

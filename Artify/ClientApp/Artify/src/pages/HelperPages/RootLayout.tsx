@@ -12,17 +12,24 @@ const RootLayout: FunctionComponent = () => {
       <main>
         <Box sx={{
           margin: 'auto',
-          maxWidth: '1120px',
+          marginTop: '124px',
+          width: {
+            xs: 'calc(100vw - 40px)',
+            md: 'calc(100vw - 100px)',
+            lg: 'calc(100vw - 200px)'
+          },
           boxSizing: 'border-box',
-          paddingTop: {xs: '1rem', sm: '2rem', md: '90px'},
-          paddingLeft: {xs: '1rem', sm: '50px', lg: '0'},
-          paddingRight: {xs: '1rem', sm: '50px', lg: '0'}
+          marginBottom: {
+            sm: 'calc(41px * 3 + 3rem)',
+            lg: 'calc(41px + 3rem)',
+          }
         }}>
           {/* {navigation.state === 'loading' && <p>Loading...</p>} */}
           <Outlet />
         </Box>
       </main>
       <Footer pos='docked' />
+
     </>
   );
 };

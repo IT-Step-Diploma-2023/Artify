@@ -1,0 +1,40 @@
+:root {
+    --light-grey: #ECEAEF;
+    --grey: #CACACA;
+    --red: #D65353;
+    --violet: #6A4BD9;
+    --dark-violet: #271846;
+}
+
+.link,
+.link-active,
+.link-danger,
+.link-danger-active {
+    text-decoration: none;
+    font-size: 1rem;
+    text-align: left;
+    display: inline-block;
+    padding: 0.6875rem 1.185rem;
+    margin-left: 0;
+}
+
+.link-danger {
+    color: var(--red)
+}
+
+.link-danger-active,
+.link-danger:hover {
+    font-weight: 800;
+    color: var(--red)
+}
+
+.link:hover,
+.link-active:hover {
+    font-weight: 800;
+    color: var(--violet);
+}
+
+.link-active {
+    font-weight: 800;
+    color: var(--violet);
+}

@@ -52,5 +52,6 @@ namespace Artify.DAL
         {
             context.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
         }
+        public int Count() { return context.Shots.Count(); }
     }
 }

@@ -1,30 +1,20 @@
 import * as React from 'react';
-import Tabs,{ tabsClasses }  from '@mui/material/Tabs';
+import Tabs, { tabsClasses } from '@mui/material/Tabs';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 import Tab from '@mui/material/Tab';
-import { fontSize } from '@mui/system';
 
-interface Lngs {
-  ua: string
-  en: string
-}
-
-const lngs: Lngs = {
-  ua: 'UA',
-  en: 'EN'
-}
 
 export default function ScrollableTabsButtonVisible() {
 
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    console.log(event);
     setValue(newValue);
   };
-
 
   const pages = [
     t('headerComponent.tags.sites'),
@@ -50,31 +40,30 @@ export default function ScrollableTabsButtonVisible() {
 
 
   return (
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        variant="scrollable"
-        centered
-        
-        scrollButtons
-        
-        sx={{          
-          [`& .${tabsClasses.scrollButtons}`]: {
-            '&.Mui-disabled': { opacity: 0.3}
-          }
-        }}
-        style={{ width: '410px', height: '44px', gap: '20px'}}>
-          {pages.map((page) => (
-              <NavLink 
-              
-              key={page}
-              to={pathes[pages.indexOf(page)]}
-              className={({ isActive }) => (isActive ? 'link1-active' : 'link1')}
-            ><Tab className='link1' sx={{height:'2px'}} label={page} />              
-            </NavLink>
-          ))}
-    
-      </Tabs> 
+    <Tabs
+      value={value}
+      onChange={handleChange}
+      variant="scrollable"
+      // centered
+
+      scrollButtons
+
+      sx={{
+        [`& .${tabsClasses.scrollButtons}`]: {
+          '&.Mui-disabled': { opacity: 0.3 }
+        }
+      }}
+      style={{ width: '410px', height: '44px', gap: '20px' }}>
+      {pages.map((page) => (
+        <NavLink
+          key={page}
+          to={pathes[pages.indexOf(page)]}
+          className={({ isActive }) => (isActive ? 'link1-active' : 'link1')}
+        ><Tab className='link1' sx={{ height: '2px' }} label={page} />
+        </NavLink>
+      ))}
+
+    </Tabs>
   );
 }
 

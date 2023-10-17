@@ -10,7 +10,7 @@ namespace Artify.Models.DbModels.DbModels.Artworks
         public int Id { get; set; }
 
         [Required]
-        public int UserId { get; set; } // User created Follower
+        public int UserId { get; set; } // UserDTO created Follower
         [Required]
         public string Title { get; set; } = string.Empty;
 

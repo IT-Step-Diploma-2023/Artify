@@ -2,7 +2,20 @@
         "title": "English",
         "buttonFetch": "Fetch Data",
         "homePage": {
-            "text": "Home Page"
+            "text": "Home Page",
+            "filterButton": "filter",
+            "params": {
+                "category": "category",
+                "price": "price",
+                "priceFree": "free",
+                "extension": "format",
+                "selectAll": "all"
+            }
+        },
+        "common": {
+            "saveLong": "save changes",
+            "save": "save",
+            "formError": "invalid or incomplete data in form fields"
         },
         "errorPage": {
             "undefinedError": {
@@ -17,11 +30,12 @@
         "headerComponent": {
             "search": "search",
             "menue": {
-                "hire": "hire",
-                "job": "job",
+                "inspiration": "inspiration",
                 "buy": "purchase",
+                "hire": "hire",
                 "help": "help",
-                "download": "download"
+                "download": "download",
+                "aboutUs": "about us"
             },
             "share": "share",
             "filter": "filter",
@@ -36,10 +50,10 @@
                 "animation": "animation"
             },
             "dropdownMenu": {
-                "workPrefs": "my job history",
+                "workPrefs": "my profie",
                 "settings": "settings",
                 "login": "login",
-                "logout": "logout",
+                "logоut": "logout",
                 "register": "sign up"
             },
             "loggedOffMessage": "login or register"
@@ -67,7 +81,9 @@
                 "passwordRepeat": "Password repeat",
                 "passwordRepeatError": "incorrect password repeat",
                 "agreement": "I agree to <1>terms of service</1>, <2>privacy policy</2> and <5>default notification settings</5>",
-                "create": "create an account"
+                "create": "create an account",
+                "formError": "помилкове або неповне введення даних",
+                "registrationError": "помилка реєстрації"
             }
         },
         "userLoginPage": {
@@ -90,20 +106,26 @@
             "basicInfo": "basic information",
             "profInfo": "professional information",
             "socialNetworks": "social networks",
-            "name": "name",
-            "userName": "username",
+            "userName": "login",
+            "fullName": "user`s full name",
             "country": "country",
-            "city": "city",
+            "address": "city",
             "about": "about me",
             "download": "download",
-
             "save": "save changes",
             "edit": "edit",
             "deleteAccount": "delete account",
-
             "albums": "albums",
             "appreciations": "likes",
-            "followings": "subscriptions"
+            "followings": "subscriptions",
+            "basicInfoErrors": {
+                "userNameError": "incorrect username format",
+                "addressError": "incorrect address format",
+                "infoError": "incorrect text format "
+            },
+            "socialNetworksErrors": {
+                "socialNetworkError": "incorrect format for profile "
+            }
         },
         "accountPage2": {
             "portfolio": "portfolio",
@@ -113,5 +135,163 @@
             "subscriptions": "subscriptions",
             "editAccount": "edit",
             "downloadWork": "download the work"
+        },
+        "accountPage3": {
+            "profession": "profession",
+            "professionPlaceholder": "enter your profession",
+            "skills": "skills",
+            "skillsPlaceholder": "enter skills related to the services you offer",
+            "skillsSub": "enter skills via sub",
+            "education": "education",
+            "grades": {
+                "add": "add more",
+                "country": "college / university country",
+                "facility": "college / university name",
+                "grade": "grade",
+                "start": "started",
+                "finish": "finished"
+            },
+            "site": "personal site",
+            "sitePlaceholder": "add a link to your own website ",
+            "siteSub": "add a link to your personal website or portfolio with samples of your work"
+        },
+        "accountPage4": {},
+        "aboutMe": {
+            "aboutMe": "about me",
+            "inWeb": "in web",
+            "tags": "tags"
+        },
+        "share": {
+            "addToGetStarted": "add to get started",
+            "text": "text",
+            "image": "image",
+            "video": "video",
+            "project": "project name",
+            "addTitle": "add a project name",
+            "tags": "tags",
+            "addTags": "add tags",
+            "upTo": "(up to 10)",
+            "suggested": "suggested",
+            "visibility": "visibility of the project",
+            "visibilityOptions": {
+                "public": "public",
+                "private": "private"
+            },
+            "price": "price",
+            "addPrice": "0.00",
+            "blocksGap": "intervals between blocks",
+            "saveAsDraft": "save as draft",
+            "myContinue": "continue",
+            "addBlock": "add block",
+            "description": {
+                "placeholder": "enter text",
+                "caption": "edit description"
+            },
+            "publicate": {
+                "coverCaption": "project cover",
+                "edit": "edit",
+                "saveDraft": "save as draft",
+                "publiсateProject": "publish",
+                "editCoverCaption": "edit cover",
+                "saveCover": "save",
+                "cancelCover": "cancel",
+                "progressMessage": "publishing project...",
+                "progressExplane": "this may take some time"
+            }
+        },
+        "hire": {
+            "tags": "tags",
+            "profession": "profession",
+            "location": "location",
+            "salary": "salary range",
+            "hr": "hr",
+            "write": "write",
+            "message": "your message",
+            "interested": "I am interested in hiring",
+            "budget": "your budget",
+            "send": "send a message",
+            "subscribe": "subscribe"
+        },
+        "help": {
+            "helpCenter": "help center",
+            "addWork": "how to add work?..",
+            "getJob": "how to get a job?..",
+            "hireDesigner": "how to hire a designer?..",
+            "createAccount": "how to create your account?..",
+            "aboutUs": "about us"
+        },
+
+
+
+        "howBuyWorkPage":{
+            "text1":"how to get a job",
+            "text2":"click the “buy” button and you will be transferred to a block where you can purchase some work.​help center",
+            "text3":"click on the “basket” button. A window will appear in front of you to fill in your data to buy a job.",
+            "text4":"thanks to the filters, you can choose the category of work you need.",
+            "text5":"to purchase a job, enter your details.",
+            "text6":"close"
+        },
+        "howAddWorkPage":{
+            "text1":"how to add a job",
+            "text2":"click the “share your work” button and you will be taken to a page where you can add your masterpiece",
+            "text3":"click the “image” button and add your picture from your files"
+        },
+        "howHireDesignerPage":{
+            "text1":"how to hire a designer",
+            "text2":"click the “hire” button and you will be transferred to the block where you can hire a designer",
+            "text3":"click on the photo or name and you will go to the designer's page.",
+            "text4":"press the “write” button and you will be able to contact the designer."
+        },
+        "aboutUsPage":{
+            "text1":"so what about us?..",
+            "text2":"we will tell you now",
+            "text3":"about us",
+            "text4":"many designers are looking for their place under the sun, and what can we say, it's quite difficult to do it nowadays. that's why we offer you a platform to realize your potential. here you can meet other designers and create joint projects together. we hope you will like it and join our interesting community...",
+            "text5":"our goal",
+            "text6":"we are here to give you: ",
+            "text7":"- good ideas for your future masterpiece ",
+            "text8":"- a chance to create your own portfolio",
+            "text9":"- an opportunity to purchase one of the designers' works",
+            "text10":"those who use the site",
+            "text11":"photographers",
+            "text12":"brands",
+            "text13":"designers",
+            "text14":"product",
+            "text15":"illustrators",
+            "text16":"web designers"
+        },
+        "mediaKit":{
+            "text1":"logo and brand",
+            "text2":"we offer you a piece of the soul of this site. you will be able to download our logo and see the fonts and colors that were used on the site. (before downloading the logo, please read the instructions for its use below). ",
+            "text3":"logo",
+            "text4":"a name for a site where designers can showcase their work, share ideas, find orders and clients. The name implies that this is a place where everyone can show their own style and bring their creative concepts to life.",
+            "text5":"download",
+            "text6":"file",
+            "text7":"colors",
+            "text8":"when you go to some site, you will notice that the background color will be white, but we decided to change it... our site color is a grayish-purple shade. this was done to diversify the usual things. also shadow, we added it to make the pictures more expressive.",
+            "text9":"fonts",
+            "text10":"oh, fonts are a separate topic... if you noticed, all words and sentences start with a small letter. as they say, and no matter what, how to break stereotypes, then let's move on..." ,
+            "text11":"do this and don't do this",
+            "text12":"as possible:",
+            "text13":"- use logo to mark our site",
+            "text14":"- use the logo when promoting your product on “mydesigno”",
+            "text15":"- use the logo when posting about us on social networks",
+            "text16":"how not possible:",
+            "text17":"- use the logo to design your own company",
+            "text18":"- use the logo as a sponsorship or collaboration with us without our permission",
+            "text19":"- don't change the logo when you use it"
+        },
+        "collection":{
+            "text1":"collection"
+        },
+        "aboutUsMenu":{
+            "text1":"about us",
+            "text2":"team",
+            "text3":"media kit"
+        },
+        "shotDetails": {
+            "buttonText": "view more",
+            "footerText": "view more works"
         }
     }
+    

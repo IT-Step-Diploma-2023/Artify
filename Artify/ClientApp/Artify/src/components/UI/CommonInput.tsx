@@ -2,10 +2,16 @@ import { styled } from "@mui/material/styles";
 import { sizes } from "../../assets/defaults/sizes";
 import { colors } from "../../assets/defaults/colors";
 
+const positionHover = '0px 4px 8px 0px ';
+const positionActive = '0px 3px 8px 0px ';
 
-const CommonInput = styled('input')(({ color, height }: {
+const colorValid = 'rgba(39, 24, 70, 0.60)';
+const colorInvalid = 'rgba(214, 83, 83, 0.4)';
+
+const CommonInput = styled('input')(({ color, height, isValid }: {
     color?: 'primary' | 'secondary',
-    height?: 'bg' | 'md'
+    height?: 'bg' | 'md',
+    isValid?: boolean
 }) => (
     {
         fontFamily: 'Nunito',
@@ -17,15 +23,15 @@ const CommonInput = styled('input')(({ color, height }: {
         boxSizing: 'border-box',
         color: colors.darkViolet,
         border: '1px solid',
-        borderColor: (color === 'primary' ? colors.grey : colors.darkViolet),
+        borderColor: ((isValid || isValid === undefined) ? (color === 'primary' ? colors.grey : colors.darkViolet) : colors.red),
         backgroundColor: (color === 'primary' ? 'white' : colors.lightGrey),
         padding: '0 24px',
         transition: 'all 0.15s ease-out',
         '&:hover': {
-            boxShadow: '0px 4px 8px 0px rgba(39, 24, 70, 0.40)'
+            boxShadow: ((isValid || isValid === undefined) ? positionHover + colorValid : positionHover + colorInvalid),
         },
         '&:active': {
-            boxShadow: '0px 3px 6px 0px rgba(39, 24, 70, 0.60)'
+            boxShadow: ((isValid || isValid === undefined) ? positionActive + colorValid : positionActive + colorInvalid)
         },
         height: (height === 'bg' ? sizes.heightBg : sizes.heightMd),
         borderRadius: (height === 'bg' ? sizes.radiusBg : sizes.radiusMd)

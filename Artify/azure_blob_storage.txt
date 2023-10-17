@@ -1,0 +1,6 @@
+Storage account name
+mydesignostorage
+Key
+lhAH/+qWzWTwXEnk1KKf5syJgY/xa6wY4+qmEI8NoFheI3IvGNLLj6H0Hga8AAwikbg1d+Zprlf7+AStPR597Q==
+Connection string
+DefaultEndpointsProtocol=https;AccountName=mydesignostorage;AccountKey=lhAH/+qWzWTwXEnk1KKf5syJgY/xa6wY4+qmEI8NoFheI3IvGNLLj6H0Hga8AAwikbg1d+Zprlf7+AStPR597Q==;EndpointSuffix=core.windows.net

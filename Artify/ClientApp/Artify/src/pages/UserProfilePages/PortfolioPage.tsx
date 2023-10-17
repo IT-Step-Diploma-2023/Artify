@@ -1,159 +1,123 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import * as React from 'react';
-import { Button } from '@mui/base/Button';
 import Typography from '@mui/material/Typography';
-
-import { NavLink } from "react-router-dom";
-
-import { Avatar, Checkbox, Grid, IconButton, ImageListItem, Paper, Tabs } from '@mui/material';
-import { FunctionComponent } from 'react';
+import { Box, Grid, IconButton, ImageListItem } from '@mui/material';
+import { FunctionComponent, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import LocationOn from '@mui/icons-material/LocationOn';
+import ProfileMenu from '../../components/UI/UserProfileComponents/ProfileMenu';
+import ProfileTopComponent from '../../components/UI/UserProfileComponents/ProfileTopComponent';
+import PlusIcon from '../../components/UI/PlusIcon';
+import { useNavigate } from 'react-router';
+import { IShot } from '../../assets/interfaces/shotsInterfaces';
+import { getPortfolioShotsData } from '../../hooks/useShots';
+import { isUserLogged, loggedInUserId } from '../../hooks/useAuthorization';
+import ShotModal from '../../components/UI/HomePageComponents/ShotModal';
+import useStorage from '../../hooks/useStorage';
+import { baseUrl } from '../../assets/defaults/urls';
 
-import AddCircleOutline from '@mui/icons-material/AddCircleOutline';
-import { FavoriteBorder, Favorite } from '@mui/icons-material';
-import CommonButton from '../../components/UI/CommonButton';
-import { colors } from '../../assets/defaults/colors'
 
-interface Lngs {
-  ua: string
-  en: string
+/* #region styles */
+const portfolioShot = {
+  width: '100%',
+  aspectRatio: '1.4',
+  borderRadius: 10,
+  boxShadow: '0px 4px 8px 0px #27184666'
 }
 
-const lngs: Lngs = {
-  ua: 'UA',
-  en: 'EN'
+const addPhotoBtn = {
+  border: '2px dashed #271846',
+  color: '#271846',
+  borderRadius: '10px',
+  width: '100%',
+  aspectRatio: '1.4',
+  display: 'flex',
+  flexDirection: 'column'
 }
+/* #endregion */
 
 const PortfolioPage: FunctionComponent = () => {
 
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { getTargetUserId } = useStorage()
 
-  const [value, setValue] = React.useState(0);
+  const [shots, setShots] = useState<IShot[]>([]);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+  const loggedUserId = loggedInUserId();
+  const targetUserId = getTargetUserId();
+  
+  const getId = () => {
+    if (targetUserId !== -1) return targetUserId;
+    if (loggedUserId !== -1) return loggedUserId;
+    return 0;
   };
 
+  useEffect(() => { void getPortfolioShotsData(getId(), setShots) }, []);
 
-  const pages = [
-    t('accountPage2.portfolio'),
-    t('accountPage2.about'),
-    t('accountPage2.saved'),
-    t('accountPage2.likedIt'),
-    t('accountPage2.subscriptions')
+  const [activeShot, setActiveShot] = useState<IShot>();
+  const [shotModalOpen, setShotModalOpen] = useState(false);
 
-  ];
-  const editAccount = t('accountPage2.editAccount');
+  const openShotModalHandler = (shot: IShot) => {
+    setActiveShot(shot);
+    setShotModalOpen(true);
+  };
+
+  const closeShotModalHandler = () => {
+    setShotModalOpen(false);
+  };
+
+  const clickHandle = () => {
+    navigate('/share');
+  }
+
   const downloadWork = t('accountPage2.downloadWork');
 
-  const pathes = [
-    '/portfolio',
-    '/about',
-    '/saved',
-    '/likedIt',
-    '/subscriptions',
-  ]
-
-
-
   return <>
-    <Grid container spacing={2}>
-      <Grid item xs={4} md={4}/>
-      <Grid item xs={4} md={4}>
-        <div>
-          <Avatar alt="Remy Sharp" src="/images/sample_christian_kouly_profile.jpg" sx={{ marginTop: '90px', display: 'inline-block', width: '147px', height: '147px' }} />
-          <div style={{ display: 'inline-block' }}>
-            <div style={{ display: 'block', marginBottom: '45px' }}>
-              <Typography component='div' sx={{ display: 'block', marginLeft: '40px', fontSize: '30px' }}>
-                {t('jocelyn calzoni')}
-              </Typography>
-              <LocationOn sx={{ fintSize: 'small', display: 'inline-block', marginLeft: '38px' }} />
-              <Typography component='div' sx={{ display: 'inline-block' }}>
-                {t('Ukraine')}
-              </Typography>
-            </div>
-            <CommonButton color='secondary' sx={{ 
-              backgroundColor: colors.lightGrey, 
-              width: '130px', 
-              margin: 'auto', 
-              display: 'block', marginBottom: '70px'}}>
-              <Typography > {editAccount} </Typography>
-            </CommonButton>
-          </div>
-        </div>
-      </Grid>
-      <Grid item xs={4} md={4} />
-    </Grid>
-
-
-    <Grid container spacing={2}>
-      <Grid item xs={3} md={3}>
-
-      </Grid>
-      <Grid item xs={5} md={5}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          centered
-          sx={{}}
-          style={{ width: '645px', height: '44px', gap: '20px' }}>
-          {pages.map((page) => (
-            <NavLink
-
-              key={page}
-              to={pathes[pages.indexOf(page)]}
-              className={({ isActive }) => (isActive ? 'link1-active' : 'link1')}
-            >{page}
-            </NavLink>
-          ))}
-
-        </Tabs>
-      </Grid>
-      <Grid item xs={4} md={4}>
-
-      </Grid>
-    </Grid>
-
-
-
-    <Grid container spacing={{ xs: 2, md: 3 }} style={{ marginLeft: '50px' }}>
-
-      {itemData.map((item) => (
-        <Grid xs={12} sm={6} md={3}>
-          <Paper elevation={0} style={{ width: 240, height: 238, borderRadius: '10px', marginTop: '60px', background: '#ECEAEF' }}>
-            <ImageListItem key={item.img} >
-              <img
-                style={{ width: 280, height: 200, borderRadius: '10px', boxShadow: '0px 4px 8px 0px #27184666' }}
-                src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-                srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                alt={item.title}
-                loading="lazy"
-              />
-            </ImageListItem>
-          </Paper>
+    <ProfileTopComponent />
+    <ProfileMenu translation={t} />
+    <Grid container spacing={{ xs: 2, md: 5 }} sx={{ marginBottom: '15rem' }}>
+      {shots.map((shot) => (
+        <Grid item xs={12} md={6} lg={3} key={shot.id}>
+          <ImageListItem >
+            <img
+              style={portfolioShot}
+              src={baseUrl + shot.cover}
+              alt={shot.title}
+              loading="lazy"
+              onClick={() => openShotModalHandler(shot)} />
+          </ImageListItem>
         </Grid>
-
       ))}
-      <IconButton aria-label="addaphoto" className={'link2'} style={{ marginTop: '60px', display: 'block' }}
-        sx={{ border: '2px dashed #271846', color: '#271846', padding: '50px', borderRadius: '10px', width: '280px', height: '200px' }}>
-        <Typography style={{ display: 'block', marginTop: '16px', marginLeft: '14px', fontWeight: 'normal' }} >{downloadWork}</Typography>
-        <AddCircleOutline style={{ width: '44px', height: '44px', fontWeight: 'normal' }} />
-      </IconButton>
+      {isUserLogged() && <Grid item xs={12} md={6} lg={3}>
+        <IconButton aria-label="addaphoto" className={'link2'}
+          disableRipple
+          sx={addPhotoBtn}
+          onClick={() => clickHandle()}>
+          <Typography sx={{ marginBottom: '0.75rem' }} >{downloadWork}</Typography>
+          <Box marginTop={'0.75rem'}>
+            <PlusIcon size={'44px'} color={'inherit'} />
+          </Box>
+        </IconButton>
+      </Grid>}
     </Grid>
-
-
+    {activeShot && <ShotModal
+      t={t}
+      openModal={shotModalOpen}
+      closeModalHandler={closeShotModalHandler}
+      openModalHandler={openShotModalHandler}
+      shotId={activeShot.id}
+      shots={shots}
+    />}
   </>
 };
 export default PortfolioPage;
 
-const itemData = [
-  {
-    img: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e',
-    title: 'Breakfast',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1516802273409-68526ee1bdd6',
-    title: 'Basketball',
-  }
-];
+// const itemData = [
+//   {
+//     img: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e',
+//     title: 'Breakfast',
+//   },
+//   {
+//     img: 'https://images.unsplash.com/photo-1516802273409-68526ee1bdd6',
+//     title: 'Basketball',
+//   }
+// ];

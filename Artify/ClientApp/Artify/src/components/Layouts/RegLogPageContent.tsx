@@ -1,6 +1,6 @@
 import { FunctionComponent, ReactNode, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Box, Container, Paper } from '@mui/material';
+// import { useTranslation } from 'react-i18next';
+import { Box, Container } from '@mui/material';
 import { colors } from '../../assets/defaults/colors';
 import FormPanelBackground from '../../components/UI/FormPanelBackground';
 import FormTitle from '../../components/UI/FormTitle';
@@ -21,7 +21,7 @@ const images = [
 
 const RegLogPageContent: FunctionComponent<PageContentProps> = ({ title, children }) => {
 
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
 
   const [index, setIndex] = useState(0);
 
@@ -32,13 +32,15 @@ const RegLogPageContent: FunctionComponent<PageContentProps> = ({ title, childre
   return (
     <>
       <FormPanel sx={{ backgroundColor: colors.lightGrey }}>
-        <Container sx={{ margin: 'auto'
-         }}>
-          <Box sx={{ 
-            width: '460px', 
-            margin: 'auto', 
-            backgroundColor: 'transparent', 
-            boxShadow: 'none' }}>
+        <Container sx={{
+          margin: 'auto'
+        }}>
+          <Box sx={{
+            width: '460px',
+            margin: 'auto',
+            backgroundColor: 'transparent',
+            boxShadow: 'none'
+          }}>
             <FormTitle sx={{ color: colors.violet }}>
               {title}
             </FormTitle>

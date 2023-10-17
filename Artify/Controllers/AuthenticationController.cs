@@ -2,6 +2,7 @@
 using Artify.Models.DbModels.Users;
 using Artify.Models.HelperModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +17,7 @@ namespace Artify.Controllers
 {
     
     [ApiController]
+    [EnableCors]
     public class AuthenticationController : ControllerBase
     {
         private IConfiguration _configuration;
@@ -52,7 +54,7 @@ namespace Artify.Controllers
                 var token = Generate(user);
                 return Ok(new { token = token });
             }
-            return NotFound("User not found");
+            return NotFound("UserDTO not found");
         }
 
         [AllowAnonymous]
@@ -63,7 +65,7 @@ namespace Artify.Controllers
             if (_usersRepository.Query(user => user.Username == registrationData.Username).Count() > 0 ||
                _usersRepository.Query(user => user.Email == registrationData.Email).Count() > 0)
             {
-                return BadRequest("User is already registered");
+                return BadRequest("UserDTO is already registered");
             }
             User newUser = new User();
             newUser.Username = registrationData.Username;
