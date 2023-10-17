@@ -16,7 +16,7 @@ import * as BtnStyles from "../../components/UI/CustomButtonStyles";
 import CustomButton from "../../components/UI/CustomButton";
 import { getAuthToken } from "../../hooks/useAuthorization";
 import addDescriptionModal from "../../components/UI/SharePageComponents/addDescriptionModal";
-import PublicateModal from "../../components/UI/SharePageComponents/publicateModal";
+import PublicateModal from "../../components/UI/SharePageComponents/PublicateModal";
 import { existedTags } from "../../assets/data/tags";
 import { useNavigate } from "react-router";
 import { urls } from "../../assets/defaults/urls";
