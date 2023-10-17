@@ -3,6 +3,7 @@ import { TFunction } from "i18next";
 import { NavLink } from "react-router-dom";
 import classes from './ProfileMenu.module.css'
 
+
 const ProfileMenu = ({ translation }: { translation: TFunction<"translation", undefined> }) => {
 
     const pages = [

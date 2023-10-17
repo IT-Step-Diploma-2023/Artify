@@ -4,7 +4,16 @@ import * as BtnStyles from "../CustomButtonStyles"
 import CommonTextArea from "../CommonTextArea";
 import CustomButton from "../CustomButton";
 
-const addDescriptionModal = (
+
+const AddDescriptionModal = ({
+    openDescriptionModal,
+    closeDescriptionModalHandler,
+    addDescription,
+    descriptionCaption,
+    descriptionText,
+    description,
+    myContinue
+}: {
     openDescriptionModal: boolean,
     closeDescriptionModalHandler: () => void,
     addDescription: (event: React.FormEvent<HTMLFormElement>) => void,
@@ -12,6 +21,7 @@ const addDescriptionModal = (
     descriptionText: string,
     description: string,
     myContinue: string
+}
 ) => {
     return <Box id="modaParent">
         <Modal
@@ -63,4 +73,4 @@ const addDescriptionModal = (
 }
 
 
-export default addDescriptionModal;
+export default AddDescriptionModal;

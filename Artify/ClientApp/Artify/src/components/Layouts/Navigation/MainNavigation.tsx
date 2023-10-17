@@ -13,6 +13,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { colors } from '../../../assets/defaults/colors';
 import NavMenu from '../../UI/NavMenu';
 import CommonButton from '../../UI/CommonButton';
+import UserDropdownMenuItems from './UserDropDownMenuItems';
 
 
 //#region localization languages
@@ -161,42 +162,6 @@ const Navbar: FunctionComponent = () => {
     </>
   }
 
-  const UserDropdownMenuItems = (): JSX.Element => {
-    if (username !== "")
-      return <>
-        <Typography
-          textAlign="center"
-          style={{ margin: '10px auto', fontWeight: '600', caret: 'transparent', cursor: 'default' }}>{username}</Typography >
-        <MenuItem
-          key={'workPrefs'}
-          onClick={() => { handleClickMenuItem('/portfolio') }}>
-          {t('headerComponent.dropdownMenu.workPrefs')}
-        </MenuItem>
-        <MenuItem divider
-          key={'settings'}
-          onClick={() => { handleClickMenuItem('/settings-basicinfo') }}>
-          {t('headerComponent.dropdownMenu.settings')}
-        </MenuItem>
-        <MenuItem
-          key={'logout'}
-          onClick={() => { handleClickMenuItem('/logout') }}>
-          {t('headerComponent.dropdownMenu.logоut')}
-        </MenuItem>
-      </>
-    return <>
-      <MenuItem divider
-        key={'login'}
-        onClick={() => { handleClickMenuItem('/login') }}>
-        {t('headerComponent.dropdownMenu.login')}
-      </MenuItem>
-      <MenuItem
-        key={'register'}
-        onClick={() => { handleClickMenuItem('/select-register') }}>
-        {t('headerComponent.dropdownMenu.register')}
-      </MenuItem>
-    </>
-  }
-
   return (
     <AppBar
       sx={{ position: 'fixed', boxShadow: 'none', backgroundColor: colors.lightGrey }}>
@@ -307,7 +272,10 @@ const Navbar: FunctionComponent = () => {
             open={Boolean(anchorElUser)}
             onClose={handleCloseUserMenu}
           >
-            <UserDropdownMenuItems />
+            <UserDropdownMenuItems
+              username={username}
+              handleClick={handleClickMenuItem}
+            />
           </Menu>
         </Box>
         <Box sx={{ flexgrow: 1, display: { xs: 'none', md: 'flex' } }}>

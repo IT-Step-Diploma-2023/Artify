@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from 'react-router-dom';
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 // import { t } from "i18next";
-import { getPortfolioUserData } from "../../../hooks/usePortfolio";
+import { getSpecifiedUserData, getUserData } from "../../../hooks/usePortfolio";
 import { IPortfolioUserData } from "../../../assets/interfaces/usersInterfaces";
 import { baseUrl } from "../../../assets/defaults/urls";
 import useStorage from "../../../hooks/useStorage";
@@ -24,10 +24,18 @@ const ProfileMainImage = () => {
     const { getTargetUserId } = useStorage();
 
     useEffect(() => {
-        void getPortfolioUserData(
-            getTargetUserId(),
-            setCurrentUser as Dispatch<SetStateAction<IPortfolioUserData>>
-        )
+        const id = getTargetUserId();
+        if (id != -1) {
+            void getSpecifiedUserData(
+                getTargetUserId(),
+                setCurrentUser as Dispatch<SetStateAction<IPortfolioUserData>>
+            );
+            return;
+        }
+        if (isUserLogged()) {
+            void getUserData(setCurrentUser as Dispatch<SetStateAction<IPortfolioUserData>>);
+            return;
+        }
     }, [])
 
     return <>

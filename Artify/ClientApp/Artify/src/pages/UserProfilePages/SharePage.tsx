@@ -15,11 +15,12 @@ import * as pageSyles from "./SharePageStyles";
 import * as BtnStyles from "../../components/UI/CustomButtonStyles";
 import CustomButton from "../../components/UI/CustomButton";
 import { getAuthToken } from "../../hooks/useAuthorization";
-import addDescriptionModal from "../../components/UI/SharePageComponents/addDescriptionModal";
+import addDescriptionModal from "../../components/UI/SharePageComponents/AddDescriptionModal";
 import PublicateModal from "../../components/UI/SharePageComponents/PublicateModal";
 import { existedTags } from "../../assets/data/tags";
 import { useNavigate } from "react-router";
 import { urls } from "../../assets/defaults/urls";
+import AddDescriptionModal from "../../components/UI/SharePageComponents/AddDescriptionModal";
 
 interface IVisibilityOption {
   index: number,
@@ -480,15 +481,15 @@ const SharePage: FunctionComponent = () => {
           }
         </Box>
       }
-      {addDescriptionModal(
-        openDescriptionModal,
-        closeDescriptionModalHandler,
-        addDescription,
-        descriptionCaption,
-        descriptionText,
-        description,
-        myContinue
-      )}
+      <AddDescriptionModal 
+            openDescriptionModal={openDescriptionModal}
+            closeDescriptionModalHandler={closeDescriptionModalHandler}
+            addDescription={addDescription}
+            descriptionCaption={descriptionCaption}
+            descriptionText={descriptionText}
+            description={description}
+            myContinue={myContinue}
+      />
       <Box style={{ display: "block", marginBottom: "45px", width: "28%" }}>
         <Box sx={{ width: "100%" }}>
           {/* project name */}
@@ -710,6 +711,7 @@ const SharePage: FunctionComponent = () => {
             {myContinue}
           </CustomButton>
           <PublicateModal
+            t={t}
             files={selectedFiles}
             openModal={openPublicateModal}
             closeModalHandler={closePublicateModalHandler}

@@ -47,14 +47,14 @@ namespace Artify.Controllers.users
 
 
         /// <summary>
-        /// Returns data of pointed user retrieving id from url
+        /// Returns data of specified user retrieving id from url
         /// </summary>
         /// /// <response code="200">Returns user in json format</response>
         /// <response code="404">UserDTO was not found in the database</response>
         /// <response code="500">Can't fetch user right now</response>
         [Route("api/[controller]/[action]")]
         [HttpGet]
-        public IActionResult GetUserData(int id)
+        public IActionResult GetSpecifiedUserData(int id)
         {
             var user = _usersRepository.Query(user => user.Id == id).FirstOrDefault();
             if (user == null)

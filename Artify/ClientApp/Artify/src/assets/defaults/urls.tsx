@@ -13,8 +13,8 @@ export const baseUrl = REACT_APP_BASE_URL;
 export const urls = {
     authentication: `${REACT_APP_BASE_URL}api/Authentication/Authentication`,
     registration: `${REACT_APP_BASE_URL}api/Authentication/Registration`,
-    getCurrentUserData: `${REACT_APP_BASE_URL}api/users/UsersApi/GetCurrentUserData`,
-    getPortfolioUserData: `${REACT_APP_BASE_URL}api/users/UsersApi/GetUserData`,
+    getCurrentUserData: `${REACT_APP_BASE_URL}api/UsersApi/GetCurrentUserData`,
+    getSpecifiedUserData: `${REACT_APP_BASE_URL}api/UsersApi/GetSpecifiedUserData`,
     getUserSocialProfiles: `${REACT_APP_BASE_URL}api/UsersApi/GetUserSocialProfiles`,
     uploadShot: `${REACT_APP_BASE_URL}api/ShotsApi/UploadShot`,
     getShot: `${REACT_APP_BASE_URL}api/ShotsApi/GetShot`,

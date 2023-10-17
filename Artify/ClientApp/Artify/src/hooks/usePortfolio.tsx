@@ -6,7 +6,6 @@ import { Dispatch, SetStateAction } from "react";
 const token = getAuthToken() ?? '';
 
 export const getUserData = async (
-    id: number,
     setItem: Dispatch<SetStateAction<IPortfolioUserData>>
 ): Promise<void> => {
     const response = await fetch(urls.getCurrentUserData, {
@@ -20,11 +19,11 @@ export const getUserData = async (
     const responseJson: IPortfolioUserData = await response.json();
     setItem(responseJson);
 }
-export const getPortfolioUserData = async (
+export const getSpecifiedUserData = async (
     id: number,
     setItem: Dispatch<SetStateAction<IPortfolioUserData>>
 ): Promise<void> => {
-    const response = await fetch(`${urls.getPortfolioUserData}?id=${id}`, {
+    const response = await fetch(`${urls.getSpecifiedUserData}?id=${id}`, {
         method: "get",
         mode: corsMod,
         headers: {

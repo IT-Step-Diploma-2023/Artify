@@ -6,7 +6,7 @@ import { getAuthToken } from "./useAuthorization";
 const token = getAuthToken() ?? '';
 
 export const getShotsData = async (
-    setItem: Dispatch<SetStateAction<IShot[]>>, filters: ShotsFilter[]
+    setItem: Dispatch<SetStateAction<IShot[]>>, filters?: ShotsFilter[]
 ): Promise<void> => {
     let outputJson = null;
     if (filters !== undefined) {
