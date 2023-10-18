@@ -42,7 +42,6 @@ const PortfolioPage: FunctionComponent = () => {
 
   const [shots, setShots] = useState<IShot[]>([]);
 
-
   const loggedUserId = loggedInUserId();
   const targetUserId = getTargetUserId();
 

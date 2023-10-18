@@ -55,9 +55,9 @@ export const getPortfolioShotsData = async (
     });
     if (response.status !== 200) return;
     const responseJson: IShot[] = await response.json();
+    console.log(responseJson);
     setItem(responseJson);
 }
-
 
 export const getShotData = async (
     shotId: number,
@@ -74,7 +74,6 @@ export const getShotData = async (
     const responseJson: IShotDetails = await response.json();
     setItem(responseJson);
 }
-
 
 export const setLike = async (
     shotId: number,
