@@ -11,7 +11,7 @@ import { IShot } from '../../assets/interfaces/shotsInterfaces';
 import { getPortfolioShotsData } from '../../hooks/useShots';
 import { isUserLogged, loggedInUserId } from '../../hooks/useAuthorization';
 import ShotModal from '../../components/UI/HomePageComponents/ShotModal';
-import useStorage from '../../hooks/useStorage';
+import useTargetUser from '../../hooks/useTargetUser';
 import { baseUrl } from '../../assets/defaults/urls';
 
 
@@ -38,20 +38,25 @@ const PortfolioPage: FunctionComponent = () => {
 
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { getTargetUserId } = useStorage()
+  const { getTargetUserId } = useTargetUser();
 
   const [shots, setShots] = useState<IShot[]>([]);
 
+
   const loggedUserId = loggedInUserId();
   const targetUserId = getTargetUserId();
-  
-  const getId = () => {
+
+  const getId = (): number => {
     if (targetUserId !== -1) return targetUserId;
     if (loggedUserId !== -1) return loggedUserId;
     return 0;
   };
 
-  useEffect(() => { void getPortfolioShotsData(getId(), setShots) }, []);
+  const [userId] = useState<number>(getId());
+
+  useEffect(() => {
+    void getPortfolioShotsData(userId, setShots);
+  }, []);
 
   const [activeShot, setActiveShot] = useState<IShot>();
   const [shotModalOpen, setShotModalOpen] = useState(false);
@@ -72,7 +77,8 @@ const PortfolioPage: FunctionComponent = () => {
   const downloadWork = t('accountPage2.downloadWork');
 
   return <>
-    <ProfileTopComponent />
+    <ProfileTopComponent
+      userId={userId} />
     <ProfileMenu translation={t} />
     <Grid container spacing={{ xs: 2, md: 5 }} sx={{ marginBottom: '15rem' }}>
       {shots.map((shot) => (

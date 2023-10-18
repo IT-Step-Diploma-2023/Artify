@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AppBar, Toolbar, CssBaseline, Typography, styled, InputBase, Box, MenuItem, Avatar, IconButton, Menu, Tooltip, Divider } from '@mui/material';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { FunctionComponent } from 'react';
-import { isUserLogged } from "../../../hooks/useAuthorization";
+import { isUserLogged  } from "../../../hooks/useAuthorization";
 import { useSelector } from "react-redux";
 import { useTranslation } from 'react-i18next';
 import Logo from '../../UI/Logo';
@@ -14,6 +14,7 @@ import { colors } from '../../../assets/defaults/colors';
 import NavMenu from '../../UI/NavMenu';
 import CommonButton from '../../UI/CommonButton';
 import UserDropdownMenuItems from './UserDropDownMenuItems';
+import useCurrentUser from '../../../hooks/useCurrentUser';
 
 
 //#region localization languages
@@ -42,7 +43,19 @@ const Navbar: FunctionComponent = () => {
   if (username === "" && authStore.isAuthenticated === true) {
     username = authStore.username;
   }
-  console.log("auth - ")
+
+  const { getData, getShownName } = useCurrentUser();
+
+
+  useEffect(() => {
+    if (username !== "") {
+      void getData();
+    }
+  }, [getData, getShownName, username]);
+
+  const shownName = getShownName();
+
+  console.log("auth - ");
   console.log(authStore);
   //Checking in state
 
@@ -248,10 +261,10 @@ const Navbar: FunctionComponent = () => {
           )}
         </Box>
         <Box sx={{ flexGrow: 0, marginRight: '10px' }}>
-          <Tooltip title={username !== "" ? username : t('headerComponent.loggedOffMessage')}>
+          <Tooltip title={username !== "" ? shownName : t('headerComponent.loggedOffMessage')}>
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
               <Avatar
-                alt={username !== "" ? username : t('headerComponent.loggedOffMessage')}
+                alt={username !== "" ? shownName : t('headerComponent.loggedOffMessage')}
                 src={username !== "" ? "/images/sample_christian_kouly_profile.jpg" : ""}
               />
             </IconButton>
@@ -273,7 +286,7 @@ const Navbar: FunctionComponent = () => {
             onClose={handleCloseUserMenu}
           >
             <UserDropdownMenuItems
-              username={username}
+              shownName={shownName}
               handleClick={handleClickMenuItem}
             />
           </Menu>

@@ -19,11 +19,11 @@ export const getUserData = async (
     const responseJson: IPortfolioUserData = await response.json();
     setItem(responseJson);
 }
-export const getSpecifiedUserData = async (
+export const getTargetUserData = async (
     id: number,
     setItem: Dispatch<SetStateAction<IPortfolioUserData>>
 ): Promise<void> => {
-    const response = await fetch(`${urls.getSpecifiedUserData}?id=${id}`, {
+    const response = await fetch(`${urls.getTargetUserData}?id=${id}`, {
         method: "get",
         mode: corsMod,
         headers: {

@@ -16,7 +16,7 @@ import { IShot } from '../../../assets/interfaces/shotsInterfaces';
 import FilterParamlist from './FilterParamList';
 import { getShotsData } from '../../../hooks/useShots';
 import ShotThumbnail from './Shots';
-import useStorage from '../../../hooks/useStorage';
+import useTargetUser from '../../../hooks/useTargetUser';
 
 /* #region styles */
 const container = {
@@ -49,7 +49,7 @@ export default function HomeImageList() {
 
   useEffect(() => { void getShotsData(setShots) }, []);
 
-  const { setTargetUserId } = useStorage();
+  const { setTargetUserId } = useTargetUser();
 
   const openShotModalHandler = (shot: IShot) => {
     setActiveShot(shot);

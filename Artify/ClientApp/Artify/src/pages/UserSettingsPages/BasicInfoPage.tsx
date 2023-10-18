@@ -12,7 +12,7 @@ import { Grid } from '@mui/material';
 import CommonTextArea from '../../components/UI/CommonTextArea';
 import { countries } from '../../utils/getCountries';
 import CommonSelect from '../../components/UI/CommonSelect';
-import useUserSettings from '../../hooks/useUserSettings';
+import useCurrentUser from '../../hooks/useCurrentUser';
 import InputErrorMessage from '../../components/UI/InputErrorMessage';
 import { IBasicUserFormData } from '../../assets/interfaces/usersInterfaces';
 
@@ -33,15 +33,16 @@ const BasicInfoPage: FunctionComponent = () => {
 
     /* #endregion */
 
-    const { postData, getData2 } = useUserSettings();
+    const { postData, loadData } = useCurrentUser();
     // const retriveData = getData();
 
-
-    const [formData, setFormData] = useState<IBasicUserFormData>(new Object as IBasicUserFormData);
+    const [formData, setFormData] = useState<IBasicUserFormData>();
 
     useEffect(() => {
-        void getData2(setFormData)
-    }, []);
+        const data = loadData();
+        if (data !== null)
+            setFormData(data);
+    }, [])
 
     /* #region validation */
 
@@ -115,6 +116,7 @@ const BasicInfoPage: FunctionComponent = () => {
             alert(formErrorMessage);
             return;
         }
+        if (formData === undefined) return;
         postData(formData, selectedImage);
     }
 
@@ -226,7 +228,7 @@ const BasicInfoPage: FunctionComponent = () => {
                                 name={login}
                                 placeholder={login}
                                 aria-label={login}
-                                defaultValue={formData.username}
+                                defaultValue={formData && formData.username}
                                 readOnly
                             />
                         </Box>
@@ -237,7 +239,7 @@ const BasicInfoPage: FunctionComponent = () => {
                                 {fullName}
                             </CommonLabel>
                             <CommonInput
-                                isValid={fullNameError === '' || formData.fullName.length === 0}
+                                isValid={fullNameError === '' || formData && formData.fullName.length === 0}
                                 sx={{ width: '100%' }}
                                 color='primary'
                                 height='bg'
@@ -246,11 +248,13 @@ const BasicInfoPage: FunctionComponent = () => {
                                 name='fullName'
                                 placeholder={fullName}
                                 aria-label={fullName}
-                                value={formData.fullName}
+                                value={formData && formData.fullName}
                                 onChange={(e: ChangeEvent<HTMLInputElement>) => {
                                     setFormData((pervData) => {
-                                        const updatedData = { ...pervData, fullName: e.target.value };
-                                        return updatedData;
+                                        if (pervData) {
+                                            const updatedData = { ...pervData, fullName: e.target.value };
+                                            return updatedData;
+                                        }
                                     });
                                     fullNameChangeHandler(e);
                                 }}
@@ -271,12 +275,15 @@ const BasicInfoPage: FunctionComponent = () => {
                                 color='primary'
                                 title='country'
                                 name='country'
-                                value={formData.country}
+                                value={formData && formData.country}
                                 onChange={(e) => {
                                     setFormData((pervData) => {
-                                        const updatedData = { ...pervData, country: e.target.value };
-                                        return updatedData;
+                                        if (pervData) {
+                                            const updatedData = { ...pervData, country: e.target.value };
+                                            return updatedData;
+                                        }
                                     });
+
                                 }}>
                                 <option value="">
                                     None
@@ -295,7 +302,7 @@ const BasicInfoPage: FunctionComponent = () => {
                                 {address}
                             </CommonLabel>
                             <CommonInput
-                                isValid={addressError === '' || formData.address.length === 0}
+                                isValid={addressError === '' || formData && formData.address.length === 0}
                                 sx={{ width: '100%' }}
                                 color='primary'
                                 height='bg'
@@ -304,11 +311,13 @@ const BasicInfoPage: FunctionComponent = () => {
                                 name="address"
                                 placeholder={address}
                                 aria-label={address}
-                                value={formData.address}
+                                value={formData && formData.address}
                                 onChange={(e: ChangeEvent<HTMLInputElement>) => {
                                     setFormData((pervData) => {
-                                        const updatedData = { ...pervData, address: e.target.value };
-                                        return updatedData;
+                                        if (pervData) {
+                                            const updatedData = { ...pervData, address: e.target.value };
+                                            return updatedData;
+                                        }
                                     });
                                     addressChangeHandler(e);
                                 }}
@@ -322,7 +331,7 @@ const BasicInfoPage: FunctionComponent = () => {
                                 {info}
                             </CommonLabel>
                             <CommonTextArea
-                                isValid={infoError === '' || formData.info.length === 0}
+                                isValid={infoError === '' || formData && formData.info.length === 0}
                                 sx={{ width: '100%' }}
                                 color='primary'
                                 borderRaius='bg'
@@ -332,11 +341,13 @@ const BasicInfoPage: FunctionComponent = () => {
                                 name="info"
                                 placeholder={info}
                                 aria-label={info}
-                                value={formData.info}
+                                value={formData && formData.info}
                                 onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
                                     setFormData((pervData) => {
-                                        const updatedData = { ...pervData, info: e.target.value };
-                                        return updatedData;
+                                        if (pervData) {
+                                            const updatedData = { ...pervData, info: e.target.value };
+                                            return updatedData;
+                                        }
                                     });
                                     infoChangeHandler(e);
                                 }}

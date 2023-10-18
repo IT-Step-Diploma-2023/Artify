@@ -1,10 +1,13 @@
 import { Typography, MenuItem } from "@mui/material";
 import { t } from "i18next";
+import { colors } from "../../../assets/defaults/colors";
 
 
 /* #region styles */
 const userFullNameText = {
-    margin: '10px auto',
+    margin: '10px 0',
+    color: colors.violet,
+    padding: "6px 16px",
     fontWeight: '600',
     caret: 'transparent',
     cursor: 'default'
@@ -12,42 +15,41 @@ const userFullNameText = {
 /* #endregion */
 
 const UserDropdownMenuItems = ({
-    username,
-    handleClick
+    shownName,
+    handleClick,
 }: {
-    username: string,
-    handleClick: (path: string) => void
+    shownName: string,
+    handleClick: (path: string) => void,
 }
 ) => {
-    if (username !== "")
+    if (shownName !== "")
         return <>
             <Typography
-                textAlign="center"
-                style={userFullNameText}>{username}</Typography >
+                textAlign="left"
+                style={userFullNameText}>{shownName}</Typography >
             <MenuItem
-                key={'workPrefs'}
-                onClick={() => { handleClick('/portfolio') }}>
+                onClick={() => {
+                    localStorage.setItem("targetUserId", "-1");
+                    if (window.location.pathname === "/portfolio") window.location.reload();
+                    handleClick('/portfolio')
+                }}>
                 {t('headerComponent.dropdownMenu.workPrefs')}
             </MenuItem>
             <MenuItem divider
-                key={'settings'}
-                onClick={() => { handleClick('/settings-basicinfo') }}>
+                onClick={() => handleClick('/settings-basicinfo')}>
                 {t('headerComponent.dropdownMenu.settings')}
             </MenuItem>
             <MenuItem
-                key={'logout'}
-                onClick={() => { handleClick('/logout') }}>
+                onClick={() => handleClick('/logout')}>
                 {t('headerComponent.dropdownMenu.logоut')}
             </MenuItem>
         </>
     return <>
         <MenuItem divider
-            key={'login'}
             onClick={() => { handleClick('/login') }}>
             {t('headerComponent.dropdownMenu.login')}
         </MenuItem>
         <MenuItem
-            key={'register'}
             onClick={() => { handleClick('/select-register') }}>
             {t('headerComponent.dropdownMenu.register')}
         </MenuItem>

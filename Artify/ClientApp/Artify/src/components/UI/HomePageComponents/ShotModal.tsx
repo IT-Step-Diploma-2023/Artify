@@ -11,7 +11,7 @@ import { useNavigate } from "react-router";
 import ShotThumbnail from "./Shots";
 import { scrollTo } from "../../../utils/scrollTo";
 import { baseUrl } from "../../../assets/defaults/urls";
-import useStorage from "../../../hooks/useStorage";
+import useTargetUser from "../../../hooks/useTargetUser";
 
 
 /* #region styles */
@@ -235,14 +235,13 @@ const ViewShotModal = ({ t, openModal, closeModalHandler, openModalHandler, shot
 
     const navigate = useNavigate();
 
-    const { setTargetUserId, setTargetUser } = useStorage();
+    const { setTargetUserId } = useTargetUser();
 
     const avatarClickHandler = () => {
         if (shot === undefined) return;
         setTargetUserId(shot.authorId);
         navigate("portfolio");
     }
-
 
     /* #region localisation const */
 
@@ -279,7 +278,7 @@ const ViewShotModal = ({ t, openModal, closeModalHandler, openModalHandler, shot
                                     baseUrl + shot.authorLogoImage :
                                     "images/default_profile.png"
                             }
-                            onClick={ avatarClickHandler } />
+                            onClick={avatarClickHandler} />
                         <Typography sx={headerText}>{shot.title}</Typography>
                         <CustomButton height="md"
                             sx={BtnStyles.darkVioletBtn}

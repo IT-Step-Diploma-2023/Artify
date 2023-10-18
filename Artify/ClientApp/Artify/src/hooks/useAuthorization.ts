@@ -50,6 +50,7 @@ function useAuthorization() {
         setToken(token);
         return isUserLogged();
     }
+
     const logOut = () => {
         localStorage.clear();
         dispatch(authActions.logout());
@@ -66,9 +67,6 @@ function useAuthorization() {
 
     return { authenticateUser, registerUser, logOut }
 }
-
-
-
 export default useAuthorization;
 
 
@@ -81,7 +79,6 @@ export const isUserLogged = (): string => {
     return tokenData['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
 }
 
-
 export const loggedInUserId = (): number => {
     const token = getAuthToken();
     if (token === null || token === 'EXPIRED') return -1;
@@ -89,7 +86,6 @@ export const loggedInUserId = (): number => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument
     return parseInt(tokenData['Id']);
 }
-
 
 export const getAuthToken = () => {
     const token = localStorage.getItem('token');

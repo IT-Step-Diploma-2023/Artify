@@ -6,39 +6,26 @@ import { colors } from "../../../assets/defaults/colors";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from 'react-router-dom';
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-// import { t } from "i18next";
-import { getSpecifiedUserData, getUserData } from "../../../hooks/usePortfolio";
+import { getTargetUserData } from "../../../hooks/usePortfolio";
 import { IPortfolioUserData } from "../../../assets/interfaces/usersInterfaces";
 import { baseUrl } from "../../../assets/defaults/urls";
-import useStorage from "../../../hooks/useStorage";
 import { isUserLogged } from "../../../hooks/useAuthorization";
 
 
-const ProfileMainImage = () => {
+const ProfileMainImage = ({userId}: {userId: number}) => {
+
+    console.log(userId);
 
     const { t } = useTranslation();
     const navigate = useNavigate();
 
     const [curentUser, setCurrentUser] = useState<IPortfolioUserData>();
 
-    const { getTargetUserId } = useStorage();
-
     useEffect(() => {
-        const id = getTargetUserId();
-        if (id != -1) {
-            void getSpecifiedUserData(
-                getTargetUserId(),
-                setCurrentUser as Dispatch<SetStateAction<IPortfolioUserData>>
-            );
-            return;
-        }
-        if (isUserLogged()) {
-            void getUserData(setCurrentUser as Dispatch<SetStateAction<IPortfolioUserData>>);
-            return;
-        }
-    }, [])
+        void getTargetUserData(userId, setCurrentUser as Dispatch<SetStateAction<IPortfolioUserData>>)
+    }, [userId])
 
-    return <>
+     return <>
         <Box sx={{ margin: '0 auto 40px', width: '500px', height: '150px', display: 'flex', justifyContent: 'left' }}>
             <Box sx={{ paddingLeft: '40px' }}>
                 <Avatar
