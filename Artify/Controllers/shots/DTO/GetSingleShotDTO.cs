@@ -20,7 +20,7 @@ namespace Artify.Controllers.shots.DTO
         public bool isDraft { get; set; }
         public int blocksGap { get; set; }
         public string cover { get; set; } = string.Empty;
-        public bool appreciatedByCurrentUser { get; set; }
+        public bool appreciatedByCurrentUser { get; set; } = false;
         public List<string> images { get; set; } = new List<string>();
         public List<string> tags { get; set; } = new List<string>();
         public List<Appreciation> appreciations { get; set; } = new List<Appreciation>();
@@ -48,16 +48,18 @@ namespace Artify.Controllers.shots.DTO
             foreach (var appreciation in shot.Appreciations)
             {
                 appreciations.Add(appreciation);
+                if (currentuserId != null && appreciation.UserId == currentuserId) 
+                    appreciatedByCurrentUser = true;
             }
             foreach (var tag in shot.Tags)
             {
                 tags.Add(tag.Name);
             }
-            if (currentuserId != null)
-                appreciatedByCurrentUser =
-                    shot.Appreciations
-                    .Where(appr => appr.UserId == currentuserId)
-                    .FirstOrDefault() != null;
+            //if (currentuserId != null)
+            //    appreciatedByCurrentUser =
+            //        shot.Appreciations
+            //        .Where(appr => appr.UserId == currentuserId)
+            //        .FirstOrDefault() != null;
         }
     }
 }
