@@ -20,10 +20,11 @@ namespace Artify.Controllers.shots.DTO
         public bool isDraft { get; set; }
         public int blocksGap { get; set; }
         public string cover { get; set; } = string.Empty;
+        public bool appreciatedByCurrentUser { get; set; }
         public List<string> images { get; set; } = new List<string>();
         public List<string> tags { get; set; } = new List<string>();
         public List<Appreciation> appreciations { get; set; } = new List<Appreciation>();
-        public GetSingleShotDTO(Shot shot)
+        public GetSingleShotDTO(Shot shot, int? currentuserId)
         {
             id = shot.Id;
             title = shot.Title;
@@ -52,6 +53,11 @@ namespace Artify.Controllers.shots.DTO
             {
                 tags.Add(tag.Name);
             }
+            if (currentuserId != null)
+                appreciatedByCurrentUser =
+                    shot.Appreciations
+                    .Where(appr => appr.UserId == currentuserId)
+                    .FirstOrDefault() != null;
         }
     }
 }

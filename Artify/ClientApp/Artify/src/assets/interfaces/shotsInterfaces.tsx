@@ -45,10 +45,32 @@ export interface IShotDetails {
     images: string[],
     appreciations: IAppreciation[],
     tags: string[]
+    appreciatedByCurrentUser?: boolean
 }
 
+export interface IShotAppreciations {
+    shotId: number,
+    count: number
+}
+
+export interface IVisibilityOption {
+    index: number,
+    option: string
+}
+
+export interface IUploadedData {
+    title?: string,
+    description?: string,
+    tags?: string[],
+    isPublic?: boolean,
+    isDraft?: boolean,
+    price?: number,
+    blocksGap?: number,
+    cover?: string
+}
 
 export interface ShotsFilter {
     filter: string,
     parameter: string
 }
+

@@ -1,28 +1,48 @@
-//on dev
+
+/* #region outdated version */
+
+//on dev NOT USED
 // const REACT_APP_BASE_URL= "";
-
 //on dev 
-const REACT_APP_BASE_URL= "https://localhost:3000/";
-
-
+// const REACT_APP_BASE_URL= "https://localhost:3000/";
 //on build
 // const REACT_APP_BASE_URL= "https://my-designo.azurewebsites.net/"
 
-export const baseUrl = REACT_APP_BASE_URL;
+// export const corsMod = "cors"; // dev
+// export const corsMod = "no-cors"; // build
+// export const corsMod = "same-origin"; // NOT USED
 
-export const urls = {
-    authentication: `${REACT_APP_BASE_URL}api/Authentication/Authentication`,
-    registration: `${REACT_APP_BASE_URL}api/Authentication/Registration`,
-    getCurrentUserData: `${REACT_APP_BASE_URL}api/UsersApi/GetCurrentUserData`,
-    getTargetUserData: `${REACT_APP_BASE_URL}api/UsersApi/GetTargetUserData`,
-    getUserSocialProfiles: `${REACT_APP_BASE_URL}api/UsersApi/GetUserSocialProfiles`,
-    uploadShot: `${REACT_APP_BASE_URL}api/ShotsApi/UploadShot`,
-    getShot: `${REACT_APP_BASE_URL}api/ShotsApi/GetShot`,
-    getShots: `${REACT_APP_BASE_URL}api/ShotsApi/GetShots`,
-    setLike: `${REACT_APP_BASE_URL}api/ShotsApi/likeShot`,
-    setMark: `${REACT_APP_BASE_URL}api/ShotsApi/markShot`,
+/* #endregion */
+
+// eslint-disable-next-line prefer-const
+let context = 0; // 0 - dev, 1 - build
+
+const setBaseUrl = () => {
+    if (context === 0) return "https://localhost:3000/";
+    return "https://my-designo.azurewebsites.net/";
 }
 
-export const corsMod = "cors";
-// export const corsMod = "no-cors";
-// export const corsMod = "same-origin";
+export const baseUrl: string = setBaseUrl();
+
+export const urls = {
+    authentication: `${baseUrl}api/Authentication/Authentication`,
+    registration: `${baseUrl}api/Authentication/Registration`,
+    getCurrentUserData: `${baseUrl}api/UsersApi/GetCurrentUserData`,
+    getTargetUserData: `${baseUrl}api/UsersApi/GetTargetUserData`,
+    getUserSocialProfiles: `${baseUrl}api/UsersApi/GetUserSocialProfiles`,
+    uploadShot: `${baseUrl}api/ShotsApi/UploadShot`,
+    getShot: `${baseUrl}api/ShotsApi/GetShot`,
+    getShots: `${baseUrl}api/ShotsApi/GetShots`,
+    appreciateShot: `${baseUrl}api/ShotsApi/AppreciateShot`,
+    isAppreciatedByCurrnetUser: `${baseUrl}api/ShotsApi/IsAppreciatedByCurrnetUser`,
+    setMark: `${baseUrl}api/ShotsApi/markShot`,
+}
+
+
+const setCors = () => {
+    if (context === 0) return "cors";
+    return "no-cors";
+}
+
+export const corsMod = setCors();
+

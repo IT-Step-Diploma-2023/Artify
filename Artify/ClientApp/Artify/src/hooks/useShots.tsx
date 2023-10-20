@@ -1,9 +1,11 @@
 import { Dispatch, SetStateAction } from "react";
 import { corsMod, urls } from "../assets/defaults/urls";
-import { IShot, IShotDetails, ShotsFilter } from "../assets/interfaces/shotsInterfaces";
+import { IShot, IShotAppreciations, IShotDetails, IUploadedData, ShotsFilter } from "../assets/interfaces/shotsInterfaces";
 import { getAuthToken } from "./useAuthorization";
 
-const token = getAuthToken() ?? '';
+const token = () => {
+    return getAuthToken() ?? ""
+};
 
 export const getShotsData = async (
     setItem: Dispatch<SetStateAction<IShot[]>>, filters?: ShotsFilter[]
@@ -23,7 +25,7 @@ export const getShotsData = async (
             method: "get",
             mode: corsMod,
             headers: {
-                "Authorization": "Bearer " + token,
+                "Authorization": "Bearer " + token(),
             },
             body: JSON.stringify(outputJson),
         });
@@ -33,7 +35,7 @@ export const getShotsData = async (
             method: "get",
             mode: corsMod,
             headers: {
-                "Authorization": "Bearer " + token,
+                "Authorization": "Bearer " + token(),
             }
         });
     }
@@ -50,7 +52,7 @@ export const getPortfolioShotsData = async (
         method: "get",
         mode: corsMod,
         headers: {
-            "Authorization": "Bearer " + token,
+            "Authorization": "Bearer " + token(),
         }
     });
     if (response.status !== 200) return;
@@ -63,31 +65,79 @@ export const getShotData = async (
     shotId: number,
     setItem: Dispatch<SetStateAction<IShotDetails | undefined>>
 ): Promise<void> => {
+    console.log(shotId);
     const response = await fetch(`${urls.getShot}?id=${shotId}`, {
         method: "get",
         mode: corsMod,
         headers: {
-            "Authorization": "Bearer " + token,
+            "Authorization": "Bearer " + token(),
         }
     });
     if (response.status !== 200) return;
     const responseJson: IShotDetails = await response.json();
+    console.log(responseJson);
     setItem(responseJson);
 }
 
-export const setLike = async (
+export const appreciateShot = async (
     shotId: number,
-    userId: number,
-    liked: 0 | 1
+    appreciated: boolean,
+    setItem: Dispatch<SetStateAction<boolean>>
 ): Promise<void> => {
-    const response = await fetch(`${urls.setLike}?shotId=${shotId}&userId=${userId}&liked=${liked}`, {
+    const response = await fetch(urls.appreciateShot, {
+        method: "POST",
+        body: JSON.stringify({
+            shotId,
+            appreciated
+        }),
         headers: {
-            "Authorization": "Bearer " + token,
-        }
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token(),
+        },
     });
     if (response.status !== 200) return;
+    const responseJson: IShotAppreciations = await response.json();
+    console.log(responseJson);
+    setItem(appreciated);
 }
 
+
+export const isAppreciated = async (
+    shotId: number
+):Promise<void> => {
+    const response = await fetch(`${urls.isAppreciatedByCurrnetUser}?shotId=${shotId}`, {
+        method: "GET",
+        headers: {
+            "Authorization": "Bearer " + token(),
+        },
+    });
+    if (response.status !== 200) return;
+    const result = await response.text();
+    console.log(result);
+    return;
+}
+
+
+
+
+    export const postData = async (
+    uploadedData: IUploadedData,
+    selectedFiles: File[]): Promise<boolean> => {
+    const formData = new FormData;
+        formData.append("value", JSON.stringify(uploadedData));
+    selectedFiles.forEach((file) => formData.append("images", file));
+
+        const response = await fetch(urls.uploadShot, {
+            method: "POST",
+        body: formData,
+        headers: {
+            "Authorization": "Bearer " + token(),
+        }
+    });
+        if (response.status !== 200) return false;
+        return true;
+    // navigate("/");
+};
 
 
 

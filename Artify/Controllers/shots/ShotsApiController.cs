@@ -249,7 +249,7 @@ namespace Artify.Controllers.shots
         /// <returns>Shots list</returns>
         [HttpGet]
         [Route("api/[controller]/[action]")]
-        public async Task<IActionResult> GetShots(int page = 0, string filters ="", int pageSize = 20)
+        public async Task<IActionResult> GetShots(int page = 0, string filters = "", int pageSize = 20)
         {
             if (pageSize > 50)
                 return BadRequest("Page size cannot be more than 50");
@@ -322,7 +322,7 @@ namespace Artify.Controllers.shots
                 }
 
             }
-            if(finalFilter != null)
+            if (finalFilter != null)
                 return finalFilter;
 
 
@@ -340,22 +340,39 @@ namespace Artify.Controllers.shots
         [Route("api/[controller]/[action]")]
         public IActionResult GetShot(int id)
         {
+            //
+            JwtUser? jwtUser = UsersService.GetCurrentUser(this.HttpContext);
+            User? user = null;
+
+            if (jwtUser != null)
+            {
+                user = _usersRepository.Query(user => user.Id == jwtUser.Id).FirstOrDefault();
+            }               
+            //
             var shot = _shotsRepository.Query(shot => shot.Id == id).FirstOrDefault();
             if (shot == null)
                 return NotFound("Shot was not found");
             if (!shot.IsPublic)
             {
-                JwtUser? jwtUser = UsersService.GetCurrentUser(this.HttpContext);
+                //JwtUser? jwtUser = UsersService.GetCurrentUser(this.HttpContext);
                 if (jwtUser == null || jwtUser.Id != shot.UserId)
                     return Forbid();
             }
 
-            GetSingleShotDTO returnModel = new GetSingleShotDTO(shot);  
+            GetSingleShotDTO returnModel = new GetSingleShotDTO(shot, user?.Id);
+
             return Ok(returnModel);
         }
 
+        /// <summary>
+        /// Make input shot appreciation true/false for current user return array of appresiations of input shot
+        /// If shot is not public and user requesting it is not logged in, return Forbid
+        /// </summary>
+        /// <param name="input" >Shot that have to be appreciated</param>
+        /// <returns>Array of appresiations of input shot or Forbidden</returns>
         [HttpPost]
         [Route("api/[controller]/[action]")]
+        [Authorize]
         public IActionResult AppreciateShot(AppreciateShotInput input)
         {
             JwtUser? jwtUser = UsersService.GetCurrentUser(this.HttpContext);
@@ -373,12 +390,12 @@ namespace Artify.Controllers.shots
             if (shot == null)
                 return NotFound("Invalid id");
 
-            if (!shot.IsPublic && shot.UserId != jwtUser.Id) 
+            if (!shot.IsPublic && shot.UserId != jwtUser.Id)
                 return Forbid("The shot is private");
-            
+
             var appreciation = shot.Appreciations.FirstOrDefault(user => user.Id == jwtUser.Id);
 
-            if(appreciation == null && input.like)
+            if (appreciation == null && input.appreciated)
             {
                 Appreciation newAppreciation = new Appreciation()
                 {
@@ -388,7 +405,7 @@ namespace Artify.Controllers.shots
                 shot.Appreciations.Add(newAppreciation);
                 _shotsRepository.Save();
             }
-            else if (appreciation != null && !input.like)
+            else if (appreciation != null && !input.appreciated)
             {
                 _appreciationsRepository.Remove(appreciation.Id);
                 _appreciationsRepository.Save();
@@ -400,8 +417,15 @@ namespace Artify.Controllers.shots
         public class AppreciateShotInput
         {
             public int shotId { get; set; }
-            public bool like { get; set; } = true;
+            public bool appreciated { get; set; } = true;
         }
+
+        /// <summary>
+        /// Return current shot id and it appreciations count 
+        /// If shot is not found, return NotFound
+        /// </summary>
+        /// <param name="shotId" >Current shot id</param>
+        /// <returns>Current shot id and it appreciations count or NotFound</returns>
         [HttpGet]
         [Route("api/[controller]/[action]")]
         public IActionResult GetAppreciations(int shotId)
@@ -411,9 +435,35 @@ namespace Artify.Controllers.shots
 
             return Ok(new
             {
-                count = shot.Appreciations.Count(),
                 shoutId = shotId,
+                count = shot.Appreciations.Count(),
             });
+        }
+
+        /// <summary>
+        /// Return true if current user appreciate current shot or false if not
+        /// </summary>
+        /// <param name="shotId" >Current shot id</param>
+        /// <returns>True if current user appreciate current shot or false if not or NotFound</returns>
+        [HttpGet]
+        [Route("api/[controller]/[action]")]
+        public IActionResult IsAppreciatedByCurrnetUser(int shotId)
+        {
+            JwtUser? jwtUser = UsersService.GetCurrentUser(this.HttpContext);
+
+            if (jwtUser == null)
+                return Unauthorized();
+
+            var user = _usersRepository.Query(user => user.Id == jwtUser.Id).FirstOrDefault();
+
+            if (user == null)
+                return Unauthorized();
+
+            var appreciation = _appreciationsRepository.Query(
+                appreciation => appreciation.ShotId == shotId &&
+                appreciation.UserId == user.Id).FirstOrDefault();
+
+            return Ok(appreciation != null);
         }
     }
 }

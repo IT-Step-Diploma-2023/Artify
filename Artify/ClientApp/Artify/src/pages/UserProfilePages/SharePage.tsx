@@ -15,28 +15,29 @@ import * as pageSyles from "./SharePageStyles";
 import * as BtnStyles from "../../components/UI/CustomButtonStyles";
 import CustomButton from "../../components/UI/CustomButton";
 import { getAuthToken } from "../../hooks/useAuthorization";
-import addDescriptionModal from "../../components/UI/SharePageComponents/AddDescriptionModal";
 import PublicateModal from "../../components/UI/SharePageComponents/PublicateModal";
 import { existedTags } from "../../assets/data/tags";
 import { useNavigate } from "react-router";
 import { urls } from "../../assets/defaults/urls";
 import AddDescriptionModal from "../../components/UI/SharePageComponents/AddDescriptionModal";
+import { IUploadedData, IVisibilityOption } from "../../assets/interfaces/shotsInterfaces";
+import { postData } from "../../hooks/useShots";
 
-interface IVisibilityOption {
-  index: number,
-  option: string
-}
+// interface IVisibilityOption {
+//   index: number,
+//   option: string
+// }
 
-interface IUploadedData {
-  title?: string,
-  description?: string,
-  tags?: string[],
-  isPublic?: boolean,
-  isDraft?: boolean,
-  price?: number,
-  blocksGap?: number,
-  cover?: string
-}
+// interface IUploadedData {
+//   title?: string,
+//   description?: string,
+//   tags?: string[],
+//   isPublic?: boolean,
+//   isDraft?: boolean,
+//   price?: number,
+//   blocksGap?: number,
+//   cover?: string
+// }
 
 const SharePage: FunctionComponent = () => {
 
@@ -247,7 +248,7 @@ const SharePage: FunctionComponent = () => {
   /* #endregion */
 
   /* #region post data */
-  const postData = async (): Promise<void> => {
+  const prepData = async (): Promise<void> => {
     const uploadedData: IUploadedData = {};
     uploadedData.title = title;
     uploadedData.description = description;
@@ -257,21 +258,10 @@ const SharePage: FunctionComponent = () => {
     uploadedData.price = price;
     uploadedData.blocksGap = gap;
     cover ? uploadedData.cover = cover.name : "";
-    console.log(uploadedData);
-    const formData = new FormData;
-    formData.append("value", JSON.stringify(uploadedData));
-    selectedFiles.forEach((file) => formData.append("images", file));
-
-    const response = await fetch(urls.uploadShot, {
-      method: "POST",
-      body: formData,
-      headers: {
-        "Authorization": "Bearer " + token,
-      }
-    });
-    if (response.status !== 200) return;
+    const result = await postData(uploadedData, selectedFiles);
+    if(!result) alert("Error while sharing!");
     navigate("/");
-  }
+  };
 
   /* #endregion */
 
@@ -701,7 +691,7 @@ const SharePage: FunctionComponent = () => {
           <CustomButton height="bg"
             sx={BtnStyles.greyBtn}
             style={{ width: "100%" }}
-            onClick={() => postData()}>
+            onClick={() => prepData()}>
             {saveAsDraft}
           </CustomButton>
           <CustomButton height="bg"
