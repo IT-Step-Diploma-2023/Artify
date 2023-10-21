@@ -1,0 +1,20 @@
+POST api/ShotsApi/AppreciateShot
+Description
+-----------
+Authorization: YES
+Set/unset Appreciation to current Shot from logged in User
+
+Request
+-----------
+{
+    "shotId":   //int
+    "appreciated":    //bool
+}
+
+Response
+-----------
+Status: 200 OK
+{
+    "shotId":   //int
+    "appreciated":    //bool
+}

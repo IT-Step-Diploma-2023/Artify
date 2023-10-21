@@ -1,0 +1,30 @@
+POST api/ShotsApi/MarkShot
+Description
+-----------
+Authorization: YES
+Put shot to exact Album owned by logged in User
+
+Request
+-----------
+{
+    "shotId":   //int
+    "marked":    //bool
+}
+
+Response
+-----------
+Status: 200 OK
+{
+    "id":       //int
+    "shotId":   //int
+    "albumId":  //int
+    "marked":    //bool
+        album: {
+            "id":
+            "userId":
+            "title":
+            "shots": [
+                // array of GetShotDTO where shot.album.id = id
+            ]
+        }
+}

@@ -1,0 +1,23 @@
+GET api/Albums/GetAlbums
+Description
+-----------
+Authorization: YES
+Get albums of logged in User
+
+Request
+-----------
+userId from tken
+
+Response
+-----------
+Status: 200 OK
+[
+    album: {
+        "id":
+        "userId":
+        "title":
+        "shots": [
+            // array of GetShotDTO where shot.album.id = id
+        ]
+    }   
+]

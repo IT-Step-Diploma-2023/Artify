@@ -1,0 +1,15 @@
+GET /ShotsApi/GetAppreciations?userId=[userId] // userId of appreciation`s owner, if current user is not owner
+Description
+-----------
+Authorization: NO
+For use in User Profile PAGE
+
+Response
+-----------
+Status: 200 OK
+"appreciations": [                           // Appreciation.UserId == UserId
+    "shot": {
+        "shotId":,
+        "coverImage":
+    }
+]
