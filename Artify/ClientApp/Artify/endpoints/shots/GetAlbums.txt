@@ -1,23 +1,30 @@
-GET api/Albums/GetAlbums
+GET api/ShotsApi/GetAlbums?userId=[targetUserId]
+
 Description
 -----------
-Authorization: YES
-Get albums of logged in User
+Authorization: NO
+Fore use at adding shot to album or in profile page
+Retrive userId: targetUser from url or currentUser from token data
 
 Request
 -----------
-userId from tken
+userId from url or token data
 
-Response
+Respose
 -----------
 Status: 200 OK
+
+Payload
+-----------
 [
-    album: {
-        "id":
-        "userId":
-        "title":
-        "shots": [
-            // array of GetShotDTO where shot.album.id = id
-        ]
-    }   
+  "album": {
+    "id":
+    "userId":
+    "title":
+    "createdDateTime":
+    "userFullName":
+    "coverImages": [ // array of coverImages of first tree shots in current album
+      "coverImage": // path to coverImage file
+    ]
+  }
 ]
