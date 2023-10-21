@@ -1,0 +1,35 @@
+POST api/ShotsApi/CreateAlbum
+
+Description
+-----------
+Authorization: YES
+Create new album
+
+Request
+-----------
+userId from token data
+album: {
+    "title":
+    "shotsId": [
+      // array of added shots
+    ]
+}
+
+Response
+-----------
+Status: 200 OK
+
+Payload
+-----------
+[
+  album: {
+    "id":
+    "userId":
+    "title":
+    "createdDateTime":
+    "userFullName":
+    "coverImages": [ // array of coverImages of first tree shots in current album
+      "coverImage": // path to coverImage file
+    ]
+  }
+]
