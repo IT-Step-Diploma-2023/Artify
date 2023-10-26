@@ -3,6 +3,8 @@ using Artify.Models.DbModels.DbModels.Artworks;
 using Artify.Models.DbModels.DbModels.Artworks.Attributes;
 using Image = Artify.Models.DbModels.DbModels.Artworks.Image;
 
+
+
 namespace Artify.Controllers.shots.DTO
 {
     public class GetSingleShotDTO
@@ -21,9 +23,10 @@ namespace Artify.Controllers.shots.DTO
         public int blocksGap { get; set; }
         public string cover { get; set; } = string.Empty;
         public bool appreciatedByCurrentUser { get; set; } = false;
-        public List<string> images { get; set; } = new List<string>();
-        public List<string> tags { get; set; } = new List<string>();
-        public List<Appreciation> appreciations { get; set; } = new List<Appreciation>();
+        public List<string> images { get; set; } = new ();
+        public List<string> tags { get; set; } = new ();
+        public List<AppreciationDTO> appreciations { get; set; } = new ();
+
         public GetSingleShotDTO(Shot shot, int? currentuserId)
         {
             id = shot.Id;
@@ -47,7 +50,9 @@ namespace Artify.Controllers.shots.DTO
             blocksGap = shot.BlocksGap;
             foreach (var appreciation in shot.Appreciations)
             {
-                appreciations.Add(appreciation);
+                var appreciationDTO = new AppreciationDTO(appreciation);
+
+                appreciations.Add(appreciationDTO);
                 if (currentuserId != null && appreciation.UserId == currentuserId) 
                     appreciatedByCurrentUser = true;
             }
@@ -55,11 +60,6 @@ namespace Artify.Controllers.shots.DTO
             {
                 tags.Add(tag.Name);
             }
-            //if (currentuserId != null)
-            //    appreciatedByCurrentUser =
-            //        shot.Appreciations
-            //        .Where(appr => appr.UserId == currentuserId)
-            //        .FirstOrDefault() != null;
         }
     }
 }
