@@ -10,6 +10,7 @@ function useCurrentUser() {
 
     const decodeData = (data: IBasicUserData): IBasicUserFormData => {
         return {
+            id: data.id,
             username: data.username,
             fullName: data.fullName ?? '',
             country: getCountry(data.location) ?? '',
@@ -21,6 +22,7 @@ function useCurrentUser() {
 
     const encodeData = (data: IBasicUserFormData, image: Blob): FormData => {
         const updatedFormData = new FormData;
+        updatedFormData.append("id", data.id.toString());
         updatedFormData.append('username', data.username);
         updatedFormData.append('fullName', data.fullName);
         updatedFormData.append('location', setLocation(data.country, data.address));

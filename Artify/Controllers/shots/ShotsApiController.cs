@@ -263,9 +263,14 @@ namespace Artify.Controllers.shots
 
             //var a = applyFilters(filters);
 
+            JwtUser? jwtUser = UsersService.GetCurrentUser(this.HttpContext);
+            int? currentUserId = null;
+            if (jwtUser != null)
+                currentUserId = jwtUser.Id;
+
             await _shotsRepository.Query(applyFilters(filters)).OrderByDescending(shot => shot.Id).Skip(page * pageSize).Take(pageSize).ForEachAsync(shot =>
             {
-                GetShotDTO getShotDTO = new(shot);
+                GetShotDTO getShotDTO = new(shot, currentUserId);
                 shot.Images.ForEach(image =>
                 {
                     getShotDTO.thumbnailsPaths.Add(UploadsController.PrepareImagePath(image.ThumbnailFullPath));
@@ -347,7 +352,7 @@ namespace Artify.Controllers.shots
             if (jwtUser != null)
             {
                 user = _usersRepository.Query(user => user.Id == jwtUser.Id).FirstOrDefault();
-            }               
+            }
             //
             var shot = _shotsRepository.Query(shot => shot.Id == id).FirstOrDefault();
             if (shot == null)
@@ -393,9 +398,10 @@ namespace Artify.Controllers.shots
             if (!shot.IsPublic && shot.UserId != jwtUser.Id)
                 return Forbid("The shot is private");
 
-            var appreciation = shot.Appreciations.FirstOrDefault(user => user.Id == jwtUser.Id);
+            var appreciation = shot.Appreciations
+                .FirstOrDefault(appreciation => appreciation.UserId == jwtUser.Id);
 
-            if (appreciation == null && input.appreciated)
+            if (appreciation == null)
             {
                 Appreciation newAppreciation = new Appreciation()
                 {
@@ -405,7 +411,7 @@ namespace Artify.Controllers.shots
                 shot.Appreciations.Add(newAppreciation);
                 _shotsRepository.Save();
             }
-            else if (appreciation != null && !input.appreciated)
+            else
             {
                 _appreciationsRepository.Remove(appreciation.Id);
                 _appreciationsRepository.Save();

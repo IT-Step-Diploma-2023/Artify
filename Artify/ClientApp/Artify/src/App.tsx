@@ -122,7 +122,6 @@ function App() {
     { path: 'google-register', element: <GoogleRegisterPage /> },
     { path: 'email-register', element: <EmailRegisterPage /> },
 
-
   ]);
 
   return (

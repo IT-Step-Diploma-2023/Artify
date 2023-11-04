@@ -1,4 +1,5 @@
 export interface IBasicUserData {
+    id: number,
     username: string,
     fullName: string,
     location: string,
@@ -7,6 +8,7 @@ export interface IBasicUserData {
 }
 
 export interface IBasicUserFormData {
+    id: number,
     username: string,
     fullName: string,
     country: string,

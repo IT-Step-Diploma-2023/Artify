@@ -1,13 +1,19 @@
 import { Outlet } from 'react-router-dom';
 import MainNavigation from '../../components/Layouts/Navigation/MainNavigation';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useState } from 'react';
 import Footer from '../../components/Layouts/FooterComponent/Footer';
 import { Box } from '@mui/material';
+import UserContext from '../../utils/UserContext';
 
 const RootLayout: FunctionComponent = () => {
+
+  const [isUserLogged, setUserIsLogged] = useState<boolean>(false);
   // const navigation = useNavigation();
   return (
     <>
+    <UserContext.Provider value = {{
+      isUserLogged, setUserIsLogged
+    }}>
       <MainNavigation />
       <main>
         <Box sx={{
@@ -29,6 +35,7 @@ const RootLayout: FunctionComponent = () => {
         </Box>
       </main>
       <Footer pos='docked' />
+    </UserContext.Provider>
 
     </>
   );

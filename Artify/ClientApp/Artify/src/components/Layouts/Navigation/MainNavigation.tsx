@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { AppBar, Toolbar, CssBaseline, Typography, styled, InputBase, Box, MenuItem, Avatar, IconButton, Menu, Tooltip, Divider } from '@mui/material';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { FunctionComponent } from 'react';
-import { isUserLogged  } from "../../../hooks/useAuthorization";
+import { isUserLogged } from "../../../hooks/useAuthorization";
 import { useSelector } from "react-redux";
 import { useTranslation } from 'react-i18next';
 import Logo from '../../UI/Logo';
@@ -36,10 +36,13 @@ interface IAuth {
   }
 }
 
+
 const Navbar: FunctionComponent = () => {
   //Cheking in local storage
-  let username = isUserLogged();
+
+    let username = isUserLogged();
   const authStore = useSelector<IAuth, any>(state => state.auth);
+
   if (username === "" && authStore.isAuthenticated === true) {
     username = authStore.username;
   }

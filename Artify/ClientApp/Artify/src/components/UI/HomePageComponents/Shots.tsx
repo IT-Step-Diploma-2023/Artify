@@ -2,13 +2,16 @@ import { Avatar, Box, Checkbox, ImageListItem, Typography } from "@mui/material"
 import { IShot } from "../../../assets/interfaces/shotsInterfaces";
 import { FavoriteBorder, Favorite } from "@mui/icons-material";
 import { baseUrl } from "../../../assets/defaults/urls";
+import { appreciateShot } from "../../../hooks/useShots";
 
 export const ShotThumbnail = ({
     shot,
-    openModalHandler
+    openModalHandler,
+    isUserLoggedIn
 }: {
     shot: IShot,
-    openModalHandler: ((shot: IShot) => void)
+    openModalHandler: ((shot: IShot) => void),
+    isUserLoggedIn: boolean
 }) => {
     return <ImageListItem>
         <img
@@ -28,9 +31,12 @@ export const ShotThumbnail = ({
             <Typography sx={{ float: 'left', fontSize: '0.875rem', fontWeight: 700, padding: '0.4375rem 0 0 0.4375rem' }}>{shot.userFullName}</Typography>
             <Typography sx={{ float: 'right', fontSize: '0.875rem', fontWeight: 400, color: '#9E9AA2', padding: '0.4375rem 0 0 0.4375rem' }}>{shot.appreciationsCount}</Typography>
             <Box>
-                <Checkbox defaultChecked={shot.isLiked} icon={<FavoriteBorder sx={{ color: '#9E9AA2', width: '1rem' }} />} checkedIcon={<Favorite sx={{ color: '#D65353', width: '1rem' }} />}
+                <Checkbox checked={shot.appreciatedByCurrentUser} icon={<FavoriteBorder sx={{ color: '#9E9AA2', width: '1rem' }} />} checkedIcon={<Favorite sx={{ color: '#D65353', width: '1rem' }} />}
                     sx={{ width: '18px', height: '18px', float: 'right', marginTop: '0.4375rem' }}
-                    onChange={() => console.log(shot.id)} />
+                    onChange={() => {
+                        if (isUserLoggedIn)
+                            void appreciateShot(shot);
+                    }} />
             </Box>
         </Box>
     </ImageListItem>
