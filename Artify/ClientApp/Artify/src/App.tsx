@@ -4,6 +4,9 @@ import store from './store/index';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@mui/material';
 import theme from './assets/defaults/theme';
+import { useState } from 'react';
+
+
 // pages
 import RootLayout from './pages/HelperPages/RootLayout';
 import ErrorPage from './pages/HelperPages/ErrorPage';
@@ -50,10 +53,17 @@ import AboutUsUiUxPage from './pages/UserHelpPages/AboutUsUiUxPage';
 import AboutUsWebDesignersPage from './pages/UserHelpPages/AboutUsWebDesignersPage';
 import AboutUsPhotographsPage from './pages/UserHelpPages/AboutUsPhotographsPage';
 import MediaKitPage from './pages/UserHelpPages/MediaKitPage';
-import TestingPage from "./pages/TestingPage";
+import { isUserLogged } from './hooks/useAuthorization';
+import AppContext from './utils/AppContext';
+import TestingPage from './pages/TestingPage';
+import { useTranslation } from 'react-i18next';
 
 
 function App() {
+
+  const [signinState, setSigninState] = useState<boolean>(() => isUserLogged() !== "");
+  const { t } = useTranslation();
+  const translation = t;
   const router = createBrowserRouter([
     {
       path: '/',
@@ -62,7 +72,6 @@ function App() {
       children: [
         { index: true, element: <HomePage /> },
         { path: 'fetchdata', element: <ExampleFetch /> },
-        { path: 'logout', element: <LogoutPage /> },
         // SETTINGS
         { path: 'settings-basicinfo', element: <BasicInfoPage /> },
         { path: 'settings-profinfo', element: <ProfInfoPage /> },
@@ -81,29 +90,29 @@ function App() {
         // MAIN MENU / FOOTER MENU
         { path: 'hire', element: <HirePage /> },
         { path: 'help-center', element: <HelpCenterPage /> }, // renamed HelpPage
-        { path: 'how-add-work', element: <HowAddWorkPage /> }, 
-        { path: 'how-buy-work', element: <HowBuyWorkPage /> }, 
-        { path: 'how-hire-designer', element: <HowHireDesignerPage /> }, 
-        { path: 'about-us', element: <AboutUsPage /> }, 
-        { path: 'about-us-brands', element: <AboutUsBrandsPage /> }, 
-        { path: 'about-us-illustrators', element: <AboutUsIllustratorsPage /> }, 
-        { path: 'about-us-photographs', element: <AboutUsPhotographsPage /> }, 
-        { path: 'about-us-designers', element: <AboutUsProductDesignersPage /> }, 
-        { path: 'about-us-uiux', element: <AboutUsUiUxPage /> }, 
-        { path: 'about-us-web', element: <AboutUsWebDesignersPage /> }, 
-        { path: 'media-kit', element: <MediaKitPage /> },  
+        { path: 'how-add-work', element: <HowAddWorkPage /> },
+        { path: 'how-buy-work', element: <HowBuyWorkPage /> },
+        { path: 'how-hire-designer', element: <HowHireDesignerPage /> },
+        { path: 'about-us', element: <AboutUsPage /> },
+        { path: 'about-us-brands', element: <AboutUsBrandsPage /> },
+        { path: 'about-us-illustrators', element: <AboutUsIllustratorsPage /> },
+        { path: 'about-us-photographs', element: <AboutUsPhotographsPage /> },
+        { path: 'about-us-designers', element: <AboutUsProductDesignersPage /> },
+        { path: 'about-us-uiux', element: <AboutUsUiUxPage /> },
+        { path: 'about-us-web', element: <AboutUsWebDesignersPage /> },
+        { path: 'media-kit', element: <MediaKitPage /> },
 
         { path: 'howAddWork', element: <HowAddWorkPage /> },
         { path: 'howBuyWork', element: <HowBuyWorkPage /> },
-        { path: 'howHireDesigner', element: <HowHireDesignerPage /> },    
-        
-        { path: 'aboutUs', element: <AboutUsPage /> },          
-        { path: 'photographs', element: <AboutUsPhotographsPage /> },  
-        { path: 'brands', element: <AboutUsBrandsPage /> },  
-        { path: 'uiUx', element: <AboutUsUiUxPage /> },  
-        { path: 'productDesigners', element: <AboutUsProductDesignersPage /> },  
-        { path: 'illustrators', element: <AboutUsIllustratorsPage /> },  
-        { path: 'webDesigners', element: <AboutUsWebDesignersPage /> },        
+        { path: 'howHireDesigner', element: <HowHireDesignerPage /> },
+
+        { path: 'aboutUs', element: <AboutUsPage /> },
+        { path: 'photographs', element: <AboutUsPhotographsPage /> },
+        { path: 'brands', element: <AboutUsBrandsPage /> },
+        { path: 'uiUx', element: <AboutUsUiUxPage /> },
+        { path: 'productDesigners', element: <AboutUsProductDesignersPage /> },
+        { path: 'illustrators', element: <AboutUsIllustratorsPage /> },
+        { path: 'webDesigners', element: <AboutUsWebDesignersPage /> },
 
         //////////////////////////////////////////////////////
         // !!! NOT IN USE
@@ -121,16 +130,22 @@ function App() {
     { path: 'select-register', element: <SelectRegisterPage /> },
     { path: 'google-register', element: <GoogleRegisterPage /> },
     { path: 'email-register', element: <EmailRegisterPage /> },
-
+    { path: 'logout', element: <LogoutPage /> },
   ]);
 
   return (
-    <ThemeProvider theme={theme}>
-      <Provider store={store}>
-        <RouterProvider router={router} />
-      </Provider>
-    </ThemeProvider>
+    <AppContext.Provider value={{
+      signinState, setSigninState,
+      translation
+    }}>
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <RouterProvider router={router} />
+        </Provider>
+      </ThemeProvider>
+    </AppContext.Provider>
   );
 }
 
 export default App;
+

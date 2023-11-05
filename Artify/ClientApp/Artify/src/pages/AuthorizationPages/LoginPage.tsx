@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { NavLink, useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { CircularProgress } from "@mui/material";
 import Separator from '../../components/UI/Separator';
 import RegLogPageContent from '../../components/Layouts/RegLogPageContent';
@@ -16,9 +16,11 @@ import CommonInput from '../../components/UI/CommonInput';
 import { colors } from '../../assets/defaults/colors';
 import useAuthorization from "../../hooks/useAuthorization";
 import GoogleIconG from '../../components/UI/GoogleIconG';
+import AppContext from '../../utils/AppContext';
 
 
 const LoginPage = () => {
+  const { setSigninState } = useContext(AppContext);
   const [isLoginError, setIsLoginError] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -42,6 +44,8 @@ const LoginPage = () => {
     setIsLoading(false);
     if (loggedUserName) {
       // dispatch(authActions.login(loggedUserName));
+      console.log("Logged in user: " + (loggedUserName as string))
+      setSigninState !== undefined && setSigninState(true);
       navigate("/");
     } else {
       setIsLoginError(t('userLoginPage.credentialsIncorrect'));

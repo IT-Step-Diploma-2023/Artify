@@ -5,15 +5,13 @@ import { extensions } from "../../../assets/data/extensions";
 import { useContext, useEffect, useState } from 'react';
 import Context from "../../../utils/Context";
 import { useTranslation } from 'react-i18next';
-// import { TFunction } from 'i18next';
-// import { getAuthToken } from '../../../hooks/useAuthorization';
 import ShotModal from './ShotModal';
 import { IShot } from '../../../assets/interfaces/shotsInterfaces';
 import FilterParamlist from './FilterParamList';
 import { getShotsData } from '../../../hooks/useShots';
 import ShotThumbnail from './Shots';
 import useTargetUser from '../../../hooks/useTargetUser';
-import useCurrentUser from '../../../hooks/useCurrentUser';
+import AppContext from '../../../utils/AppContext';
 
 /* #region styles */
 const container = {
@@ -39,11 +37,10 @@ export default function HomeImageList() {
 
   const [shotModalOpen, setShotModalOpen] = useState(false);
 
-  const { loadData } = useCurrentUser();
-
-  const isUserLoggedIn = loadData() !== null;
+  const { signinState } = useContext(AppContext);
 
   const existedPrices: string[] = [];
+
   prices.map((price) => {
     existedPrices.push(price.name);
   });
@@ -88,7 +85,7 @@ export default function HomeImageList() {
             <ShotThumbnail
               shot={shot}
               openModalHandler={openShotModalHandler}
-              isUserLoggedIn={isUserLoggedIn} />
+              isUserLoggedIn={signinState} />
           </Grid>
         ))}
 
@@ -128,7 +125,7 @@ export default function HomeImageList() {
         openModalHandler={openShotModalHandler}
         shotId={activeShot.id}
         shots={shots}
-        isUserLoggedIn={isUserLoggedIn}
+        isUserLoggedIn={signinState}
       />}
     </Box>
   </>

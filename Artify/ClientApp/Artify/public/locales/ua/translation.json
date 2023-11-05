@@ -27,6 +27,10 @@
             "message": "Ресурс або сторінка не знайдені"
         }
     },
+    "logoutPage":{
+        "message": "Вихід успішний!",
+        "buttonText": "до головної"
+    },
     "headerComponent": {
         "search": "пошук",
         "menue": {

@@ -3,7 +3,7 @@ import * as BtnStyles from "../CustomButtonStyles"
 import CustomButton from "../CustomButton";
 import { TFunction } from "i18next";
 import { colors } from "../../../assets/defaults/colors";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { IShot, IShotDetails } from "../../../assets/interfaces/shotsInterfaces";
 import { appreciateShot, getShotData } from "../../../hooks/useShots";
 import { effects } from "../../../assets/defaults/effects";
@@ -12,7 +12,6 @@ import ShotThumbnail from "./Shots";
 import { scrollTo } from "../../../utils/scrollTo";
 import { baseUrl } from "../../../assets/defaults/urls";
 import useTargetUser from "../../../hooks/useTargetUser";
-import useCurrentUser from "../../../hooks/useCurrentUser";
 
 
 /* #region styles */
@@ -354,7 +353,8 @@ const ViewShotModal = ({ t, openModal, closeModalHandler, openModalHandler, shot
                                     onClick={() => scrollTo("header")}>
                                     <ShotThumbnail
                                         shot={shot}
-                                        openModalHandler={openModalHandler} />
+                                        openModalHandler={openModalHandler}
+                                        isUserLoggedIn = {isUserLoggedIn} />
                                 </Grid>
                             ))}</Grid>
                     </Box>

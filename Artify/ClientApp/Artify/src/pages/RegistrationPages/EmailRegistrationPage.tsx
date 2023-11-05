@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { useTranslation } from 'react-i18next';
-import { ChangeEvent, FunctionComponent, useEffect, useState } from 'react';
+import { ChangeEvent, FunctionComponent, useContext, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import { Checkbox, FormControlLabel, Grid, Typography } from '@mui/material';
 import CommonButton from '../../components/UI/CommonButton';
@@ -11,6 +11,7 @@ import useAuthorization from "../../hooks/useAuthorization";
 import { useNavigate } from "react-router";
 import { colors } from '../../assets/defaults/colors';
 import InputErrorMessage from '../../components/UI/InputErrorMessage';
+import AppContext from '../../utils/AppContext';
 
 interface InputForm {
     name: string,
@@ -27,6 +28,8 @@ const EmailRegisterPage: FunctionComponent = () => {
 
     const { t } = useTranslation();
 
+    const {setSigninState} = useContext(AppContext);
+ 
     const errorMessages = {
         username: t('userAccountCreate.registerationPage.loginError'),
         email: t('userAccountCreate.registerationPage.emailError'),
@@ -207,6 +210,7 @@ const EmailRegisterPage: FunctionComponent = () => {
                     setIsFormError(t('userAccountCreate.registrationPage.registrationError'));
                     return;
                 }
+                setSigninState && setSigninState(true);
                 navigate('/');
             }}>
                 <Grid container columnSpacing={2} rowSpacing={3} marginTop={3}>
