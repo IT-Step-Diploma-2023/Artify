@@ -6,12 +6,13 @@ import { useContext, useEffect, useState } from 'react';
 import Context from "../../../utils/Context";
 import { useTranslation } from 'react-i18next';
 import ShotModal from './ShotModal';
-import { IShot } from '../../../assets/interfaces/shotsInterfaces';
+import { IShot} from '../../../assets/interfaces/shotsInterfaces';
 import FilterParamlist from './FilterParamList';
 import { getShotsData } from '../../../hooks/useShots';
 import ShotThumbnail from './Shots';
 import useTargetUser from '../../../hooks/useTargetUser';
 import AppContext from '../../../utils/AppContext';
+import { useNavigate } from 'react-router';
 
 /* #region styles */
 const container = {
@@ -59,6 +60,13 @@ export default function HomeImageList() {
     setShotModalOpen(false);
   };
 
+  const navigate = useNavigate();
+
+  const navigateToPortfolio = (shotAuthorId: number) => {
+      setTargetUserId(shotAuthorId);
+      navigate("portfolio");
+  }
+
   return (<>
     <Box sx={container}>
       <Box
@@ -85,7 +93,8 @@ export default function HomeImageList() {
             <ShotThumbnail
               shot={shot}
               openModalHandler={openShotModalHandler}
-              isUserLoggedIn={signinState} />
+              isUserLoggedIn={signinState} 
+              navigateToPortfolio = {navigateToPortfolio}/>
           </Grid>
         ))}
 
@@ -126,6 +135,7 @@ export default function HomeImageList() {
         shotId={activeShot.id}
         shots={shots}
         isUserLoggedIn={signinState}
+        navigateToPortfolio = {navigateToPortfolio}
       />}
     </Box>
   </>

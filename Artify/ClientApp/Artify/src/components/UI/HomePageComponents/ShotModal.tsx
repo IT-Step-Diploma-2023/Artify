@@ -3,15 +3,13 @@ import * as BtnStyles from "../CustomButtonStyles"
 import CustomButton from "../CustomButton";
 import { TFunction } from "i18next";
 import { colors } from "../../../assets/defaults/colors";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { IShot, IShotDetails } from "../../../assets/interfaces/shotsInterfaces";
 import { appreciateShot, getShotData } from "../../../hooks/useShots";
 import { effects } from "../../../assets/defaults/effects";
-import { useNavigate } from "react-router";
 import ShotThumbnail from "./Shots";
 import { scrollTo } from "../../../utils/scrollTo";
 import { baseUrl } from "../../../assets/defaults/urls";
-import useTargetUser from "../../../hooks/useTargetUser";
 
 
 /* #region styles */
@@ -49,6 +47,8 @@ const avatar = {
     float: 'left',
     width: "50px",
     height: "50px",
+    transition: "all 0.15s",
+    cursor: "pointer",
     "&:hover": {
         boxShadow: "2px 2px 4px 0px rgba(39, 24, 70, 0.20)"
     },
@@ -218,14 +218,15 @@ const moreImagesContainer = {
 
 /* #endregion */
 
-const ViewShotModal = ({ t, openModal, closeModalHandler, openModalHandler, shotId, shots, isUserLoggedIn }: {
+const ViewShotModal = ({ t, openModal, closeModalHandler, openModalHandler, shotId, shots, isUserLoggedIn, navigateToPortfolio }: {
     t: TFunction<"translation", undefined>,
     openModal: boolean,
     closeModalHandler: () => void,
     openModalHandler: (shot: IShot) => void,
     shotId: number,
     shots: IShot[],
-    isUserLoggedIn: boolean
+    isUserLoggedIn: boolean,
+    navigateToPortfolio: (shotAuthorId: number) => void
 }) => {
 
     const [shot, setShotDetails] = useState<IShotDetails>();
@@ -235,21 +236,13 @@ const ViewShotModal = ({ t, openModal, closeModalHandler, openModalHandler, shot
     useEffect(() => {
         void getShotData(shotId, setShotDetails);
     }, [shotId]);
-    
+
     useEffect(() => {
         shot?.appreciatedByCurrentUser === undefined ?
             setAppreciated(false) : setAppreciated(shot.appreciatedByCurrentUser);
     }, [shot?.appreciatedByCurrentUser])
 
-    const navigate = useNavigate();
-
-    const { setTargetUserId } = useTargetUser();
-
-    const avatarClickHandler = () => {
-        if (shot === undefined) return;
-        setTargetUserId(shot.authorId);
-        navigate("portfolio");
-    }
+    useLayoutEffect(() => { scrollTo("ancorTop") }, [shotId])
 
     /* #region localisation const */
 
@@ -273,7 +266,7 @@ const ViewShotModal = ({ t, openModal, closeModalHandler, openModalHandler, shot
                     height: "100vh",
                     padding: "0px 100px 0px 100px"
                 }}>
-                <Box sx={content}>
+                <Box sx={content} id="ancorTop">
                     <Box component="div" sx={header} id="header">
                         <Avatar sx={avatar}
                             alt={shot.authorFullName}
@@ -285,7 +278,7 @@ const ViewShotModal = ({ t, openModal, closeModalHandler, openModalHandler, shot
                                     baseUrl + shot.authorLogoImage :
                                     "images/default_profile.png"
                             }
-                            onClick={avatarClickHandler} />
+                            onClick={() => navigateToPortfolio(shot.authorId)} />
                         <Typography sx={headerText}>{shot.title}</Typography>
                         <CustomButton height="md"
                             sx={BtnStyles.darkVioletBtn}
@@ -350,11 +343,12 @@ const ViewShotModal = ({ t, openModal, closeModalHandler, openModalHandler, shot
                         <Grid container spacing={{ xs: 2, md: 5 }} sx={{ height: "fit-content" }}>
                             {shots.map((shot) => (
                                 <Grid item xs={12} md={6} lg={3} key={"inner" + shot.id.toString()}
-                                    onClick={() => scrollTo("header")}>
+                                >
                                     <ShotThumbnail
                                         shot={shot}
                                         openModalHandler={openModalHandler}
-                                        isUserLoggedIn = {isUserLoggedIn} />
+                                        isUserLoggedIn={isUserLoggedIn}
+                                        navigateToPortfolio={navigateToPortfolio} />
                                 </Grid>
                             ))}</Grid>
                     </Box>

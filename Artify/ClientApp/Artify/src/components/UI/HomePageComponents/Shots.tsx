@@ -4,38 +4,86 @@ import { FavoriteBorder, Favorite } from "@mui/icons-material";
 import { baseUrl } from "../../../assets/defaults/urls";
 import { appreciateShot } from "../../../hooks/useShots";
 
+
 export const ShotThumbnail = ({
     shot,
     openModalHandler,
-    isUserLoggedIn
+    isUserLoggedIn,
+    navigateToPortfolio
 }: {
     shot: IShot,
     openModalHandler: ((shot: IShot) => void),
-    isUserLoggedIn: boolean
+    isUserLoggedIn: boolean,
+    navigateToPortfolio: (shotAuthorId: number) => void
 }) => {
-    return <ImageListItem>
+
+    /* #region styles */
+    const shotThumbnail = {
+        width: '100%',
+        aspectRatio: '1.4',
+        borderRadius: 10,
+        boxShadow: '0px 4px 8px 0px #27184666',
+        cursor: "pointer"
+    }
+
+    const logoNameContainer = {
+        cursor: "pointer",
+    }
+
+    const authorLogo = {
+        float: 'left',
+        marginTop: '0.4375rem',
+        width: '1.25rem',
+        height: '1.25rem',
+        transition: "all 0.15s ease-out",
+        "&:hover": {
+            boxShadow: "2px 2px 4px 0px rgba(39, 24, 70, 0.20)"
+        },
+        "&:active": {
+            boxShadow: "1px 1px 6px 0px rgba(39, 24, 70, 0.40)"
+        },
+    }
+
+    const authorFullName = {
+        float: 'left',
+        fontSize: '0.875rem',
+        fontWeight: 700,
+        padding: '0.4375rem 0 0 0.4375rem',
+        caretColor: "transparent",
+        transition: "all 0.15s ease-out",
+        "&:hover": {
+            transform: "translate(0px, 1px)"
+        },
+    }
+    /* #endregion */
+
+    return <ImageListItem >
         <img
-            style={{ width: '100%', aspectRatio: '1.4', borderRadius: 10, boxShadow: '0px 4px 8px 0px #27184666' }}
+            style={shotThumbnail}
             src={baseUrl + shot.cover}
             alt={shot.title}
             loading="lazy"
             onClick={() => openModalHandler(shot)} />
         <Box>
-            <Box sx={{ verticalAlign: 'center', marginRight: 'auto' }}>
-                <Avatar sx={{ float: 'left', marginTop: '0.4375rem', width: '1.25rem', height: '1.25rem' }}
-                    alt={shot.userFullName}
-                    src={shot.logoImage !== "" ?
-                        baseUrl + shot.logoImage :
-                        "images/default_profile.png"} />
+            <Box sx={logoNameContainer}
+                onClick={() => navigateToPortfolio(shot.userId)} >
+                <Box sx={{ verticalAlign: 'center', marginRight: 'auto' }}>
+                    <Avatar sx={authorLogo}
+                        alt={shot.userFullName}
+                        src={shot.logoImage !== "" ?
+                            baseUrl + shot.logoImage :
+                            "images/default_profile.png"} />
+                </Box>
+                <Typography sx={authorFullName}>{shot.userFullName}</Typography>
             </Box>
-            <Typography sx={{ float: 'left', fontSize: '0.875rem', fontWeight: 700, padding: '0.4375rem 0 0 0.4375rem' }}>{shot.userFullName}</Typography>
             <Typography sx={{ float: 'right', fontSize: '0.875rem', fontWeight: 400, color: '#9E9AA2', padding: '0.4375rem 0 0 0.4375rem' }}>{shot.appreciationsCount}</Typography>
             <Box>
                 <Checkbox checked={shot.appreciatedByCurrentUser} icon={<FavoriteBorder sx={{ color: '#9E9AA2', width: '1rem' }} />} checkedIcon={<Favorite sx={{ color: '#D65353', width: '1rem' }} />}
                     sx={{ width: '18px', height: '18px', float: 'right', marginTop: '0.4375rem' }}
                     onChange={() => {
-                        if (isUserLoggedIn)
+                        if (isUserLoggedIn) {
                             void appreciateShot(shot);
+                        }
                     }} />
             </Box>
         </Box>
