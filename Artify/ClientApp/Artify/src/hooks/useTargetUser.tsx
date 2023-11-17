@@ -1,13 +1,10 @@
 // import { IBasicUserFormData } from "../assets/interfaces/usersInterfaces";
 
 import { IBasicUserData, IBasicUserFormData } from "../assets/interfaces/usersInterfaces";
-import useLocation from "./useLocation";
+import * as location from "../utils/location";
 
 
 const useTargetUser = () => {
-
-    const { getCountry, getAddress } = useLocation();
-
 
     function setTargetUserId(id: number): void {
         localStorage.setItem("targetUserId", id.toString())
@@ -21,10 +18,11 @@ const useTargetUser = () => {
 
     function setTargetUser(data: IBasicUserData) {
         const targetUser: IBasicUserFormData = {
+            id: data.id,
             username: data.username,
             fullName: data.fullName,
-            country: getCountry(data.location),
-            address: getAddress(data.location),
+            country: location.getCountry(data.location),
+            address: location.getAddress(data.location),
             info: data.info,
             logoImage: data.logoImage
         };

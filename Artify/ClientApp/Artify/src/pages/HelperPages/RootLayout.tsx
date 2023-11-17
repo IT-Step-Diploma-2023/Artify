@@ -1,9 +1,8 @@
 import { Outlet } from 'react-router-dom';
 import MainNavigation from '../../components/Layouts/Navigation/MainNavigation';
-import { FunctionComponent, useState } from 'react';
+import { FunctionComponent } from 'react';
 import Footer from '../../components/Layouts/FooterComponent/Footer';
 import { Box } from '@mui/material';
-import AppContext from '../../utils/AppContext';
 
 const RootLayout: FunctionComponent = () => {
 

@@ -9,7 +9,9 @@ namespace Artify.Controllers.users.DTO.UserDTO
         public string? Username { get; set; }
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string? FullName { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string? Email { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int RoleId { get; set; }
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string? Location { get; set; }
@@ -24,7 +26,6 @@ namespace Artify.Controllers.users.DTO.UserDTO
 
         public BaseDTOUser(User user, bool privateData = false)
         {
-
             fillFields(user, privateData);
         }
         public BaseDTOUser() { }

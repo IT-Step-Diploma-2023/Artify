@@ -9,7 +9,7 @@ import { appreciateShot, getShotData } from "../../../hooks/useShots";
 import { effects } from "../../../assets/defaults/effects";
 import ShotThumbnail from "./Shots";
 import { scrollTo } from "../../../utils/scrollTo";
-import { baseUrl } from "../../../assets/defaults/urls";
+import { baseUrl, baseUrlApi } from "../../../assets/defaults/urls";
 
 
 /* #region styles */
@@ -275,7 +275,7 @@ const ViewShotModal = ({ t, openModal, closeModalHandler, openModalHandler, shot
                                 shot.authorUsername}
                             src={
                                 shot.authorLogoImage !== "" ?
-                                    baseUrl + shot.authorLogoImage :
+                                    baseUrlApi + shot.authorLogoImage :
                                     "images/default_profile.png"
                             }
                             onClick={() => navigateToPortfolio(shot.authorId)} />

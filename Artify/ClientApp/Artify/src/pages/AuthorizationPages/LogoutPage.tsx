@@ -14,13 +14,14 @@ import { useNavigate } from "react-router";
 const LogoutPage = () => {
 
   // const { setSigninState } = useContext(UserContext);
-  const { translation } = useContext(AppContext);
+  const { translation, setSigninState } = useContext(AppContext);
   // const {t} = useTranslation();
   const navigate = useNavigate();
   const { logOut } = useAuthorization();
 
   // setSigninState && setSigninState(false);
   logOut();
+  if (setSigninState !== undefined) setSigninState(false);
 
   return (
     <RegLogPageContent title={translation && translation('logoutPage.message').toUpperCase()}>

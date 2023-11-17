@@ -1,4 +1,4 @@
-import { FunctionComponent, useContext, useState } from 'react';
+import { FunctionComponent, useState } from 'react';
 import HomeImageList from '../components/UI/HomePageComponents/HomeImageList';
 import HomeButtonFilter from '../components/UI/HomePageComponents/HomeButtonFilter';
 // import HomeTabs from '../components/UI/HomeTabs';

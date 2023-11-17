@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AppBar, Toolbar, CssBaseline, Typography, styled, InputBase, Box, MenuItem, Avatar, IconButton, Menu, Tooltip, Divider } from '@mui/material';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { FunctionComponent } from 'react';
@@ -15,6 +15,8 @@ import NavMenu from '../../UI/NavMenu';
 import CommonButton from '../../UI/CommonButton';
 import UserDropdownMenuItems from './UserDropDownMenuItems';
 import useCurrentUser from '../../../hooks/useCurrentUser';
+import { baseUrlApi } from '../../../assets/defaults/urls';
+import AppContext from '../../../utils/AppContext';
 
 
 //#region localization languages
@@ -36,25 +38,26 @@ interface IAuth {
   }
 }
 
-
 const Navbar: FunctionComponent = () => {
   //Cheking in local storage
-
-    let username = isUserLogged();
+  let username = isUserLogged();
   const authStore = useSelector<IAuth, any>(state => state.auth);
 
   if (username === "" && authStore.isAuthenticated === true) {
     username = authStore.username;
   }
 
-  const { getData, getShownName } = useCurrentUser();
+  const { signinState, user } = useContext(AppContext);
+  const { getData, getShownName, getLogoImage } = useCurrentUser();
+  const [logoImage, setLogoImage] = useState("../images/default_profile.png");
 
-
+  // add useContext for getting user data
   useEffect(() => {
-    if (username !== "") {
+    if(signinState){ 
       void getData();
+      setLogoImage(() => getLogoImage())
     }
-  }, [getData, getShownName, username]);
+  }, [getData, getLogoImage, signinState]);
 
   const shownName = getShownName();
 
@@ -188,6 +191,7 @@ const Navbar: FunctionComponent = () => {
         width: 'auto',
         padding: { xs: '0 20px', md: '0 100px' }
       }}>
+        <h2 style={{ color: "red" }}>signinState = {signinState.toString()}</h2>
         {/* for sm size */}
         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
           <IconButton
@@ -264,11 +268,19 @@ const Navbar: FunctionComponent = () => {
           )}
         </Box>
         <Box sx={{ flexGrow: 0, marginRight: '10px' }}>
-          <Tooltip title={username !== "" ? shownName : t('headerComponent.loggedOffMessage')}>
-            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+          <Tooltip title={signinState ? shownName : t('headerComponent.loggedOffMessage')}>
+            <IconButton onClick={handleOpenUserMenu} sx={{
+              p: 0,
+              "&:hover": {
+                boxShadow: "2px 2px 4px 0px rgba(39, 24, 70, 0.20)"
+              },
+              "&:active": {
+                boxShadow: "1px 1px 6px 0px rgba(39, 24, 70, 0.40)"
+              },
+            }}>
               <Avatar
-                alt={username !== "" ? shownName : t('headerComponent.loggedOffMessage')}
-                src={username !== "" ? "/images/sample_christian_kouly_profile.jpg" : ""}
+                alt={signinState ? shownName : t('headerComponent.loggedOffMessage')}
+                src={signinState ? baseUrlApi + logoImage : "images/default_profile.png"}
               />
             </IconButton>
           </Tooltip>

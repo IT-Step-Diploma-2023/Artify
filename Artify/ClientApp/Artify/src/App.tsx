@@ -4,7 +4,7 @@ import store from './store/index';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@mui/material';
 import theme from './assets/defaults/theme';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 // pages
@@ -57,11 +57,13 @@ import { isUserLogged } from './hooks/useAuthorization';
 import AppContext from './utils/AppContext';
 import TestingPage from './pages/TestingPage';
 import { useTranslation } from 'react-i18next';
-
+import { IBasicUserFormData } from './assets/interfaces/usersInterfaces';
+import { retriveData } from './hooks/useCurrentUser';
 
 function App() {
 
   const [signinState, setSigninState] = useState<boolean>(() => isUserLogged() !== "");
+  const [user, setUser] = useState<IBasicUserFormData>();
   const { t } = useTranslation();
   const translation = t;
   const router = createBrowserRouter([
@@ -126,6 +128,7 @@ function App() {
     },
     //////////////////////////////////////////////////////
     // !!! СЮДИ ІНШІ РОУТИ НЕ ДОДАВАТИ !!!
+
     { path: 'login', element: <LoginPage /> },
     { path: 'select-register', element: <SelectRegisterPage /> },
     { path: 'google-register', element: <GoogleRegisterPage /> },
@@ -133,9 +136,17 @@ function App() {
     { path: 'logout', element: <LogoutPage /> },
   ]);
 
+  useEffect(() => {
+    let ignore = false;
+    if (signinState)
+      void retriveData(setUser, ignore);
+    return () => { ignore = true };
+  }, [signinState]);
+
   return (
     <AppContext.Provider value={{
       signinState, setSigninState,
+      user, setUser,
       translation
     }}>
       <ThemeProvider theme={theme}>

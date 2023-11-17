@@ -8,13 +8,63 @@ import CommonLabel from '../../components/UI/UserSettingsComponents/CommonLabel'
 import CommonInput from '../../components/UI/CommonInput';
 import React from 'react';
 import { AddAPhoto } from '@mui/icons-material';
-import { Grid } from '@mui/material';
+import { Avatar, Grid } from '@mui/material';
 import CommonTextArea from '../../components/UI/CommonTextArea';
 import { countries } from '../../utils/getCountries';
 import CommonSelect from '../../components/UI/CommonSelect';
 import useCurrentUser from '../../hooks/useCurrentUser';
 import InputErrorMessage from '../../components/UI/InputErrorMessage';
 import { IBasicUserFormData } from '../../assets/interfaces/usersInterfaces';
+import { baseUrlApi } from '../../assets/defaults/urls';
+import CustomButton from '../../components/UI/CustomButton';
+import * as BtnStyles from "../../components/UI/CustomButtonStyles";
+
+/* #region styles */
+
+const logoImage = {
+    width: "147px",
+    height: "147px",
+    display: 'block',
+    boxShadow: '0px 4px 8px 0px #2718464D'
+};
+
+const logoImageEmpty = {
+    border: '2px dashed #271846',
+    color: '#271846',
+    display: 'block',
+    padding: '50px',
+    width: '147px',
+    height: '147px',
+    borderRadius: '50%',
+    "&:hover": {
+        boxShadow: "2px 2px 4px 0px rgba(39, 24, 70, 0.20)"
+    },
+    "&:active": {
+        boxShadow: "1px 1px 6px 0px rgba(39, 24, 70, 0.40)"
+    },
+};
+
+const logoImageEmptyIcon = {
+    height: '2.25rem',
+    width: '2.25rem',
+    margin: '3px 0 0 3px'
+};
+
+const loadFileBtn = {
+    width: '100%',
+    marginTop: '1.5rem',
+    '&:hover': {
+        color: colors.lightGrey,
+        backgroundColor: colors.violet,
+        border: '0',
+        boxShadow: '0px 4px 8px 0px rgba(39, 24, 70, 0.40)',
+    },
+    '&:active': {
+        boxShadow: '0px 3px 6px 0px rgba(39, 24, 70, 0.60)',
+    }
+};
+
+/* #endregion */
 
 const BasicInfoPage: FunctionComponent = () => {
 
@@ -34,15 +84,10 @@ const BasicInfoPage: FunctionComponent = () => {
     /* #endregion */
 
     const { postData, loadData } = useCurrentUser();
-    // const retriveData = getData();
 
-    const [formData, setFormData] = useState<IBasicUserFormData>();
+    const [formData, setFormData] = useState<IBasicUserFormData | null | undefined>(() => loadData());
 
-    useEffect(() => {
-        const data = loadData();
-        if (data !== null)
-            setFormData(data);
-    }, [])
+    // useEffect(() => { void setFormData(() => loadData()); }, []);
 
     /* #region validation */
 
@@ -56,6 +101,7 @@ const BasicInfoPage: FunctionComponent = () => {
 
     const [formValid, setFormValid] = useState<boolean>(false);
     const [formActive, setFormActive] = useState<boolean>(false);
+
 
     useEffect(() => {
         if (fullNameError !== '' || addressError !== '' || infoError !== '')
@@ -106,8 +152,10 @@ const BasicInfoPage: FunctionComponent = () => {
 
     const loadInputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         const loadedFile = event.target.files!
+        console.log(loadedFile[0]);
         setSelectedImage(loadedFile[0]);
     }
+
     /* #endregion */
 
     const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
@@ -116,10 +164,11 @@ const BasicInfoPage: FunctionComponent = () => {
             alert(formErrorMessage);
             return;
         }
-        if (formData === undefined) return;
-        postData(formData, selectedImage);
+        if (formData === null || formData === undefined) return;
+        void postData(formData, selectedImage);
     }
 
+    if (formData === null || formData === undefined) return <></>;
     return <>
         <Box sx={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
             <Box sx={{ position: 'absolute', left: '0', margin: '0' }}>
@@ -152,41 +201,30 @@ const BasicInfoPage: FunctionComponent = () => {
                         md: 'block'
                     }
                 }}>
-                    {(selectedImage.size === 0) &&
+                    {(selectedImage.size === 0 && formData.logoImage === "") &&
                         <Box
                             aria-label="addaphoto"
-                            sx={{
-                                border: '2px dashed #271846',
-                                color: '#271846',
-                                display: 'block',
-                                padding: '50px',
-                                width: '147px',
-                                height: '147px',
-                                borderRadius: '50%'
-                            }}>
-                            <AddAPhoto sx={{
-                                height: '2.25rem',
-                                width: '2.25rem',
-                                margin: '3px 0 0 3px'
-                            }} />
+                            sx={logoImageEmpty}>
+                            <AddAPhoto sx={logoImageEmptyIcon} />
                         </Box>}
-                    {(selectedImage.size !== 0) &&
-                        <img
-                            alt="not found"
-                            width={'147px'}
-                            style={{
-                                border: '1px solid',
-                                color: '#271846',
-                                display: 'block',
-                                borderRadius: '50%'
-                            }}
-                            src={URL.createObjectURL(selectedImage)}
-                        // src='/public/images/sample_luna_profile.png'
+                    {(selectedImage.size !== 0 || formData.logoImage !== "") &&
+                        <Avatar
+                            sx={logoImage}
+                            alt={formData.username}
+                            title={formData.fullName ?
+                                formData.fullName :
+                                formData.username}
+                            // src='/public/images/sample_luna_profile.png'
+                            src={
+                                selectedImage.size !== 0 ?
+                                    URL.createObjectURL(selectedImage) :
+                                    baseUrlApi + formData.logoImage}
                         />
                     }
-                    <CommonButton color='secondary'
-                        sx={{ width: '100%', marginTop: '1.5rem', backgroundColor: colors.lightGrey }}
-                        onClick={() => selectedImage.size === 0 ? loadButtonClickHandler() : setSelectedImage(new Blob)}
+                    <CustomButton height="md"
+                        sx={BtnStyles.lightGreyBtn}
+                        style={loadFileBtn}
+                        onClick={loadButtonClickHandler}
                     >
                         {download}
                         <input
@@ -196,7 +234,7 @@ const BasicInfoPage: FunctionComponent = () => {
                             name="profileImage"
                             onChange={loadInputChangeHandler}
                         />
-                    </CommonButton>
+                    </CustomButton>
                 </Box>
                 <Grid
                     component='form'
@@ -357,7 +395,8 @@ const BasicInfoPage: FunctionComponent = () => {
                             }
                         </Box>
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={12}
+                        sx={{ paddingBottom: "1rem" }}>
                         <CommonButton
                             color='primary'
                             height='bg'

@@ -16,7 +16,6 @@ export interface SocialProfiles {
 
 function useSocialProfiles() {
 
-
     const decodeData = (data: SocialProfiles): SocialProfile[] => {
         const decodedData: SocialProfile[] = [];
         availableProfiles.forEach((profile) => {
@@ -26,7 +25,6 @@ function useSocialProfiles() {
         });
         return decodedData;
     }
-
 
     const encodeData = (data: SocialProfile[]) => {
         const updatedData: SocialProfiles = { socialProfiles: [] };

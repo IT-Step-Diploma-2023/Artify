@@ -8,11 +8,18 @@ import { useNavigate } from 'react-router-dom';
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { getTargetUserData } from "../../../hooks/usePortfolio";
 import { IPortfolioUserData } from "../../../assets/interfaces/usersInterfaces";
-import { baseUrl } from "../../../assets/defaults/urls";
+import { baseUrlApi } from "../../../assets/defaults/urls";
 import { isUserLogged } from "../../../hooks/useAuthorization";
 
+const logoImage = {
+    display: 'inline-block',
+    width: '147px',
+    height: '147px',
+    boxShadow: '0px 4px 8px 0px #2718464D'
+};
 
-const ProfileMainImage = ({userId}: {userId: number}) => {
+
+const ProfileMainImage = ({ userId }: { userId: number }) => {
 
     console.log(userId);
 
@@ -25,22 +32,17 @@ const ProfileMainImage = ({userId}: {userId: number}) => {
         void getTargetUserData(userId, setCurrentUser as Dispatch<SetStateAction<IPortfolioUserData>>)
     }, [userId])
 
-     return <>
+    return <>
         <Box sx={{ margin: '0 auto 40px', width: '500px', height: '150px', display: 'flex', justifyContent: 'left' }}>
             <Box sx={{ paddingLeft: '40px' }}>
                 <Avatar
                     alt="Remy Sharp"
                     src={
                         curentUser?.logoImage ?
-                            baseUrl + curentUser.logoImage :
+                            baseUrlApi + curentUser.logoImage :
                             "images/default_profile.png"
                     }
-                    sx={{
-                        display: 'inline-block',
-                        width: '147px',
-                        height: '147px',
-                        boxShadow: '0px 4px 8px 0px #2718464D'
-                    }} />
+                    sx={logoImage} />
             </Box>
             <Box sx={{ paddingLeft: '40px' }}>
                 <Typography component='div' sx={{ display: 'block', fontSize: '2rem', fontWeight: '700' }}>

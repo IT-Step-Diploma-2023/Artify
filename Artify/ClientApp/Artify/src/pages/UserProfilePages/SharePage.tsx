@@ -18,7 +18,7 @@ import { getAuthToken } from "../../hooks/useAuthorization";
 import PublicateModal from "../../components/UI/SharePageComponents/PublicateModal";
 import { existedTags } from "../../assets/data/tags";
 import { useNavigate } from "react-router";
-import { urls } from "../../assets/defaults/urls";
+// import { urls } from "../../assets/defaults/urls";
 import AddDescriptionModal from "../../components/UI/SharePageComponents/AddDescriptionModal";
 import { IUploadedData, IVisibilityOption } from "../../assets/interfaces/shotsInterfaces";
 import { postData } from "../../hooks/useShots";
@@ -40,8 +40,6 @@ import { postData } from "../../hooks/useShots";
 // }
 
 const SharePage: FunctionComponent = () => {
-
-  const token = getAuthToken() ?? "";
 
   const { t, i18n } = useTranslation();
 

@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { corsMod, urls } from "../assets/defaults/urls";
-import { IShot, IShotAppreciations, IShotDetails, IUploadedData, ShotsFilter } from "../assets/interfaces/shotsInterfaces";
+import { IShot, IShotDetails, IUploadedData, ShotsFilter } from "../assets/interfaces/shotsInterfaces";
 import { getAuthToken } from "./useAuthorization";
 
 const token = () => {

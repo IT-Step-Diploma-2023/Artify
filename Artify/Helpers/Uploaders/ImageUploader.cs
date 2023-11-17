@@ -8,7 +8,7 @@ namespace Artify.Helpers.Uploaders
     public static class ImageUploader
     {
 
-        private static string[] allowedExtension = { ".png",".jpg",".gif",".jpeg" };
+        private static string[] allowedExtension = { ".png", ".jpg", ".gif", ".jpeg" };
         public static async Task<ImageUploaderResult> UploadImage(IFormFile image, string imageSubLinks)
         {
             if (!allowedExtension.Contains(Path.GetExtension(image.FileName)))
@@ -27,7 +27,7 @@ namespace Artify.Helpers.Uploaders
                 //Ensuring that image with this name does not exist
                 string fileName = string.Empty;
                 string fullPath = string.Empty;
-                for (int i=0; i < 20; i++)
+                for (int i = 0; i < 20; i++)
                 {
                     fileName = $"{Guid.NewGuid()}{Path.GetExtension(image.FileName)}";
                     fullPath = Path.Combine(UploadsController.imagesRootDirectoryFullPath, imageSubLinks, UploadsController.originalFolderName, fileName);
@@ -35,25 +35,45 @@ namespace Artify.Helpers.Uploaders
                     if (!File.Exists(fullPath))
                         break;
                 }
-                if(fileName == string.Empty)
+                if (fileName == string.Empty)
                     throw new Exception("Wrong filename");
 
                 var relativePath = Path.Combine(UploadsController.imagesRootDirectory, imageSubLinks, UploadsController.originalFolderName, fileName);
-                
+
                 using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
                     await image.CopyToAsync(stream);
                 }
                 return new ImageUploaderResult { ResultCode = ImageUploaderResultCode.Success, FileName = relativePath };
             }
-            catch (ArgumentException) {
+            catch (ArgumentException)
+            {
                 return new ImageUploaderResult { ResultCode = ImageUploaderResultCode.ForbiddenExtension };
-            }catch(Exception) {
+            }
+            catch (Exception)
+            {
                 return new ImageUploaderResult { ResultCode = ImageUploaderResultCode.Error };
             }
-            
+
         }
-        
+
+        public static async Task<ImageDeletingResult> DeleteImage(string imageFilePath)
+        {
+            if (File.Exists(imageFilePath))
+            {
+                using (FileStream stream = new FileStream(imageFilePath, FileMode.Open))
+                {
+                    await stream.FlushAsync();
+                }
+                File.Delete(imageFilePath);
+            }
+            else
+            {
+                return new ImageDeletingResult { ResultCode = ImageDeletingResultCode.NotFound };
+            }
+            return new ImageDeletingResult { ResultCode = ImageDeletingResultCode.Success };
+        }
+
         public static ImageUploaderResult CompressImage(string RelativeImagePath, string imageCategory)
         {
             try
@@ -64,7 +84,8 @@ namespace Artify.Helpers.Uploaders
                     result = CompressImage(image, imageCategory);
                 }
                 return result;
-            }catch (Exception)
+            }
+            catch (Exception)
             {
                 return new ImageUploaderResult()
                 {
@@ -113,22 +134,25 @@ namespace Artify.Helpers.Uploaders
                 return new ImageUploaderResult()
                 {
                     ResultCode = ImageUploaderResultCode.Success,
-                    FileName = Path.Combine(UploadsController.imagesRootDirectory,imageSubLinks,UploadsController.thumbnailsFolderName, fileName)
+                    FileName = Path.Combine(UploadsController.imagesRootDirectory, imageSubLinks, UploadsController.thumbnailsFolderName, fileName)
                 };
-            }catch(Exception) {
+            }
+            catch (Exception)
+            {
                 return new ImageUploaderResult()
                 {
                     ResultCode = ImageUploaderResultCode.Error,
                 };
-            }    
+            }
         }
-        public async static Task<bool> removeImage(string relativeFileName)
+        public async static Task<bool> RemoveImage(string relativeFileName)
         {
             try
             {
                 var filePath = Path.Combine(Directory.GetCurrentDirectory(), relativeFileName);
                 await Task.Run(() => File.Delete(filePath));
-            }catch(Exception)
+            }
+            catch (Exception)
             {
                 return false;
             }
@@ -139,10 +163,23 @@ namespace Artify.Helpers.Uploaders
             public ImageUploaderResultCode ResultCode;
             public string? FileName;
         }
+
         public enum ImageUploaderResultCode
         {
             Success,
             ForbiddenExtension,
+            Error
+        }
+
+        public class ImageDeletingResult {
+            public ImageDeletingResultCode ResultCode;
+            public string? FileName;
+        }
+
+        public enum ImageDeletingResultCode
+        {
+            Success,
+            NotFound,
             Error
         }
     }

@@ -46,7 +46,8 @@ export default function HomeImageList() {
     existedPrices.push(price.name);
   });
 
-  useEffect(() => { void getShotsData(setShots) }, [shots]);
+  // useEffect(() => { void getShotsData(setShots) }, [shots]);
+  useEffect(() => { void getShotsData(setShots) }, []);
 
   const { setTargetUserId } = useTargetUser();
 

@@ -1,7 +1,7 @@
 import { Avatar, Box, Checkbox, ImageListItem, Typography } from "@mui/material";
 import { IShot } from "../../../assets/interfaces/shotsInterfaces";
 import { FavoriteBorder, Favorite } from "@mui/icons-material";
-import { baseUrl } from "../../../assets/defaults/urls";
+import { baseUrl, baseUrlApi } from "../../../assets/defaults/urls";
 import { appreciateShot } from "../../../hooks/useShots";
 
 
@@ -71,7 +71,7 @@ export const ShotThumbnail = ({
                     <Avatar sx={authorLogo}
                         alt={shot.userFullName}
                         src={shot.logoImage !== "" ?
-                            baseUrl + shot.logoImage :
+                            baseUrlApi + shot.logoImage :
                             "images/default_profile.png"} />
                 </Box>
                 <Typography sx={authorFullName}>{shot.userFullName}</Typography>

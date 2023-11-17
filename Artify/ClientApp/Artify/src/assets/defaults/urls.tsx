@@ -23,13 +23,17 @@ const setBaseUrl = () => {
 }
 
 export const baseUrl: string = setBaseUrl();
+export const baseUrlApi: string = baseUrl + "api/";
 
 export const urls = {
+    // user
     authentication: `${baseUrl}api/Authentication/Authentication`,
     registration: `${baseUrl}api/Authentication/Registration`,
     getCurrentUserData: `${baseUrl}api/UsersApi/GetCurrentUserData`,
     getTargetUserData: `${baseUrl}api/UsersApi/GetTargetUserData`,
+    updateCurrentUser: `${baseUrl}api/UsersApi/UpdateCurrentUser`, // no cntroller now
     getUserSocialProfiles: `${baseUrl}api/UsersApi/GetUserSocialProfiles`,
+    // shot
     uploadShot: `${baseUrl}api/ShotsApi/UploadShot`,
     getShot: `${baseUrl}api/ShotsApi/GetShot`,
     getShots: `${baseUrl}api/ShotsApi/GetShots`,

@@ -223,20 +223,13 @@ namespace Artify.Controllers.shots
             try
             {
                 foreach (OldNewImageFilePath item in images)
-                    await ImageUploader.removeImage(item.NewFilePath);
+                    await ImageUploader.RemoveImage(item.NewFilePath);
             }
             catch (Exception)
             {
                 return false;
             }
             return true;
-        }
-        private class OldNewImageFilePath
-        {
-            public string OldFileName { get; set; } = string.Empty;
-            public string NewFileName { get; set; } = string.Empty;
-            public string NewFilePath { get; set; } = string.Empty;
-
         }
 
         /// <summary>
