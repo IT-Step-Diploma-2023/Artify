@@ -14,7 +14,7 @@ import { useNavigate } from "react-router";
 const LogoutPage = () => {
 
   // const { setSigninState } = useContext(UserContext);
-  const { translation, setSigninState } = useContext(AppContext);
+  const { translation, setSigninState, setUser } = useContext(AppContext);
   // const {t} = useTranslation();
   const navigate = useNavigate();
   const { logOut } = useAuthorization();
@@ -22,6 +22,7 @@ const LogoutPage = () => {
   // setSigninState && setSigninState(false);
   logOut();
   if (setSigninState !== undefined) setSigninState(false);
+  if (setUser !== undefined) setUser(undefined);
 
   return (
     <RegLogPageContent title={translation && translation('logoutPage.message').toUpperCase()}>
