@@ -9,14 +9,14 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { useContext, useState } from 'react';
 import { CircularProgress } from "@mui/material";
-import Separator from '../../components/UI/Separator';
-import RegLogPageContent from '../../components/Layouts/RegLogPageContent';
-import CommonButton from '../../components/UI/CommonButton';
-import CommonInput from '../../components/UI/CommonInput';
-import { colors } from '../../assets/defaults/colors';
-import useAuthorization from "../../hooks/useAuthorization";
-import GoogleIconG from '../../components/UI/GoogleIconG';
-import AppContext from '../../utils/AppContext';
+import Separator from '../../../components/UI/Separator';
+import CommonButton from '../../../components/UI/CommonButton';
+import CommonInput from '../../../components/UI/CommonInput';
+import { colors } from '../../../assets/defaults/colors';
+import useAuthorization from "../../../hooks/useAuthorization";
+import GoogleIconG from '../../../components/UI/GoogleIconG';
+import AppContext from '../../../utils/AppContext';
+import RegLogPageContent from '../components/layout/RegLogPageContent';
 
 
 const LoginPage = () => {

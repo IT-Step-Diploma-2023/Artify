@@ -1,7 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { FunctionComponent, } from 'react';
-
-import RegLogPageContent from '../../components/Layouts/RegLogPageContent';
+import RegLogPageContent from '../../authorization/components/layout/RegLogPageContent';
 
 
 const GoogleRegisterPage: FunctionComponent = () => {

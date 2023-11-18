@@ -3,15 +3,15 @@ import { useTranslation } from 'react-i18next';
 import { ChangeEvent, FunctionComponent, useContext, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import { Checkbox, FormControlLabel, Grid, Typography } from '@mui/material';
-import CommonButton from '../../components/UI/CommonButton';
-import RegLogPageContent from '../../components/Layouts/RegLogPageContent';
-import CommonInput from '../../components/UI/CommonInput';
 import { NavLink } from 'react-router-dom';
-import useAuthorization from "../../hooks/useAuthorization";
+import useAuthorization from "../../../hooks/useAuthorization";
 import { useNavigate } from "react-router";
-import { colors } from '../../assets/defaults/colors';
-import InputErrorMessage from '../../components/UI/InputErrorMessage';
-import AppContext from '../../utils/AppContext';
+import AppContext from '../../../utils/AppContext';
+import RegLogPageContent from '../../authorization/components/layout/RegLogPageContent';
+import { colors } from '../../../assets/defaults/colors';
+import CommonButton from '../../../components/UI/CommonButton';
+import InputErrorMessage from '../../../components/UI/InputErrorMessage';
+
 
 interface InputForm {
     name: string,

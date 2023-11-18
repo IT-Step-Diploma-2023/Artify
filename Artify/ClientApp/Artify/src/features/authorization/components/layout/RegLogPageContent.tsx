@@ -1,10 +1,11 @@
 import { FunctionComponent, ReactNode, useState } from 'react';
 // import { useTranslation } from 'react-i18next';
 import { Box, Container } from '@mui/material';
-import { colors } from '../../assets/defaults/colors';
-import FormPanelBackground from '../../components/UI/FormPanelBackground';
-import FormTitle from '../../components/UI/FormTitle';
-import FormPanel from '../../components/UI/FormPanel';
+import FormPanel from '../../../../components/UI/FormPanel';
+import { colors } from '../../../../assets/defaults/colors';
+import FormTitle from '../../../../components/UI/FormTitle';
+import FormPanelBackground from '../../../../components/UI/FormPanelBackground';
+
 
 
 interface PageContentProps {

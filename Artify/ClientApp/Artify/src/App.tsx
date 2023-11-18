@@ -12,11 +12,11 @@ import RootLayout from './pages/HelperPages/RootLayout';
 import ErrorPage from './pages/HelperPages/ErrorPage';
 import HomePage from './pages/HomePage';
 // auth and reg pages
-import LoginPage from './pages/AuthorizationPages/LoginPage';
-import LogoutPage from './pages/AuthorizationPages/LogoutPage';
-import EmailRegisterPage from './pages/RegistrationPages/EmailRegistrationPage';
-import SelectRegisterPage from './pages/RegistrationPages/SelectRegistrationPage';
-import GoogleRegisterPage from './pages/RegistrationPages/GoogleRegistrationPage';
+import LoginPage from './features/authorization/pages/LoginPage';
+import LogoutPage from './features/authorization/pages/LogoutPage';
+import EmailRegisterPage from './features/registration/pages/EmailRegistrationPage';
+import SelectRegisterPage from './features/registration/pages/SelectRegistrationPage';
+import GoogleRegisterPage from './features/registration/pages/GoogleRegistrationPage';
 // user settings pages
 import BasicInfoPage from './pages/UserSettingsPages/BasicInfoPage';
 import ProfInfoPage from './pages/UserSettingsPages/ProfInfoPage';

@@ -3,6 +3,7 @@ import { corsMod, urls } from "../assets/defaults/urls";
 import { IShot, IShotDetails, IUploadedData, ShotsFilter } from "../assets/interfaces/shotsInterfaces";
 import { getAuthToken } from "./useAuthorization";
 
+
 const token = () => {
     return getAuthToken() ?? ""
 };

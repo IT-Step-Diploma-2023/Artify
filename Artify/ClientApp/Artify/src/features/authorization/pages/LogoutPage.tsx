@@ -1,25 +1,19 @@
-// import { AuthenticationManager } from '../../utils/AuthenticationManager';
 import { useContext } from "react";
-import useAuthorization from "../../hooks/useAuthorization";
-import AppContext from "../../utils/AppContext";
-import RegLogPageContent from '../../components/Layouts/RegLogPageContent';
-
-// import { useTranslation } from "react-i18next";
-import CommonButton from "../../components/UI/CommonButton";
-import { colors } from "../../assets/defaults/colors";
+import AppContext from "../../../utils/AppContext";
+import CommonButton from "../../../components/UI/CommonButton";
+import { colors } from "../../../assets/defaults/colors";
 import { Box } from "@mui/system";
 import { useNavigate } from "react-router";
+import useAuthorization from "../../../hooks/useAuthorization";
+import RegLogPageContent from "../components/layout/RegLogPageContent";
 
 
 const LogoutPage = () => {
 
-  // const { setSigninState } = useContext(UserContext);
   const { translation, setSigninState, setUser } = useContext(AppContext);
-  // const {t} = useTranslation();
   const navigate = useNavigate();
   const { logOut } = useAuthorization();
 
-  // setSigninState && setSigninState(false);
   logOut();
   if (setSigninState !== undefined) setSigninState(false);
   if (setUser !== undefined) setUser(undefined);

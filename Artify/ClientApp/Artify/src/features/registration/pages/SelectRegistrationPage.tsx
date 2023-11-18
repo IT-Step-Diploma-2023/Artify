@@ -2,11 +2,12 @@ import { useTranslation } from 'react-i18next';
 import { FunctionComponent } from 'react';
 import Box from '@mui/material/Box';
 import { Typography } from '@mui/material';
-import CommonButton from '../../components/UI/CommonButton';
-import Separator from '../../components/UI/Separator';
 import { useNavigate } from 'react-router-dom';
-import RegLogPageContent from '../../components/Layouts/RegLogPageContent';
-import GoogleIconG from '../../components/UI/GoogleIconG';
+import CommonButton from '../../../components/UI/CommonButton';
+import GoogleIconG from '../../../components/UI/GoogleIconG';
+import Separator from '../../../components/UI/Separator';
+import RegLogPageContent from '../../authorization/components/layout/RegLogPageContent';
+
 
 
 const SelectRegisterPage: FunctionComponent = () => {
