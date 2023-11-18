@@ -7,7 +7,6 @@ import { Avatar, Grid } from '@mui/material';
 import * as BtnStyles from "../../../components/UI/CustomButtonStyles";
 import { colors } from '../../../assets/defaults/colors';
 import useCurrentUser from '../../../hooks/useCurrentUser';
-import { IBasicUserFormData } from '../../../assets/interfaces/usersInterfaces';
 import { baseUrlApi } from '../../../assets/defaults/urls';
 import CustomButton from '../../../components/UI/CustomButton';
 import CommonInput from '../../../components/UI/CommonInput';
@@ -87,8 +86,6 @@ const BasicInfoPage: FunctionComponent = () => {
     const { postData } = useCurrentUser();
 
     const { user, setUser } = useContext(AppContext);
-
-    // useEffect(() => { void setUser(() => loadData()); }, []);
 
     /* #region validation */
 

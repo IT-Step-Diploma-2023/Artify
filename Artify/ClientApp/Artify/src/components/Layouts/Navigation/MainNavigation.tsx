@@ -70,6 +70,7 @@ const Navbar: FunctionComponent = () => {
 
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
+  
   const { signinState, user } = useContext(AppContext);
 
   const shownName = getShownName(user);

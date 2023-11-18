@@ -7,12 +7,11 @@ import { colors } from '../../../assets/defaults/colors';
 import CommonButton from '../../../components/UI/CommonButton';
 import CommonInput from '../../../components/UI/CommonInput';
 import InputErrorMessage from '../../../components/UI/InputErrorMessage';
-import getData from '../../../hooks/useSocialProfiles';
-import postData from '../../../hooks/useSocialProfiles';
-import loadData from '../../../hooks/useSocialProfiles';
 import SettingsMenu from '../components/layout/SettingsMenu';
 import CommonLabel from '../components/UI/CommonLabel';
-import { ISocialProfile, ISocialProfiles } from '../../../assets/interfaces/socialProfilesInterfaces';
+import { ISocialProfile } from '../../../assets/interfaces/socialProfilesInterfaces';
+import useSocialProfiles from '../../../hooks/useSocialProfiles';
+import { retriveData } from '../../../hooks/useSocialProfiles';
 
 
 const NetworksPage: FunctionComponent = () => {
@@ -26,27 +25,31 @@ const NetworksPage: FunctionComponent = () => {
 
     /* #endregion */
 
-    // const { getData, postData, loadData, } = useSocialProfiles();
+    const { postData } = useSocialProfiles();
 
-    useEffect(() => { void getData() },[]);
 
-    const [formData, setFormData] = useState<ISocialProfile[] | null>();
+    const [formData, setFormData] = useState<ISocialProfile[] | undefined>();
+
+    useEffect(() => { void retriveData(setFormData) }, []);
 
     /* #region validation */
     // ^(http(s):\/\/.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$
 
     const errors: string[] = [];
     const states: boolean[] = [];
-    formData.forEach(() => {
-        errors.push('');
-        states.push(false);
-    });
+
+    if (formData) {
+        formData.forEach(() => {
+            errors.push('');
+            states.push(false);
+        });
+    }
 
     const [inputErrors, setInputError] = useState(errors);
     const [formValid, setFormValid] = useState(false);
 
     useEffect(() => {
-        inputErrors.find((error) => error !== '') !== undefined ?
+        inputErrors.find((error) => error !== '') ?
             setFormValid(false) :
             setFormValid(true);
     }, [inputErrors]);
@@ -70,6 +73,7 @@ const NetworksPage: FunctionComponent = () => {
         const name = event.target.name;
         const value = event.target.value;
         setFormData((prevData) => {
+            if (prevData === undefined) return;
             const newData = [...prevData];
             newData[id].address = value;
             return newData;
@@ -83,11 +87,12 @@ const NetworksPage: FunctionComponent = () => {
             alert(formErrorMessage);
             return;
         }
-        postData(formData);
+        if (formData === undefined) return;
+        void postData(formData);
     }
 
     return <>
-        <Box sx={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
+        {formData && <Box sx={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
             <Box sx={{ position: 'absolute', left: '0', margin: '0' }}>
                 <SettingsMenu translation={t}></SettingsMenu>
             </Box>
@@ -134,7 +139,8 @@ const NetworksPage: FunctionComponent = () => {
                     {t('common.saveLong')}
                 </CommonButton>
             </Box>
-        </Box>
+        </Box>}
+
     </>
 };
 

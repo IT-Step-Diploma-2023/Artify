@@ -33,6 +33,7 @@ export const urls = {
     getTargetUserData: `${baseUrl}api/UsersApi/GetTargetUserData`,
     updateCurrentUser: `${baseUrl}api/UsersApi/UpdateCurrentUser`, // no cntroller now
     getUserSocialProfiles: `${baseUrl}api/UsersApi/GetUserSocialProfiles`,
+    updateUserSocialProfiles: `${baseUrl}api/UsersApi/UpdateUserSocialProfiles`,
     // shot
     uploadShot: `${baseUrl}api/ShotsApi/UploadShot`,
     getShot: `${baseUrl}api/ShotsApi/GetShot`,

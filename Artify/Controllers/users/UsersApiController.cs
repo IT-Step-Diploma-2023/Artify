@@ -75,6 +75,11 @@ namespace Artify.Controllers.users
             public List<SocialProfileDTO> SocialProfiles { get; set; } = new List<SocialProfileDTO>();
         }
 
+        private class UserSocialProfilesDTO : ISocialProfilesList
+        {
+            public List<SocialProfileDTO> SocialProfiles { get; set; } = new List<SocialProfileDTO>();
+        }
+
 
         /// <summary>
         /// Returns user social profiles data
@@ -82,7 +87,7 @@ namespace Artify.Controllers.users
         /// /// <response code="200">Returns user with the social profiles in json format</response>
         /// <response code="404">UserDTO was not found in the database</response>
         /// <response code="500">Can't fetch user right now</response>
-        [Route("api/users/[controller]/[action]")]
+        [Route("api/[controller]/[action]")]
         [HttpGet]
         [Authorize]
         public IActionResult GetUserSocialProfiles()
@@ -94,20 +99,10 @@ namespace Artify.Controllers.users
                     return Forbid();
                 User? user = _usersRepository.Query(user => user.Id == model.Id).FirstOrDefault();
                 if (user == null) return NotFound(new { errorMessage = "UserDTO was not found in the database" });
-                UserSocialProfileDTO returnModel = new UserSocialProfileDTO(user);
-                user.UserSocialProfiles.ForEach(profile =>
-                {
-                    SocialProfileDTO socialProfile = new SocialProfileDTO()
-                    {
-                        Address = profile.Address,
-                        Name = profile.SocialProfile.Name
-                    };
-                    returnModel.SocialProfiles.Add(socialProfile);
-                });
 
-                int count = user.UserSocialProfiles.Count();
+                var returnModel = new UserSocialProfilesDTO();
+                GetUserSocialProfilesDTO(user, returnModel);
 
-                // _socialProfilesRepository.Query(profile => profile.UserSocialProfiles.Contains())
                 return Ok(returnModel);
             }
             catch (Exception)
@@ -115,6 +110,8 @@ namespace Artify.Controllers.users
                 return BadRequest(new { errorMessage = "Something went wrong" });
             }
         }
+
+
 
         /// <summary>
         /// Update logged in user social profiles data
@@ -125,7 +122,7 @@ namespace Artify.Controllers.users
         [Route("api/[controller]/[action]")]
         [HttpPost]
         [Authorize]
-        public IActionResult UpdateUserSocialProfiles()
+        public IActionResult UpdateUserSocialProfiles([FromForm] string value)
         {
             try
             {
@@ -135,13 +132,69 @@ namespace Artify.Controllers.users
                 User? user = _usersRepository.Query(user => user.Id == model.Id).FirstOrDefault();
                 if (user == null)
                     return NotFound(new { errorMessage = "UserDTO was not found in the database" });
+                try
+                {
+                    var inputJson = JsonConvert.DeserializeObject<UserSocialProfilesDTO>(value) ?? throw new Exception();
+                    var updatedSocialProfiles = inputJson.SocialProfiles;
+
+                    #region add or update
+                    updatedSocialProfiles.ForEach((profile) =>
+                    {
+                        var storedProfile = user.UserSocialProfiles.Where(usp => usp.SocialProfile.Name == profile.Name).FirstOrDefault();
+                        if (storedProfile == null)
+                        {
+                            var socialPrfile = _userProfilesRepository.Query(sp => sp.Name == profile.Name).
+                            FirstOrDefault() ?? throw new NullReferenceException("No such social network in database");
+                            user.UserSocialProfiles.Add(new UserSocialProfile()
+                            {
+                                UserId = user.Id,
+                                SocialProfileId = socialPrfile.Id,
+                                Address = profile.Address,
+                            });
+                            _userProfilesRepository.Save();
+                        }
+                        else
+                        {
+                            if (storedProfile.Address != profile.Address)
+                            {
+                                storedProfile.Address = profile.Address;
+                                _userProfilesRepository.Save();
+                            }
+                        }
+                    });
+                    #endregion
+
+
+                    #region remove social profile
+                    List<int> deletedProfileIds = new();
+                    user.UserSocialProfiles.ForEach(profile =>
+                    {
+                        var search = inputJson.SocialProfiles.Where(sp=>sp.Address==profile.Address).FirstOrDefault();
+                        if(search == null) deletedProfileIds.Add(profile.Id);
+                    });
+                    deletedProfileIds.ForEach(id =>
+                    {
+                        var deletedProfile = user.UserSocialProfiles.Single(usp => usp.Id == id);
+                        user.UserSocialProfiles.Remove(deletedProfile);
+                        _userProfilesRepository.Save();
+                    });
+                    #endregion
+
+                    var returnModel = new UserSocialProfilesDTO();
+                    GetUserSocialProfilesDTO(user, returnModel);
+
+                    return Ok(returnModel);
+                }
+                catch (Exception)
+                {
+                    return BadRequest(new { errorMessage = "Values are not provided" });
+                }
 
             }
             catch (Exception)
             {
                 return BadRequest(new { errorMessage = "Something went wrong" });
             }
-            return Ok();
         }
 
         /// <summary>
@@ -219,6 +272,17 @@ namespace Artify.Controllers.users
             }
         }
 
-
+        private static void GetUserSocialProfilesDTO(User user, UserSocialProfilesDTO returnModel)
+        {
+            user.UserSocialProfiles.ForEach(profile =>
+            {
+                SocialProfileDTO socialProfile = new SocialProfileDTO()
+                {
+                    Address = profile.Address,
+                    Name = profile.SocialProfile.Name
+                };
+                returnModel.SocialProfiles.Add(socialProfile);
+            });
+        }
     }
 }
