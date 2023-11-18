@@ -5,7 +5,6 @@ import { Box, Divider, Slider } from "@mui/material";
 import { ChangeEvent, FunctionComponent, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import CommonInput from "../../../components/UI/CommonInput";
-import CommonLabel from "../../../components/UI/UserSettingsComponents/CommonLabel";
 import { colors } from "../../../assets/defaults/colors";
 import { effects } from "../../../assets/defaults/effects";
 import CrossIcon from "../../../components/UI/CrossIcon";
@@ -18,6 +17,7 @@ import { IVisibilityOption, IUploadedData } from "../../../assets/interfaces/sho
 import { postData } from "../../../hooks/useShots";
 import AddDescriptionModal from "../components/layout/AddDescriptionModal";
 import PublicateModal from "../components/layout/PublicateModal";
+import CommonLabel from "../../userSettings/components/UI/CommonLabel";
 
 
 // interface IVisibilityOption {

@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box';
-import { ChangeEvent, FunctionComponent, useEffect, useState } from 'react';
+import { ChangeEvent, FunctionComponent, useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import React from 'react';
 import { AddAPhoto } from '@mui/icons-material';
@@ -7,17 +7,18 @@ import { Avatar, Grid } from '@mui/material';
 import * as BtnStyles from "../../../components/UI/CustomButtonStyles";
 import { colors } from '../../../assets/defaults/colors';
 import useCurrentUser from '../../../hooks/useCurrentUser';
-import SettingsMenu from '../../../components/UI/UserSettingsComponents/SettingsMenu';
 import { IBasicUserFormData } from '../../../assets/interfaces/usersInterfaces';
 import { baseUrlApi } from '../../../assets/defaults/urls';
 import CustomButton from '../../../components/UI/CustomButton';
-import CommonLabel from '../../../components/UI/UserSettingsComponents/CommonLabel';
 import CommonInput from '../../../components/UI/CommonInput';
 import InputErrorMessage from '../../../components/UI/InputErrorMessage';
 import CommonSelect from '../../../components/UI/CommonSelect';
 import CommonTextArea from '../../../components/UI/CommonTextArea';
 import CommonButton from '../../../components/UI/CommonButton';
 import {countries} from "../../../utils/getCountries"
+import SettingsMenu from '../components/layout/SettingsMenu';
+import CommonLabel from '../components/UI/CommonLabel';
+import AppContext from '../../../utils/AppContext';
 
 /* #region styles */
 
@@ -83,11 +84,11 @@ const BasicInfoPage: FunctionComponent = () => {
 
     /* #endregion */
 
-    const { postData, loadData } = useCurrentUser();
+    const { postData } = useCurrentUser();
 
-    const [formData, setFormData] = useState<IBasicUserFormData | null | undefined>(() => loadData());
+    const { user, setUser } = useContext(AppContext);
 
-    // useEffect(() => { void setFormData(() => loadData()); }, []);
+    // useEffect(() => { void setUser(() => loadData()); }, []);
 
     /* #region validation */
 
@@ -164,11 +165,12 @@ const BasicInfoPage: FunctionComponent = () => {
             alert(formErrorMessage);
             return;
         }
-        if (formData === null || formData === undefined) return;
-        void postData(formData, selectedImage);
+        if (user === null || user === undefined) return;
+        void postData(user, selectedImage);
     }
 
-    if (formData === null || formData === undefined) return <></>;
+    if (user === null || user === undefined) return <></>;
+    if (setUser === null || setUser === undefined) return <></>;
     return <>
         <Box sx={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
             <Box sx={{ position: 'absolute', left: '0', margin: '0' }}>
@@ -201,24 +203,24 @@ const BasicInfoPage: FunctionComponent = () => {
                         md: 'block'
                     }
                 }}>
-                    {(selectedImage.size === 0 && formData.logoImage === "") &&
+                    {(selectedImage.size === 0 && user.logoImage === "") &&
                         <Box
                             aria-label="addaphoto"
                             sx={logoImageEmpty}>
                             <AddAPhoto sx={logoImageEmptyIcon} />
                         </Box>}
-                    {(selectedImage.size !== 0 || formData.logoImage !== "") &&
+                    {(selectedImage.size !== 0 || user.logoImage !== "") &&
                         <Avatar
                             sx={logoImage}
-                            alt={formData.username}
-                            title={formData.fullName ?
-                                formData.fullName :
-                                formData.username}
+                            alt={user.username}
+                            title={user.fullName ?
+                                user.fullName :
+                                user.username}
                             // src='/public/images/sample_luna_profile.png'
                             src={
                                 selectedImage.size !== 0 ?
                                     URL.createObjectURL(selectedImage) :
-                                    baseUrlApi + formData.logoImage}
+                                    baseUrlApi + user.logoImage}
                         />
                     }
                     <CustomButton height="md"
@@ -266,7 +268,7 @@ const BasicInfoPage: FunctionComponent = () => {
                                 name={login}
                                 placeholder={login}
                                 aria-label={login}
-                                defaultValue={formData && formData.username}
+                                defaultValue={user && user.username}
                                 readOnly
                             />
                         </Box>
@@ -277,7 +279,7 @@ const BasicInfoPage: FunctionComponent = () => {
                                 {fullName}
                             </CommonLabel>
                             <CommonInput
-                                isValid={fullNameError === '' || formData && formData.fullName.length === 0}
+                                isValid={fullNameError === '' || user && user.fullName.length === 0}
                                 sx={{ width: '100%' }}
                                 color='primary'
                                 height='bg'
@@ -286,9 +288,9 @@ const BasicInfoPage: FunctionComponent = () => {
                                 name='fullName'
                                 placeholder={fullName}
                                 aria-label={fullName}
-                                value={formData && formData.fullName}
+                                value={user && user.fullName}
                                 onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                                    setFormData((pervData) => {
+                                    setUser((pervData) => {
                                         if (pervData) {
                                             const updatedData = { ...pervData, fullName: e.target.value };
                                             return updatedData;
@@ -313,9 +315,9 @@ const BasicInfoPage: FunctionComponent = () => {
                                 color='primary'
                                 title='country'
                                 name='country'
-                                value={formData && formData.country}
+                                value={user && user.country}
                                 onChange={(e) => {
-                                    setFormData((pervData) => {
+                                    setUser((pervData) => {
                                         if (pervData) {
                                             const updatedData = { ...pervData, country: e.target.value };
                                             return updatedData;
@@ -340,7 +342,7 @@ const BasicInfoPage: FunctionComponent = () => {
                                 {address}
                             </CommonLabel>
                             <CommonInput
-                                isValid={addressError === '' || formData && formData.address.length === 0}
+                                isValid={addressError === '' || user && user.address.length === 0}
                                 sx={{ width: '100%' }}
                                 color='primary'
                                 height='bg'
@@ -349,9 +351,9 @@ const BasicInfoPage: FunctionComponent = () => {
                                 name="address"
                                 placeholder={address}
                                 aria-label={address}
-                                value={formData && formData.address}
+                                value={user && user.address}
                                 onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                                    setFormData((pervData) => {
+                                    setUser((pervData) => {
                                         if (pervData) {
                                             const updatedData = { ...pervData, address: e.target.value };
                                             return updatedData;
@@ -369,7 +371,7 @@ const BasicInfoPage: FunctionComponent = () => {
                                 {info}
                             </CommonLabel>
                             <CommonTextArea
-                                isValid={infoError === '' || formData && formData.info.length === 0}
+                                isValid={infoError === '' || user && user.info.length === 0}
                                 sx={{ width: '100%' }}
                                 color='primary'
                                 borderRaius='bg'
@@ -379,9 +381,9 @@ const BasicInfoPage: FunctionComponent = () => {
                                 name="info"
                                 placeholder={info}
                                 aria-label={info}
-                                value={formData && formData.info}
+                                value={user && user.info}
                                 onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
-                                    setFormData((pervData) => {
+                                    setUser((pervData) => {
                                         if (pervData) {
                                             const updatedData = { ...pervData, info: e.target.value };
                                             return updatedData;

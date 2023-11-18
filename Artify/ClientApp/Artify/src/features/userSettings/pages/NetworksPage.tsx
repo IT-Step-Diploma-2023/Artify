@@ -7,9 +7,12 @@ import { colors } from '../../../assets/defaults/colors';
 import CommonButton from '../../../components/UI/CommonButton';
 import CommonInput from '../../../components/UI/CommonInput';
 import InputErrorMessage from '../../../components/UI/InputErrorMessage';
-import CommonLabel from '../../../components/UI/UserSettingsComponents/CommonLabel';
-import SettingsMenu from '../../../components/UI/UserSettingsComponents/SettingsMenu';
-import useSocialProfiles from '../../../hooks/useSocialProfiles';
+import getData from '../../../hooks/useSocialProfiles';
+import postData from '../../../hooks/useSocialProfiles';
+import loadData from '../../../hooks/useSocialProfiles';
+import SettingsMenu from '../components/layout/SettingsMenu';
+import CommonLabel from '../components/UI/CommonLabel';
+import { ISocialProfile, ISocialProfiles } from '../../../assets/interfaces/socialProfilesInterfaces';
 
 
 const NetworksPage: FunctionComponent = () => {
@@ -23,11 +26,11 @@ const NetworksPage: FunctionComponent = () => {
 
     /* #endregion */
 
-    const { getData, postData, loadData, } = useSocialProfiles();
-       
-    useEffect(() => { void getData() });
+    // const { getData, postData, loadData, } = useSocialProfiles();
 
-    const [formData, setFormData] = useState(loadData);
+    useEffect(() => { void getData() },[]);
+
+    const [formData, setFormData] = useState<ISocialProfile[] | null>();
 
     /* #region validation */
     // ^(http(s):\/\/.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$

@@ -1,23 +1,16 @@
 import { getAuthToken } from './useAuthorization';
 import availableProfiles from '../assets/data/availableSocialProfiles.json'
 import { urls, corsMod } from '../assets/defaults/urls';
+import { ISocialProfiles, ISocialProfile } from '../assets/interfaces/socialProfilesInterfaces';
 
 
 const token = getAuthToken() ?? '';
 
-export interface SocialProfile {
-    name: string,
-    address: string
-}
 
-export interface SocialProfiles {
-    socialProfiles: SocialProfile[]
-}
+function useISocialProfiles() {
 
-function useSocialProfiles() {
-
-    const decodeData = (data: SocialProfiles): SocialProfile[] => {
-        const decodedData: SocialProfile[] = [];
+    const decodeData = (data: ISocialProfiles): ISocialProfile[] => {
+        const decodedData: ISocialProfile[] = [];
         availableProfiles.forEach((profile) => {
             const item = data.socialProfiles.find((profileItem) => profileItem.name === profile.name);
             if (item !== undefined) profile.address = item.address;
@@ -26,8 +19,8 @@ function useSocialProfiles() {
         return decodedData;
     }
 
-    const encodeData = (data: SocialProfile[]) => {
-        const updatedData: SocialProfiles = { socialProfiles: [] };
+    const encodeData = (data: ISocialProfile[]) => {
+        const updatedData: ISocialProfiles = { socialProfiles: [] };
         data.forEach((profile) => {
             if (profile.address !== '')
                 updatedData.socialProfiles.push(profile);
@@ -35,18 +28,18 @@ function useSocialProfiles() {
         return updatedData;
     }
 
-    const postData = (data: SocialProfile[]): void => {
+    const postData = (data: ISocialProfile[]): void => {
         const jsonData = encodeData(data);
         console.log(jsonData);
         sessionStorage.removeItem('socialProfiles');
     }
 
-    const saveData = (data: SocialProfile[]) => {
+    const saveData = (data: ISocialProfile[]) => {
         sessionStorage.setItem('socialProfiles', JSON.stringify(data));
     }
 
-    const loadData = (): SocialProfile[] => {
-        const data: SocialProfile[] = JSON.parse(sessionStorage.socialProfiles as string)
+    const loadData = (): ISocialProfile[] => {
+        const data: ISocialProfile[] = JSON.parse(sessionStorage.socialProfiles as string)
         return data;
     }
 
@@ -59,12 +52,12 @@ function useSocialProfiles() {
             },
         });
         if (response.status !== 200) return;
-        const responseJson: SocialProfiles = await response.json();
+        const responseJson: ISocialProfiles = await response.json();
         saveData(decodeData(responseJson));
     }
 
     return { getData, postData, saveData, loadData };
 }
 
-export default useSocialProfiles;
+export default useISocialProfiles;
 

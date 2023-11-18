@@ -1,5 +1,5 @@
 import { styled } from "@mui/material";
-import {colors} from "../../../assets/defaults/colors";
+import { colors } from "../../../../assets/defaults/colors";
 
 const CommonLabel = styled('label')(({ htmlFor }: { htmlFor: string }) => ({
     htmlFor: { htmlFor },

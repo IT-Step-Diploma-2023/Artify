@@ -1,5 +1,5 @@
 import { Typography, styled } from "@mui/material";
-import {colors} from "../../../assets/defaults/colors";
+import { colors } from "../../../../assets/defaults/colors";
 
 
 const InputSub = styled(Typography)(() => ({

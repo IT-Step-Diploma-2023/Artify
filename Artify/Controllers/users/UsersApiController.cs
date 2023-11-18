@@ -180,7 +180,7 @@ namespace Artify.Controllers.users
 
                     var logoImagePath = new OldNewImageFilePath();
 
-                    if (!logoImage.FileName.IsNullOrEmpty())
+                    if (logoImage.FileName != "blob")
                     {
                         ImageUploaderResult uploadResult = await ImageUploader.UploadImage(logoImage, "logoImages");
                         if (uploadResult.ResultCode == ImageUploaderResultCode.Error || uploadResult.FileName == null)
