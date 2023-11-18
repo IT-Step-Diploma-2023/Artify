@@ -32,8 +32,8 @@ import CollectionItemPage from './pages/UserProfilePages/CollectionItemPage';
 import SavedPage from './pages/UserProfilePages/SavedPage';
 import SubscriptionsPage from './pages/UserProfilePages/SubscriptionsPage';
 // main menu / footer menu pages
-import HirePage from './pages/HirePages/HirePage';
-import HelpCenterPage from './pages/UserHelpPages/HelpCenterPage';
+import HirePage from './features/hire/pages/HirePage';
+import HelpCenterPage from './features/userHelp/pages/HelpCenterPage';
 //
 import MessagePage from './pages/MessagePage';
 import ProfilePage2 from './pages/ProfilePage2';
@@ -41,18 +41,18 @@ import SharePage1 from './pages/UserProfilePages/SharePage1';
 import SharePage2 from './pages/UserProfilePages/SharePage2';
 import FilterPage from './pages/FilterPage';
 
-import HowAddWorkPage from './pages/UserHelpPages/HowAddWorkPage';
-import HowBuyWorkPage from './pages/UserHelpPages/HowBuyWorkPage';
-import HowHireDesignerPage from './pages/UserHelpPages/HowHireDesignerPage';
+import HowAddWorkPage from './features/userHelp/pages/HowAddWorkPage';
+import HowBuyWorkPage from './features/userHelp/pages/HowBuyWorkPage';
+import HowHireDesignerPage from './features/userHelp/pages/HowHireDesignerPage';
 
-import AboutUsBrandsPage from './pages/UserHelpPages/AboutUsBrandsPage';
-import AboutUsIllustratorsPage from './pages/UserHelpPages/AboutUsIllustratorsPage';
-import AboutUsPage from './pages/UserHelpPages/AboutUsPage';
-import AboutUsProductDesignersPage from './pages/UserHelpPages/AboutUsProductDesignersPage';
-import AboutUsUiUxPage from './pages/UserHelpPages/AboutUsUiUxPage';
-import AboutUsWebDesignersPage from './pages/UserHelpPages/AboutUsWebDesignersPage';
-import AboutUsPhotographsPage from './pages/UserHelpPages/AboutUsPhotographsPage';
-import MediaKitPage from './pages/UserHelpPages/MediaKitPage';
+import AboutUsBrandsPage from './features/userHelp/pages/AboutUsBrandsPage';
+import AboutUsIllustratorsPage from './features/userHelp/pages/AboutUsIllustratorsPage';
+import AboutUsPage from './features/userHelp/pages/AboutUsPage';
+import AboutUsProductDesignersPage from './features/userHelp/pages/AboutUsProductDesignersPage';
+import AboutUsUiUxPage from './features/userHelp/pages/AboutUsUiUxPage';
+import AboutUsWebDesignersPage from './features/userHelp/pages/AboutUsWebDesignersPage';
+import AboutUsPhotographsPage from './features/userHelp/pages/AboutUsPhotographsPage';
+import MediaKitPage from './features/userHelp/pages/MediaKitPage';
 import { isUserLogged } from './hooks/useAuthorization';
 import AppContext from './utils/AppContext';
 import TestingPage from './pages/TestingPage';

@@ -1,13 +1,11 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { Button } from '@mui/base/Button';
 import Typography from '@mui/material/Typography';
-
 import {  Grid,  Paper, Stack} from '@mui/material';
 import { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
-
 import { Link } from 'react-router-dom';
-import AboutUsMenu from '../../components/UI/AboutUsMenu';
+import AboutUsMenu from '../components/layout/AboutUsMenu';
 
 
   const MediaKitPage: FunctionComponent = () => {   
