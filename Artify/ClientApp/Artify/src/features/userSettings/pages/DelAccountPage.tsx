@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
-import SettingsMenu from '../../components/UI/UserSettingsComponents/SettingsMenu';
-import ProfileMenu from '../../components/UI/UserProfileComponents/ProfileMenu';
+import ProfileMenu from '../../userProfile/components/layout/ProfileMenu';
+import SettingsMenu from '../components/layout/SettingsMenu';
 
 
 const DelAccountPage: FunctionComponent = () => {

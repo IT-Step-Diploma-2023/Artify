@@ -6,7 +6,6 @@ import { ThemeProvider } from '@mui/material';
 import theme from './assets/defaults/theme';
 import { useEffect, useState } from 'react';
 
-
 // pages
 import RootLayout from './pages/HelperPages/RootLayout';
 import ErrorPage from './pages/HelperPages/ErrorPage';
@@ -18,27 +17,27 @@ import EmailRegisterPage from './features/registration/pages/EmailRegistrationPa
 import SelectRegisterPage from './features/registration/pages/SelectRegistrationPage';
 import GoogleRegisterPage from './features/registration/pages/GoogleRegistrationPage';
 // user settings pages
-import BasicInfoPage from './pages/UserSettingsPages/BasicInfoPage';
-import ProfInfoPage from './pages/UserSettingsPages/ProfInfoPage';
-import NetworksPage from './pages/UserSettingsPages/NetworksPage';
-import DelAccountPage from './pages/UserSettingsPages/DelAccountPage';
+import BasicInfoPage from './features/userSettings/pages/BasicInfoPage';
+import ProfInfoPage from './features/userSettings/pages/ProfInfoPage';
+import NetworksPage from './features/userSettings/pages/NetworksPage';
+import DelAccountPage from './features/userSettings/pages/DelAccountPage';
 // user profile pages
-import PortfolioPage from './pages/UserProfilePages/PortfolioPage';
+import PortfolioPage from './features/userProfile/pages/PortfolioPage';
 import ShowBorders from './pages/ShowBordersPage';
-import AboutMePage from './pages/UserProfilePages/AboutMePage';
-import LikedPage from './pages/UserProfilePages/LikedPage';
-import SharePage from './pages/UserProfilePages/SharePage';
-import CollectionItemPage from './pages/UserProfilePages/CollectionItemPage';
-import SavedPage from './pages/UserProfilePages/SavedPage';
-import SubscriptionsPage from './pages/UserProfilePages/SubscriptionsPage';
+import AboutMePage from './features/userProfile/pages/AboutMePage';
+import LikedPage from './features/userProfile/pages/LikedPage';
+import SharePage from './features/share/pages/SharePage';
+import CollectionItemPage from './features/userProfile/pages/CollectionItemPage';
+import SavedPage from './features/userProfile/pages/SavedPage';
+import SubscriptionsPage from './features/userProfile/pages/SubscriptionsPage';
 // main menu / footer menu pages
 import HirePage from './features/hire/pages/HirePage';
 import HelpCenterPage from './features/userHelp/pages/HelpCenterPage';
 //
 import MessagePage from './pages/MessagePage';
 import ProfilePage2 from './pages/ProfilePage2';
-import SharePage1 from './pages/UserProfilePages/SharePage1';
-import SharePage2 from './pages/UserProfilePages/SharePage2';
+import SharePage1 from './features/share/pages/SharePage1';
+import SharePage2 from './features/share/pages/SharePage2';
 import FilterPage from './pages/FilterPage';
 
 import HowAddWorkPage from './features/userHelp/pages/HowAddWorkPage';

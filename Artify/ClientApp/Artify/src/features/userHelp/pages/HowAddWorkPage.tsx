@@ -2,14 +2,12 @@
 import * as React from 'react';
 import { Button } from '@mui/base/Button';
 import Typography from '@mui/material/Typography';
-
 import {  Grid,  IconButton,  ImageListItem,  Input,  ListItemButton,  ListItemText,  Menu,  MenuItem,  Paper,  Select,  Slider, Stack} from '@mui/material';
 import { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import {  AutorenewRounded, DeleteForeverRounded, North, South } from '@mui/icons-material';
-
-import MainNavigation from '../../components/Layouts/Navigation/MainNavigation';
 import { Link } from 'react-router-dom';
+import MainNavigation from '../../../components/Layouts/Navigation/MainNavigation';
 
   
   const HowAddWorkPage: FunctionComponent = () => {   

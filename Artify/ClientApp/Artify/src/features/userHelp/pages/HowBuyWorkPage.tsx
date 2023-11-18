@@ -2,16 +2,14 @@
 import * as React from 'react';
 import { Button } from '@mui/base/Button';
 import Typography from '@mui/material/Typography';
-
 import {  Avatar, Box, Checkbox, Dialog, DialogActions, Grid,  IconButton,  ImageListItem,  Input,  Paper} from '@mui/material';
 import { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import {  Close, LocationOn } from '@mui/icons-material';
-
-
 import { Link } from 'react-router-dom';
-import MainNavigation from '../../components/Layouts/Navigation/MainNavigation';
-import HomeButtonFilter2 from '../../components/UI/HomeButtonFilter2';
+import MainNavigation from '../../../components/Layouts/Navigation/MainNavigation';
+import HomeButtonFilter2 from '../../../components/UI/HomeButtonFilter2';
+
 
  
   const HowBuyWorkPage: FunctionComponent = () => {   

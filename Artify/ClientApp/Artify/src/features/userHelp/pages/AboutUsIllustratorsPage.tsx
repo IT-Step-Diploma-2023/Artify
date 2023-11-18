@@ -5,7 +5,9 @@ import {  Grid,  ImageListItem,  ImageListItemBar,  Paper, Stack} from '@mui/mat
 import { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import AboutUsMenu from '../../components/UI/AboutUsMenu';
+import AboutUsMenu from
+ '../components/layout/AboutUsMenu';
+
 
   
   const AboutUsIllustratorsPage: FunctionComponent = () => {   

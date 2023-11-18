@@ -1,6 +1,6 @@
-import { colors } from "../../assets/defaults/colors";
-import { effects } from "../../assets/defaults/effects";
-import { sizes } from "../../assets/defaults/sizes";
+import { colors } from "../../../assets/defaults/colors";
+import { effects } from "../../../assets/defaults/effects";
+import { sizes } from "../../../assets/defaults/sizes";
 
 export const inputBox = {
   width: "100%", 

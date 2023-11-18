@@ -1,17 +1,14 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import * as React from 'react';
 import Typography from '@mui/material/Typography';
-
-
 import { Avatar, Button, Grid, ImageListItem, Input, Paper, Select } from '@mui/material';
 import { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { LocationOn } from '@mui/icons-material';
-
-
 import { Link } from "react-router-dom";
-import MainNavigation from '../../components/Layouts/Navigation/MainNavigation';
-import ProfileMenu from '../../components/UI/UserProfileComponents/ProfileMenu';
+import MainNavigation from '../../../components/Layouts/Navigation/MainNavigation';
+import ProfileMenu from '../../userProfile/components/layout/ProfileMenu';
+
 
  
   const HowHireDesignerPage: FunctionComponent = () => {
@@ -270,8 +267,7 @@ import ProfileMenu from '../../components/UI/UserProfileComponents/ProfileMenu';
 </svg>
       </Grid>
     </Grid>
-
-
+    
     <Grid container spacing={2}>
       <Grid item xs={3} md={3}>
         

@@ -1,27 +1,24 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import * as React from "react";
 import Typography from "@mui/material/Typography";
-
 import { Box, Divider, Slider } from "@mui/material";
 import { ChangeEvent, FunctionComponent, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-// import { AutorenewRounded, DeleteForeverRounded, North, South } from "@mui/icons-material";
-import CommonInput from "../../components/UI/CommonInput";
-import CommonLabel from "../../components/UI/UserSettingsComponents/CommonLabel";
-import { colors } from "../../assets/defaults/colors";
-import { effects } from "../../assets/defaults/effects";
-import CrossIcon from "../../components/UI/CrossIcon";
+import CommonInput from "../../../components/UI/CommonInput";
+import CommonLabel from "../../../components/UI/UserSettingsComponents/CommonLabel";
+import { colors } from "../../../assets/defaults/colors";
+import { effects } from "../../../assets/defaults/effects";
+import CrossIcon from "../../../components/UI/CrossIcon";
 import * as pageSyles from "./SharePageStyles";
-import * as BtnStyles from "../../components/UI/CustomButtonStyles";
-import CustomButton from "../../components/UI/CustomButton";
-import { getAuthToken } from "../../hooks/useAuthorization";
-import PublicateModal from "../../components/UI/SharePageComponents/PublicateModal";
-import { existedTags } from "../../assets/data/tags";
+import * as BtnStyles from "../../../components/UI/CustomButtonStyles";
+import CustomButton from "../../../components/UI/CustomButton";
+import { existedTags } from "../../../assets/data/tags";
 import { useNavigate } from "react-router";
-// import { urls } from "../../assets/defaults/urls";
-import AddDescriptionModal from "../../components/UI/SharePageComponents/AddDescriptionModal";
-import { IUploadedData, IVisibilityOption } from "../../assets/interfaces/shotsInterfaces";
-import { postData } from "../../hooks/useShots";
+import { IVisibilityOption, IUploadedData } from "../../../assets/interfaces/shotsInterfaces";
+import { postData } from "../../../hooks/useShots";
+import AddDescriptionModal from "../components/layout/AddDescriptionModal";
+import PublicateModal from "../components/layout/PublicateModal";
+
 
 // interface IVisibilityOption {
 //   index: number,

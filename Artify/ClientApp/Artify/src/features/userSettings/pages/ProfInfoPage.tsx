@@ -3,11 +3,12 @@ import Box from '@mui/material/Box';
 import { Divider } from '@mui/material';
 import { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
-import SettingsMenu from '../../components/UI/UserSettingsComponents/SettingsMenu';
-import CommonButton from '../../components/UI/CommonButton';
-import CommonLabel from '../../components/UI/UserSettingsComponents/CommonLabel';
-import InputSub from '../../components/UI/UserSettingsComponents/InputSub';
-import CommonInput from '../../components/UI/CommonInput';
+import CommonButton from '../../../components/UI/CommonButton';
+import CommonInput from '../../../components/UI/CommonInput';
+import SettingsMenu from '../components/layout/SettingsMenu';
+import CommonLabel from '../components/UI/CommonLabel';
+import InputSub from '../components/UI/InputSub';
+
 
 const ProfInfoPage: FunctionComponent = () => {
 

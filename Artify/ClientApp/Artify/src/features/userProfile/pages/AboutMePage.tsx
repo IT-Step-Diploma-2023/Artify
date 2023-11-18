@@ -4,8 +4,8 @@ import Typography from '@mui/material/Typography';
 import { Chip, Grid, Input } from '@mui/material';
 import { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
-import ProfileTopComponent from '../../components/UI/UserProfileComponents/ProfileTopComponent';
-import ProfileMenu from '../../components/UI/UserProfileComponents/ProfileMenu';
+import ProfileMenu from '../components/layout/ProfileMenu';
+import ProfileTopComponent from '../components/layout/ProfileTopComponent';
 
 
 const AboutMePage: FunctionComponent = () => {

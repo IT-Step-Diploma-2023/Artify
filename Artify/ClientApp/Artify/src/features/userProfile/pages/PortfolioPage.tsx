@@ -3,16 +3,16 @@ import Typography from '@mui/material/Typography';
 import { Box, Grid, IconButton, ImageListItem } from '@mui/material';
 import { FunctionComponent, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import ProfileMenu from '../../components/UI/UserProfileComponents/ProfileMenu';
-import ProfileTopComponent from '../../components/UI/UserProfileComponents/ProfileTopComponent';
-import PlusIcon from '../../components/UI/PlusIcon';
 import { useNavigate } from 'react-router';
-import { IShot } from '../../assets/interfaces/shotsInterfaces';
-import { getPortfolioShotsData } from '../../hooks/useShots';
-import { isUserLogged, loggedInUserId } from '../../hooks/useAuthorization';
-import ShotModal from '../../components/UI/HomePageComponents/ShotModal';
-import useTargetUser from '../../hooks/useTargetUser';
-import { baseUrl } from '../../assets/defaults/urls';
+import useTargetUser from '../../../hooks/useTargetUser';
+import { isUserLogged, loggedInUserId } from '../../../hooks/useAuthorization';
+import { IShot } from '../../../assets/interfaces/shotsInterfaces';
+import ProfileTopComponent from '../components/layout/ProfileTopComponent';
+import ProfileMenu from '../components/layout/ProfileMenu';
+import PlusIcon from '../../../components/UI/PlusIcon';
+import { baseUrl } from '../../../assets/defaults/urls';
+import ShotModal from '../../../components/UI/HomePageComponents/ShotModal';
+import {getPortfolioShotsData} from "../../../hooks/useShots";
 
 
 /* #region styles */

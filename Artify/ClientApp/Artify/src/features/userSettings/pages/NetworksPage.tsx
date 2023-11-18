@@ -3,13 +3,13 @@
 import Box from '@mui/material/Box';
 import { ChangeEvent, FormEvent, FunctionComponent, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import SettingsMenu from '../../components/UI/UserSettingsComponents/SettingsMenu';
-import { colors } from '../../assets/defaults/colors';
-import CommonButton from '../../components/UI/CommonButton';
-import CommonLabel from '../../components/UI/UserSettingsComponents/CommonLabel';
-import CommonInput from '../../components/UI/CommonInput';
-import useSocialProfiles from '../../hooks/useSocialProfiles';
-import InputErrorMessage from '../../components/UI/InputErrorMessage';
+import { colors } from '../../../assets/defaults/colors';
+import CommonButton from '../../../components/UI/CommonButton';
+import CommonInput from '../../../components/UI/CommonInput';
+import InputErrorMessage from '../../../components/UI/InputErrorMessage';
+import CommonLabel from '../../../components/UI/UserSettingsComponents/CommonLabel';
+import SettingsMenu from '../../../components/UI/UserSettingsComponents/SettingsMenu';
+import useSocialProfiles from '../../../hooks/useSocialProfiles';
 
 
 const NetworksPage: FunctionComponent = () => {

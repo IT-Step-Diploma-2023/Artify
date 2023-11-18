@@ -1,23 +1,23 @@
 import Box from '@mui/material/Box';
 import { ChangeEvent, FunctionComponent, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import SettingsMenu from '../../components/UI/UserSettingsComponents/SettingsMenu';
-import { colors } from '../../assets/defaults/colors';
-import CommonButton from '../../components/UI/CommonButton';
-import CommonLabel from '../../components/UI/UserSettingsComponents/CommonLabel';
-import CommonInput from '../../components/UI/CommonInput';
 import React from 'react';
 import { AddAPhoto } from '@mui/icons-material';
 import { Avatar, Grid } from '@mui/material';
-import CommonTextArea from '../../components/UI/CommonTextArea';
-import { countries } from '../../utils/getCountries';
-import CommonSelect from '../../components/UI/CommonSelect';
-import useCurrentUser from '../../hooks/useCurrentUser';
-import InputErrorMessage from '../../components/UI/InputErrorMessage';
-import { IBasicUserFormData } from '../../assets/interfaces/usersInterfaces';
-import { baseUrlApi } from '../../assets/defaults/urls';
-import CustomButton from '../../components/UI/CustomButton';
-import * as BtnStyles from "../../components/UI/CustomButtonStyles";
+import * as BtnStyles from "../../../components/UI/CustomButtonStyles";
+import { colors } from '../../../assets/defaults/colors';
+import useCurrentUser from '../../../hooks/useCurrentUser';
+import SettingsMenu from '../../../components/UI/UserSettingsComponents/SettingsMenu';
+import { IBasicUserFormData } from '../../../assets/interfaces/usersInterfaces';
+import { baseUrlApi } from '../../../assets/defaults/urls';
+import CustomButton from '../../../components/UI/CustomButton';
+import CommonLabel from '../../../components/UI/UserSettingsComponents/CommonLabel';
+import CommonInput from '../../../components/UI/CommonInput';
+import InputErrorMessage from '../../../components/UI/InputErrorMessage';
+import CommonSelect from '../../../components/UI/CommonSelect';
+import CommonTextArea from '../../../components/UI/CommonTextArea';
+import CommonButton from '../../../components/UI/CommonButton';
+import {countries} from "../../../utils/getCountries"
 
 /* #region styles */
 

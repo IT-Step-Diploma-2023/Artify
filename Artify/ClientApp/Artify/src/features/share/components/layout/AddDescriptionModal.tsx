@@ -1,8 +1,9 @@
 import { Box, Modal, Typography } from "@mui/material";
-import * as pageStyles from "../../../pages/UserProfilePages/SharePageStyles"
-import * as BtnStyles from "../CustomButtonStyles"
-import CommonTextArea from "../CommonTextArea";
-import CustomButton from "../CustomButton";
+import * as pageStyles from "../../pages/SharePageStyles"
+import * as BtnStyles from "../../../../components/UI/CustomButtonStyles"
+import CommonTextArea from "../../../../components/UI/CommonTextArea";
+import CustomButton from "../../../../components/UI/CustomButton";
+
 
 
 const AddDescriptionModal = ({

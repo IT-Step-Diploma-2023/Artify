@@ -1,6 +1,6 @@
 import { Paper, Avatar, Typography  } from "@mui/material"
 import { Box } from "@mui/system"
-import CommonButton from "../CommonButton";
+import CommonButton from "../../../../components/UI/CommonButton";
 
 
 const LikedProfileCard = (

@@ -2,9 +2,9 @@
 import { Grid } from '@mui/material';
 import { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
-import ProfileMenu from '../../components/UI/UserProfileComponents/ProfileMenu';
-import ProfileTopComponent from '../../components/UI/UserProfileComponents/ProfileTopComponent';
-import LikedProfileCard from '../../components/UI/UserProfileComponents/LikedProfileCard';
+import ProfileTopComponent from '../components/layout/ProfileTopComponent';
+import LikedProfileCard from '../components/layout/LikedProfileCard';
+import ProfileMenu from '../components/layout/ProfileMenu';
 
 
 const SubscriptionsPage: FunctionComponent = () => {

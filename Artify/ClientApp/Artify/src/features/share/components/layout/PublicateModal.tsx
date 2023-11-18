@@ -1,10 +1,10 @@
 import { Box, CircularProgress, Modal, Typography } from "@mui/material";
-import * as BtnStyles from "../CustomButtonStyles"
-import CustomButton from "../CustomButton";
+import * as BtnStyles from "../../../../components/UI/CustomButtonStyles"
+import CustomButton from "../../../../components/UI/CustomButton";
 import { TFunction } from "i18next";
-import { colors } from "../../../assets/defaults/colors";
-import { editIcon } from "./editIcon";
-import { effects } from "../../../assets/defaults/effects";
+import { colors } from "../../../../assets/defaults/colors";
+import { editIcon } from "../UI/editIcon";
+import { effects } from "../../../../assets/defaults/effects";
 import { useState } from "react";
 
 

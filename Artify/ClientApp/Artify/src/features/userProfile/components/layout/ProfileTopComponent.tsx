@@ -1,15 +1,16 @@
 import { LocationOn } from "@mui/icons-material";
 import { Avatar, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import CommonButton from "../CommonButton";
-import { colors } from "../../../assets/defaults/colors";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from 'react-router-dom';
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { getTargetUserData } from "../../../hooks/usePortfolio";
-import { IPortfolioUserData } from "../../../assets/interfaces/usersInterfaces";
-import { baseUrlApi } from "../../../assets/defaults/urls";
-import { isUserLogged } from "../../../hooks/useAuthorization";
+import { getTargetUserData } from "../../../../hooks/usePortfolio";
+import { IPortfolioUserData } from "../../../../assets/interfaces/usersInterfaces";
+import { baseUrlApi } from "../../../../assets/defaults/urls";
+import { isUserLogged } from "../../../../hooks/useAuthorization";
+import CommonButton from "../../../../components/UI/CommonButton";
+import { colors } from "../../../../assets/defaults/colors";
+
 
 const logoImage = {
     display: 'inline-block',
