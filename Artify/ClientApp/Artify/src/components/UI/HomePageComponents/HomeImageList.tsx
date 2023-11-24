@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from 'react';
 import Context from "../../../utils/Context";
 import { useTranslation } from 'react-i18next';
 import ShotModal from './ShotModal';
-import { IShot} from '../../../assets/interfaces/shotsInterfaces';
+import { IShot } from '../../../assets/interfaces/shotsInterfaces';
 import FilterParamlist from './FilterParamList';
 import { getShotsData } from '../../../hooks/useShots';
 import ShotThumbnail from './Shots';
@@ -31,6 +31,7 @@ export default function HomeImageList() {
 
   // const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
+  const { signinState } = useContext(AppContext);
   const { filterActive } = useContext(Context);
 
   const [shots, setShots] = useState<IShot[]>([]);
@@ -38,15 +39,12 @@ export default function HomeImageList() {
 
   const [shotModalOpen, setShotModalOpen] = useState(false);
 
-  const { signinState } = useContext(AppContext);
-
   const existedPrices: string[] = [];
 
   prices.map((price) => {
     existedPrices.push(price.name);
   });
 
-  // useEffect(() => { void getShotsData(setShots) }, [shots]);
   useEffect(() => { void getShotsData(setShots) }, []);
 
   const { setTargetUserId } = useTargetUser();
@@ -55,18 +53,22 @@ export default function HomeImageList() {
     setActiveShot(shot);
     setShotModalOpen(true);
     setTargetUserId((shot.userId));
+    // activeShot && console.log("in activeShot // " + activeShot.id.toString());
   };
 
   const closeShotModalHandler = () => {
     setShotModalOpen(false);
+    void getShotsData(setShots);
+    return;
   };
 
   const navigate = useNavigate();
 
   const navigateToPortfolio = (shotAuthorId: number) => {
-      setTargetUserId(shotAuthorId);
-      navigate("portfolio");
+    setTargetUserId(shotAuthorId);
+    navigate("portfolio");
   }
+
 
   return (<>
     <Box sx={container}>
@@ -94,11 +96,11 @@ export default function HomeImageList() {
             <ShotThumbnail
               shot={shot}
               openModalHandler={openShotModalHandler}
-              isUserLoggedIn={signinState} 
-              navigateToPortfolio = {navigateToPortfolio}/>
+              isUserLoggedIn={signinState}
+              navigateToPortfolio={navigateToPortfolio} />
           </Grid>
         ))}
-
+        {/* fake shots for demo */}
         {/* {itemData.map((item) => (
           <Grid item xs={12} md={6} lg={3} key={item.img} id={itemData.indexOf(item).toString()} >
             <ImageListItem >
@@ -136,7 +138,7 @@ export default function HomeImageList() {
         shotId={activeShot.id}
         shots={shots}
         isUserLoggedIn={signinState}
-        navigateToPortfolio = {navigateToPortfolio}
+        navigateToPortfolio={navigateToPortfolio}
       />}
     </Box>
   </>

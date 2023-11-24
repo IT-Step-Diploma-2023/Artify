@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, MutableRefObject, SetStateAction } from "react";
 import { corsMod, urls } from "../assets/defaults/urls";
 import { IShot, IShotDetails, IUploadedData, ShotsFilter } from "../assets/interfaces/shotsInterfaces";
 import { getAuthToken } from "./useAuthorization";
@@ -16,7 +16,7 @@ export const getShotsData = async (
         let outputFilter = "";
         filters.forEach((value: ShotsFilter) => {
             // outputFilter += "\"" + value.filter + "\"" + "=" + "\"" + value.parameter + "\"";
-            outputFilter += `"${value.filter}"="${value.parameter}`;
+            outputFilter += `"${value.filter}"="${value.parameter}"`;
         })
         outputJson = { "output": outputFilter };
     }
@@ -66,10 +66,11 @@ export const getPortfolioShotsData = async (
 }
 
 export const getShotData = async (
-    shotId: number,
+    id: number,
     setItem: Dispatch<SetStateAction<IShotDetails | undefined>>
 ): Promise<void> => {
-    const response = await fetch(`${urls.getShot}?id=${shotId}`, {
+    // console.log("in getShotData // " + id.toString());
+    const response = await fetch(`${urls.getShot}?id=${id}`, {
         method: "get",
         mode: corsMod,
         headers: {
@@ -83,10 +84,29 @@ export const getShotData = async (
     setItem(responseJson);
 }
 
-export const appreciateShot = async (
-    shot: IShot | IShotDetails,
+export const getShotDataRef = async (
+    id: number,
+    ref: MutableRefObject<IShotDetails | undefined>
 ): Promise<void> => {
-    const shotId = shot.id
+    const response = await fetch(`${urls.getShot}?id=${id}`, {
+        method: "get",
+        mode: corsMod,
+        headers: {
+            "Authorization": "Bearer " + token(),
+        }
+    });
+    if (response.status !== 200) return;
+    const responseJson: IShotDetails = await response.json();
+    if (responseJson.appreciatedByCurrentUser === undefined)
+        responseJson.appreciatedByCurrentUser = false;
+    ref.current = responseJson;
+}
+
+export const appreciateShot = async (
+    id: number,
+    setAppreciated: Dispatch<SetStateAction<boolean | undefined>>
+): Promise<void> => {
+    const shotId = id;
     const response = await fetch(urls.appreciateShot, {
         method: "POST",
         body: JSON.stringify({
@@ -99,9 +119,10 @@ export const appreciateShot = async (
         },
     });
     if (response.status !== 200) return;
-    shot.appreciatedByCurrentUser = !shot.appreciatedByCurrentUser;
+    if (setAppreciated === undefined) return;
+    setAppreciated((prev) => { return !prev; }
+    )
 }
-
 
 export const isAppreciated = async (
     shotId: number

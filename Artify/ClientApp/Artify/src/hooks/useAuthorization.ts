@@ -73,6 +73,7 @@ export default useAuthorization;
 //Returns null or username if user is logged in
 export const isUserLogged = (): string => {
     const token = getAuthToken();
+    // console.log("token = " + (token ?? "no-token"))
     if (token === null || token === 'EXPIRED') return "";
     const tokenData = parseJwt(token);
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
@@ -88,7 +89,7 @@ export const loggedInUserId = (): number => {
 }
 
 export const getAuthToken = () => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');""
     if (!token) return null;
     const tokenDuration = getTokenDuration();
     if (tokenDuration < 0) {
@@ -102,7 +103,7 @@ export const logOut = () => {
 }
 
 export const getTokenDuration = (): number => {
-    const storedExpirationDate = localStorage.getItem('expires');
+    const storedExpirationDate = localStorage.getItem('expiration');
     const expirationDate = new Date(storedExpirationDate ?? '');
     const now = new Date();
     return expirationDate.getTime() - now.getTime();

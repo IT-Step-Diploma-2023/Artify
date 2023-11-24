@@ -55,6 +55,7 @@ const NetworksPage: FunctionComponent = () => {
     }, [inputErrors]);
 
     const validate = (id: number, name: string, value: string) => {
+        console.log("validation");
         const re = /^(http(s):\/\/.)[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$/;
         setInputError((prevData) => {
             const newData = [...prevData]
@@ -90,6 +91,21 @@ const NetworksPage: FunctionComponent = () => {
         if (formData === undefined) return;
         void postData(formData);
     }
+    // if (formData) {
+    //     formData.map((profile) => {
+    //         console.log(formData.indexOf(profile).toString() + " invalid address: " + (inputErrors[formData.indexOf(profile)] === '').toString());
+    //         console.log(formData.indexOf(profile).toString() + " address length=0: " + (profile.address.length === 0).toString());
+    //     });
+    //     console.log(inputErrors);
+    // }
+
+    const getValidity = (profile: ISocialProfile) => {
+        //console.log(profile.address + "errorLength: " + inputErrors.length.toString())
+        if (inputErrors.length === 0) return true;
+        if (formData)
+            return (inputErrors[formData.indexOf(profile)] === '' || profile.address.length === 0);
+        return false;
+    }
 
     return <>
         {formData && <Box sx={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
@@ -107,7 +123,7 @@ const NetworksPage: FunctionComponent = () => {
                             {profile.name}
                         </CommonLabel>
                         <CommonInput
-                            isValid={inputErrors[formData.indexOf(profile)] === '' || profile.address.length === 0}
+                            isValid={getValidity(profile)}
                             sx={{ width: '100%' }}
                             color='primary'
                             height='bg'

@@ -3,7 +3,7 @@ import * as BtnStyles from "../CustomButtonStyles"
 import CustomButton from "../CustomButton";
 import { TFunction } from "i18next";
 import { colors } from "../../../assets/defaults/colors";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { IShot, IShotDetails } from "../../../assets/interfaces/shotsInterfaces";
 import { appreciateShot, getShotData } from "../../../hooks/useShots";
 import { effects } from "../../../assets/defaults/effects";
@@ -229,28 +229,28 @@ const ViewShotModal = ({ t, openModal, closeModalHandler, openModalHandler, shot
     navigateToPortfolio: (shotAuthorId: number) => void
 }) => {
 
-    const [shot, setShotDetails] = useState<IShotDetails>();
-    const [appreciated, setAppreciated] = useState<boolean>(false);
+    const [shot, setShot] = useState<IShotDetails | undefined>();
+    const [appreciated, setAppreciated] = useState<boolean>();
+
+    useEffect(() => {
+        // console.log("in modal // " + shotId.toString());
+        void getShotData(shotId, setShot);
+        // shot && console.log("in effect // " + shot?.id.toString() + "\n\n");
+        void setAppreciated(shots.find((shot) => shot.id === shotId)?.appreciatedByCurrentUser);
+        return () => {
+            setShot(undefined);
+        }
+    }, [shotId, shots]);
+
     const [marked, setMarked] = useState<boolean>(false);
 
-    useEffect(() => {
-        void getShotData(shotId, setShotDetails);
-    }, [shotId]);
-
-    useEffect(() => {
-        shot?.appreciatedByCurrentUser === undefined ?
-            setAppreciated(false) : setAppreciated(shot.appreciatedByCurrentUser);
-    }, [shot?.appreciatedByCurrentUser])
-
-    useLayoutEffect(() => { scrollTo("ancorTop") }, [shotId])
+    useLayoutEffect(() => { scrollTo("ancorTop") }, [shotId]);
 
     /* #region localisation const */
 
     /* #endregion */
 
-    if (shot === undefined) return <></>
-
-    return <Box id="modaParent">
+    return shot ? <Box id="modaParent">
         <Modal
             open={openModal}
             onClose={() => {
@@ -278,8 +278,11 @@ const ViewShotModal = ({ t, openModal, closeModalHandler, openModalHandler, shot
                                     baseUrlApi + shot.authorLogoImage :
                                     "images/default_profile.png"
                             }
-                            onClick={() => navigateToPortfolio(shot.authorId)} />
-                        <Typography sx={headerText}>{shot.title}</Typography>
+                            onClick={() => {
+                                shot &&
+                                    navigateToPortfolio(shot.authorId)
+                            }} />
+                        <Typography sx={headerText}>{shot.title} //{shot.id}</Typography>
                         <CustomButton height="md"
                             sx={BtnStyles.darkVioletBtn}
                             style={{
@@ -294,20 +297,20 @@ const ViewShotModal = ({ t, openModal, closeModalHandler, openModalHandler, shot
                         </CustomButton>
                     </Box>
                     <Box sx={imagesContainer}>
-                        {shot.images.map((image) =>
-                            <Box key={shot.images.indexOf(image)}>
+                        {shot.images.map((image, index) =>
+                            <Box key={index}>
                                 <img
                                     src={baseUrl + image}
-                                    alt={shot.images.indexOf(image).toString()}
+                                    alt={index.toString()}
                                     style={{
                                         width: "100%",
-                                        marginBottom: (shot.blocksGap.toString() + "px"),
+                                        marginBottom: (shot && shot.blocksGap.toString() + "px"),
                                         boxShadow: "4px 4px 13px 0px rgba(0, 0, 0, 0.60)",
                                         borderRadius: "10px"
                                     }} />
                             </Box>
                         )}
-                        {shot.description !== undefined && <Box sx={textBlock} >
+                        {shot.description && <Box sx={textBlock} >
                             {shot.description.split('\n').map((row) =>
                             (row !== "" ?
                                 <p key={Math.random()}>{row}</p> :
@@ -324,7 +327,8 @@ const ViewShotModal = ({ t, openModal, closeModalHandler, openModalHandler, shot
                             </Box>
                             <Box sx={appreciated ? iconButtonLikeActive : iconButtonLike}
                                 onClick={() => {
-                                    void appreciateShot(shot);
+                                    if (setAppreciated)
+                                        void appreciateShot(shotId, setAppreciated);
                                 }}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none" color={colors.grey}>
                                     <path d="M14.475 4.28251C14.1307 3.93451 13.7207 3.65848 13.2688 3.47049C12.8168 3.28249 12.332 3.1863 11.8425 3.18751C11.353 3.1863 10.8682 3.28249 10.4162 3.47049C9.96425 3.65848 9.55422 3.93451 9.20998 4.28251L8.99998 4.50001L8.78998 4.29001C8.09376 3.59386 7.14953 3.20278 6.16498 3.20278C5.18043 3.20278 4.2362 3.59386 3.53998 4.29001C2.85288 4.99099 2.46802 5.93344 2.46802 6.91501C2.46802 7.89658 2.85288 8.83903 3.53998 9.54001L8.61748 14.6325C8.72295 14.7379 8.86592 14.797 9.01498 14.797C9.16405 14.797 9.30701 14.7379 9.41248 14.6325L14.49 9.54001C15.1773 8.83673 15.5609 7.89159 15.5581 6.90819C15.5553 5.9248 15.1663 4.98186 14.475 4.28251Z" fill={colors.white} />
@@ -342,8 +346,7 @@ const ViewShotModal = ({ t, openModal, closeModalHandler, openModalHandler, shot
                     <Box sx={moreImagesContainer}  >
                         <Grid container spacing={{ xs: 2, md: 5 }} sx={{ height: "fit-content" }}>
                             {shots.map((shot) => (
-                                <Grid item xs={12} md={6} lg={3} key={"inner" + shot.id.toString()}
-                                >
+                                (shot.id !== shotId) && <Grid item xs={12} md={6} lg={3} key={"inner" + shot.id.toString()}>
                                     <ShotThumbnail
                                         shot={shot}
                                         openModalHandler={openModalHandler}
@@ -354,7 +357,8 @@ const ViewShotModal = ({ t, openModal, closeModalHandler, openModalHandler, shot
                     </Box>
                 </Box>
             </Box>
-        </Modal>
-    </Box>;
+        </Modal >
+    </Box >
+        : <></>;
 }
 export default ViewShotModal;

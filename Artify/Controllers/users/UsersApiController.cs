@@ -137,7 +137,7 @@ namespace Artify.Controllers.users
                     var inputJson = JsonConvert.DeserializeObject<UserSocialProfilesDTO>(value) ?? throw new Exception();
                     var updatedSocialProfiles = inputJson.SocialProfiles;
 
-                    #region add or update
+                    #region add or update social profile
                     updatedSocialProfiles.ForEach((profile) =>
                     {
                         var storedProfile = user.UserSocialProfiles.Where(usp => usp.SocialProfile.Name == profile.Name).FirstOrDefault();
@@ -163,7 +163,6 @@ namespace Artify.Controllers.users
                         }
                     });
                     #endregion
-
 
                     #region remove social profile
                     List<int> deletedProfileIds = new();

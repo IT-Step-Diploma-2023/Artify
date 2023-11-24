@@ -15,6 +15,8 @@ import UserDropdownMenuItems from './UserDropDownMenuItems';
 import { baseUrlApi } from '../../../assets/defaults/urls';
 import AppContext from '../../../utils/AppContext';
 import { IBasicUserFormData } from '../../../assets/interfaces/usersInterfaces';
+import { useSelector } from 'react-redux';
+import { isUserLogged } from '../../../hooks/useAuthorization';
 
 
 /* #region global functions */
@@ -24,9 +26,9 @@ const getShownName = (user: IBasicUserFormData | undefined): string => {
   return user.username;
 }
 const getLogoImage = (user: IBasicUserFormData | undefined): string => {
-  if (user == null) return "../images/default_profile.png";
-  if (user.logoImage != "") return user.logoImage;
-  return "../images/default_profile.png";
+  if (user == null) return "images/default_profile.png";
+  if (user.logoImage != "") { return user.logoImage; }
+  return "images/default_profile.png";
 }
 /* #endregion */
 
@@ -51,17 +53,18 @@ const pathes = [
 
 const Navbar: FunctionComponent = () => {
 
+
   /* #region variant of check is user logged */
   //// Cheking in local storage
   ////////////////////////////////////////////////
   //// TEST THIS FOR USING LATER
   ////////////////////////////////////////////////
-  // let username = isUserLogged();
-  // const authStore = useSelector<IAuth, any>(state => state.auth);
+  let username = isUserLogged();
+  const authStore = useSelector<IAuth, any>(state => state.auth);
 
-  // if (username === "" && authStore.isAuthenticated === true) {
-  //   username = authStore.username;
-  // }
+  if (username === "" && authStore.isAuthenticated === true) {
+    username = authStore.username;
+  }
 
   // console.log("auth - ");
   // console.log(authStore);
@@ -70,9 +73,9 @@ const Navbar: FunctionComponent = () => {
 
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
-  
-  const { signinState, user } = useContext(AppContext);
 
+  const { signinState, user } = useContext(AppContext);
+ 
   const shownName = getShownName(user);
   const logoImage = getLogoImage(user);
 
@@ -278,8 +281,8 @@ const Navbar: FunctionComponent = () => {
               },
             }}>
               <Avatar
-                alt={signinState ? shownName : t('headerComponent.loggedOffMessage')}
-                src={signinState ? baseUrlApi + logoImage : "../images/default_profile.png"}
+                alt={user ? shownName : t('headerComponent.loggedOffMessage')}
+                src={user ? baseUrlApi + logoImage : "images/default_profile.png"}
               />
             </IconButton>
           </Tooltip>

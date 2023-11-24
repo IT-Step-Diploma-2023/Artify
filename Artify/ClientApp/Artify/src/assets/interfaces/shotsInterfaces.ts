@@ -45,7 +45,7 @@ export interface IShotDetails {
     images: string[],
     appreciations: IAppreciation[],
     tags: string[]
-    appreciatedByCurrentUser?: boolean
+    appreciatedByCurrentUser: boolean
 }
 
 export interface IShotAppreciations {
