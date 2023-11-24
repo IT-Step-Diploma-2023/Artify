@@ -27,7 +27,7 @@ const getShownName = (user: IBasicUserFormData | undefined): string => {
 }
 const getLogoImage = (user: IBasicUserFormData | undefined): string => {
   if (user == null) return "images/default_profile.png";
-  if (user.logoImage != "") { return user.logoImage; }
+  if (user.logoImage !== "") return user.logoImage; 
   return "images/default_profile.png";
 }
 /* #endregion */
@@ -184,6 +184,7 @@ const Navbar: FunctionComponent = () => {
     </>
   }
 
+  console.log(user);
   return (
     <AppBar
       sx={{ position: 'fixed', boxShadow: 'none', backgroundColor: colors.lightGrey }}>
@@ -282,8 +283,8 @@ const Navbar: FunctionComponent = () => {
             }}>
               <Avatar
                 alt={user ? shownName : t('headerComponent.loggedOffMessage')}
-                src={user ? baseUrlApi + logoImage : "images/default_profile.png"}
-              />
+                src={(user && user.logoImage !== "") ? baseUrlApi + logoImage : "images/default_profile.png"}
+                />
             </IconButton>
           </Tooltip>
           <Menu

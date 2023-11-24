@@ -84,24 +84,6 @@ export const getShotData = async (
     setItem(responseJson);
 }
 
-export const getShotDataRef = async (
-    id: number,
-    ref: MutableRefObject<IShotDetails | undefined>
-): Promise<void> => {
-    const response = await fetch(`${urls.getShot}?id=${id}`, {
-        method: "get",
-        mode: corsMod,
-        headers: {
-            "Authorization": "Bearer " + token(),
-        }
-    });
-    if (response.status !== 200) return;
-    const responseJson: IShotDetails = await response.json();
-    if (responseJson.appreciatedByCurrentUser === undefined)
-        responseJson.appreciatedByCurrentUser = false;
-    ref.current = responseJson;
-}
-
 export const appreciateShot = async (
     id: number,
     setAppreciated: Dispatch<SetStateAction<boolean | undefined>>

@@ -168,8 +168,8 @@ namespace Artify.Controllers.users
                     List<int> deletedProfileIds = new();
                     user.UserSocialProfiles.ForEach(profile =>
                     {
-                        var search = inputJson.SocialProfiles.Where(sp=>sp.Address==profile.Address).FirstOrDefault();
-                        if(search == null) deletedProfileIds.Add(profile.Id);
+                        var search = inputJson.SocialProfiles.Where(sp => sp.Address == profile.Address).FirstOrDefault();
+                        if (search == null) deletedProfileIds.Add(profile.Id);
                     });
                     deletedProfileIds.ForEach(id =>
                     {
@@ -230,31 +230,7 @@ namespace Artify.Controllers.users
                     user.Location = inputJson.Location ?? user.Location;
                     user.Info = inputJson.Info;
 
-                    var logoImagePath = new OldNewImageFilePath();
-
-                    if (logoImage.FileName != "blob")
-                    {
-                        ImageUploaderResult uploadResult = await ImageUploader.UploadImage(logoImage, "logoImages");
-                        if (uploadResult.ResultCode == ImageUploaderResultCode.Error || uploadResult.FileName == null)
-                            throw new FileLoadException("Uploading image failed");
-                        if (uploadResult.ResultCode == ImageUploaderResultCode.ForbiddenExtension)
-                            throw new BadImageFormatException("Unsupported file extension");
-                        logoImagePath.OldFileName = logoImage.FileName;
-                        logoImagePath.NewFilePath = uploadResult.FileName;
-                    }
-
-                    //*
-                    if (user.LogoImage != null && user.LogoImage != "")
-                    {
-                        ImageDeletingResult deletingResult = await ImageUploader.DeleteImage(user.LogoImage);
-                        if (deletingResult.ResultCode == ImageDeletingResultCode.Error)
-                            throw new FileNotFoundException($"File '{user.LogoImage}' deleting error");
-                        if (deletingResult.ResultCode == ImageDeletingResultCode.NotFound)
-                            throw new FileNotFoundException($"File '{user.LogoImage}' not found");
-                    }
-                    //->
-
-                    user.LogoImage = logoImagePath.NewFilePath;
+                    await UpdateImage(logoImage, user, inputJson);
 
                     _usersRepository.Save();
 
@@ -268,6 +244,39 @@ namespace Artify.Controllers.users
             catch (Exception)
             {
                 return BadRequest(new { errorMessage = "Values are not provided" });
+            }
+
+            static async Task UpdateImage(IFormFile logoImage, User user, BaseDTOUser inputJson)
+            {
+                if (logoImage == null) return;
+                if (user == null) return;
+                if (inputJson == null) return;
+
+                if (user.LogoImage == inputJson.LogoImage && logoImage.FileName == "blob") return;
+
+                var logoImagePath = new OldNewImageFilePath();
+
+                if (logoImage.FileName != "blob")
+                {
+                    ImageUploaderResult uploadResult = await ImageUploader.UploadImage(logoImage, "logoImages");
+                    if (uploadResult.ResultCode == ImageUploaderResultCode.Error || uploadResult.FileName == null)
+                        throw new FileLoadException("Uploading image failed");
+                    if (uploadResult.ResultCode == ImageUploaderResultCode.ForbiddenExtension)
+                        throw new BadImageFormatException("Unsupported file extension");
+                    logoImagePath.OldFileName = logoImage.FileName;
+                    logoImagePath.NewFilePath = uploadResult.FileName;
+                }
+
+                if (user.LogoImage != null && user.LogoImage != "")
+                {
+                    ImageDeletingResult deletingResult = await ImageUploader.DeleteImage(user.LogoImage);
+                    if (deletingResult.ResultCode == ImageDeletingResultCode.Error)
+                        throw new FileNotFoundException($"File '{user.LogoImage}' deleting error");
+                    if (deletingResult.ResultCode == ImageDeletingResultCode.NotFound)
+                        throw new FileNotFoundException($"File '{user.LogoImage}' not found");
+                }
+                user.LogoImage = logoImagePath.NewFilePath;
+
             }
         }
 

@@ -27,7 +27,8 @@ const encodeData = (data: IBasicUserFormData, image: Blob): FormData => {
         username: data.username,
         fullName: data.fullName,
         location: location.setLocation(data.country, data.address),
-        info: data.info
+        info: data.info,
+        logoImage: data.logoImage
     }
     updatedFormData.append("value", JSON.stringify(value));
     updatedFormData.append('logoImage', image);
@@ -35,6 +36,7 @@ const encodeData = (data: IBasicUserFormData, image: Blob): FormData => {
 }
 
 function useCurrentUser() {
+
     const postData = async (data: IBasicUserFormData, image: Blob): Promise<void> => {
         const formData = encodeData(data, image);
         const response = await fetch(urls.updateCurrentUser, {

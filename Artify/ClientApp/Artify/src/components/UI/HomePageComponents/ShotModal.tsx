@@ -3,7 +3,7 @@ import * as BtnStyles from "../CustomButtonStyles"
 import CustomButton from "../CustomButton";
 import { TFunction } from "i18next";
 import { colors } from "../../../assets/defaults/colors";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { IShot, IShotDetails } from "../../../assets/interfaces/shotsInterfaces";
 import { appreciateShot, getShotData } from "../../../hooks/useShots";
 import { effects } from "../../../assets/defaults/effects";
@@ -359,6 +359,8 @@ const ViewShotModal = ({ t, openModal, closeModalHandler, openModalHandler, shot
             </Box>
         </Modal >
     </Box >
-        : <></>;
+        : <>
+        {/* here will be fallback */}
+        </>;
 }
 export default ViewShotModal;

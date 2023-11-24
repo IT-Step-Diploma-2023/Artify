@@ -14,7 +14,7 @@ import InputErrorMessage from '../../../components/UI/InputErrorMessage';
 import CommonSelect from '../../../components/UI/CommonSelect';
 import CommonTextArea from '../../../components/UI/CommonTextArea';
 import CommonButton from '../../../components/UI/CommonButton';
-import {countries} from "../../../utils/getCountries"
+import { countries } from "../../../utils/getCountries"
 import SettingsMenu from '../components/layout/SettingsMenu';
 import CommonLabel from '../components/UI/CommonLabel';
 import AppContext from '../../../utils/AppContext';
@@ -133,7 +133,7 @@ const BasicInfoPage: FunctionComponent = () => {
 
     const infoChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
         const value = event.target.value;
-        const re = /^([їЇіІєЄа-яА-Яa-zA-Z0-9])[їЇіІєЄа-яА-Яa-zA-Z0-9" "$@!?#№,;\\/-]{0,2048}$/;
+        const re = /^([їЇіІєЄа-яА-Яa-zA-Z0-9\\\n-])[їЇіІєЄа-яА-Яa-zA-Z0-9" "$@!?#№,:;\\\n\\/\\.-]{0,2048}$/;
         re.test(String(value)) || value === '' ? setInfoError('') : setInfoError('infoError');
         value !== '' ? setInfoActive(true) : setInfoActive(false);
     }
@@ -162,12 +162,13 @@ const BasicInfoPage: FunctionComponent = () => {
             alert(formErrorMessage);
             return;
         }
-        if (user === null || user === undefined) return;
+        if (!user) return;
+        console.log(user);
         void postData(user, selectedImage);
     }
 
-    if (user === null || user === undefined) return <></>;
-    if (setUser === null || setUser === undefined) return <></>;
+    if (!user) return <></>;
+    if (!setUser) return <></>;
     return <>
         <Box sx={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
             <Box sx={{ position: 'absolute', left: '0', margin: '0' }}>
@@ -214,10 +215,10 @@ const BasicInfoPage: FunctionComponent = () => {
                                 user.fullName :
                                 user.username}
                             // src='/public/images/sample_luna_profile.png'
-                            src={
-                                selectedImage.size !== 0 ?
-                                    URL.createObjectURL(selectedImage) :
-                                    baseUrlApi + user.logoImage}
+                            src={selectedImage.size !== 0 ?
+                                URL.createObjectURL(selectedImage) :
+                                baseUrlApi + user.logoImage
+                            }
                         />
                     }
                     <CustomButton height="md"
@@ -233,6 +234,16 @@ const BasicInfoPage: FunctionComponent = () => {
                             name="profileImage"
                             onChange={loadInputChangeHandler}
                         />
+                    </CustomButton>
+                    <CustomButton height='md'
+                        sx={BtnStyles.violetBtn}
+                        style={loadFileBtn}
+                        onClick={() => {
+                            if (selectedImage.size !== 0) { setSelectedImage(new Blob); return; }
+                            if (user.logoImage !== "") { user.logoImage = ""; }
+                        }}
+                    >
+                        Remove
                     </CustomButton>
                 </Box>
                 <Grid
