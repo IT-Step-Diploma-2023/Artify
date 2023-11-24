@@ -3,6 +3,8 @@ using Artify.Models.DbModels.DbModels.Artworks;
 using Artify.Models.DbModels.DbModels.Artworks.Attributes;
 using Image = Artify.Models.DbModels.DbModels.Artworks.Image;
 
+
+
 namespace Artify.Controllers.shots.DTO
 {
     public class GetSingleShotDTO
@@ -20,10 +22,12 @@ namespace Artify.Controllers.shots.DTO
         public bool isDraft { get; set; }
         public int blocksGap { get; set; }
         public string cover { get; set; } = string.Empty;
-        public List<string> images { get; set; } = new List<string>();
-        public List<string> tags { get; set; } = new List<string>();
-        public List<Appreciation> appreciations { get; set; } = new List<Appreciation>();
-        public GetSingleShotDTO(Shot shot)
+        public bool appreciatedByCurrentUser { get; set; } = false;
+        public List<string> images { get; set; } = new ();
+        public List<string> tags { get; set; } = new ();
+        public List<AppreciationDTO> appreciations { get; set; } = new ();
+
+        public GetSingleShotDTO(Shot shot, int? currentuserId)
         {
             id = shot.Id;
             title = shot.Title;
@@ -46,7 +50,11 @@ namespace Artify.Controllers.shots.DTO
             blocksGap = shot.BlocksGap;
             foreach (var appreciation in shot.Appreciations)
             {
-                appreciations.Add(appreciation);
+                var appreciationDTO = new AppreciationDTO(appreciation);
+
+                appreciations.Add(appreciationDTO);
+                if (currentuserId != null && appreciation.UserId == currentuserId) 
+                    appreciatedByCurrentUser = true;
             }
             foreach (var tag in shot.Tags)
             {

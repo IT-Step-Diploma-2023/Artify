@@ -46,7 +46,7 @@ export default function HomeButtonFilter() {
         sx={filterListIcon}
         style={{ transform: filterActive ? "scale(1, -1)" : "scale(1, 1)" }} />
       <Typography component='div' sx={{ display: 'inline-block', float: 'right', padding: '1px 6px' }}>
-        {t('фільтр')}
+        {t('homePage.filterButton')}
       </Typography>
     </CustomButton>
   </>

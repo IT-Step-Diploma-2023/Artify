@@ -1,0 +1,20 @@
+GET /users/UsersApi/GetFollowings?userId=[userId] // userId of profile`s owner, if current user is not owner
+Description
+-----------
+Authorization: NO
+For use in User Profile PAGE
+
+Response
+-----------
+Status: 200 OK
+"followings": [                           // Appreciation.UserId == UserId
+    "user": {
+        "userId":,
+        "username":,
+        "fullName":,
+        "logoImage":,
+        "specialties":[
+            "name":
+        ]
+    }
+]

@@ -1,0 +1,9 @@
+////////////////////////////////////////////////
+//// TEST THIS FOR USING LATER in MainNavigation.tsx
+////////////////////////////////////////////////
+interface IAuth {
+  auth: {
+    username: string,
+    isAuthenticated: boolean
+  }
+}

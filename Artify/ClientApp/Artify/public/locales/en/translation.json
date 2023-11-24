@@ -27,6 +27,10 @@
                 "message": "Resource or page not found"
             }
         },
+        "logoutPage":{
+            "message": "Log out successful!",
+            "buttonText": "to home page"
+        },
         "headerComponent": {
             "search": "search",
             "menue": {
@@ -220,9 +224,6 @@
             "createAccount": "how to create your account?..",
             "aboutUs": "about us"
         },
-
-
-
         "howBuyWorkPage":{
             "text1":"how to get a job",
             "text2":"click the “buy” button and you will be transferred to a block where you can purchase some work.​help center",

@@ -1,0 +1,27 @@
+GET api/ShotsApi/GetAlbum?albumId=[albumId]
+
+Description
+-----------
+Authorization: NO
+Get albums of logged in User
+
+Request
+-----------
+albumId from url
+
+Response
+-----------
+Status: 200 OK
+
+Payload
+-----------
+album: {
+    "id":
+    "userId":
+    "title":
+    "createdDateTime":
+    "userFullName":
+    "shots": [
+ // shot DTO shold has coverImage, title, authorLogoImage, authorFullName
+    ]
+}   

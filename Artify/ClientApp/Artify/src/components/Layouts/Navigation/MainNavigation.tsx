@@ -1,11 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-import { useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { AppBar, Toolbar, CssBaseline, Typography, styled, InputBase, Box, MenuItem, Avatar, IconButton, Menu, Tooltip, Divider } from '@mui/material';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { FunctionComponent } from 'react';
-import { isUserLogged  } from "../../../hooks/useAuthorization";
-import { useSelector } from "react-redux";
 import { useTranslation } from 'react-i18next';
 import Logo from '../../UI/Logo';
 import SearchIcon from '@mui/icons-material/Search';
@@ -14,8 +12,25 @@ import { colors } from '../../../assets/defaults/colors';
 import NavMenu from '../../UI/NavMenu';
 import CommonButton from '../../UI/CommonButton';
 import UserDropdownMenuItems from './UserDropDownMenuItems';
-import useCurrentUser from '../../../hooks/useCurrentUser';
+import { baseUrlApi } from '../../../assets/defaults/urls';
+import AppContext from '../../../utils/AppContext';
+import { IBasicUserFormData } from '../../../assets/interfaces/usersInterfaces';
+import { useSelector } from 'react-redux';
+import { isUserLogged } from '../../../hooks/useAuthorization';
 
+
+/* #region global functions */
+const getShownName = (user: IBasicUserFormData | undefined): string => {
+  if (user == null) return "";
+  if (user.fullName != "") return user.fullName
+  return user.username;
+}
+const getLogoImage = (user: IBasicUserFormData | undefined): string => {
+  if (user == null) return "images/default_profile.png";
+  if (user.logoImage != "") { return user.logoImage; }
+  return "images/default_profile.png";
+}
+/* #endregion */
 
 //#region localization languages
 interface Lngs {
@@ -29,39 +44,40 @@ const lngs: Lngs = {
 }
 //#endregion
 
-interface IAuth {
-  auth: {
-    username: string,
-    isAuthenticated: boolean
-  }
-}
+const pathes = [
+  '/inspire',
+  '/buy',
+  '/hire',
+  '/help-center',
+];
 
 const Navbar: FunctionComponent = () => {
-  //Cheking in local storage
+
+
+  /* #region variant of check is user logged */
+  //// Cheking in local storage
+  ////////////////////////////////////////////////
+  //// TEST THIS FOR USING LATER
+  ////////////////////////////////////////////////
   let username = isUserLogged();
   const authStore = useSelector<IAuth, any>(state => state.auth);
+
   if (username === "" && authStore.isAuthenticated === true) {
     username = authStore.username;
   }
 
-  const { getData, getShownName } = useCurrentUser();
-
-
-  useEffect(() => {
-    if (username !== "") {
-      void getData();
-    }
-  }, [getData, getShownName, username]);
-
-  const shownName = getShownName();
-
-  console.log("auth - ");
-  console.log(authStore);
-  //Checking in state
+  // console.log("auth - ");
+  // console.log(authStore);
+  //// Checking in state
+  /* #endregion */
 
   const navigate = useNavigate();
-
   const { t, i18n } = useTranslation();
+
+  const { signinState, user } = useContext(AppContext);
+ 
+  const shownName = getShownName(user);
+  const logoImage = getLogoImage(user);
 
   const pages = [
     t('headerComponent.menue.inspiration'),
@@ -69,13 +85,6 @@ const Navbar: FunctionComponent = () => {
     t('headerComponent.menue.hire'),
     t('headerComponent.menue.help'),
   ];
-
-  const pathes = [
-    '/inspire',
-    '/buy',
-    '/hire',
-    '/help-center',
-  ]
 
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -250,7 +259,7 @@ const Navbar: FunctionComponent = () => {
           flexGrow: 0,
           margin: '0 10px 0 20px'
         }}>
-          {username !== "" && (
+          {signinState && (
             <CommonButton
               color='primary'
               height='bg'
@@ -261,11 +270,19 @@ const Navbar: FunctionComponent = () => {
           )}
         </Box>
         <Box sx={{ flexGrow: 0, marginRight: '10px' }}>
-          <Tooltip title={username !== "" ? shownName : t('headerComponent.loggedOffMessage')}>
-            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+          <Tooltip title={signinState ? shownName : t('headerComponent.loggedOffMessage')}>
+            <IconButton onClick={handleOpenUserMenu} sx={{
+              p: 0,
+              "&:hover": {
+                boxShadow: "2px 2px 4px 0px rgba(39, 24, 70, 0.20)"
+              },
+              "&:active": {
+                boxShadow: "1px 1px 6px 0px rgba(39, 24, 70, 0.40)"
+              },
+            }}>
               <Avatar
-                alt={username !== "" ? shownName : t('headerComponent.loggedOffMessage')}
-                src={username !== "" ? "/images/sample_christian_kouly_profile.jpg" : ""}
+                alt={user ? shownName : t('headerComponent.loggedOffMessage')}
+                src={user ? baseUrlApi + logoImage : "images/default_profile.png"}
               />
             </IconButton>
           </Tooltip>

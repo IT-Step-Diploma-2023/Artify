@@ -1,5 +1,6 @@
 ﻿using Artify.Controllers.uploads;
 using Artify.Models.DbModels.DbModels.Artworks;
+using Artify.Models.DbModels.DbModels.Artworks.Attributes;
 using System.Runtime.InteropServices.JavaScript;
 
 namespace Artify.Controllers.shots.DTO
@@ -20,8 +21,8 @@ namespace Artify.Controllers.shots.DTO
         public string cover { get; set; } = string.Empty;
         public List<string> thumbnailsPaths { get; set; } = new List<string>();
         public int appreciationsCount { get; set; } = 0;
-        public bool isLiked { get; set; }
-        public GetShotDTO(Shot shot)
+        public bool appreciatedByCurrentUser { get; set; }
+        public GetShotDTO(Shot shot, int? currentuserId)
         {
             id = shot.Id;
             createdDateTime = shot.CreatedDateTime;
@@ -36,7 +37,9 @@ namespace Artify.Controllers.shots.DTO
             if (shot.Title != string.Empty)
                 title = shot.Title;
             appreciationsCount = shot.Appreciations.Count;
-            isLiked = shot.Appreciations.Exists(s => shot.UserId == s.UserId);
+            if (currentuserId != null)
+                appreciatedByCurrentUser = shot.Appreciations
+                    .Exists(appreciation => appreciation.UserId == currentuserId);
         }
         public GetShotDTO() { }
     }

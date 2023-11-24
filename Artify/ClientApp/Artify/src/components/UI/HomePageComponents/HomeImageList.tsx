@@ -1,22 +1,18 @@
-import ImageListItem from '@mui/material/ImageListItem';
-import { Avatar, Box, Grid, Typography } from '@mui/material';
-import Checkbox from '@mui/material/Checkbox';
-import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
-import Favorite from '@mui/icons-material/Favorite';
+import { Box, Grid } from '@mui/material';
 import { existedTags } from "../../../assets/data/tags";
 import { prices } from "../../../assets/data/prices";
 import { extensions } from "../../../assets/data/extensions";
 import { useContext, useEffect, useState } from 'react';
 import Context from "../../../utils/Context";
 import { useTranslation } from 'react-i18next';
-// import { TFunction } from 'i18next';
-// import { getAuthToken } from '../../../hooks/useAuthorization';
 import ShotModal from './ShotModal';
 import { IShot } from '../../../assets/interfaces/shotsInterfaces';
 import FilterParamlist from './FilterParamList';
 import { getShotsData } from '../../../hooks/useShots';
 import ShotThumbnail from './Shots';
 import useTargetUser from '../../../hooks/useTargetUser';
+import AppContext from '../../../utils/AppContext';
+import { useNavigate } from 'react-router';
 
 /* #region styles */
 const container = {
@@ -33,8 +29,9 @@ export default function HomeImageList() {
 
   const { t } = useTranslation();
 
-  const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+  // const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
+  const { signinState } = useContext(AppContext);
   const { filterActive } = useContext(Context);
 
   const [shots, setShots] = useState<IShot[]>([]);
@@ -43,6 +40,7 @@ export default function HomeImageList() {
   const [shotModalOpen, setShotModalOpen] = useState(false);
 
   const existedPrices: string[] = [];
+
   prices.map((price) => {
     existedPrices.push(price.name);
   });
@@ -55,11 +53,22 @@ export default function HomeImageList() {
     setActiveShot(shot);
     setShotModalOpen(true);
     setTargetUserId((shot.userId));
+    // activeShot && console.log("in activeShot // " + activeShot.id.toString());
   };
 
   const closeShotModalHandler = () => {
     setShotModalOpen(false);
+    void getShotsData(setShots);
+    return;
   };
+
+  const navigate = useNavigate();
+
+  const navigateToPortfolio = (shotAuthorId: number) => {
+    setTargetUserId(shotAuthorId);
+    navigate("portfolio");
+  }
+
 
   return (<>
     <Box sx={container}>
@@ -86,11 +95,13 @@ export default function HomeImageList() {
           <Grid item xs={12} md={6} lg={3} key={shot.id.toString()}>
             <ShotThumbnail
               shot={shot}
-              openModalHandler={openShotModalHandler} />
+              openModalHandler={openShotModalHandler}
+              isUserLoggedIn={signinState}
+              navigateToPortfolio={navigateToPortfolio} />
           </Grid>
         ))}
-
-        {itemData.map((item) => (
+        {/* fake shots for demo */}
+        {/* {itemData.map((item) => (
           <Grid item xs={12} md={6} lg={3} key={item.img} id={itemData.indexOf(item).toString()} >
             <ImageListItem >
               <img
@@ -111,12 +122,13 @@ export default function HomeImageList() {
                 <Typography sx={{ float: 'right', fontSize: '0.875rem', fontWeight: 400, color: '#9E9AA2', padding: '0.4375rem 0 0 0.4375rem' }}>12</Typography>
                 <Box >
                   <Checkbox {...label} icon={<FavoriteBorder sx={{ color: '#9E9AA2', width: '1rem' }} />} checkedIcon={<Favorite sx={{ color: '#D65353', width: '1rem' }} />}
-                    sx={{ width: '18px', height: '18px', float: 'right', marginTop: '0.4375rem' }} />
+                    sx={{ width: '18px', height: '18px', float: 'right', marginTop: '0.4375rem' }} 
+                    onChange={e=>{console.log(e.target.checked)}}/>
                 </Box>
               </Box>
             </ImageListItem>
           </Grid>
-        ))}
+        ))} */}
       </Grid>
       {activeShot && <ShotModal
         t={t}
@@ -125,62 +137,64 @@ export default function HomeImageList() {
         openModalHandler={openShotModalHandler}
         shotId={activeShot.id}
         shots={shots}
+        isUserLoggedIn={signinState}
+        navigateToPortfolio={navigateToPortfolio}
       />}
     </Box>
   </>
   );
 }
 
-const itemData = [
-  {
-    img: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e',
-    title: 'Breakfast',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
-    title: 'Burger',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
-    title: 'Camera',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
-    title: 'Coffee',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1533827432537-70133748f5c8',
-    title: 'Hats',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62',
-    title: 'Honey',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1516802273409-68526ee1bdd6',
-    title: 'Basketball',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1518756131217-31eb79b20e8f',
-    title: 'Fern',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1597645587822-e99fa5d45d25',
-    title: 'Mushrooms',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1567306301408-9b74779a11af',
-    title: 'Tomato basil',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1471357674240-e1a485acb3e1',
-    title: 'Sea star',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1589118949245-7d38baf380d6',
-    title: 'Bike',
-  },
-];
+// const itemData = [
+//   {
+//     img: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e',
+//     title: 'Breakfast',
+//   },
+//   {
+//     img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
+//     title: 'Burger',
+//   },
+//   {
+//     img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
+//     title: 'Camera',
+//   },
+//   {
+//     img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
+//     title: 'Coffee',
+//   },
+//   {
+//     img: 'https://images.unsplash.com/photo-1533827432537-70133748f5c8',
+//     title: 'Hats',
+//   },
+//   {
+//     img: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62',
+//     title: 'Honey',
+//   },
+//   {
+//     img: 'https://images.unsplash.com/photo-1516802273409-68526ee1bdd6',
+//     title: 'Basketball',
+//   },
+//   {
+//     img: 'https://images.unsplash.com/photo-1518756131217-31eb79b20e8f',
+//     title: 'Fern',
+//   },
+//   {
+//     img: 'https://images.unsplash.com/photo-1597645587822-e99fa5d45d25',
+//     title: 'Mushrooms',
+//   },
+//   {
+//     img: 'https://images.unsplash.com/photo-1567306301408-9b74779a11af',
+//     title: 'Tomato basil',
+//   },
+//   {
+//     img: 'https://images.unsplash.com/photo-1471357674240-e1a485acb3e1',
+//     title: 'Sea star',
+//   },
+//   {
+//     img: 'https://images.unsplash.com/photo-1589118949245-7d38baf380d6',
+//     title: 'Bike',
+//   },
+// ];
 
 
 

@@ -5,6 +5,7 @@ import Footer from '../../components/Layouts/FooterComponent/Footer';
 import { Box } from '@mui/material';
 
 const RootLayout: FunctionComponent = () => {
+
   // const navigation = useNavigation();
   return (
     <>
@@ -29,7 +30,6 @@ const RootLayout: FunctionComponent = () => {
         </Box>
       </main>
       <Footer pos='docked' />
-
     </>
   );
 };
