@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AppBar, Toolbar, CssBaseline, Typography, styled, InputBase, Box, MenuItem, Avatar, IconButton, Menu, Tooltip, Divider } from '@mui/material';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { FunctionComponent } from 'react';
@@ -27,7 +27,7 @@ const getShownName = (user: IBasicUserFormData | undefined): string => {
 }
 const getLogoImage = (user: IBasicUserFormData | undefined): string => {
   if (user == null) return "images/default_profile.png";
-  if (user.logoImage !== "") return user.logoImage; 
+  if (user.logoImage !== "") return user.logoImage;
   return "images/default_profile.png";
 }
 /* #endregion */
@@ -75,9 +75,12 @@ const Navbar: FunctionComponent = () => {
   const { t, i18n } = useTranslation();
 
   const { signinState, user } = useContext(AppContext);
- 
+
   const shownName = getShownName(user);
   const logoImage = getLogoImage(user);
+
+  // const [logoImage, setLogoImage] = useState<string>();
+  // useEffect(() => { setLogoImage(() => getLogoImage(user)) }, [user, user?.logoImage]);
 
   const pages = [
     t('headerComponent.menue.inspiration'),
@@ -284,7 +287,7 @@ const Navbar: FunctionComponent = () => {
               <Avatar
                 alt={user ? shownName : t('headerComponent.loggedOffMessage')}
                 src={(user && user.logoImage !== "") ? baseUrlApi + logoImage : "images/default_profile.png"}
-                />
+              />
             </IconButton>
           </Tooltip>
           <Menu

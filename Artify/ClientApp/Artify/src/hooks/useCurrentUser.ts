@@ -37,20 +37,31 @@ const encodeData = (data: IBasicUserFormData, image: Blob): FormData => {
 
 function useCurrentUser() {
 
-    const postData = async (data: IBasicUserFormData, image: Blob): Promise<void> => {
+    const postData = async (
+        data: IBasicUserFormData,
+        image: Blob,
+        setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
+        setUser: React.Dispatch<React.SetStateAction<IBasicUserFormData | undefined>> | undefined
+    ): Promise<void> => {
         const formData = encodeData(data, image);
-        const response = await fetch(urls.updateCurrentUser, {
+        await fetch(urls.updateCurrentUser, {
             method: "PUT",
             mode: corsMod,
             headers: {
                 "Authorization": "Bearer " + token(),
             },
             body: formData
+        }).then(response=>
+            response.json()
+        ).then(responseJson=>{
+            saveData(decodeData(responseJson as IBasicUserData));
+            setUser && setUser(decodeData(responseJson as IBasicUserData));
+            setIsLoading(false);
+            alert("Дані оновлені успішно!");
+        }).catch(error => {
+            console.log("Error: ", error);
+            setIsLoading(false);
         });
-        if (response.status !== 200) return;
-        const responseJson: IBasicUserData = await response.json();
-        saveData(decodeData(responseJson));
-        alert("Дані оновлені успішно!");
     }
 
     const saveData = (data: IBasicUserFormData) => {

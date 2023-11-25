@@ -115,7 +115,10 @@
         "country": "країна",
         "address": "місто",
         "about": "про мене",
-        "download": "завантажити",
+        "logoImage": {
+            "download": "завантажити",
+            "delete": "видалити"
+        },
         "deleteAccount": "видалити аккаунт",
         "save": "зберегти зміни",
         "edit": "редагувати",
@@ -123,7 +126,7 @@
         "appreciations": "вподобання",
         "followings": "підписки",
         "basicInfoErrors": {
-            "userNameError": "некоректний формат імені користувача",
+            "fullNameError": "некоректний формат імені користувача",
             "addressError": "некоректний формат адреси",
             "infoError": "некоректний формат тексту "
         },

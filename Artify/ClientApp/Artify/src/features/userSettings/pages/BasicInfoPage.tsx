@@ -18,6 +18,7 @@ import { countries } from "../../../utils/getCountries"
 import SettingsMenu from '../components/layout/SettingsMenu';
 import CommonLabel from '../components/UI/CommonLabel';
 import AppContext from '../../../utils/AppContext';
+import CircularIndeterminate from '../../../components/UI/Progerss';
 
 /* #region styles */
 
@@ -77,9 +78,14 @@ const BasicInfoPage: FunctionComponent = () => {
     const country = t('accountPage.country');
     const address = t('accountPage.address');
     const info = t('accountPage.about');
-    const download = t('accountPage.download');
+    const downloadLogoImage = t('accountPage.logoImage.download');
+    const deleteLogoimage = t('accountPage.logoImage.delete');
     const save = t('accountPage.save');
     const formErrorMessage = t('common.formError');
+
+    const fullNameErrorMessage = t("accountPage.basicInfoErrors.fullNameError")
+    const addressErrorMessage = t("accountPage.basicInfoErrors.addressError")
+    const infoErrorMessage = t("accountPage.basicInfoErrors.infoError")
 
     /* #endregion */
 
@@ -100,6 +106,7 @@ const BasicInfoPage: FunctionComponent = () => {
     const [formValid, setFormValid] = useState<boolean>(false);
     const [formActive, setFormActive] = useState<boolean>(false);
 
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         if (fullNameError !== '' || addressError !== '' || infoError !== '')
@@ -120,21 +127,21 @@ const BasicInfoPage: FunctionComponent = () => {
     const fullNameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         const re = /^([їЇіІєЄа-яА-Яa-zA-Z])[їЇіІєЄа-яА-Яa-zA-Z0-9" "-]{0,24}$/;
-        re.test(String(value)) || value === '' ? setFullNameError('') : setFullNameError('fullNameError');
+        re.test(String(value)) || value === '' ? setFullNameError('') : setFullNameError(fullNameErrorMessage);
         value !== '' ? setFullNameActive(true) : setFullNameActive(false);
     }
 
     const addressChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         const re = /^([їЇіІєЄа-яА-Яa-zA-Z0-9#№])[їЇіІєЄа-яА-Яa-zA-Z0-9" "#№,;\\/-]{0,256}$/;
-        re.test(String(value)) || value === '' ? setAddressError('') : setAddressError('addressError');
+        re.test(String(value)) || value === '' ? setAddressError('') : setAddressError(addressErrorMessage);
         value !== '' ? setAddressActive(true) : setAddressActive(false);
     }
 
     const infoChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
         const value = event.target.value;
         const re = /^([їЇіІєЄа-яА-Яa-zA-Z0-9\\\n-])[їЇіІєЄа-яА-Яa-zA-Z0-9" "$@!?#№,:;\\\n\\/\\.-]{0,2048}$/;
-        re.test(String(value)) || value === '' ? setInfoError('') : setInfoError('infoError');
+        re.test(String(value)) || value === '' ? setInfoError('') : setInfoError(infoErrorMessage);
         value !== '' ? setInfoActive(true) : setInfoActive(false);
     }
 
@@ -158,24 +165,53 @@ const BasicInfoPage: FunctionComponent = () => {
 
     const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        if (isLoading) return;
         if (!formValid) {
             alert(formErrorMessage);
             return;
         }
         if (!user) return;
-        console.log(user);
-        void postData(user, selectedImage);
+        setIsLoading(true);
+        void postData(user, selectedImage, setIsLoading, setUser);
     }
 
-    if (!user) return <></>;
-    if (!setUser) return <></>;
+    if (!user || !setUser) return <>
+        <Box sx={{
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 9999
+        }}>
+            <CircularIndeterminate />
+        </Box>
+    </>;
+
     return <>
+        {(isLoading && !user && !setUser) && <Box sx={{
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 9999
+        }}>
+            <CircularIndeterminate />
+        </Box>}
         <Box sx={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
             <Box sx={{ position: 'absolute', left: '0', margin: '0' }}>
                 <SettingsMenu translation={t} />
             </Box>
         </Box>
         <Box sx={{ position: 'relative' }}>
+
             <Box sx={{
                 position: 'absolute',
                 left: '0',
@@ -226,7 +262,7 @@ const BasicInfoPage: FunctionComponent = () => {
                         style={loadFileBtn}
                         onClick={loadButtonClickHandler}
                     >
-                        {download}
+                        {downloadLogoImage}
                         <input
                             id='loadFileInput'
                             style={{ display: 'none' }}
@@ -235,7 +271,7 @@ const BasicInfoPage: FunctionComponent = () => {
                             onChange={loadInputChangeHandler}
                         />
                     </CustomButton>
-                    <CustomButton height='md'
+                    {user.logoImage !=="" && <CustomButton height='md'
                         sx={BtnStyles.violetBtn}
                         style={loadFileBtn}
                         onClick={() => {
@@ -243,8 +279,8 @@ const BasicInfoPage: FunctionComponent = () => {
                             if (user.logoImage !== "") { user.logoImage = ""; }
                         }}
                     >
-                        Remove
-                    </CustomButton>
+                        {deleteLogoimage}
+                    </CustomButton>}
                 </Box>
                 <Grid
                     component='form'

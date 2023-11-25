@@ -115,7 +115,10 @@
             "country": "country",
             "address": "city",
             "about": "about me",
-            "download": "download",
+            "logoImage":{
+                "download": "download",
+                "delete": "delete"
+            },
             "save": "save changes",
             "edit": "edit",
             "deleteAccount": "delete account",
@@ -123,7 +126,7 @@
             "appreciations": "likes",
             "followings": "subscriptions",
             "basicInfoErrors": {
-                "userNameError": "incorrect username format",
+                "fullNameError": "incorrect username format",
                 "addressError": "incorrect address format",
                 "infoError": "incorrect text format "
             },
